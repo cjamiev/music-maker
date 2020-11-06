@@ -1,0 +1,18 @@
+.note-circle {
+  fill: white;
+  stroke: black;
+  stroke-width: 2;
+}
+
+.note-line {
+  stroke: black;
+  stroke-width: 1;
+}
+
+.blue-fill {
+  fill: blue;
+}
+
+.red-fill {
+  fill: red;
+}

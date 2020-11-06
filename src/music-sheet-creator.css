@@ -1,0 +1,38 @@
+.main {
+  margin: 10px;
+}
+
+.display-selection {
+  display: flex;
+  flex-direction: row;
+  place-items: center;  
+}
+
+.display-note {
+  height: 150px;
+  width: 50px;
+}
+
+.display-note-active {
+  border: 1px dashed darkblue;
+}
+
+.note-selection {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+}
+
+.note-btn {
+  background-color: #3287a8;
+  color: white;
+  outline: none;
+  margin: 3px;
+}
+
+.add-btn {
+  background-color: #005475;
+  color: white;
+  outline: none;
+  margin: 3px;
+}
