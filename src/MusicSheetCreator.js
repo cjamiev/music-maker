@@ -19,39 +19,52 @@ const DisplaySelection = ({ notes, selectedNote, selectItem }) => {
   );
 };
 
-const NoteSelector = (props) => {
+const SymbolSelector = ({ selectSymbol, selectNoteType }) => {
   return (
-    <div>
-      <div className="note-selection">
-        <button className='note-btn' onClick={() => props.selectNote('C6')}>C</button>
-        <button className='note-btn' onClick={() => props.selectNote('D6')}>D</button>
-        <button className='note-btn' onClick={() => props.selectNote('E6')}>E</button>
-        <button className='note-btn' onClick={() => props.selectNote('F6')}>F</button>
+    <div className="symbol-selection">
+      <div className="note-type-selection">
+        <button className="add-btn" onClick={() => { selectNoteType('whole'); }}>Whole Note</button>
+        <button className="add-btn" onClick={() => { selectNoteType('half'); }}>Half Note</button>
+        <button className="add-btn" onClick={() => { selectNoteType('quarter'); }}>Quarter Note</button>
       </div>
-      <div className="note-selection">
-        <button className='note-btn' onClick={() => props.selectNote('C5')}>C</button>
-        <button className='note-btn' onClick={() => props.selectNote('D5')}>D</button>
-        <button className='note-btn' onClick={() => props.selectNote('E5')}>E</button>
-        <button className='note-btn' onClick={() => props.selectNote('F5')}>F</button>
-        <button className='note-btn' onClick={() => props.selectNote('G5')}>G</button>
-        <button className='note-btn' onClick={() => props.selectNote('A5')}>High A</button>
-        <button className='note-btn' onClick={() => props.selectNote('B5')}>B</button>
+      <div>
+        <div className="note-selection">
+          <button className='note-btn' onClick={() => selectSymbol('C6')}>C</button>
+          <button className='note-btn' onClick={() => selectSymbol('D6')}>D</button>
+          <button className='note-btn' onClick={() => selectSymbol('E6')}>E</button>
+          <button className='note-btn' onClick={() => selectSymbol('F6')}>F</button>
+        </div>
+        <div className="note-selection">
+          <button className='note-btn' onClick={() => selectSymbol('C5')}>C</button>
+          <button className='note-btn' onClick={() => selectSymbol('D5')}>D</button>
+          <button className='note-btn' onClick={() => selectSymbol('E5')}>E</button>
+          <button className='note-btn' onClick={() => selectSymbol('F5')}>F</button>
+          <button className='note-btn' onClick={() => selectSymbol('G5')}>G</button>
+          <button className='note-btn' onClick={() => selectSymbol('A5')}>High A</button>
+          <button className='note-btn' onClick={() => selectSymbol('B5')}>B</button>
+        </div>
+        <div className="note-selection">
+          <button className='note-btn' onClick={() => selectSymbol('C4')}>Middle C</button>
+          <button className='note-btn' onClick={() => selectSymbol('D4')}>D</button>
+          <button className='note-btn' onClick={() => selectSymbol('E4')}>E</button>
+          <button className='note-btn' onClick={() => selectSymbol('F4')}>F</button>
+          <button className='note-btn' onClick={() => selectSymbol('G4')}>G</button>
+          <button className='note-btn' onClick={() => selectSymbol('A4')}>A</button>
+          <button className='note-btn' onClick={() => selectSymbol('B4')}>B</button>
+        </div>
+        <div className="note-selection">
+          <button className='note-btn' onClick={() => selectSymbol('E3')}>E</button>
+          <button className='note-btn' onClick={() => selectSymbol('F3')}>F</button>
+          <button className='note-btn' onClick={() => selectSymbol('G3')}>G</button>
+          <button className='note-btn' onClick={() => selectSymbol('A3')}>A</button>
+          <button className='note-btn' onClick={() => selectSymbol('B3')}>B</button>
+        </div>
       </div>
-      <div className="note-selection">
-        <button className='note-btn' onClick={() => props.selectNote('C4')}>Middle C</button>
-        <button className='note-btn' onClick={() => props.selectNote('D4')}>D</button>
-        <button className='note-btn' onClick={() => props.selectNote('E4')}>E</button>
-        <button className='note-btn' onClick={() => props.selectNote('F4')}>F</button>
-        <button className='note-btn' onClick={() => props.selectNote('G4')}>G</button>
-        <button className='note-btn' onClick={() => props.selectNote('A4')}>A</button>
-        <button className='note-btn' onClick={() => props.selectNote('B4')}>B</button>
-      </div>
-      <div className="note-selection">
-        <button className='note-btn' onClick={() => props.selectNote('E3')}>E</button>
-        <button className='note-btn' onClick={() => props.selectNote('F3')}>F</button>
-        <button className='note-btn' onClick={() => props.selectNote('G3')}>G</button>
-        <button className='note-btn' onClick={() => props.selectNote('A3')}>A</button>
-        <button className='note-btn' onClick={() => props.selectNote('B3')}>B</button>
+      <div className="divider-selection">
+        <button className='note-btn' onClick={() => selectSymbol('SymbolMeasureBar')}> Measure Bar</button>
+        <button className='note-btn' onClick={() => selectSymbol('SymbolEndBar')}>End Bar</button>
+        <button className='note-btn' onClick={() => selectSymbol('SymbolLeftRepeatBar')}>Left Repeat Bar</button>
+        <button className='note-btn' onClick={() => selectSymbol('SymbolRightRepeatBar')}>Right Repeat Bar</button>
       </div>
     </div>
   );
@@ -76,9 +89,14 @@ const MusicSheetCreator = () => {
     }
   };
 
-  const selectNote = note => {
+  const selectSymbol = note => {
     const updatedSheet = sheet.map((item, i) => {
-      return i === index ? note + noteType : item;
+      if (!note.includes('Symbol')) {
+        return i === index ? note + noteType : item;
+      }
+      else {
+        return i === index ? note : item;
+      }
     });
     setSheet(updatedSheet);
   };
@@ -97,13 +115,8 @@ const MusicSheetCreator = () => {
 
   return (
     <div className="main">
-      <div>
-        <button className="add-btn" onClick={() => { selectNoteType('whole'); }}>Whole Note</button>
-        <button className="add-btn" onClick={() => { selectNoteType('half'); }}>Half Note</button>
-        <button className="add-btn" onClick={() => { selectNoteType('quarter'); }}>Quarter Note</button>
-      </div>
       <DisplaySelection notes={sheet} selectedNote={index} selectItem={selectIndex} />
-      <NoteSelector selectNote={selectNote} />
+      <SymbolSelector selectSymbol={selectSymbol} selectNoteType={selectNoteType} />
       <button className="add-btn" onClick={addNote}>Add New Note</button>
       <button className="add-btn" onClick={removeNote}>Remove Selected Note</button>
     </div>

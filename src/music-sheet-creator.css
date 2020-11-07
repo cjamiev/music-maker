@@ -17,10 +17,24 @@
   border: 1px dashed darkblue;
 }
 
+.symbol-selection {
+  display: flex;
+}
+
 .note-selection {
   display: flex;
   place-items: center;
   justify-content: center;
+}
+
+.divider-selection {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-type-selection {
+  display: flex;
+  flex-direction: column;
 }
 
 .note-btn {

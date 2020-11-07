@@ -5,6 +5,9 @@ import {
   wholeNoteSelector
 } from './Note';
 import {
+  symbolSelector
+} from './symbol';
+import {
   StaffLines,
   StaffLedgerLines,
   getNumberOfHighLedgerLines,
@@ -25,6 +28,9 @@ const SymbolAndStaffLines = ({ symbols }) => {
     }
     else if (item.includes('quarter')) {
       return quarterNoteSelector[item];
+    }
+    else if (item.includes('Symbol')) {
+      return symbolSelector[item];
     }
   });
 

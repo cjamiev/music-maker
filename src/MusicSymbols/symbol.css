@@ -1,0 +1,13 @@
+.single-bar-line {
+  stroke: black;
+  stroke-width: 1.25;
+}
+
+.double-bar-line {
+  stroke: black;
+  stroke-width: 3;
+}
+
+.small-circle {
+  fill: black;
+}
