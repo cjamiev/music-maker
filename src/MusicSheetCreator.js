@@ -19,13 +19,14 @@ const DisplaySelection = ({ notes, selectedNote, selectItem }) => {
   );
 };
 
-const SymbolSelector = ({ selectSymbol, selectNoteType }) => {
+const SymbolSelector = ({ selectSymbol, selectNoteType, selectNoteMode }) => {
   return (
     <div className="symbol-selection">
       <div className="note-type-selection">
         <button className="add-btn" onClick={() => { selectNoteType('whole'); }}>Whole Note</button>
         <button className="add-btn" onClick={() => { selectNoteType('half'); }}>Half Note</button>
         <button className="add-btn" onClick={() => { selectNoteType('quarter'); }}>Quarter Note</button>
+        <button className="add-btn" onClick={() => { selectNoteMode('dotted'); }}>Dotted Mode</button>
       </div>
       <div>
         <div className="note-selection">
@@ -74,10 +75,11 @@ const MusicSheetCreator = () => {
   const [sheet, setSheet] = useState(['C4quarter']);
   const [index, setIndex] = useState(0);
   const [noteType, setNoteType] = useState('quarter');
+  const [noteMode, setNoteMode] = useState('');
 
   const addNote = () => {
     setIndex(sheet.length);
-    const updatedSheet = sheet.concat('C4quarter');
+    const updatedSheet = sheet.concat('C4quarter' + noteMode);
     setSheet(updatedSheet);
   };
 
@@ -92,7 +94,7 @@ const MusicSheetCreator = () => {
   const selectSymbol = note => {
     const updatedSheet = sheet.map((item, i) => {
       if (!note.includes('Symbol')) {
-        return i === index ? note + noteType : item;
+        return i === index ? note + noteType + noteMode : item;
       }
       else {
         return i === index ? note : item;
@@ -108,15 +110,34 @@ const MusicSheetCreator = () => {
   const selectNoteType = newNoteType => {
     setNoteType(newNoteType);
     const updatedSheet = sheet.map((item, i) => {
-      return i === index ? item.substring(0, 2) + newNoteType : item;
+      return i === index ? item.substring(0, 2) + newNoteType + noteMode : item;
     });
     setSheet(updatedSheet);
+  };
+
+  const selectNoteMode = newNoteMode => {
+    if (noteMode.includes(newNoteMode)) {
+      const updatedNoteMode = noteMode.replace(newNoteMode, '');
+      setNoteMode(updatedNoteMode);
+      const updatedSheet = sheet.map((item, i) => {
+        return i === index ? item.substring(0, 2) + noteType + updatedNoteMode : item;
+      });
+      setSheet(updatedSheet);
+    }
+    else {
+      const updatedNoteMode = noteMode + newNoteMode;
+      setNoteMode(updatedNoteMode);
+      const updatedSheet = sheet.map((item, i) => {
+        return i === index ? item.substring(0, 2) + noteType + updatedNoteMode : item;
+      });
+      setSheet(updatedSheet);
+    }
   };
 
   return (
     <div className="main">
       <DisplaySelection notes={sheet} selectedNote={index} selectItem={selectIndex} />
-      <SymbolSelector selectSymbol={selectSymbol} selectNoteType={selectNoteType} />
+      <SymbolSelector selectSymbol={selectSymbol} selectNoteType={selectNoteType} selectNoteMode={selectNoteMode} />
       <button className="add-btn" onClick={addNote}>Add New Note</button>
       <button className="add-btn" onClick={removeNote}>Remove Selected Note</button>
     </div>
