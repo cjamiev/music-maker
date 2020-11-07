@@ -19,7 +19,21 @@ const STAFF_WIDTH = 50;
 const keyList = ['E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B5', 'C6', 'D6', 'E6', 'F6'];
 
 const CreateOtherSymbol = (key) => {
-  if (key === 'SymbolMeasureBar') {
+  if (key === 'wholerest') {
+    return (
+      <Fragment>
+        <rect x={STAFF_WIDTH / TWO - STAFF_LINE_DISTANCE / TWO} y={TOP_STAFF_LINE + STAFF_LINE_DISTANCE} width={STAFF_LINE_DISTANCE} height={STAFF_LINE_DISTANCE / TWO} className='single-bar-line' />
+      </ Fragment >
+    );
+  }
+  else if (key === 'halfrest') {
+    return (
+      <Fragment>
+        <rect x={STAFF_WIDTH / TWO - STAFF_LINE_DISTANCE / TWO} y={TOP_STAFF_LINE + 1.5 * STAFF_LINE_DISTANCE} width={STAFF_LINE_DISTANCE} height={STAFF_LINE_DISTANCE / TWO} className='single-bar-line' />
+      </ Fragment >
+    );
+  }
+  else if (key === 'SymbolMeasureBar') {
     return (
       <Fragment>
         <line x1={STAFF_WIDTH / TWO} x2={STAFF_WIDTH / TWO} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='single-bar-line' />

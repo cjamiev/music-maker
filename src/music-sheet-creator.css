@@ -27,12 +27,7 @@
   justify-content: center;
 }
 
-.divider-selection {
-  display: flex;
-  flex-direction: column;
-}
-
-.note-type-selection {
+.column-selection {
   display: flex;
   flex-direction: column;
 }

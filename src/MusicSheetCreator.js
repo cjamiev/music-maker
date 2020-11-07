@@ -34,7 +34,14 @@ const DisplaySelection = ({ sheet, selectItem, currentIndex }) => {
 const SymbolSelector = ({ selectKey, selectNoteType, selectDotted, selectStacatto, selectSymbol }) => {
   return (
     <div className="symbol-selection">
-      <div className="note-type-selection">
+      <div className="column-selection">
+        <button className="add-btn" onClick={() => { selectSymbol('wholerest'); }}>Whole Rest</button>
+        <button className="add-btn" onClick={() => { selectSymbol('halfrest'); }}>Half Rest</button>
+        <button className="add-btn" onClick={() => { selectSymbol('quarterrest'); }}>Quarter Rest</button>
+        <button className="add-btn" onClick={() => { selectSymbol('8threst'); }}>8th Rest</button>
+        <button className="add-btn" onClick={() => { selectSymbol('16threst'); }}>16th Rest</button>
+      </div>
+      <div className="column-selection">
         <button className="add-btn" onClick={() => { selectNoteType('whole'); }}>Whole Note</button>
         <button className="add-btn" onClick={() => { selectNoteType('half'); }}>Half Note</button>
         <button className="add-btn" onClick={() => { selectNoteType('quarter'); }}>Quarter Note</button>
@@ -74,7 +81,7 @@ const SymbolSelector = ({ selectKey, selectNoteType, selectDotted, selectStacatt
           <button className='note-btn' onClick={() => selectKey('B3')}>B</button>
         </div>
       </div>
-      <div className="divider-selection">
+      <div className="column-selection">
         <button className='note-btn' onClick={() => selectSymbol('SymbolMeasureBar')}> Measure Bar</button>
         <button className='note-btn' onClick={() => selectSymbol('SymbolEndBar')}>End Bar</button>
         <button className='note-btn' onClick={() => selectSymbol('SymbolLeftRepeatBar')}>Left Repeat Bar</button>
