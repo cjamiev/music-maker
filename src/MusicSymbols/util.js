@@ -23,26 +23,26 @@ export const StaffLedgerLines = (count, above = false) => {
   );
 };
 
-export const getNumberOfHighLedgerLines = (notes) => {
-  if (notes.find(item => tripleHighLedgerNotes.find(entry => item.includes(entry)))) {
+export const getNumberOfHighLedgerLines = (key) => {
+  if (tripleHighLedgerNotes.find(entry => key.includes(entry))) {
     return 3;
   }
-  else if (notes.find(item => doubleHighLedgerNotes.find(entry => item.includes(entry)))) {
+  else if (doubleHighLedgerNotes.find(entry => key.includes(entry))) {
     return 2;
   }
-  else if (notes.find(item => singleHighLedgerNotes.find(entry => item.includes(entry)))) {
+  else if (singleHighLedgerNotes.find(entry => key.includes(entry))) {
     return 1;
   }
 };
 
-export const getNumberOfLowLedgerLines = (notes) => {
-  if (notes.find(item => tripleLowLedgerNotes.find(entry => item.includes(entry)))) {
+export const getNumberOfLowLedgerLines = (key) => {
+  if (tripleLowLedgerNotes.find(entry => key.includes(entry))) {
     return 3;
   }
-  else if (notes.find(item => doubleLowLedgerNotes.find(entry => item.includes(entry)))) {
+  else if (doubleLowLedgerNotes.find(entry => key.includes(entry))) {
     return 2;
   }
-  else if (notes.find(item => singleLowLedgerNotes.find(entry => item.includes(entry)))) {
+  else if (singleLowLedgerNotes.find(entry => key.includes(entry))) {
     return 1;
   }
 };
