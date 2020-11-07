@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SVGCreator from './SVGCreator';
+import MusicSymbolGenerator from './MusicSymbols/MusicSymbolGenerator';
 import './music-sheet-creator.css';
 
 const DisplaySelection = ({ notes, selectedNote, selectItem }) => {
@@ -7,7 +7,7 @@ const DisplaySelection = ({ notes, selectedNote, selectItem }) => {
     const className = selectedNote === index ? 'display-note display-note-active' : 'display-note';
     return (
       <div key={note + index} className={className} onClick={() => { selectItem(index); }}>
-        <SVGCreator notes={[note]} />
+        <MusicSymbolGenerator symbols={[note]} />
       </div>
     );
   });
@@ -23,20 +23,10 @@ const NoteSelector = (props) => {
   return (
     <div>
       <div className="note-selection">
-        <button className='note-btn' onClick={() => props.selectNote('E3')}>E</button>
-        <button className='note-btn' onClick={() => props.selectNote('F3')}>F</button>
-        <button className='note-btn' onClick={() => props.selectNote('G3')}>G</button>
-        <button className='note-btn' onClick={() => props.selectNote('A3')}>A</button>
-        <button className='note-btn' onClick={() => props.selectNote('B3')}>B</button>
-      </div>
-      <div className="note-selection">
-        <button className='note-btn' onClick={() => props.selectNote('C4')}>Middle C</button>
-        <button className='note-btn' onClick={() => props.selectNote('D4')}>D</button>
-        <button className='note-btn' onClick={() => props.selectNote('E4')}>E</button>
-        <button className='note-btn' onClick={() => props.selectNote('F4')}>F</button>
-        <button className='note-btn' onClick={() => props.selectNote('G4')}>G</button>
-        <button className='note-btn' onClick={() => props.selectNote('A4')}>A</button>
-        <button className='note-btn' onClick={() => props.selectNote('B4')}>B</button>
+        <button className='note-btn' onClick={() => props.selectNote('C6')}>C</button>
+        <button className='note-btn' onClick={() => props.selectNote('D6')}>D</button>
+        <button className='note-btn' onClick={() => props.selectNote('E6')}>E</button>
+        <button className='note-btn' onClick={() => props.selectNote('F6')}>F</button>
       </div>
       <div className="note-selection">
         <button className='note-btn' onClick={() => props.selectNote('C5')}>C</button>
@@ -48,10 +38,20 @@ const NoteSelector = (props) => {
         <button className='note-btn' onClick={() => props.selectNote('B5')}>B</button>
       </div>
       <div className="note-selection">
-        <button className='note-btn' onClick={() => props.selectNote('C6')}>C</button>
-        <button className='note-btn' onClick={() => props.selectNote('D6')}>D</button>
-        <button className='note-btn' onClick={() => props.selectNote('E6')}>E</button>
-        <button className='note-btn' onClick={() => props.selectNote('F6')}>F</button>
+        <button className='note-btn' onClick={() => props.selectNote('C4')}>Middle C</button>
+        <button className='note-btn' onClick={() => props.selectNote('D4')}>D</button>
+        <button className='note-btn' onClick={() => props.selectNote('E4')}>E</button>
+        <button className='note-btn' onClick={() => props.selectNote('F4')}>F</button>
+        <button className='note-btn' onClick={() => props.selectNote('G4')}>G</button>
+        <button className='note-btn' onClick={() => props.selectNote('A4')}>A</button>
+        <button className='note-btn' onClick={() => props.selectNote('B4')}>B</button>
+      </div>
+      <div className="note-selection">
+        <button className='note-btn' onClick={() => props.selectNote('E3')}>E</button>
+        <button className='note-btn' onClick={() => props.selectNote('F3')}>F</button>
+        <button className='note-btn' onClick={() => props.selectNote('G3')}>G</button>
+        <button className='note-btn' onClick={() => props.selectNote('A3')}>A</button>
+        <button className='note-btn' onClick={() => props.selectNote('B3')}>B</button>
       </div>
     </div>
   );
