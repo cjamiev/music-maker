@@ -68,6 +68,14 @@ const MusicSheetCreator = () => {
     setSheet(updatedSheet);
   };
 
+  const removeNote = () => {
+    if (sheet.length > 1) {
+      const updatedSheet = sheet.filter((item, i) => i !== index);
+      setSheet(updatedSheet);
+      setIndex(0);
+    }
+  };
+
   const selectNote = note => {
     const updatedSheet = sheet.map((item, i) => {
       return i === index ? note + noteType : item;
@@ -96,7 +104,8 @@ const MusicSheetCreator = () => {
       </div>
       <DisplaySelection notes={sheet} selectedNote={index} selectItem={selectIndex} />
       <NoteSelector selectNote={selectNote} />
-      <button className="add-btn" onClick={addNote}>Add New note</button>
+      <button className="add-btn" onClick={addNote}>Add New Note</button>
+      <button className="add-btn" onClick={removeNote}>Remove Selected Note</button>
     </div>
   );
 };
