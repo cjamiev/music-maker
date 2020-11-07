@@ -1,6 +1,10 @@
 import './svg-creator.css';
 import React from 'react';
-import noteSelector from './Note';
+import {
+  quarterNoteSelector,
+  halfNoteSelector,
+  wholeNoteSelector
+} from './Note';
 
 const tripleLowLedgerNotes = ['E3', 'F3'];
 const doubleLowLedgerNotes = ['G3', 'A3'];
@@ -27,33 +31,41 @@ const StaffLedgerLines = (count, above = false) => {
 };
 
 const getNumberOfHighLedgerLines = (notes) => {
-  if (notes.find(item => tripleHighLedgerNotes.find(entry => entry === item))) {
+  if (notes.find(item => tripleHighLedgerNotes.find(entry => item.includes(entry)))) {
     return 3;
   }
-  else if (notes.find(item => doubleHighLedgerNotes.find(entry => entry === item))) {
+  else if (notes.find(item => doubleHighLedgerNotes.find(entry => item.includes(entry)))) {
     return 2;
   }
-  else if (notes.find(item => singleHighLedgerNotes.find(entry => entry === item))) {
+  else if (notes.find(item => singleHighLedgerNotes.find(entry => item.includes(entry)))) {
     return 1;
   }
 };
 
 const getNumberOfLowLedgerLines = (notes) => {
-  if (notes.find(item => tripleLowLedgerNotes.find(entry => entry === item))) {
+  if (notes.find(item => tripleLowLedgerNotes.find(entry => item.includes(entry)))) {
     return 3;
   }
-  else if (notes.find(item => doubleLowLedgerNotes.find(entry => entry === item))) {
+  else if (notes.find(item => doubleLowLedgerNotes.find(entry => item.includes(entry)))) {
     return 2;
   }
-  else if (notes.find(item => singleLowLedgerNotes.find(entry => entry === item))) {
+  else if (notes.find(item => singleLowLedgerNotes.find(entry => item.includes(entry)))) {
     return 1;
   }
 };
 
-const CreateNote = ({ notes }) => {
+const CreateNoteAndStaffLines = ({ notes }) => {
   console.log(notes);
   const noteSVG = notes.map(item => {
-    return noteSelector[item];
+    if (item.includes('whole')) {
+      return wholeNoteSelector[item];
+    }
+    else if (item.includes('half')) {
+      return halfNoteSelector[item];
+    }
+    else if (item.includes('quarter')) {
+      return quarterNoteSelector[item];
+    }
   });
 
   const staffAboveCount = getNumberOfHighLedgerLines(notes);
@@ -72,7 +84,7 @@ const CreateNote = ({ notes }) => {
 const SVGNoteCreator = ({ notes }) => {
   return (
     <div>
-      <CreateNote notes={notes} />
+      <CreateNoteAndStaffLines notes={notes} />
     </div>
   );
 };

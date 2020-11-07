@@ -22,7 +22,6 @@ const DisplaySelection = ({ notes, selectedNote, selectItem }) => {
 const NoteSelector = (props) => {
   return (
     <div>
-
       <div className="note-selection">
         <button className='note-btn' onClick={() => props.selectNote('E3')}>E</button>
         <button className='note-btn' onClick={() => props.selectNote('F3')}>F</button>
@@ -59,19 +58,19 @@ const NoteSelector = (props) => {
 };
 
 const MusicSheetCreator = () => {
-  const [sheet, setSheet] = useState(['C4']);
+  const [sheet, setSheet] = useState(['C4quarter']);
   const [index, setIndex] = useState(0);
+  const [noteType, setNoteType] = useState('quarter');
 
   const addNote = () => {
     setIndex(sheet.length);
-    const updatedSheet = sheet.concat('C4');
+    const updatedSheet = sheet.concat('C4quarter');
     setSheet(updatedSheet);
   };
 
   const selectNote = note => {
-    sheet[index] = note;
     const updatedSheet = sheet.map((item, i) => {
-      return i === index ? note : item;
+      return i === index ? note + noteType : item;
     });
     setSheet(updatedSheet);
   };
@@ -80,8 +79,21 @@ const MusicSheetCreator = () => {
     setIndex(newIndex);
   };
 
+  const selectNoteType = newNoteType => {
+    setNoteType(newNoteType);
+    const updatedSheet = sheet.map((item, i) => {
+      return i === index ? item.substring(0, 2) + newNoteType : item;
+    });
+    setSheet(updatedSheet);
+  };
+
   return (
     <div className="main">
+      <div>
+        <button className="add-btn" onClick={() => { selectNoteType('whole'); }}>Whole Note</button>
+        <button className="add-btn" onClick={() => { selectNoteType('half'); }}>Half Note</button>
+        <button className="add-btn" onClick={() => { selectNoteType('quarter'); }}>Quarter Note</button>
+      </div>
       <DisplaySelection notes={sheet} selectedNote={index} selectItem={selectIndex} />
       <NoteSelector selectNote={selectNote} />
       <button className="add-btn" onClick={addNote}>Add New note</button>

@@ -9,10 +9,6 @@
   stroke-width: 1;
 }
 
-.blue-fill {
-  fill: blue;
-}
-
-.red-fill {
-  fill: red;
+.circle-filled {
+  fill: black;
 }
