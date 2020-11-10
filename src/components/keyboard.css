@@ -3,7 +3,6 @@
 }
 
 .key {
-  flex: 1;
   height: calc(var(--width) * 4);
   width: var(--width);
   text-align: center;
