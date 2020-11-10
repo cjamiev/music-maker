@@ -19,7 +19,7 @@ const Keyboard = ({ selectPianoKey }) => {
   });
 
   return (
-    <div class="keyboard">
+    <div className="keyboard">
       {renderPianoKeys}
     </div>
   );
