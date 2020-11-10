@@ -23,6 +23,7 @@
 
 .note-selection {
   display: flex;
+  flex-wrap: wrap;
   place-items: center;
   justify-content: center;
 }
@@ -33,6 +34,7 @@
 }
 
 .note-btn {
+  flex: 1 0 16%;
   background-color: #3287a8;
   color: white;
   outline: none;
