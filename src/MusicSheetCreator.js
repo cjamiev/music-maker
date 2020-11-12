@@ -63,9 +63,9 @@ const SymbolSelector = ({ selectKey, selectNoteType, selectDotted, selectStacatt
       <div className="column-selection">
         <button className="add-btn" onClick={() => { selectSymbol('wholerest'); }}>Whole Rest</button>
         <button className="add-btn" onClick={() => { selectSymbol('halfrest'); }}>Half Rest</button>
-        {/* <button className="add-btn" onClick={() => { selectSymbol('quarterrest'); }}>Quarter Rest</button>
+        <button className="add-btn" onClick={() => { selectSymbol('quarterrest'); }}>Quarter Rest</button>
         <button className="add-btn" onClick={() => { selectSymbol('8threst'); }}>8th Rest</button>
-        <button className="add-btn" onClick={() => { selectSymbol('16threst'); }}>16th Rest</button> */}
+        <button className="add-btn" onClick={() => { selectSymbol('16threst'); }}>16th Rest</button>
       </div>
       <div className="column-selection">
         <button className="add-btn" onClick={() => { selectNoteType('whole'); }}>Whole Note</button>
@@ -74,7 +74,7 @@ const SymbolSelector = ({ selectKey, selectNoteType, selectDotted, selectStacatt
         <button className="add-btn" onClick={() => { selectDotted(); }}>Dotted</button>
         {/* <button className="add-btn" onClick={() => { selectStacatto(); }}>Stacatto</button> */}
       </div>
-      <div class="note-selection">
+      <div className="note-selection">
         {renderNotes}
       </div>
       <div className="column-selection">
@@ -271,7 +271,7 @@ const MusicSheetCreator = () => {
           return item;
         }
       });
-      setTrebleStaff(updatedBassStaff);
+      setBassStaff(updatedBassStaff);
     }
   };
 

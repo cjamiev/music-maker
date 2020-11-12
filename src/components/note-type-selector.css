@@ -1,0 +1,26 @@
+.note-type-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.note-type-dropdown .dropdown-content {
+  visibility: hidden;
+  position: absolute;
+
+  border: 1px solid black;
+  padding: 5px 5px;
+  margin: 0 0 5px 5px;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+}
+
+.dropdown-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.note-type-dropdown-active .dropdown-content {
+  visibility: visible;
+}
