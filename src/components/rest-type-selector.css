@@ -1,9 +1,10 @@
-.note-type-dropdown {
+.rest-type-dropdown {
   position: relative;
   display: inline-block;
+  margin-left: 5px;
 }
 
-.note-type-dropdown .note-type-dropdown-content {
+.rest-type-dropdown .rest-type-dropdown-content {
   visibility: hidden;
   position: absolute;
 
@@ -15,12 +16,12 @@
   left: 50%;
 }
 
-.note-type-dropdown-content {
+.rest-type-dropdown-content {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
 }
 
-.note-type-dropdown-active .note-type-dropdown-content {
+.rest-type-dropdown-active .rest-type-dropdown-content {
   visibility: visible;
 }

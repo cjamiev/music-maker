@@ -14,7 +14,7 @@ const noteTypes = [
   { key: 'dotted-sixteenth-note', label: 'Dotted 16th Note' }
 ];
 
-const NoteTYpeSelector = ({ selectNoteType }) => {
+const NoteTypeSelector = ({ selectNoteType }) => {
   const [toggle, setToggle] = useState(false);
   const renderNoteTypeButtons = noteTypes.map(item => {
     return (<button key={item.key} onClick={() => { selectNoteType(item.key); }}>{item.label}</button>);
@@ -28,12 +28,12 @@ const NoteTYpeSelector = ({ selectNoteType }) => {
   return (
     <div className={className} onClick={toggleDropdownSelection}>
       Note Selector
-      <div className="dropdown-content">
+      <div className="note-type-dropdown-content">
         {renderNoteTypeButtons}
       </div>
     </div>
   );
 };
 
-export default NoteTYpeSelector;
+export default NoteTypeSelector;
 
