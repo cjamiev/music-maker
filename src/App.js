@@ -83,6 +83,7 @@ const App = () => {
           pedal={pedal}
         />
         <NotationSelector
+          addItem={addItem}
           selectKeySignature={selectKeySignature}
           selectTimeSignature={selectTimeSignature}
           selectPianoKey={selectPianoKey}
@@ -91,7 +92,6 @@ const App = () => {
           selectMusicalSymbol={selectMusicalSymbol}
           selectPedal={selectPedal}
         />
-        <button onClick={addItem}>Add</button>
       </main>
       <Footer />
     </div>

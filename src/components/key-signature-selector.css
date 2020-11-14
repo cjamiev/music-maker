@@ -1,6 +1,7 @@
 .key-signature-dropdown {
   position: relative;
   display: inline-block;
+  color: white;
 }
 
 .key-signature-dropdown .key-signature-dropdown-content {

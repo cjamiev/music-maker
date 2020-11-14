@@ -1,6 +1,7 @@
 .time-signature-dropdown {
   position: relative;
   display: inline-block;
+  color: white;
 }
 
 .time-signature-dropdown .time-signature-dropdown-content {

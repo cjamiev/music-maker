@@ -2,3 +2,23 @@
   position: absolute;
   top: 60%;
 }
+
+.keyboard-container {
+  display: flex;
+  background-color: black;
+  padding: 15px;
+  border-radius: 0 0 15px 15px;
+}
+
+.keyboard-left-area {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.keyboard-right-area {
+  background-color: black;
+  margin-right: 5px;
+}

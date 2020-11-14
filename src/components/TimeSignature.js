@@ -23,7 +23,7 @@ const TimeSignatureSelector = ({ selectTimeSignature }) => {
 
   return (
     <div className={className} onClick={toggleDropdownSelection}>
-      Key Signature
+      Time Signature
       <div className="time-signature-dropdown-content">
         {renderTimeSignatureButtons}
       </div>
