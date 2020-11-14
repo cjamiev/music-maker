@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import SheetMusic from './components/SheetMusic';
 import NotationSelector from './components/NotationSelector';
-// import MusicSheetCreator from './MusicSheetCreator';
 import './App.css';
 
 const App = () => {
+  const [row, setRow] = useState([]);
   const [keySignature, setKeySignature] = useState('');
   const [timeSignature, setTimeSignature] = useState('4/4');
   const [pianoKey, setPianoKey] = useState('C4');
@@ -56,11 +56,24 @@ const App = () => {
     setPedal(selected);
   };
 
+  const addItem = () => {
+    const item = {
+      pianoKey,
+      noteType,
+      noteModification,
+      musicalSymbol,
+      pedal
+    };
+    const updatedRow = row.concat([item]);
+    setRow(updatedRow);
+  };
+
   return (
     <div className='main'>
       <SheetMusic
         keySignature={keySignature}
         timeSignature={timeSignature}
+        row={row}
         pianoKey={pianoKey}
         noteType={noteType}
         noteModification={noteModification}
@@ -76,7 +89,7 @@ const App = () => {
         selectMusicalSymbol={selectMusicalSymbol}
         selectPedal={selectPedal}
       />
-      {/* <MusicSheetCreator /> */}
+      <button onClick={addItem}>Add</button>
     </div>
   );
 };
