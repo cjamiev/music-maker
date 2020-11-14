@@ -1,0 +1,28 @@
+.footer {
+  height: 35px;
+  position: absolute;
+  top: calc(100% - 40px);
+  width: 100%;
+}
+
+.footer-btns {
+  height: 30px;
+  width: 150px;
+  margin: auto 5px;
+  background-color: #33b1f8;
+  border: 1px solid #33b1f8;
+  color: white;
+  outline: 0;
+}
+
+.footer-btns:hover {
+  background-color: #33bfff;
+}
+
+.footer-btns:active {
+  background-color: #33b1f8;
+}
+
+.float-right {
+  float: right;
+}

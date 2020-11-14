@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SheetMusic from './components/SheetMusic';
 import NotationSelector from './components/NotationSelector';
+import Footer from './layout/Footer';
 import './App.css';
 
 const App = () => {
@@ -69,27 +70,30 @@ const App = () => {
   };
 
   return (
-    <div className='main'>
-      <SheetMusic
-        keySignature={keySignature}
-        timeSignature={timeSignature}
-        row={row}
-        pianoKey={pianoKey}
-        noteType={noteType}
-        noteModification={noteModification}
-        musicalSymbol={musicalSymbol}
-        pedal={pedal}
-      />
-      <NotationSelector
-        selectKeySignature={selectKeySignature}
-        selectTimeSignature={selectTimeSignature}
-        selectPianoKey={selectPianoKey}
-        selectNoteType={selectNoteType}
-        selectNoteModification={selectNoteModification}
-        selectMusicalSymbol={selectMusicalSymbol}
-        selectPedal={selectPedal}
-      />
-      <button onClick={addItem}>Add</button>
+    <div>
+      <main className='main'>
+        <SheetMusic
+          keySignature={keySignature}
+          timeSignature={timeSignature}
+          row={row}
+          pianoKey={pianoKey}
+          noteType={noteType}
+          noteModification={noteModification}
+          musicalSymbol={musicalSymbol}
+          pedal={pedal}
+        />
+        <NotationSelector
+          selectKeySignature={selectKeySignature}
+          selectTimeSignature={selectTimeSignature}
+          selectPianoKey={selectPianoKey}
+          selectNoteType={selectNoteType}
+          selectNoteModification={selectNoteModification}
+          selectMusicalSymbol={selectMusicalSymbol}
+          selectPedal={selectPedal}
+        />
+        <button onClick={addItem}>Add</button>
+      </main>
+      <Footer />
     </div>
   );
 };
