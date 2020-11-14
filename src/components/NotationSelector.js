@@ -7,7 +7,7 @@ import NoteModifierSelector from './NoteModifierSelector';
 import RestSelector from './RestSelector';
 import BarSelector from './BarSelector';
 import PedalSelector from './PedalSelector';
-import './note-type-selector.css';
+import './notation-selector.css';
 
 const NotationSelector = ({ selectKeySignature, selectTimeSignature, selectPianoKey, selectNoteType, selectNoteModification, selectMusicalSymbol, selectPedal }) => {
   return (
@@ -16,10 +16,10 @@ const NotationSelector = ({ selectKeySignature, selectTimeSignature, selectPiano
       <TimeSignature selectTimeSignature={selectTimeSignature} />
       <NoteTypeSelector selectNoteType={selectNoteType} />
       <NoteModifierSelector selectNoteModification={selectNoteModification} />
-      <RestSelector selectMusicalSymbol={selectMusicalSymbol} />
       <BarSelector selectMusicalSymbol={selectMusicalSymbol} />
-      <PedalSelector selectPedal={selectPedal} />
+      <RestSelector selectMusicalSymbol={selectMusicalSymbol} />
       <Keyboard selectPianoKey={selectPianoKey} />
+      <PedalSelector selectPedal={selectPedal} />
     </div>
   );
 };
