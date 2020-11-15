@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Draw from './svg/Draw';
 import SheetMusic from './components/SheetMusic';
 import NotationSelector from './components/NotationSelector';
 import Footer from './layout/Footer';
@@ -71,7 +72,7 @@ const App = () => {
 
   return (
     <div>
-      <main className='main'>
+      {/* <main className='main'>
         <SheetMusic
           keySignature={keySignature}
           timeSignature={timeSignature}
@@ -93,8 +94,22 @@ const App = () => {
           selectPedal={selectPedal}
         />
       </main>
-      <Footer />
-    </div>
+      <Footer />  pianoKey={'A#4'}*/}
+
+      <Draw musicalSymbol={'sixteenth-rest'} pianoKey={'A#4'} noteType={'whole-note'} />
+      <Draw musicalSymbol={'eighth-rest'} pianoKey={'A#4'} noteType={'whole-note'} />
+      <Draw musicalSymbol={'quarter-rest'} pianoKey={'A#4'} noteType={'whole-note'} />
+      <Draw pianoKey={'A#4'} noteType={'whole-note'} />
+      <Draw pianoKey={'A#4'} noteType={'half-note'} />
+      <Draw pianoKey={'A#4'} noteType={'quarter-note'} />
+      <Draw pianoKey={'A#4'} noteType={'eighth-note'} />
+      <Draw pianoKey={'A#4'} noteType={'sixteenth-note'} />
+      <Draw pianoKey={'B4'} noteType={'whole-note'} />
+      <Draw pianoKey={'B4'} noteType={'half-note'} />
+      <Draw pianoKey={'B4'} noteType={'quarter-note'} />
+      <Draw pianoKey={'B4'} noteType={'eighth-note'} />
+      <Draw pianoKey={'B4'} noteType={'sixteenth-note'} />
+    </div >
   );
 };
 

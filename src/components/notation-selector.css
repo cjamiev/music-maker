@@ -16,9 +16,11 @@
   background-color: black;
   margin-left: 5px;
   margin-right: 5px;
+  width: 200px;
 }
 
 .keyboard-right-area {
   background-color: black;
   margin-right: 5px;
+  width: 200px;
 }
