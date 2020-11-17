@@ -3,12 +3,14 @@ import './piano-note.css';
 
 const STEM_X = '133.94351';
 const STEM_Y = '79.62748';
+const BASE_HEIGHT_SIXTEENTH_NOTE = 167.53473;
+const BASE_HEIGHT = 129.53473;
 const SMALLER_STEM_Y = '117.62748';
 const FLIPPED_STEM_X = '-72.072655';
 const FLIPPED_STEM_Y = '-287.29202';
 const SMALLER_FLIPPED_STEM_Y = '-264.29202';
 
-export const NoteStem = ({ type, xshift = 0, yshift = 0 }) => {
+export const NoteStem = ({ type, xshift = 0, yshift = 0, heightShift = 0 }) => {
   const translate = `translate(${xshift},${yshift})`;
 
   if (type === 'sixteenth-note') {
@@ -19,7 +21,7 @@ export const NoteStem = ({ type, xshift = 0, yshift = 0 }) => {
           x={STEM_X}
           y={STEM_Y}
           width='1.7296242'
-          height='167.53473'
+          height={BASE_HEIGHT_SIXTEENTH_NOTE + heightShift}
           transform='matrix(0.99999308,0.00371988,-0.00256694,0.99999671,0,0)' />
       </g>
     );
@@ -32,7 +34,7 @@ export const NoteStem = ({ type, xshift = 0, yshift = 0 }) => {
           x={STEM_X}
           y={SMALLER_STEM_Y}
           width='1.7296242'
-          height='129.53473'
+          height={BASE_HEIGHT + heightShift}
           transform='matrix(0.99999308,0.00371988,-0.00256694,0.99999671,0,0)' />
       </g>
     );

@@ -89,6 +89,29 @@ const renderPianoKey = (pianoKey, noteType, noteModifier) => {
   );
 };
 
+const renderPianoChord = (pianoKeys, noteType, noteModifier) => {
+  const naturalKeys = pianoKeys.map(key => key.replace('#', ''));
+  const keyIndicies = naturalKeys.map(naturalKey => keyPositions.findIndex(key => key === naturalKey)).sort();
+  const notes = keyIndicies.map(keyIndex => {
+    const shouldFlip = keyIndex > 19 ? true : false;
+    const xshift = 0;
+    const yshift = shouldFlip ? -22.25 * (keyIndex - 23) : -22.25 * (keyIndex - 17);
+    return (<NoteHead key={keyIndex} type={noteType} xshift={xshift} yshift={yshift} />);
+  });
+
+  const shouldFlip = keyIndicies[0] > 19 ? true : false;
+  const stemXShift = 0;
+  const stemYShift = shouldFlip ? -22.25 * (keyIndicies[0] - 23) : -22.25 * (keyIndicies[0] - 17);
+  return (
+    <Fragment>
+      {notes}
+      {<NoteStem type={noteType} xshift={stemXShift} yshift={stemYShift - 30} heightShift={30} />}
+      {<NoteFlag type={noteType} xshift={stemXShift} yshift={stemYShift} />}
+      {renderNoteModifier(noteModifier, keyIndicies[0])}
+    </Fragment>
+  );
+};
+
 const renderMusicSymbol = (musicalSymbol) => {
   return (
     <svg height='1in' width='1in' viewBox='0 0 400 400'>
@@ -103,7 +126,8 @@ const Draw = ({ musicalSymbol, pianoKey, noteType, noteModifier }) => {
     <svg style={{ marginLeft: '50px' }} height={STAFF_HEIGHT} width={STAFF_WIDTH} viewBox='0 0 100 100'>
       <g transform="translate(25,-20)">
         <g transform="scale(0.22) translate(10,134)">
-          {renderPianoKey('F4', 'sixteenth-note', { natural: true })}
+          {/* {renderPianoKey('E5', 'quarter-note', {})} */}
+          {renderPianoChord(['F4', 'A4', 'C5'], 'quarter-note', {})}
           {/* {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)} */}
         </g>
         <line className="staff-line" x1={25} x2={25} y1={50} y2={150} />
