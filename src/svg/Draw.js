@@ -1,40 +1,51 @@
 import React, { Fragment } from 'react';
-import {
-  renderFlippedNoteFlag,
-  renderFlippedNoteHead,
-  renderFlippedNoteStem,
-  renderNoteFlag,
-  renderNoteHead,
-  renderNoteStem
-} from './DrawPianoNote';
+import { FlippedNoteHead, NoteHead } from './DrawNote/NoteHead';
+import { FlippedNoteStem, NoteStem } from './DrawNote/NoteStem';
+import { FlippedNoteFlag, NoteFlag } from './DrawNote/NoteFlag';
 import {
   renderRestNote
 } from './DrawMusicSymbol';
+import {
+  renderFlat,
+  renderSharp,
+  renderNatural,
+  renderAccent,
+  renderFermata
+} from './DrawNoteModifier';
+import {
+  StaffLines
+} from './DrawStaff';
 
-const keyList = [
-  'C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2',
-  'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3',
-  'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4',
-  'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G5', 'G#5', 'A5', 'A#5', 'B5',
-  'C6', 'C#6', 'D6', 'D#6', 'E6', 'F6', 'F#6', 'G6', 'G#6', 'A6', 'A#6', 'B6'
+const keyPositions = [
+  'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2',
+  'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3',
+  'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4',
+  'C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B5',
+  'C6', 'D6', 'E6', 'F6', 'G6', 'A6', 'B6'
 ];
+const STAFF_WIDTH = 500;
+const STAFF_HEIGHT = 500;
 
 const renderPianoKey = (pianoKey, noteType) => {
-  const keyIndex = keyList.findIndex(key => key === pianoKey);
-  const shouldFlip = keyIndex > 34 ? true : false;
+  const naturalKey = pianoKey.replace('#', '');
+  const keyIndex = keyPositions.findIndex(key => key === naturalKey);
+  const shouldFlip = keyIndex > 19 ? true : false;
+
+  const xshift = 0;
+  const yshift = shouldFlip ? -22.25 * (keyIndex - 23) : -22.25 * (keyIndex - 17);
 
   return (
-    <svg height='1in' width='1in' viewBox='0 0 210 297'>
-      {shouldFlip ? renderFlippedNoteHead(noteType) : renderNoteHead(noteType)}
-      {shouldFlip ? renderFlippedNoteStem(noteType) : renderNoteStem(noteType)}
-      {shouldFlip ? renderFlippedNoteFlag(noteType) : renderNoteFlag(noteType)}
-    </svg >
+    <Fragment>
+      {shouldFlip ? <FlippedNoteHead type={noteType} xshift={xshift} yshift={yshift} /> : <NoteHead type={noteType} xshift={xshift} yshift={yshift} />}
+      {shouldFlip ? <FlippedNoteStem type={noteType} xshift={xshift} yshift={yshift} /> : <NoteStem type={noteType} xshift={xshift} yshift={yshift} />}
+      {shouldFlip ? <FlippedNoteFlag type={noteType} xshift={xshift} yshift={yshift} /> : <NoteFlag type={noteType} xshift={xshift} yshift={yshift} />}
+    </Fragment>
   );
 };
 
 const renderMusicSymbol = (musicalSymbol) => {
   return (
-    <svg height='1in' width='1in' viewBox='0 0 210 297'>
+    <svg height='1in' width='1in' viewBox='0 0 400 400'>
       { renderRestNote(musicalSymbol)}
     </svg >
   );
@@ -43,10 +54,17 @@ const renderMusicSymbol = (musicalSymbol) => {
 const Draw = ({ musicalSymbol, pianoKey, noteType }) => {
 
   return (
-    <Fragment>
-      {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)}
-    </Fragment>
-
+    <svg style={{ marginLeft: '50px' }} height={STAFF_HEIGHT} width={STAFF_WIDTH} viewBox='0 0 100 100'>
+      <g transform="scale(0.22) translate(10,134)">
+        {/* {renderPianoKey('B4', 'sixteenth-note')} */}
+        {renderPianoKey('E5', 'sixteenth-note')}
+      </g>
+      <line className="staff-line" x1={25} x2={25} y1={50} y2={150} />
+      {StaffLines}
+    </svg>
+    // <Fragment>
+    //   {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)}
+    // </Fragment >
   );
 };
 
