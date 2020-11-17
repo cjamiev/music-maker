@@ -110,7 +110,7 @@ const renderPianoChord = (pianoKeys, noteType, noteModifier) => {
       {notes}
       {<NoteStem type={noteType} xshift={stemXShift} yshift={stemYShift - 50} heightShift={50} />}
       {<NoteFlag type={noteType} xshift={stemXShift} yshift={stemYShift} />}
-      {renderNoteModifier(noteModifier, keyIndicies[0])}
+      {renderNoteModifier(noteModifier, keyIndicies[1])}
     </Fragment>
   );
 };
@@ -130,7 +130,7 @@ const Draw = ({ musicalSymbol, pianoKey, noteType, noteModifier }) => {
       <g transform="translate(25,-20)">
         <g transform="scale(0.22) translate(10,134)">
           {/* {renderPianoKey('F5', 'quarter-note', {})} */}
-          {renderPianoChord(['F4', 'A4', 'C5'], 'half-note', {})}
+          {renderPianoChord(['F4', 'A4', 'C5'], 'half-note', { flat: true })}
           {/* {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)} */}
         </g>
         <line className="staff-line" x1={25} x2={25} y1={50} y2={150} />
