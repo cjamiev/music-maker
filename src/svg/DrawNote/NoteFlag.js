@@ -5,7 +5,7 @@ const BASE_FLAG_X = 7;
 const BASE_FLAG_Y = -15;
 const FLIPPED_BASE_FLAG_X = 6;
 
-export const FlippedNoteFlag = ({ type, xshift, yshift }) => {
+export const FlippedNoteFlag = ({ type, xshift = 0, yshift = 0 }) => {
   const translate = `translate(${xshift + FLIPPED_BASE_FLAG_X},${yshift})`;
 
   if (type === 'sixteenth-note') {

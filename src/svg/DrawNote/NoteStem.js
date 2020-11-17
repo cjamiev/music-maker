@@ -8,7 +8,7 @@ const FLIPPED_STEM_X = '-72.072655';
 const FLIPPED_STEM_Y = '-287.29202';
 const SMALLER_FLIPPED_STEM_Y = '-264.29202';
 
-export const NoteStem = ({ type, xshift, yshift }) => {
+export const NoteStem = ({ type, xshift = 0, yshift = 0 }) => {
   const translate = `translate(${xshift},${yshift})`;
 
   if (type === 'sixteenth-note') {

@@ -11,11 +11,11 @@ const BASE_FLIPPED_NOTE_HEAD_CY = '-144.20645';
 const BASE_FLIPPED_INNER_HALF_NOTE_HEAD_X = '27.261833';
 const BASE_FLIPPED_INNER_HALF_NOTE_HEAD_Y = '131.5632';
 
-export const NoteHead = ({ type, xshift, yshift }) => {
+export const NoteHead = ({ type, xshift = 0, yshift = 0 }) => {
   const translate = `translate(${xshift},${yshift})`;
 
   if (type === 'whole-note') {
-    return <WholeNote translate={translate} />;
+    return <WholeNote xshift={xshift} yshift={yshift} />;
   }
   if (type === 'half-note') {
     return (
@@ -55,7 +55,7 @@ export const FlippedNoteHead = ({ type, xshift, yshift }) => {
   const translate = `translate(${xshift},${yshift})`;
 
   if (type === 'whole-note') {
-    return <WholeNote translate={translate} />;
+    return <WholeNote xshift={xshift} yshift={yshift} />;
   }
   else if (type === 'half-note') {
     return (

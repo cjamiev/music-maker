@@ -6,7 +6,7 @@ const BASE_OUTER_PART_WHOLE_NOTE_CY = '-257.27422';
 const BASE_INNER_PART_WHOLE_NOTE_CX = '-27.653008';
 const BASE_INNER_PART_WHOLE_NOTE_CY = '266.86511';
 
-export const WholeNote = ({ xshift, yshift }) => {
+export const WholeNote = ({ xshift = 0, yshift = 0 }) => {
   const translate = `translate(${xshift},${yshift})`;
 
   return (
