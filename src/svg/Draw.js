@@ -39,7 +39,7 @@ const renderNote = (noteType, keyIndex) => {
   const shouldFlip = keyIndex > 19 ? true : false;
 
   const xshift = 0;
-  const yshift = shouldFlip ? -22.25 * (keyIndex - 23) : -22.25 * (keyIndex - 17);
+  const yshift = shouldFlip && noteType !== 'whole-note' ? -22.75 * (keyIndex - 23) : -22.75 * (keyIndex - 17);
 
   if (shouldFlip) {
     return (
@@ -95,7 +95,10 @@ const renderPianoChord = (pianoKeys, noteType, noteModifier) => {
   const notes = keyIndicies.map(keyIndex => {
     const shouldFlip = keyIndex > 19 ? true : false;
     const xshift = 0;
-    const yshift = shouldFlip ? -22.25 * (keyIndex - 23) : -22.25 * (keyIndex - 17);
+    const yshift = shouldFlip && noteType !== 'whole-note' ? -22.75 * (keyIndex - 23) : -22.75 * (keyIndex - 17);
+    if (shouldFlip) {
+      return (<FlippedNoteHead type={noteType} xshift={xshift} yshift={yshift} />);
+    }
     return (<NoteHead key={keyIndex} type={noteType} xshift={xshift} yshift={yshift} />);
   });
 
@@ -105,7 +108,7 @@ const renderPianoChord = (pianoKeys, noteType, noteModifier) => {
   return (
     <Fragment>
       {notes}
-      {<NoteStem type={noteType} xshift={stemXShift} yshift={stemYShift - 30} heightShift={30} />}
+      {<NoteStem type={noteType} xshift={stemXShift} yshift={stemYShift - 50} heightShift={50} />}
       {<NoteFlag type={noteType} xshift={stemXShift} yshift={stemYShift} />}
       {renderNoteModifier(noteModifier, keyIndicies[0])}
     </Fragment>
@@ -126,8 +129,8 @@ const Draw = ({ musicalSymbol, pianoKey, noteType, noteModifier }) => {
     <svg style={{ marginLeft: '50px' }} height={STAFF_HEIGHT} width={STAFF_WIDTH} viewBox='0 0 100 100'>
       <g transform="translate(25,-20)">
         <g transform="scale(0.22) translate(10,134)">
-          {/* {renderPianoKey('E5', 'quarter-note', {})} */}
-          {renderPianoChord(['F4', 'A4', 'C5'], 'quarter-note', {})}
+          {/* {renderPianoKey('F5', 'quarter-note', {})} */}
+          {renderPianoChord(['F4', 'A4', 'C5'], 'half-note', {})}
           {/* {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)} */}
         </g>
         <line className="staff-line" x1={25} x2={25} y1={50} y2={150} />
