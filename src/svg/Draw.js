@@ -22,7 +22,10 @@ import {
   Fermata
 } from './DrawNoteModifier';
 import {
-  StaffLines
+  StaffLines,
+  StaffLedgerLines,
+  getNumberOfHighLedgerLines,
+  getNumberOfLowLedgerLines
 } from './DrawStaff';
 
 const keyPositions = [
@@ -123,18 +126,31 @@ const renderMusicSymbol = (musicalSymbol) => {
   );
 };
 
+const renderStaffLines = (pianoKey) => {
+  const staffAboveCount = getNumberOfHighLedgerLines(pianoKey);
+  const staffBelowCount = getNumberOfLowLedgerLines(pianoKey);
+
+  return (
+    <Fragment>
+      {StaffLines}
+      {staffAboveCount && StaffLedgerLines(staffAboveCount, true)}
+      {staffBelowCount && StaffLedgerLines(staffBelowCount)}
+    </Fragment>
+  );
+};
+
 const Draw = ({ musicalSymbol, pianoKey, noteType, noteModifier }) => {
 
   return (
     <svg style={{ marginLeft: '50px' }} height={STAFF_HEIGHT} width={STAFF_WIDTH} viewBox='0 0 100 100'>
       <g transform="translate(25,-20)">
         <g transform="scale(0.22) translate(10,134)">
-          {/* {renderPianoKey('F5', 'quarter-note', {})} */}
-          {renderPianoChord(['F4', 'A4', 'C5'], 'half-note', { flat: true })}
+          {renderPianoKey('C6', 'quarter-note', {})}
+          {/* {renderPianoChord(['F4', 'A4', 'D5'], 'half-note', { flat: true })} */}
           {/* {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)} */}
         </g>
         <line className="staff-line" x1={25} x2={25} y1={50} y2={150} />
-        {StaffLines}
+        {renderStaffLines('C6')}
       </g>
     </svg>
   );
