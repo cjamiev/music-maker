@@ -35,8 +35,13 @@ const keyPositions = [
   'C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B5',
   'C6', 'D6', 'E6', 'F6', 'G6', 'A6', 'B6'
 ];
-const STAFF_WIDTH = 500;
-const STAFF_HEIGHT = 500;
+
+const STAFF_WIDTH = '300px';
+const STAFF_HEIGHT = '300px';
+const DOTTED_NOTE_X_POSITION = 155;
+const STAFF_LINE_DISTANCE = 10;
+const TWO = 2;
+const ZERO = 0;
 
 const renderNote = (noteType, keyIndex) => {
   const shouldFlip = keyIndex > 19 ? true : false;
@@ -83,11 +88,17 @@ const renderNoteModifier = (noteModifier, keyIndex) => {
 const renderPianoKey = (pianoKey, noteType, noteModifier) => {
   const naturalKey = pianoKey.replace('#', '');
   const keyIndex = keyPositions.findIndex(key => key === naturalKey);
+  const isDotted = noteType.includes('dotted');
+  let dottedYPos = (keyIndex - 9) % TWO === 0 ? (435 - ((keyIndex - 9) / TWO * 46)) : (435 - (keyIndex - 10) / TWO * 46);
+  dottedYPos = keyIndex - 9 > ZERO ? dottedYPos : 435;
+
+  console.log(390 - (keyIndex - 10) / TWO * STAFF_LINE_DISTANCE);
 
   return (
     <Fragment>
-      {renderNote(noteType, keyIndex)}
+      {renderNote(noteType.replace('dotted-', ''), keyIndex)}
       {renderNoteModifier(noteModifier, keyIndex)}
+      {isDotted && <circle cx={DOTTED_NOTE_X_POSITION} cy={dottedYPos} r="6" className="small-circle" />}
     </Fragment>
   );
 };
@@ -127,14 +138,10 @@ const renderMusicSymbol = (musicalSymbol) => {
 };
 
 const renderStaffLines = (pianoKey) => {
-  const staffAboveCount = getNumberOfHighLedgerLines(pianoKey);
-  const staffBelowCount = getNumberOfLowLedgerLines(pianoKey);
-
   return (
     <Fragment>
       {StaffLines}
-      {staffAboveCount && StaffLedgerLines(staffAboveCount, true)}
-      {staffBelowCount && StaffLedgerLines(staffBelowCount)}
+      {StaffLedgerLines(pianoKey)}
     </Fragment>
   );
 };
@@ -142,15 +149,15 @@ const renderStaffLines = (pianoKey) => {
 const Draw = ({ musicalSymbol, pianoKey, noteType, noteModifier }) => {
 
   return (
-    <svg style={{ marginLeft: '50px' }} height={STAFF_HEIGHT} width={STAFF_WIDTH} viewBox='0 0 100 100'>
-      <g transform="translate(25,-20)">
-        <g transform="scale(0.22) translate(10,134)">
-          {renderPianoKey('C6', 'quarter-note', {})}
-          {/* {renderPianoChord(['F4', 'A4', 'D5'], 'half-note', { flat: true })} */}
+    <svg style={{ marginLeft: '50px', border: '1px solid black' }} height={STAFF_HEIGHT} width={STAFF_WIDTH} viewBox='0 0 150 150'>
+      <g transform="translate(50,-20)">
+        <g transform="scale(0.22) translate(10,250)">
+          {renderPianoKey('F6', 'dotted-quarter-note', { sharp: true })}
+          {/* {renderPianoChord(['F4', 'G4'], 'half-note', { flat: true })} */}
           {/* {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)} */}
         </g>
-        <line className="staff-line" x1={25} x2={25} y1={50} y2={150} />
-        {renderStaffLines('C6')}
+        <line className="staff-line" x1={25} x2={25} y1={40} y2={145} />
+        {renderStaffLines('F6')}
       </g>
     </svg>
   );
