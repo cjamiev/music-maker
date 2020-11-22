@@ -85,25 +85,34 @@ const renderNoteModifier = (noteModifier, keyIndex) => {
   );
 };
 
+const renderDot = (keyIndex) => {
+  let dottedYPos = (keyIndex - 9) % TWO === 0 ? (435 - ((keyIndex - 9) / TWO * 46)) : (435 - (keyIndex - 10) / TWO * 46);
+  dottedYPos = keyIndex - 9 > ZERO ? dottedYPos : 435;
+
+  return (
+    <Fragment>
+      {<circle cx={DOTTED_NOTE_X_POSITION} cy={dottedYPos} r="6" className="small-circle" />}
+    </Fragment>
+  );
+};
+
 const renderPianoKey = (pianoKey, noteType, noteModifier) => {
   const naturalKey = pianoKey.replace('#', '');
   const keyIndex = keyPositions.findIndex(key => key === naturalKey);
   const isDotted = noteType.includes('dotted');
-  let dottedYPos = (keyIndex - 9) % TWO === 0 ? (435 - ((keyIndex - 9) / TWO * 46)) : (435 - (keyIndex - 10) / TWO * 46);
-  dottedYPos = keyIndex - 9 > ZERO ? dottedYPos : 435;
-
-  console.log(390 - (keyIndex - 10) / TWO * STAFF_LINE_DISTANCE);
 
   return (
     <Fragment>
       {renderNote(noteType.replace('dotted-', ''), keyIndex)}
       {renderNoteModifier(noteModifier, keyIndex)}
-      {isDotted && <circle cx={DOTTED_NOTE_X_POSITION} cy={dottedYPos} r="6" className="small-circle" />}
+      {isDotted && renderDot(keyIndex)}
     </Fragment>
   );
 };
 
-const renderPianoChord = (pianoKeys, noteType, noteModifier) => {
+const renderPianoChord = (pianoKeys, type, noteModifier) => {
+  const isDotted = type.includes('dotted');
+  const noteType = type.replace('dotted-', '');
   const naturalKeys = pianoKeys.map(key => key.replace('#', ''));
   const keyIndicies = naturalKeys.map(naturalKey => keyPositions.findIndex(key => key === naturalKey)).sort();
   const notes = keyIndicies.map(keyIndex => {
@@ -125,6 +134,7 @@ const renderPianoChord = (pianoKeys, noteType, noteModifier) => {
       {<NoteStem type={noteType} xshift={stemXShift} yshift={stemYShift - 50} heightShift={50} />}
       {<NoteFlag type={noteType} xshift={stemXShift} yshift={stemYShift} />}
       {renderNoteModifier(noteModifier, keyIndicies[1])}
+      {isDotted && renderDot(keyIndicies[1])}
     </Fragment>
   );
 };
@@ -153,7 +163,7 @@ const Draw = ({ musicalSymbol, pianoKey, noteType, noteModifier }) => {
       <g transform="translate(50,-20)">
         <g transform="scale(0.22) translate(10,250)">
           {renderPianoKey('F6', 'dotted-quarter-note', { sharp: true })}
-          {/* {renderPianoChord(['F4', 'G4'], 'half-note', { flat: true })} */}
+          {renderPianoChord(['F4', 'A4'], 'dotted-half-note', { flat: true })}
           {/* {musicalSymbol ? renderMusicSymbol(musicalSymbol) : renderPianoKey(pianoKey, noteType)} */}
         </g>
         <line className="staff-line" x1={25} x2={25} y1={40} y2={145} />
