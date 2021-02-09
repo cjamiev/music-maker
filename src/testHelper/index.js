@@ -1,0 +1,3 @@
+export {
+  testRenderComponent
+} from './componentSetup';
