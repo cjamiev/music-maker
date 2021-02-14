@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { timeSignatures } from 'constants';
 import './timesignature.css';
 
-import { timeSignatures } from 'constants';
 
 const TimeSignatureSelector = ({ timeSignature, selectTimeSignature }) => {
   const [toggle, setToggle] = useState(false);

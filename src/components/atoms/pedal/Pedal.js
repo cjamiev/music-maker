@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
+import { pedalTypes } from 'constants';
 import './pedal.css';
-
-const pedalTypes = [
-  { key: 'pedal-start', label: 'Pedal Start' },
-  { key: 'pedal-continue', label: 'Continue' },
-  { key: 'pedal-overlap', label: 'Overlap' },
-  { key: 'pedal-end', label: 'End' },
-  { key: '', label: 'Remove' }
-];
 
 const Pedal = ({ selectPedal }) => {
   const [toggle, setToggle] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { noteTypes } from 'constants';
 import './notetype.css';
 
-import { noteTypes } from 'constants';
 
 const NoteType = ({ selectNoteType }) => {
   const [toggle, setToggle] = useState(false);

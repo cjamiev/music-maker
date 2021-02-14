@@ -7,7 +7,7 @@ const testProps = {
 };
 
 describe('Piano', () => {
-  it('checks an item', () => {
+  it('selects the correct key', () => {
     const { getByText } = testRenderComponent(Piano, testProps);
 
     fireEvent.click(getByText('C4'));

@@ -63,3 +63,24 @@ export const barTypes = [
   { key: 'repeat-start-bar', label: 'Repeat Bar Start' },
   { key: 'repeat-end-bar', label: 'Repeat Bar End' }
 ];
+
+export const restTypes = [
+  { key: 'whole-rest', label: 'Whole Rest' },
+  { key: 'half-rest', label: 'Half Rest' },
+  { key: 'quarter-rest', label: 'Quarter Rest' },
+  { key: 'eigth-rest', label: '8th Rest' },
+  { key: 'sixteenth-rest', label: '16th Rest' },
+  { key: 'dotted-whole-rest', label: 'Dotted Whole Rest' },
+  { key: 'dotted-half-rest', label: 'Dotted Half Rest' },
+  { key: 'dotted-quarter-rest', label: 'Dotted Quarter Rest' },
+  { key: 'dotted-eigth-rest', label: 'Dotted 8th Rest' },
+  { key: 'dotted-sixteenth-rest', label: 'Dotted 16th Rest' }
+];
+
+export const pedalTypes = [
+  { key: 'pedal-start', label: 'Pedal Start' },
+  { key: 'pedal-continue', label: 'Continue' },
+  { key: 'pedal-overlap', label: 'Overlap' },
+  { key: 'pedal-end', label: 'End' },
+  { key: '', label: 'Remove' }
+];

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import './keysignature.css';
-
 import { keySignatures } from 'constants';
+import './keysignature.css';
 
 const KeySignature = ({ keySignature, selectKeySignature }) => {
   const [toggle, setToggle] = useState(false);

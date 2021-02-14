@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import './bartype.css';
-
 import { barTypes } from 'constants';
+import './bartype.css';
 
 const BarType = ({ selectMusicalSymbol }) => {
   const [toggle, setToggle] = useState(false);
