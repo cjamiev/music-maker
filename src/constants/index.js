@@ -46,6 +46,16 @@ export const noteTypes = [
   { key: 'dotted-sixteenth-note', label: 'Dotted 16th Note' }
 ];
 
+export const noteModifierTypes = [
+  { key: { accidental: 'flat' }, label: 'flat' },
+  { key: { accidental: 'sharp' }, label: 'sharp' },
+  { key: { accidental: 'natural' }, label: 'natural' },
+  { key: { accent: true }, label: 'accent' },
+  { key: { rolled: true }, label: 'rolled' },
+  { key: { fermata: true }, label: 'fermata' },
+  { key: { stacatto: true }, label: 'stacatto' }
+];
+
 export const barTypes = [
   { key: 'measure-bar', label: 'Measure Bar' },
   { key: 'line-end-bar', label: 'Line End Bar' },

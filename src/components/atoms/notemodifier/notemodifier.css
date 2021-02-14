@@ -1,11 +1,11 @@
-.keysignature-dropdown {
+.notemodifier-dropdown {
   position: relative;
   display: inline-block;
   color: white;
   cursor: pointer;
 }
 
-.keysignature-dropdown .keysignature-dropdown-content {
+.notemodifier-dropdown .notemodifier-dropdown-content {
   visibility: hidden;
   position: absolute;
 
@@ -18,10 +18,12 @@
   left: 50%;
 }
 
-.keysignature-dropdown-content {
-  display: flex;
+.notemodifier-dropdown-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
-.keysignature-dropdown-active .keysignature-dropdown-content {
+.notemodifier-dropdown-active .notemodifier-dropdown-content {
   visibility: visible;
 }
