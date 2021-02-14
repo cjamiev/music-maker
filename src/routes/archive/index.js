@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Draw from './svg/Draw';
-import SheetMusic from './components/SheetMusic';
 import NotationSelector from './components/NotationSelector';
 import Footer from './layout/Footer';
 import './index.css';
@@ -74,16 +73,6 @@ const App = () => {
     <div>
       <Draw musicalSymbol={musicalSymbol} pianoKey={pianoKey} noteType={noteType} noteModifier={noteModification} />
       <main className='main'>
-        <SheetMusic
-          keySignature={keySignature}
-          timeSignature={timeSignature}
-          row={row}
-          pianoKey={pianoKey}
-          noteType={noteType}
-          noteModification={noteModification}
-          musicalSymbol={musicalSymbol}
-          pedal={pedal}
-        />
         <NotationSelector
           addItem={addItem}
           selectKeySignature={selectKeySignature}

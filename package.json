@@ -13,7 +13,7 @@
     "e2e": "cypress run",
     "e2e:watch": "cypress open",
     "test": "jest --env=jsdom --watch",
-    "t": "jest --env=jsdom src/components/Piano/Piano.test.js --watch"
+    "t": "jest --env=jsdom src/components/atoms/KeySignature/KeySignature.test.js --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.12.8",

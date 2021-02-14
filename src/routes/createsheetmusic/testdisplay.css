@@ -1,4 +1,7 @@
 .staff-container {
+  position: absolute;
+  top: 50%;
+  left: 40%;
   width: 100%;
   height: 200px;
 }
