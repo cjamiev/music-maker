@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import App from 'app';
+import App from 'core';
 import { configureStore } from 'store';
 
 const store = configureStore();

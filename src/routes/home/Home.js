@@ -1,19 +1,9 @@
-import React, { useState } from 'react';
-import Piano from 'components/Piano';
+import React from 'react';
 
-const App = () => {
-  const [pianoKey, setPianoKey] = useState('C4');
-
-  const selectPianoKey = (selected) => {
-    setPianoKey(selected);
-  };
-
+const Home = () => {
   return (
-    <div>
-      <div>Selection:{pianoKey}</div>
-      <Piano selectPianoKey={setPianoKey} />
-    </div>
+    <div>Home</div>
   );
 };
 
-export default App;
+export default Home;
