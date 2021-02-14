@@ -47,9 +47,9 @@ export const noteTypes = [
 ];
 
 export const noteModifierTypes = [
-  { key: { accidental: 'flat' }, label: 'flat' },
-  { key: { accidental: 'sharp' }, label: 'sharp' },
-  { key: { accidental: 'natural' }, label: 'natural' },
+  { key: { flat: true }, label: 'flat' },
+  { key: { sharp: true }, label: 'sharp' },
+  { key: { natural: true }, label: 'natural' },
   { key: { accent: true }, label: 'accent' },
   { key: { rolled: true }, label: 'rolled' },
   { key: { fermata: true }, label: 'fermata' },

@@ -3,10 +3,10 @@ import './notemodifier.css';
 
 import { noteModifierTypes } from 'constants';
 
-const NoteModifier = ({ selectNoteModification }) => {
+const NoteModifier = ({ selectNoteModifier }) => {
   const [toggle, setToggle] = useState(false);
   const renderNoteModifierTypeButtons = noteModifierTypes.map(item => {
-    return (<button key={item.label} onClick={() => { selectNoteModification(item.key); }}>{item.label}</button>);
+    return (<button key={item.label} onClick={() => { selectNoteModifier(item.key); }}>{item.label}</button>);
   });
 
   const toggleDropdownSelection = () => {
