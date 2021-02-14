@@ -12,7 +12,7 @@ const keyList = [
 const Keyboard = ({ selectPianoKey }) => {
   const renderPianoKeys = keyList.map((keyId) => {
     const isBlackKey = keyId.includes('#');
-    const className = isBlackKey ? 'key black' : 'key white';
+    const className = isBlackKey ? 'piano-key piano-black' : 'piano-key piano-white';
     const keyName = isBlackKey ? '' : keyId;
 
     return (<div key={keyId} className={className} onClick={() => { selectPianoKey(keyId); }}>{keyName}</div>);

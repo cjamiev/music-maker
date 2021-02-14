@@ -3,7 +3,7 @@
 }
 
 .key {
-  height: calc(var(--width) * 4);
+  height: calc(var(--width) * 6);
   width: var(--width);
   text-align: center;
   cursor: pointer;

@@ -1,6 +1,8 @@
 import React from 'react';
 import './piano-note.css';
 
+const ZERO = 0;
+
 const STEM_X = '132.94351';
 const STEM_Y = '79.62748';
 const BASE_HEIGHT_SIXTEENTH_NOTE = 167.53473;
@@ -11,7 +13,7 @@ const FLIPPED_STEM_X = '-72.072655';
 const FLIPPED_STEM_Y = '-287.29202';
 const SMALLER_FLIPPED_STEM_Y = '-264.29202';
 
-export const NoteStem = ({ type, xshift = 0, yshift = 0, heightShift = 0 }) => {
+export const NoteStem = ({ type, xshift = ZERO, yshift = ZERO, heightShift = ZERO }) => {
   const translate = `translate(${xshift},${yshift})`;
 
   if (type === 'sixteenth-note') {

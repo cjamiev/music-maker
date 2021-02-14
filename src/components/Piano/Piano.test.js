@@ -1,5 +1,5 @@
 import { fireEvent } from '@testing-library/react';
-import { testRenderComponent } from '../../testHelper';
+import { testRenderComponent } from 'testHelper';
 import Piano from './Piano';
 
 const testProps = {

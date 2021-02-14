@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Piano from './components/Piano';
+import Piano from 'components/Piano';
 
 const App = () => {
   const [pianoKey, setPianoKey] = useState('C4');

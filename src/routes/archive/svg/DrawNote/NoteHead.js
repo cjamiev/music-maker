@@ -2,6 +2,8 @@ import React from 'react';
 import { WholeNote } from './WholeNote';
 import './piano-note.css';
 
+const ZERO = 0;
+
 const BASE_NOTE_HEAD_CX = '1.9447203';
 const BASE_NOTE_HEAD_CY = '272.65167';
 const BASE_INNER_HALF_NOTE_HEAD_X = '-17.261833';
@@ -11,7 +13,7 @@ const BASE_FLIPPED_NOTE_HEAD_CY = '-144.20645';
 const BASE_FLIPPED_INNER_HALF_NOTE_HEAD_X = '27.261833';
 const BASE_FLIPPED_INNER_HALF_NOTE_HEAD_Y = '131.5632';
 
-export const NoteHead = ({ type, xshift = 0, yshift = 0 }) => {
+export const NoteHead = ({ type, xshift = ZERO, yshift = ZERO }) => {
   const translate = `translate(${xshift},${yshift})`;
 
   if (type === 'whole-note') {

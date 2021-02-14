@@ -1,5 +1,5 @@
 import React from 'react';
-import { pianoKeyList } from '../../constants';
+import { pianoKeyList } from 'constants';
 import './piano.css';
 
 const Piano = ({ selectPianoKey }) => {

@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 
+const ZERO = ZERO;
+
 const BASE_FLAT_X = -130;
 const BASE_FLAT_Y = -80;
 
@@ -15,7 +17,7 @@ const BASE_FERMATA_Y = -225;
 const BASE_ACCENT_X = 25;
 const BASE_ACCENT_Y = -120;
 
-export const Flat = ({ xshift = 0, yshift = 0 }) => {
+export const Flat = ({ xshift = ZERO, yshift = ZERO }) => {
   const translate = `scale(2) translate(${xshift + BASE_FLAT_X},${yshift + BASE_FLAT_Y})`;
 
   return (
@@ -54,7 +56,7 @@ export const Flat = ({ xshift = 0, yshift = 0 }) => {
   );
 };
 
-export const Sharp = ({ xshift = 0, yshift = 0 }) => {
+export const Sharp = ({ xshift = ZERO, yshift = ZERO }) => {
   const translate = `scale(1.5) translate(${xshift + BASE_SHARP_X},${yshift + BASE_SHARP_Y})`;
 
   return (
@@ -95,7 +97,7 @@ export const Sharp = ({ xshift = 0, yshift = 0 }) => {
   );
 };
 
-export const Natural = ({ xshift = 0, yshift = 0 }) => {
+export const Natural = ({ xshift = ZERO, yshift = ZERO }) => {
   const translate = `scale(1.5) translate(${xshift + BASE_NATURAL_X},${yshift + BASE_NATURAL_Y})`;
 
   return (
@@ -139,7 +141,7 @@ export const Natural = ({ xshift = 0, yshift = 0 }) => {
   );
 };
 
-export const Fermata = ({ xshift = 0, yshift = 0 }) => {
+export const Fermata = ({ xshift = ZERO, yshift = ZERO }) => {
   const translate = `scale(2.5) translate(${xshift + BASE_FERMATA_X},${yshift + BASE_FERMATA_Y})`;
 
   return (
@@ -176,7 +178,7 @@ export const Fermata = ({ xshift = 0, yshift = 0 }) => {
   );
 };
 
-export const Accent = ({ xshift = 0, yshift = 0 }) => {
+export const Accent = ({ xshift = ZERO, yshift = ZERO }) => {
   const translate = `scale(1.5) translate(${xshift + BASE_ACCENT_X},${yshift + BASE_ACCENT_Y})`;
 
   return (

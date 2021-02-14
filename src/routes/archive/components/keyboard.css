@@ -2,13 +2,13 @@
   display: flex;
 }
 
-.key {
+.piano-key {
   height: calc(var(--width) * 4);
   width: var(--width);
   text-align: center;
 }
 
-.white {
+.piano-white {
   --width: 50px;
   background-color: white;
   border: 1px solid #333;
@@ -16,11 +16,11 @@
   border-radius: 0 0 5px 5px;
 }
 
-.white:active {
+.piano-white:active {
   background-color: #eeeeee;
 }
 
-.black {
+.piano-black {
   --width: 30px;
   background-color: black;
   background-image: linear-gradient(#656565 0%, #000 1.38%, #585858 3.53%, #1c1c1c 93.01%, #5a5a5a 94.87%, #343434 96.44%, #2b2b2b 99.79%, rgba(0, 0, 0, 0) 100%);
@@ -30,7 +30,7 @@
   z-index: 2;
 }
 
-.black:active {
+.piano-black:active {
   background-color: #333;
   background-image: linear-gradient(grey, black);
 }

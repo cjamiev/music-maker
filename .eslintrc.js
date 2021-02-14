@@ -1,16 +1,24 @@
 module.exports = {
+  parser: 'babel-eslint',
   extends: ['prettier'],
   env: {
     jest: true,
     node: true,
-    es6: true,
+    es6: true
   },
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-    },
+      jsx: true,
+      experimentalObjectRestSpread: true
+    }
+  },
+  plugins: ['react', 'react-hooks'],
+  settings: {
+    react: {
+      version: 'detect'
+    }
   },
   rules: {
     'array-bracket-spacing': 'error',
@@ -22,8 +30,8 @@ module.exports = {
     complexity: [
       'error',
       {
-        max: 10,
-      },
+        max: 10
+      }
     ],
     eqeqeq: 'error',
     indent: ['error', 2],
@@ -31,18 +39,19 @@ module.exports = {
     'max-depth': [
       'error',
       {
-        max: 2,
-      },
+        max: 2
+      }
     ],
     'max-lines': [
       'warn',
       {
-        max: 500,
-      },
+        max: 500
+      }
     ],
     'max-params': 'warn',
     'no-bitwise': 'warn',
     'no-confusing-arrow': 'error',
+    'no-console': 'warn',
     'no-const-assign': 'error',
     'no-dupe-keys': 'error',
     'no-duplicate-imports': 'error',
@@ -69,15 +78,18 @@ module.exports = {
     'one-var-declaration-per-line': 'error',
     'prefer-arrow-callback': 'error',
     'prefer-const': 'warn',
-    quotes: ['error', 'single'],
-    semi: 'error',
+    'quotes': ['error', 'single'],
+    'react/require-render-return': [1],
+    'react-hooks/rules-of-hooks':'warn',
+    'react-hooks/exhaustive-deps':'warn',
+    'semi': 'error',
     'semi-spacing': [
       'error',
       {
-        before: false,
-      },
+        before: false
+      }
     ],
     'semi-style': ['error', 'last'],
-    'space-before-function-paren': 'off',
-  },
+    'space-before-function-paren': 'off'
+  }
 };

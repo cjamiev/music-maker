@@ -3,7 +3,7 @@ import Draw from './svg/Draw';
 import SheetMusic from './components/SheetMusic';
 import NotationSelector from './components/NotationSelector';
 import Footer from './layout/Footer';
-import './App.css';
+import './index.css';
 
 const App = () => {
   const [row, setRow] = useState([]);
@@ -72,6 +72,7 @@ const App = () => {
 
   return (
     <div>
+      <Draw musicalSymbol={musicalSymbol} pianoKey={pianoKey} noteType={noteType} noteModifier={noteModification} />
       <main className='main'>
         <SheetMusic
           keySignature={keySignature}
@@ -95,9 +96,6 @@ const App = () => {
         />
       </main>
       <Footer />
-
-      {/* <Draw musicalSymbol={'sixteenth-rest'} pianoKey={'A#4'} noteType={'whole-note'} /> */}
-
     </div >
   );
 };
