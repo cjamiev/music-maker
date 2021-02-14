@@ -32,3 +32,24 @@ export const timeSignatures = [
   { key: '3/8', label: '3/8' },
   { key: '6/8', label: '6/8' }
 ];
+
+export const noteTypes = [
+  { key: 'whole-note', label: 'Whole Note' },
+  { key: 'half-note', label: 'Half Note' },
+  { key: 'quarter-note', label: 'Quarter Note' },
+  { key: 'eigth-note', label: '8th Note' },
+  { key: 'sixteenth-note', label: '16th Note' },
+  { key: 'dotted-whole-note', label: 'Dotted Whole Note' },
+  { key: 'dotted-half-note', label: 'Dotted Half Note' },
+  { key: 'dotted-quarter-note', label: 'Dotted Quarter Note' },
+  { key: 'dotted-eigth-note', label: 'Dotted 8th Note' },
+  { key: 'dotted-sixteenth-note', label: 'Dotted 16th Note' }
+];
+
+export const barTypes = [
+  { key: 'measure-bar', label: 'Measure Bar' },
+  { key: 'line-end-bar', label: 'Line End Bar' },
+  { key: 'double-line-end-bar', label: 'Double Line End Bar' },
+  { key: 'repeat-start-bar', label: 'Repeat Bar Start' },
+  { key: 'repeat-end-bar', label: 'Repeat Bar End' }
+];
