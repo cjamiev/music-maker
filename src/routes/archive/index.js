@@ -6,6 +6,7 @@ const keyList = ['F6', 'E6', 'D6', 'C6', 'B5', 'A5', 'G5', 'F5', 'E5', 'D5', 'C5
 const trebleList = ['F', 'E', 'D', 'C', 'B', 'High A', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'G', 'F', 'E', 'D', 'Middle C', 'B', 'A', 'G', 'F', 'E'];
 const bassList = ['A', 'G', 'F', 'E', 'D', 'Middle C', 'B', 'A', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'G', 'F', 'Low E', 'D', 'C', 'B', 'A', 'G'];
 const INDEX_ZERO = 0;
+const INDEX_NONE = -1;
 const AT_LEAST_ONE = 1;
 const DEFAULT_TREBLE = {
   key: 'C4',
@@ -60,39 +61,39 @@ const MusicSheetCreator = () => {
   const [trebleStaff, setTrebleStaff] = useState([DEFAULT_TREBLE]);
   const [bassStaff, setBassStaff] = useState([DEFAULT_BASS]);
   const [trebleIndex, setTrebleIndex] = useState(INDEX_ZERO);
-  const [bassIndex, setBassIndex] = useState(-1);
+  const [bassIndex, setBassIndex] = useState(INDEX_NONE);
 
   const addNote = () => {
     setTrebleIndex(trebleStaff.length);
     const updatedTrebleStaff = trebleStaff.concat(DEFAULT_TREBLE);
     setTrebleStaff(updatedTrebleStaff);
 
-    setBassIndex(-1);
+    setBassIndex(INDEX_NONE);
     const updatedBassStaff = bassStaff.concat(DEFAULT_BASS);
     setBassStaff(updatedBassStaff);
   };
 
   const removeNote = () => {
-    if (trebleIndex !== -1 && trebleStaff.length > AT_LEAST_ONE) {
+    if (trebleIndex !== INDEX_NONE && trebleStaff.length > AT_LEAST_ONE) {
       const updatedTrebleStaff = trebleStaff.filter((item, i) => i !== trebleIndex);
       setTrebleStaff(updatedTrebleStaff);
       setTrebleIndex(INDEX_ZERO);
       const updatedBassStaff = bassStaff.filter((item, i) => i !== trebleIndex);
       setBassStaff(updatedBassStaff);
-      setBassIndex(-1);
+      setBassIndex(INDEX_NONE);
     }
-    if (bassIndex !== -1 && bassStaff.length > AT_LEAST_ONE) {
+    if (bassIndex !== INDEX_NONE && bassStaff.length > AT_LEAST_ONE) {
       const updatedTrebleStaff = trebleStaff.filter((item, i) => i !== bassIndex);
       setTrebleStaff(updatedTrebleStaff);
       setTrebleIndex(INDEX_ZERO);
       const updatedBassStaff = bassStaff.filter((item, i) => i !== bassIndex);
       setBassStaff(updatedBassStaff);
-      setBassIndex(-1);
+      setBassIndex(INDEX_NONE);
     }
   };
 
   const selectKey = key => {
-    if (trebleIndex !== -1) {
+    if (trebleIndex !== INDEX_NONE) {
       const updatedTrebleStaff = trebleStaff.map((item, i) => {
         const type = item.type ? item.type : 'quarter';
         if (i === trebleIndex) {
@@ -108,7 +109,7 @@ const MusicSheetCreator = () => {
       });
       setTrebleStaff(updatedTrebleStaff);
     }
-    if (bassIndex !== -1) {
+    if (bassIndex !== INDEX_NONE) {
       const updatedBassStaff = bassStaff.map((item, i) => {
         const type = item.type ? item.type : 'quarter';
         if (i === bassIndex) {
@@ -127,7 +128,7 @@ const MusicSheetCreator = () => {
   };
 
   const selectNoteType = noteType => {
-    if (trebleIndex !== -1) {
+    if (trebleIndex !== INDEX_NONE) {
       const updatedTrebleStaff = trebleStaff.map((item, i) => {
         if (i === trebleIndex) {
           const key = item.type ? item.key : 'C4';
@@ -143,7 +144,7 @@ const MusicSheetCreator = () => {
       });
       setTrebleStaff(updatedTrebleStaff);
     }
-    if (bassIndex !== -1) {
+    if (bassIndex !== INDEX_NONE) {
       const updatedBassStaff = bassStaff.map((item, i) => {
         if (i === bassIndex) {
           const key = item.type ? item.key : 'C4';
@@ -162,7 +163,7 @@ const MusicSheetCreator = () => {
   };
 
   const selectDotted = () => {
-    if (trebleIndex !== -1) {
+    if (trebleIndex !== INDEX_NONE) {
       const updatedTrebleStaff = trebleStaff.map((item, i) => {
         if (i === trebleIndex) {
           return {
@@ -176,7 +177,7 @@ const MusicSheetCreator = () => {
       });
       setTrebleStaff(updatedTrebleStaff);
     }
-    if (bassIndex !== -1) {
+    if (bassIndex !== INDEX_NONE) {
       const updatedBassStaff = bassStaff.map((item, i) => {
         if (i === bassIndex) {
           return {
@@ -208,7 +209,7 @@ const MusicSheetCreator = () => {
   };
 
   const selectSymbol = key => {
-    if (trebleIndex !== -1) {
+    if (trebleIndex !== INDEX_NONE) {
       const updatedTrebleStaff = trebleStaff.map((item, i) => {
         if (i === trebleIndex) {
           return {
@@ -225,7 +226,7 @@ const MusicSheetCreator = () => {
       });
       setTrebleStaff(updatedTrebleStaff);
     }
-    if (bassIndex !== -1) {
+    if (bassIndex !== INDEX_NONE) {
       const updatedBassStaff = bassStaff.map((item, i) => {
         if (i === bassIndex) {
           return {
@@ -246,12 +247,12 @@ const MusicSheetCreator = () => {
 
   const selectTrebleItem = newIndex => {
     setTrebleIndex(newIndex);
-    setBassIndex(-1);
+    setBassIndex(INDEX_NONE);
   };
 
   const selectBassItem = newIndex => {
     setBassIndex(newIndex);
-    setTrebleIndex(-1);
+    setTrebleIndex(INDEX_NONE);
   };
 
   return (
@@ -264,7 +265,7 @@ const MusicSheetCreator = () => {
         currentBassIndex={bassIndex}
         selectBassItem={selectBassItem}
       />
-      <SymbolSelector selectKey={selectKey} selectNoteType={selectNoteType} selectDotted={selectDotted} selectStacatto={selectStacatto} selectSymbol={selectSymbol} isTreble={trebleIndex !== -1} />
+      <SymbolSelector selectKey={selectKey} selectNoteType={selectNoteType} selectDotted={selectDotted} selectStacatto={selectStacatto} selectSymbol={selectSymbol} isTreble={trebleIndex !== INDEX_NONE} />
       <button className="add-btn" onClick={addNote}>Add New Note</button>
       <button className="add-btn" onClick={removeNote}>Remove Selected Note</button>
     </div>
