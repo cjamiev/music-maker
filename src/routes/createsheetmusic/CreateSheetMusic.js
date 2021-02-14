@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CreateSheetMusicForm from 'components/molecules/CreateSheetMusicForm';
-import TestDisplay from './TestDisplay';
+import MusicStand from 'components/atoms/MusicStand';
 
 const CreateSheetMusic = () => {
   const [row, setRow] = useState([]);
@@ -64,7 +64,7 @@ const CreateSheetMusic = () => {
 
   return (
     <div>
-      <TestDisplay
+      <MusicStand
         keySignature={keySignature}
         timeSignature={timeSignature}
         row={row}

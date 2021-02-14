@@ -1,0 +1,55 @@
+.music-stand {
+  background-color: black;
+  color: white;
+  position: absolute;
+}
+
+.sheet {
+  background-color: white;
+  color: black;
+  height: 100%;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  display: flex;
+  flex: 1;
+  border: 2px dashed black;
+}
+
+@media screen and (min-width: 1500px) {
+  .music-stand {
+    left: 880px;
+    top: 35%;
+    width: 240px;
+    height: 220px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+}
+@media screen and (min-width: 1080px) and (max-width: 1500px) {
+  .music-stand {
+    left: 600px;
+    top: 40%;
+    width: 200px;
+    height: 180px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .music-stand {
+    top: 50%;
+    left: 460px;
+    width: 100px;
+    height: 90px;
+    border-radius: 5px;
+    padding: 5px;
+  }
+}

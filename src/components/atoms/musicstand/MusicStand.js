@@ -1,9 +1,8 @@
 import React from 'react';
-import './testdisplay.css';
-
 import { keySignatures } from 'constants';
+import './musicstand.css';
 
-const getCurrentMod = noteModifier => {
+const getModifier = noteModifier => {
   const showAccent = noteModifier.accent ? 'Accent' : '';
   const showStacatto = noteModifier.stacatto ? 'Stacatto' : '';
   const showFermata = noteModifier.fermata ? 'Fermata' : '';
@@ -13,7 +12,7 @@ const getCurrentMod = noteModifier => {
   return `${showAccidental} ${showAccent} ${showStacatto} ${showFermata} ${showRolled}`;
 };
 
-const TestDisplay = ({ keySignature, timeSignature, row, pianoKey, noteType, noteModifier, musicalSymbol, pedal }) => {
+const MusicStand = ({ keySignature, timeSignature, row, pianoKey, noteType, noteModifier, musicalSymbol, pedal }) => {
   const renderRow = row.map((item, index) => {
     const mainSymbol = item.pianoKey || item.musicalSymbol;
     const showAccent = item.noteModifier.accent ? 'Accent' : '';
@@ -32,25 +31,25 @@ const TestDisplay = ({ keySignature, timeSignature, row, pianoKey, noteType, not
     );
   });
 
-  const currentMainSymbol = pianoKey || musicalSymbol;
-  const currentMod = getCurrentMod(noteModifier);
+  const symbol = pianoKey || musicalSymbol;
+  const modifier = getModifier(noteModifier);
   const keySignatureLabel = keySignatures.find(item => item.key === keySignature).label;
 
   return (
-    <div className="staff-container">
-      {'Key of ' + keySignatureLabel}<br />
-      {'Time Signature: ' + timeSignature}<br />
-      <div className="row">
-        {renderRow}
-      </div>
-      <div>
-        Selection: {currentMainSymbol || pianoKey} &nbsp;
+    <div className="music-stand">
+      <div className="sheet">
+        {'Key of ' + keySignatureLabel}<br />
+        {'Time Signature: ' + timeSignature}<br />
+        {'Selection ' + symbol}&nbsp;
         {pianoKey && noteType }
-        {currentMod} <br/>
+        {modifier} <br/>
         {pedal}
+        <div className="row">
+          {renderRow}
+        </div>
       </div>
     </div>
   );
 };
 
-export default TestDisplay;
+export default MusicStand;
