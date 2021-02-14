@@ -4,15 +4,13 @@ import './testdisplay.css';
 import { keySignatures } from 'constants';
 
 const getCurrentMod = noteModifier => {
-  const currentShowAccent = noteModifier.accent ? 'Accent' : '';
-  const currentShowStacatto = noteModifier.stacatto ? 'Stacatto' : '';
-  const currentShowFermata = noteModifier.fermata ? 'Fermata' : '';
-  const currentShowRolled = noteModifier.rolled ? 'Rolled' : '';
-  const currentFlat = noteModifier.flat ? ' flat' : '';
-  const currentSharp = noteModifier.sharp ? 'sharp' : '';
-  const currentNatural = noteModifier.natural ? 'natural': '';
+  const showAccent = noteModifier.accent ? 'Accent' : '';
+  const showStacatto = noteModifier.stacatto ? 'Stacatto' : '';
+  const showFermata = noteModifier.fermata ? 'Fermata' : '';
+  const showRolled = noteModifier.rolled ? 'Rolled' : '';
+  const showAccidental = noteModifier.accidental ? ` ${noteModifier.accidental}`: '';
 
-  return `${currentFlat} ${currentSharp} ${currentNatural} ${currentShowAccent} ${currentShowStacatto} ${currentShowFermata} ${currentShowRolled}`;
+  return `${showAccidental} ${showAccent} ${showStacatto} ${showFermata} ${showRolled}`;
 };
 
 const TestDisplay = ({ keySignature, timeSignature, row, pianoKey, noteType, noteModifier, musicalSymbol, pedal }) => {

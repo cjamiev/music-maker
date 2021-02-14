@@ -30,18 +30,14 @@ const CreateSheetMusic = () => {
   };
 
   const selectNoteModifier = (selected) => {
-    const isSharp = selected.sharp;
-    const isFlat = selected.flat;
-    const isNatural = selected.natural;
+    const isSameAccidental = noteModifier.accidental === selected.accidental;
     const isAccent = selected.accent;
     const isRolled = selected.rolled;
     const isStacatto = selected.stacatto;
     const isFermata = selected.fermata;
 
     const updatedNoteModifier = {
-      sharp: isSharp ? !noteModifier.sharp : noteModifier.sharp,
-      flat: isFlat ? !noteModifier.flat : noteModifier.flat,
-      natural: isNatural ? !noteModifier.natural : noteModifier.natural,
+      accidental: isSameAccidental ? '' : selected.accidental || noteModifier.accidental,
       accent: isAccent ? !noteModifier.accent : noteModifier.accent,
       rolled: isRolled ? !noteModifier.rolled : noteModifier.rolled,
       stacatto: isStacatto ? !noteModifier.stacatto : noteModifier.stacatto,
