@@ -80,7 +80,9 @@ const CreateSheetMusic = () => {
       />
       <CreateSheetMusicForm
         addItem={addItem}
+        keySignature={keySignature}
         selectKeySignature={selectKeySignature}
+        timeSignature={timeSignature}
         selectTimeSignature={selectTimeSignature}
         selectPianoKey={selectPianoKey}
         selectNoteType={selectNoteType}

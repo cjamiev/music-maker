@@ -10,13 +10,13 @@
   border-radius: 0 0 15px 15px;
 }
 
-.keyboard-left-area {
+.keyboard-leftarea {
   display: flex;
   flex-direction: column;
   background-color: black;
   margin-left: 5px;
   margin-right: 5px;
-  width: 200px;
+  width: 100px;
 }
 
 .keyboard-right-area {

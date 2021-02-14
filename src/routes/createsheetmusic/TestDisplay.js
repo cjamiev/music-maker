@@ -1,6 +1,8 @@
 import React from 'react';
 import './testdisplay.css';
 
+import { keySignatures } from 'constants';
+
 const getCurrentMod = noteModifier => {
   const currentShowAccent = noteModifier.accent ? 'Accent' : '';
   const currentShowStacatto = noteModifier.stacatto ? 'Stacatto' : '';
@@ -32,10 +34,11 @@ const TestDisplay = ({ keySignature, timeSignature, row, pianoKey, noteType, not
 
   const currentMainSymbol = pianoKey || musicalSymbol;
   const currentMod = getCurrentMod(noteModifier);
+  const keySignatureLabel = keySignatures.find(item => item.key === keySignature).label;
 
   return (
     <div className="staff-container">
-      {'Key Signature: ' + keySignature}<br />
+      {'Key of ' + keySignatureLabel}<br />
       {'Time Signature: ' + timeSignature}<br />
       <div className="row">
         {renderRow}

@@ -1,0 +1,27 @@
+.keysignature-dropdown {
+  position: relative;
+  display: inline-block;
+  color: white;
+  cursor: pointer;
+}
+
+.keysignature-dropdown .keysignature-dropdown-content {
+  visibility: hidden;
+  position: absolute;
+
+  background-color: darkblue;
+  border: 1px solid darkblue;
+  padding: 5px 5px;
+  margin: 0 0 5px 5px;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+}
+
+.keysignature-dropdown-content {
+  display: flex;
+}
+
+.keysignature-dropdown-active .keysignature-dropdown-content {
+  visibility: visible;
+}
