@@ -8,9 +8,11 @@ const getCurrentMod = noteModifier => {
   const currentShowStacatto = noteModifier.stacatto ? 'Stacatto' : '';
   const currentShowFermata = noteModifier.fermata ? 'Fermata' : '';
   const currentShowRolled = noteModifier.rolled ? 'Rolled' : '';
-  const currentAccidental = noteModifier.flat ? 'flat' : noteModifier.sharp ? 'sharp' : noteModifier.natural ? 'natural': '';
+  const currentFlat = noteModifier.flat ? ' flat' : '';
+  const currentSharp = noteModifier.sharp ? 'sharp' : '';
+  const currentNatural = noteModifier.natural ? 'natural': '';
 
-  return `${currentAccidental} ${currentShowAccent} ${currentShowStacatto} ${currentShowFermata} ${currentShowRolled}`;
+  return `${currentFlat} ${currentSharp} ${currentNatural} ${currentShowAccent} ${currentShowStacatto} ${currentShowFermata} ${currentShowRolled}`;
 };
 
 const TestDisplay = ({ keySignature, timeSignature, row, pianoKey, noteType, noteModifier, musicalSymbol, pedal }) => {

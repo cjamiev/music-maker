@@ -32,7 +32,7 @@ const CreateSheetMusic = () => {
   const selectNoteModifier = (selected) => {
     const isSharp = selected.sharp;
     const isFlat = selected.flat;
-    const isNatural = selected.Natural;
+    const isNatural = selected.natural;
     const isAccent = selected.accent;
     const isRolled = selected.rolled;
     const isStacatto = selected.stacatto;
