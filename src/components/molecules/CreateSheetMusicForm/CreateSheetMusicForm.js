@@ -6,14 +6,14 @@ import Piano from 'components/atoms/Piano';
 // import NoteModifierSelector from './NoteModifierSelector';
 // import RestSelector from './RestSelector';
 // import BarSelector from './BarSelector';
-// import PedalSelector from './PedalSelector';
+import Pedal from 'components/atoms/Pedal';
 import './createsheetmusicform.css';
 
-const CreateSheetMusicForm = ({ selectKeySignature, selectTimeSignature, selectPianoKey, selectNoteType, selectNoteModification, selectMusicalSymbol, selectPedal, addItem }) => {
+const CreateSheetMusicForm = ({ selectKeySignature, selectTimeSignature, selectPianoKey, selectNoteType, selectNoteModifier, selectMusicalSymbol, selectPedal, addItem }) => {
   return (
     <div className='input-grid'>
       {/* <NoteTypeSelector selectNoteType={selectNoteType} />
-      <NoteModifierSelector selectNoteModification={selectNoteModification} />
+      <NoteModifierSelector selectNoteModifier={selectNoteModifier} />
       <BarSelector selectMusicalSymbol={selectMusicalSymbol} />
       <RestSelector selectMusicalSymbol={selectMusicalSymbol} /> */}
       <div className="keyboard-container">
@@ -26,7 +26,7 @@ const CreateSheetMusicForm = ({ selectKeySignature, selectTimeSignature, selectP
           <button onClick={addItem}>Add</button>
         </div> */}
       </div>
-      {/* <PedalSelector selectPedal={selectPedal} /> */}
+      <Pedal selectPedal={selectPedal} />
     </div>
   );
 };
