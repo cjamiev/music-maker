@@ -38,12 +38,12 @@ const MusicStand = ({ keySignature, timeSignature, row, pianoKey, noteType, note
   return (
     <div className="music-stand">
       <div className="sheet">
-        {'Key of ' + keySignatureLabel}<br />
-        {'Time Signature: ' + timeSignature}<br />
-        {'Selection ' + symbol}&nbsp;
-        {pianoKey && noteType }
-        {modifier} <br/>
-        {pedal}
+        <label>{'Key of ' + keySignatureLabel}</label><br />
+        <label>{'Time Signature: ' + timeSignature}</label><br />
+        <label>{'Selection ' + symbol}&nbsp;</label>
+        <label>{pianoKey && noteType }</label>
+        <label>{modifier}</label><br/>
+        <label>{pedal}</label>
         <div className="row">
           {renderRow}
         </div>
