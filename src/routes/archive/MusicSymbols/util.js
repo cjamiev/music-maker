@@ -1,3 +1,5 @@
+import React, { Fragment } from 'react';
+
 const tripleLowLedgerNotes = ['E3', 'F3'];
 const doubleLowLedgerNotes = ['G3', 'A3'];
 const singleLowLedgerNotes = ['B3', 'C4'];
