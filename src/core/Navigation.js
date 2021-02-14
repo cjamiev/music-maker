@@ -4,8 +4,7 @@ import './navigation.css';
 
 const NAV_ITEMS = [
   { label: 'Home', url: '/home'},
-  { label: 'Create Sheet Music', url: '/createsheetmusic'},
-  { label: 'Archive', url: '/archive'}
+  { label: 'Create Sheet Music', url: '/createsheetmusic'}
 ];
 
 const Navigation = React.memo(() => {

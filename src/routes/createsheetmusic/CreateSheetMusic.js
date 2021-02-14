@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import CreateSheetMusicForm from 'components/molecules/CreateSheetMusicForm';
+import Draw from '../archive/svg/Draw';
 import MusicStand from 'components/atoms/MusicStand';
+import CreateSheetMusicForm from 'components/molecules/CreateSheetMusicForm';
+import Footer from '../archive/layout/Footer';
 
 const CreateSheetMusic = () => {
   const [row, setRow] = useState([]);
@@ -64,6 +66,7 @@ const CreateSheetMusic = () => {
 
   return (
     <div>
+      <Draw musicalSymbol={musicalSymbol} pianoKey={pianoKey} noteType={noteType} noteModifier={noteModifier} />
       <MusicStand
         keySignature={keySignature}
         timeSignature={timeSignature}
@@ -86,6 +89,7 @@ const CreateSheetMusic = () => {
         selectMusicalSymbol={selectMusicalSymbol}
         selectPedal={selectPedal}
       />
+      <Footer />
     </div>
   );
 };
