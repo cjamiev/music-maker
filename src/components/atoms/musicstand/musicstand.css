@@ -26,9 +26,9 @@
 @media screen and (min-width: 1500px) {
   .music-stand {
     left: 880px;
-    top: 35%;
+    top: 40%;
     width: 240px;
-    height: 220px;
+    height: 180px;
     border-radius: 10px;
     padding: 10px;
   }
@@ -36,9 +36,9 @@
 @media screen and (min-width: 1080px) and (max-width: 1500px) {
   .music-stand {
     left: 600px;
-    top: 40%;
+    top: 41%;
     width: 200px;
-    height: 180px;
+    height: 170px;
     border-radius: 10px;
     padding: 10px;
   }
@@ -47,7 +47,7 @@
   .music-stand {
     top: 50%;
     left: 460px;
-    width: 100px;
+    width: 350px;
     height: 90px;
     border-radius: 5px;
     padding: 5px;

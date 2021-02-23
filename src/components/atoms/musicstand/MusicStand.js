@@ -12,7 +12,7 @@ const getModifier = noteModifier => {
   return `${showAccidental} ${showAccent} ${showStacatto} ${showFermata} ${showRolled}`;
 };
 
-const MusicStand = ({ keySignature, timeSignature, row, pianoKey, noteType, noteModifier, musicalSymbol, pedal }) => {
+const MusicStand = ({ keySignature, timeSignature, row, pianoKey, noteType, noteModifier, musicalSymbol, pedal, handleClick }) => {
   const renderRow = row.map((item, index) => {
     const mainSymbol = item.pianoKey || item.musicalSymbol;
     const showAccent = item.noteModifier.accent ? 'Accent' : '';
@@ -22,7 +22,7 @@ const MusicStand = ({ keySignature, timeSignature, row, pianoKey, noteType, note
     const mod = `${item.noteModifier.accidental} ${showAccent} ${showStacatto} ${showFermata} ${showRolled}`;
 
     return (
-      <div key={item.pianoKey || item.musicalSymbol + index} className="item">
+      <div key={item.pianoKey || item.musicalSymbol + index} className="item" >
         {mainSymbol}<br />
         {item.pianoKey && item.noteType}<br />
         {mod}<br />
@@ -38,10 +38,15 @@ const MusicStand = ({ keySignature, timeSignature, row, pianoKey, noteType, note
   return (
     <div className="music-stand">
       <div className="sheet">
-        <label>{'Key of ' + keySignatureLabel}</label><br />
-        <label>{'Time Signature: ' + timeSignature}</label><br />
-        <label>{'Selection ' + symbol}&nbsp;</label>
+        <button onClick={() => { handleClick('key'); }}>Key</button>
+        <label>&nbsp;{keySignatureLabel}</label><br />
+        <button onClick={() => { handleClick('time'); }}>Time</button>
+        <label>&nbsp;{timeSignature}</label><br />
+        <button onClick={() => { handleClick('symbol'); }}>Symbol</button>
+        <label>&nbsp;{symbol}&nbsp;</label><br/>
+        <button onClick={() => { handleClick('note'); }}>Note</button>
         <label>{pianoKey && noteType }</label>
+        <button onClick={() => { handleClick('modifier'); }}>Modofier</button>
         <label>{modifier}</label><br/>
         <label>{pedal}</label>
         <div className="row">

@@ -3,6 +3,7 @@ import Draw from '../archive/svg/Draw';
 import MusicStand from 'components/atoms/MusicStand';
 import CreateSheetMusicForm from 'components/molecules/CreateSheetMusicForm';
 import Footer from '../archive/layout/Footer';
+import './styles.css';
 
 const CreateSheetMusic = () => {
   const [row, setRow] = useState([]);
@@ -13,6 +14,7 @@ const CreateSheetMusic = () => {
   const [noteModifier, setNoteModifier] = useState({ flat: false, sharp: false, natural: false, accent: false, rolled: false, stacatto: false, fermata: false });
   const [musicalSymbol, setMusicalSymbol] = useState('');
   const [pedal, setPedal] = useState('');
+  const [showSelector, setShowSelector] = useState(false);
 
   const selectKeySignature = (selected) => {
     setKeySignature(selected);
@@ -64,9 +66,18 @@ const CreateSheetMusic = () => {
     setRow(updatedRow);
   };
 
+  const handleShowSelector = () => {
+    setShowSelector(!showSelector);
+  };
+
   return (
     <div>
       <Draw musicalSymbol={musicalSymbol} pianoKey={pianoKey} noteType={noteType} noteModifier={noteModifier} />
+      {!showSelector &&
+        <div className='divStyle'>
+          Test Area
+        </div>
+      }
       <MusicStand
         keySignature={keySignature}
         timeSignature={timeSignature}
@@ -76,6 +87,7 @@ const CreateSheetMusic = () => {
         noteModifier={noteModifier}
         musicalSymbol={musicalSymbol}
         pedal={pedal}
+        handleClick={handleShowSelector}
       />
       <CreateSheetMusicForm
         addItem={addItem}

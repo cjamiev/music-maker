@@ -13,14 +13,6 @@ const CreateSheetMusicForm = ({ keySignature, selectKeySignature, timeSignature,
   return (
     <div className='input-grid'>
       <div className="keyboard-container">
-        <div className="keyboard-leftarea">
-          <KeySignature keySignature={keySignature} selectKeySignature={selectKeySignature} />
-          <TimeSignature timeSignature={timeSignature} selectTimeSignature={selectTimeSignature} />
-          <NoteType selectNoteType={selectNoteType} />
-          <NoteModifier selectNoteModifier={selectNoteModifier} />
-          <RestType selectMusicalSymbol={selectMusicalSymbol} />
-          <BarType selectMusicalSymbol={selectMusicalSymbol} />
-        </div>
         <Piano selectPianoKey={selectPianoKey} />
         {/* <div className="keyboard-right-area">
           <button onClick={addItem}>Add</button>
