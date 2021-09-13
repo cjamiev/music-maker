@@ -13,9 +13,7 @@ module.exports = (env) => {
       filename: '[name].bundle.js'
     },
     devServer: {
-      contentBase: './build',
       historyApiFallback: true,
-      inline: true,
       port: 3000,
       open: true,
       proxy: {
