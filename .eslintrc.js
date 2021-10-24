@@ -14,6 +14,7 @@ module.exports = {
       experimentalObjectRestSpread: true
     }
   },
+  ignorePatterns: ['.eslintrc.js'],
   plugins: ['react', 'react-hooks'],
   settings: {
     react: {
@@ -51,7 +52,6 @@ module.exports = {
     'max-params': 'warn',
     'no-bitwise': 'warn',
     'no-confusing-arrow': 'error',
-    'no-console': 'warn',
     'no-const-assign': 'error',
     'no-dupe-keys': 'error',
     'no-duplicate-imports': 'error',

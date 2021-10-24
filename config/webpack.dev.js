@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -12,17 +13,23 @@ module.exports = (env) => {
       path: path.resolve(__dirname, '../build'),
       filename: '[name].bundle.js'
     },
+    watchOptions: {
+      ignored: ['**/*package.json']
+    },
     devServer: {
       historyApiFallback: true,
-      port: 3000,
+      port: 4000,
       open: true,
-      proxy: {
-        '/api': 'http://localhost:1000'
-      }
+      proxy: [
+        {
+          context: ['**'],
+          target: 'http://localhost:1000'
+        }
+      ]
     },
     resolve: {
       extensions: ['.js', '*'],
-      modules: [path.resolve(__dirname, '../src'), 'node_modules']
+      modules: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../utils'), 'node_modules']
     },
     devtool: 'source-map',
     optimization: {
@@ -35,9 +42,9 @@ module.exports = (env) => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js)$/,
           exclude: /node_modules/,
-          use: ['babel-loader', 'eslint-loader']
+          use: ['babel-loader']
         },
         {
           test: /\.css$/,
@@ -65,8 +72,8 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({ template: path.resolve('./src/index.html') }),
-      new webpack.DefinePlugin({ 'process.env': JSON.stringify(env) })
+      new webpack.DefinePlugin({ 'process.env': JSON.stringify(env) }),
+      new ESLintPlugin()
     ]
   };
 };
-
