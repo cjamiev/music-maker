@@ -1,20 +1,21 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   extends: ['prettier'],
   env: {
     jest: true,
     node: true,
-    es6: true
+    es2021: true
   },
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2021,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
       experimentalObjectRestSpread: true
-    }
+    },
+    requireConfigFile: false,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['**/bundle.js', '.eslintrc.js'],
   plugins: ['react', 'react-hooks'],
   settings: {
     react: {
