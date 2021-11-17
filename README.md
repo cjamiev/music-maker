@@ -53,9 +53,10 @@ const modifier = {
 ```
 
 SVG: https://blog.landr.com/music-symbols/
-- Brace, Alto/Tenor Clef
+- Alto/Tenor Clef
 - Hemiola/Triplet
 - Marcato Accent
 - Ottava Alta/Bassa
 - Chord Numerals, Chord Letters, Numbering
 - Ties, Slurs
+- Update Brace, Quarter Rest
