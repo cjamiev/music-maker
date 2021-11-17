@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Draw from '../archive/svg/Draw';
-import MusicStand from 'components/atoms/MusicStand';
-import CreateSheetMusicForm from 'components/molecules/CreateSheetMusicForm';
+import MusicStand from './MusicStand';
+import CreateSheetMusicForm from './CreateSheetMusicForm';
 import Footer from '../archive/layout/Footer';
 import './styles.css';
 

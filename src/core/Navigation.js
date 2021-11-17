@@ -4,7 +4,7 @@ import './navigation.css';
 
 const NAV_ITEMS = [
   { label: 'Home', url: '/home'},
-  { label: 'Create Sheet Music', url: '/createsheetmusic'},
+  { label: 'Archive 2.0', url: '/archive2'},
   { label: 'Archive', url: '/archive'}
 ];
 
