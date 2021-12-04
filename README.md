@@ -58,5 +58,4 @@ SVG: https://blog.landr.com/music-symbols/
 - Marcato Accent
 - Ottava Alta/Bassa
 - Chord Numerals, Chord Letters, Numbering
-- Ties, Slurs
-- Update Brace, Quarter Rest
+- Volta Brackets
