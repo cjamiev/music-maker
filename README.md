@@ -53,9 +53,7 @@ const modifier = {
 ```
 
 SVG: https://blog.landr.com/music-symbols/
-- Alto/Tenor Clef
-- Hemiola/Triplet
-- Marcato Accent
-- Ottava Alta/Bassa
 - Chord Numerals, Chord Letters, Numbering
-- Volta Brackets
+- Hemiola/Triplet
+- Alto/Tenor Clef
+- Marcato Accent
