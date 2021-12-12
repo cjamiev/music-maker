@@ -1,59 +1,56 @@
 # Sheet Music Creator
-UI to create sheet music
+Application to create sheet music. 
+
+## Features (WIP)
+- Create, View and Play Sheet Music
+- Training Page (Interval, Scales)
+- Dictionary for Musical Jargon
+- Random Music Generator
+
+## Data Spec
+Viewing sheet music as a grid of svg objects each cell can be described by the properties of what is displayed.
+For example the first cell would be Clef, second cell would be Key Signature, third cell would be Time Signature,
+fourth cell be the first note. 
+
+An array where each element is an object that represents which svg rendering component is to be used. 
+Each object will reference component name, optional classNames to update the svg elements, transformation to
+move the object to its right location. As well as subcomponent section for conditionally rendered elements as 
+well as its transformation properties.  
+```
+[{
+  description: 'G# whole note dotted second element on Treble Cleff',
+  component: 'note',
+	classNames: ['red'],  
+	transform: {
+    translateX: 105
+  },
+  subcomponents: {
+    wholeNote: {
+      translateY: 5
+    }
+    dotted: {}
+    sharp: {
+      translateY: 5
+    },
+  }
+}]
+```
 
 ## ToDo
-High Level Features:
-- Dictionary for Musical Jargon
-- Interval Training
-- Random Music Generator
-- Play Song (interpretation configuration)
-- Create Sheet Music
-- Display Sheet Music
+- Mapper for converting json data into the sheet music grid
+- Form for creating json data
+  - Keyboard
+  - Slur & Tie generator and controller
+  - Beam note generator
+- Outline (clickable) for each cell of the grid
+- Transpose scales
+- Save in localStorage and json file
+- Load from localStorage and json file
 
-DataSpec
-```
-const sheetMusic = {
-  // text
-  name: 'title',
-  // Largo, Adagio, Andante, Moderato, Allegro, Vivace, Presto
-  tempo: '',
-  // bps number range 20 - 240?
-  bps: 100,
-  // C/a, G/e, D/b, A/f#, E/c#, B/g#, F#/d#, C#/a#
-  keySignature: 'c#',
-  // 2/4, 3/4, 4/4, 2/2, 3/2, 4/2, 2/8, 3/8, 4/8, 6/8
-  timeSignature: {
-    numerator: 2,
-    denominator: 2
-  },
-  treble: [],
-  dynamics: [],
-  bass: []
-};
-
-const note = {
-  notes: ['a1'],
-  // whole, half, quarter, eigth, sixteenth and dotted eqivalents
-  type: 'whole',
-  symbol: '',
-  modifier: {},
-  pedal: ''
-};
-
-const modifier = {
-  stacatto: false,
-  natural: false,
-  sharp: false,
-  flat: false,
-  rolled: false,
-  accent: false,
-  fermata: false,
-  tenuto: false
-};
-```
-
-SVG: https://blog.landr.com/music-symbols/
-- Chord Numerals, Chord Letters, Numbering
+SVG Objects: https://blog.landr.com/music-symbols/
 - Hemiola/Triplet
 - Alto/Tenor Clef
 - Marcato Accent
+- fortepiano (fp)
+- G-clef Ottava Alta
+- G-clef Ottava Bass
