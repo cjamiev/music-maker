@@ -12,36 +12,40 @@ Viewing sheet music as a grid of svg objects each cell can be described by the p
 For example the first cell would be Clef, second cell would be Key Signature, third cell would be Time Signature,
 fourth cell be the first note. 
 
-An array where each element is an object that represents which svg rendering component is to be used. 
-Each object will reference component name, optional classNames to update the svg elements, transformation to
-move the object to its right location. As well as subcomponent section for conditionally rendered elements as 
-well as its transformation properties.  
+Saved data will be an array where each item in the array is an object that represents which svg rendering component is to be used. 
+Each object will properties 
+- component = name of the component that it will map to
+- transform = svg transform attribute as a string move the object to its right location
+- subcomponents = array of objects that also contain component, transform and potentially subcomponent properties  
 ```
 [{
   description: 'G# whole note dotted second element on Treble Cleff',
-  component: 'note',
-	classNames: ['red'],  
-	transform: {
-    translateX: 105
-  },
-  subcomponents: {
-    wholeNote: {
-      translateY: 5
-    }
-    dotted: {}
-    sharp: {
-      translateY: 5
+  component: 'Note',
+	transform: 'translate(27,0)',
+  subcomponents: [
+    {
+      component: 'WholeNote',
+      transform: 'translate(5,0)'
     },
-  }
+    {
+      component: 'Dotted',
+      transform: 'translate(5,0)'
+    },
+    {
+      component: 'Sharp',
+      transform: 'translate(0,5)'
+    }
+  ]
 }]
 ```
 
 ## ToDo
 - Mapper for converting json data into the sheet music grid
+- Cleanup each of the svg components 
+- Test with json data for each of the conditionals/parameters
+- Slur & Tie generator and controller
+- Beam note generator
 - Form for creating json data
-  - Keyboard
-  - Slur & Tie generator and controller
-  - Beam note generator
 - Outline (clickable) for each cell of the grid
 - Transpose scales
 - Save in localStorage and json file

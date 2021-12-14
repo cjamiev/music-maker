@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack serve --config config/webpack.dev.js",
+    "lint": "eslint --fix --ext .js ./src",
     "eslint": "eslint --ext .js src/ -f html -o coverage/eslint-report.html"
   },
   "devDependencies": {
