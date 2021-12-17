@@ -51,7 +51,6 @@ chord numerals: I ii iii IV V vi vii° i ii° III iv v VI VII
 
 ## ToDo
 - Test with json data for each of the conditionals/parameters
-- Slur & Tie generator and controller
 - Beam note generator
 - Text Component
   - Normal Font -> font-family: Arial, sans-serif;
@@ -60,7 +59,7 @@ chord numerals: I ii iii IV V vi vii° i ii° III iv v VI VII
   - Cursive Font -> font-family: 'Brush Script MT', cursive;
 - Custom SVG placer
 	- Cycle through any existing svg component
-	- Be able to manually place it anywhere in the sheet music
+	- Be able to drag or use controller to place it anywhere in the sheet music
 - Form for creating json data
 - Outline (clickable) for each cell of the grid
 - Transpose scales

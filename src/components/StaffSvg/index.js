@@ -1,4 +1,4 @@
-
+import CurveSvg from './CurveSvg';
 import {
   ClefSVG,
   MeasureStartSVG,
@@ -87,6 +87,7 @@ import {
 import './music-staff.css';
 
 const svgMap = {
+  'Curve': CurveSvg,
   'Clef': ClefSVG,
   'MeasureStart': MeasureStartSVG,
   'Treble': TrebleSVG,

@@ -8,6 +8,31 @@
   stroke: #ff0000;
 }
 
+.svg__curve {
+  stroke-width: 2;
+  stroke: #1E1935;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.svg__drag-point {
+  stroke-width: 2;
+  stroke: #EF2D56;
+  fill: #fff;
+}
+
+.svg__drag-point:hover {
+  fill: #EF2D56;
+  cursor: move;
+}
+
+.svg__reference-line {
+  stroke-width: 1;
+  stroke: #999;
+  stroke-linecap: round;
+  stroke-dasharray: 5, 3;
+}
+
 .svg__0 {
   stroke-width:0.588357;
 }

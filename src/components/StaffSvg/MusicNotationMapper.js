@@ -2,6 +2,7 @@ import React from 'react';
 import svgDataMapper from './index';
 
 const testData = [
+  { component: 'Curve', transform:'translate(0,0)', id: 1 },
   { component:'Clef', transform:'translate(0,0)', conditions:{}, subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},{ component:'Treble', transform:'translate(0,0)', conditions:{showGClefOttavaAlta:true,showGClefOttavaBass:true}},{ component:'Bass', transform:'translate(0,0)', conditions:{showFClefOttavaAlta:true,showFClefOttavaBass:true}}] },
   { component:'Dynamics', transform:'translate(0,0)', conditions:{showCrescendo:true,showDecrescendo:true,showDynamicText:true}, subcomponents:[] },
   { component:'KeySignature', transform:'translate(0,0)', conditions:{}, subcomponents:[{ component:'FlatKeySignature', transform:'translate(0,0)', conditions:{showFFlat:true,showCFlat:true,showGFlat:true,showDFlat:true,showAFlat:true,showEFlat:true,showBFlat:true}},{ component:'SharpKeySignature', transform:'translate(0,0)', conditions:{showFSharp:true,showCSharp:true,showGSharp:true,showDSharp:true,showASharp:true,showESharp:true,showBSharp:true}}] },
@@ -16,18 +17,27 @@ const testData = [
   { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[] },
   { component:'VoltaBracket', transform:'translate(0,0)', conditions:{}, subcomponents:[{ component:'VoltaBracketTopLine', transform:'translate(0,0)', conditions:{}},{ component:'VoltaBracketEnd', transform:'translate(0,0)', conditions:{}},{ component:'VoltaBracketStart', transform:'translate(0,0)', conditions:{}}] }
 ];
-const MusicNotationMapper = ({ data = testData }) => {
+const MusicNotationMapper = ({ data = testData, parentRef } ) => {
   const renderData = svgDataMapper(data).map(item => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
 
-    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} subcomponents={item.subcomponents} />;
+    return (
+      <SvgComponent
+        key={key}
+        reference={parentRef}
+        dataid={item.id}
+        transform={item.transform}
+        conditions={item.conditions}
+        subcomponents={item.subcomponents}
+      />
+    );
   });
 
   return (
-    <svg className="svg--primary-color" width="1920" height="1080" viewBox="0 0 507.99999 285.75002">
+    <g>
       {renderData}
-    </svg>
+    </g>
   );
 };
 
