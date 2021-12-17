@@ -50,8 +50,6 @@ chord notation: C Cm Caug Cdim Csus C6 Cm6 C7 CM7 Cm7 C9 CM9
 chord numerals: I ii iii IV V vi vii° i ii° III iv v VI VII
 
 ## ToDo
-- Mapper for converting json data into the sheet music grid
-- Cleanup each of the svg components 
 - Test with json data for each of the conditionals/parameters
 - Slur & Tie generator and controller
 - Beam note generator
