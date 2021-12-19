@@ -24,66 +24,6 @@ const SYMBOL_THREE = 0.5;
 const SYMBOL_FOUR = 120;
 const SYMBOL_FIVE = 125;
 
-const CreateOtherSymbol = (key) => {
-  if (key === 'wholerest') {
-    return (
-      <Fragment>
-        <rect x={STAFF_WIDTH / TWO - STAFF_LINE_DISTANCE / TWO} y={TOP_STAFF_LINE + STAFF_LINE_DISTANCE} width={STAFF_LINE_DISTANCE} height={STAFF_LINE_DISTANCE / TWO} className='single-bar-line' />
-      </ Fragment >
-    );
-  }
-  else if (key === 'halfrest') {
-    return (
-      <Fragment>
-        <rect x={STAFF_WIDTH / TWO - STAFF_LINE_DISTANCE / TWO} y={TOP_STAFF_LINE + SYMBOL_ONE * STAFF_LINE_DISTANCE} width={STAFF_LINE_DISTANCE} height={STAFF_LINE_DISTANCE / TWO} className='single-bar-line' />
-      </ Fragment >
-    );
-  }
-  else if (key === 'quarterrest') {
-    return (
-      <Fragment>
-        <path id="shape0" fill="#000000" fillRule="evenodd" transform="scale(0.1) translate(225, 550)"
-          d="M0 0L82.08 92.16C68.6013 112.301 40.3307 125.045 41.76 152.64L94.32 236.88C76.9654 230.78 65.1809 214.67 49.68 228.96C44.3255 238.959 40.6859 267.262 46.8 294.48L18.72 239.76C14.4851 228.48 17.2066 217.2 24.48 205.92C38.923 200.903 53.5179 195.545 60.48 207.36L0.72 123.12L21.6 89.28C33.3057 74.4 25.7337 59.52 20.88 44.64C12.72 27.84 5.76 12.96 0 0Z" />
-      </Fragment>
-    );
-  }
-  else if (key === 'SymbolMeasureBar') {
-    return (
-      <Fragment>
-        <line x1={STAFF_WIDTH / TWO} x2={STAFF_WIDTH / TWO} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='single-bar-line' />
-      </Fragment>
-    );
-  }
-  else if (key === 'SymbolEndBar') {
-    return (
-      <Fragment>
-        <line x1={45} x2={45} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='single-bar-line' />
-        <line x1={48} x2={48} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='double-bar-line' />
-      </Fragment>
-    );
-  }
-  else if (key === 'SymbolLeftRepeatBar') {
-    return (
-      <Fragment>
-        <line x1={2} x2={2} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='double-bar-line' />
-        <line x1={5} x2={5} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='single-bar-line' />
-        <circle cx="10" cy="65" r="2.5" className="small-circle" />
-        <circle cx="10" cy="75" r="2.5" className="small-circle" />
-      </Fragment>
-    );
-  }
-  else {
-    return (
-      <Fragment>
-        <circle cx="40" cy="65" r="2.5" className="small-circle" />
-        <circle cx="40" cy="75" r="2.5" className="small-circle" />
-        <line x1={45} x2={45} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='single-bar-line' />
-        <line x1={48} x2={48} y1={TOP_STAFF_LINE} y2={BOTTOM_STAFF_LINE} className='double-bar-line' />
-      </Fragment>
-    );
-  }
-};
-
 const CreateNote = ({ key, type, dotted, stacatto }) => {
   const count = keyList.findIndex(item => key.includes(item));
   const isWholeNote = type === 'whole';
@@ -108,10 +48,5 @@ const CreateNote = ({ key, type, dotted, stacatto }) => {
 };
 
 export const CreateSymbol = (symbol) => {
-  if (symbol.type) {
-    return CreateNote(symbol);
-  }
-  else {
-    return CreateOtherSymbol(symbol.key);
-  }
+  return CreateNote(symbol);
 };
