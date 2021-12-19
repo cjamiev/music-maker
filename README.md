@@ -50,8 +50,9 @@ chord notation: C Cm Caug Cdim Csus C6 Cm6 C7 CM7 Cm7 C9 CM9
 chord numerals: I ii iii IV V vi vii° i ii° III iv v VI VII
 
 ## ToDo
-- Test with json data for each of the conditionals/parameters
+- Create constants for sizes, locations of SvgObjects
 - Beam note generator
+- Test with json data for each of the conditionals/parameters
 - Text Component
   - Normal Font -> font-family: Arial, sans-serif;
   - Small gap Font -> font-family: Tahoma, sans-serif;
@@ -67,6 +68,5 @@ chord numerals: I ii iii IV V vi vii° i ii° III iv v VI VII
 - Load from localStorage and json file
 
 SVG Objects: https://blog.landr.com/music-symbols/
-- Hemiola/Triplet
 - Alto/Tenor Clef
 - Marcato Accent

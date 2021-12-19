@@ -20,6 +20,23 @@ export const TenutoSVG = ({ transform }) => {
   );
 };
 
+export const TripletSVG = ({ transform }) => {
+  return (
+    <g transform={transform}>
+      <g data-testid="subcomponent-triplet" aria-label="triplet" >
+        <rect data-testid="element-triplet-left-bar" className="svg__10" aria-label="element triplet left bar" width="9.260416" height="0.62309355" x="64.822922" y="93.892601" />
+        <rect data-testid="element-triplet-right-bar" className="svg__10" aria-label="element triplet right bar" width="9.260416" height="0.62309355" x="83.347763" y="93.892601" />
+        <rect data-testid="element-triplet-start-bar" className="svg__10" aria-label="element triplet start bar" width="4.9036407" height="0.4714008" x="94.276756" y="64.822922" transform="matrix(0,1,1,0,0,0)" />
+        <rect data-testid="element-triplet-end-bar" className="svg__10" aria-label="element triplet end bar" width="4.9036407" height="0.4714008" x="94.276817" y="92.136765" transform="matrix(0,1,1,0,0,0)" />
+        <text data-testid="element-triplet-number" className="svg__26" aria-label="element triplet number" x="75.369492" y="98.056602" >
+          <tspan data-testid="tspan10101-4" className="svg__27" x="75.369492" y="98.056602" >3
+          </tspan>
+        </text>
+      </g>
+    </g>
+  );
+};
+
 export const ChordNotationSVG = ({ transform, conditions = {} }) => {
   const { showChordNotationFlat, showChordNotationSharp, showChordNotationQuality } = conditions;
 
