@@ -7,61 +7,56 @@ export const pianoKeyList = [
 ];
 
 export const keySignatures = [
-  { key: '', label: 'C/a' },
-  { key: '1#', label: 'G/e' },
-  { key: '2#', label: 'D/b' },
-  { key: '3#', label: 'A/f#' },
-  { key: '4#', label: 'E/c#' },
-  { key: '5#', label: 'B/g#' },
-  { key: '6#', label: 'F#/d#' },
-  { key: '7#', label: 'C#/a#' },
-  { key: '1b', label: 'F/D' },
-  { key: '2b', label: 'Bb/G' },
-  { key: '3b', label: 'Eb/C' },
-  { key: '4b', label: 'Ab/F' },
-  { key: '5b', label: 'Db/Bb' },
-  { key: '6b', label: 'Gb/Eb' },
-  { key: '7b', label: 'Cb/Ab' }
+  { value: '', label: 'C/a' },
+  { value: '1#', label: 'G/e' },
+  { value: '2#', label: 'D/b' },
+  { value: '3#', label: 'A/f#' },
+  { value: '4#', label: 'E/c#' },
+  { value: '5#', label: 'B/g#' },
+  { value: '6#', label: 'F#/d#' },
+  { value: '7#', label: 'C#/a#' },
+  { value: '1b', label: 'F/D' },
+  { value: '2b', label: 'Bb/G' },
+  { value: '3b', label: 'Eb/C' },
+  { value: '4b', label: 'Ab/F' },
+  { value: '5b', label: 'Db/Bb' },
+  { value: '6b', label: 'Gb/Eb' },
+  { value: '7b', label: 'Cb/Ab' }
 ];
 
 export const timeSignatures = [
-  { key: '2/2', label: '2/2' },
-  { key: '2/4', label: '2/4' },
-  { key: '3/4', label: '3/4' },
-  { key: '4/4', label: '4/4' },
-  { key: '3/8', label: '3/8' },
-  { key: '6/8', label: '6/8' }
+  { value: '2/2', label: '2/2' },
+  { value: '2/4', label: '2/4' },
+  { value: '3/4', label: '3/4' },
+  { value: '4/4', label: '4/4' },
+  { value: '3/8', label: '3/8' },
+  { value: '6/8', label: '6/8' }
 ];
 
 export const noteTypes = [
-  { key: 'whole-note', label: 'Whole Note' },
-  { key: 'half-note', label: 'Half Note' },
-  { key: 'quarter-note', label: 'Quarter Note' },
-  { key: 'eigth-note', label: '8th Note' },
-  { key: 'sixteenth-note', label: '16th Note' },
-  { key: 'dotted-whole-note', label: 'Dotted Whole Note' },
-  { key: 'dotted-half-note', label: 'Dotted Half Note' },
-  { key: 'dotted-quarter-note', label: 'Dotted Quarter Note' },
-  { key: 'dotted-eigth-note', label: 'Dotted 8th Note' },
-  { key: 'dotted-sixteenth-note', label: 'Dotted 16th Note' }
+  { value: 'whole-note', label: 'Whole Note' },
+  { value: 'half-note', label: 'Half Note' },
+  { value: 'quarter-note', label: 'Quarter Note' },
+  { value: 'eigth-note', label: '8th Note' },
+  { value: 'sixteenth-note', label: '16th Note' }
 ];
 
 export const noteModifierTypes = [
-  { key: { accidental: 'flat' }, label: 'flat' },
-  { key: { accidental: 'sharp' }, label: 'sharp' },
-  { key: { accidental: 'natural' }, label: 'natural' },
-  { key: { accent: true }, label: 'accent' },
-  { key: { rolled: true }, label: 'rolled' },
-  { key: { fermata: true }, label: 'fermata' },
-  { key: { stacatto: true }, label: 'stacatto' }
+  { value: 'dotted', label: 'Dotted' },
+  { value: 'flat', label: 'Flat' },
+  { value: 'sharp', label: 'Sharp' },
+  { value: 'natural', label: 'Natural' },
+  { value: 'accent', label: 'Accent' },
+  { value: 'rolled', label: 'Rolled' },
+  { value: 'fermata', label: 'Fermata' },
+  { value: 'stacatto', label: 'Stacatto' }
 ];
 
 export const barTypes = [
-  { key: 'measure-bar', label: 'Measure Bar' },
-  { key: 'line-end-bar', label: 'Line End Bar' },
-  { key: 'double-line-end-bar', label: 'Double Line End Bar' },
-  { key: 'repeat-start-bar', label: 'Repeat Bar Start' },
-  { key: 'repeat-end-bar', label: 'Repeat Bar End' }
+  { value: 'measure-bar', label: 'Measure Bar' },
+  { value: 'line-end-bar', label: 'Line End Bar' },
+  { value: 'repeat-start-bar', label: 'Repeat Bar Start' },
+  { value: 'repeat-end-bar', label: 'Repeat Bar End' }
 ];
 
 export const restTypes = [
@@ -78,9 +73,9 @@ export const restTypes = [
 ];
 
 export const pedalTypes = [
-  { key: 'pedal-start', label: 'Pedal Start' },
-  { key: 'pedal-continue', label: 'Continue' },
-  { key: 'pedal-overlap', label: 'Overlap' },
-  { key: 'pedal-end', label: 'End' },
-  { key: '', label: 'Remove' }
+  { value: 'pedal-start', label: 'Pedal Start' },
+  { value: 'pedal-continue', label: 'Continue' },
+  { value: 'pedal-overlap', label: 'Overlap' },
+  { value: 'pedal-end', label: 'End' },
+  { value: '', label: 'Remove' }
 ];

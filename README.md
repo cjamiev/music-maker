@@ -38,15 +38,6 @@ Each object will properties
   ]
 }]
 ```
-Text Data
-tempo: Alla marcia Aellgro Allegretto Andante Moderately Moderato Slowly Vivace Strict 
-  Lively march tempo
-time: 2,3,4,5,6,7,8,9,10,11,12
-dynamics: 'ppp', 'pp', 'p', 'mp', 'fp', 'mf', 'f', 'ff', 'fff', 'sfz', 'dim.', 'rit.',   
-  'decresc.', 'cresc.', 'leggiero', 'a tempo', 'risoluto', 'dim. e poco rit.', 'poco rit.'
-repeat: D. C. al Fine, D.S. al Fine, Fine, D. C.
-chord notation: C Cm Caug Cdim Csus C6 Cm6 C7 CM7 Cm7 C9 CM9
-chord numerals: I ii iii IV V vi vii° i ii° III iv v VI VII
 
 ## ToDo
 - Create constants for sizes, locations of SvgObjects
