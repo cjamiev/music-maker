@@ -22,37 +22,15 @@ const DEFAULT_BASS = {
   key: 'A5'
 };
 
-const SymbolSelector = ({ selectKey, selectNoteType, selectDotted, selectStacatto, selectSymbol, isTreble }) => {
+const SymbolSelector = ({ selectKey, isTreble }) => {
   const noteLabels = isTreble ? trebleList : bassList;
   const renderNotes = keyList.map((item, index) => {
     return (<button key={item + index} className='note-btn' onClick={() => selectKey(item)}>{noteLabels[index]}</button>);
   });
 
   return (
-    <div className="symbol-selection">
-      <div className="column-selection">
-        <button className="add-btn" onClick={() => { selectSymbol('wholerest'); }}>Whole Rest</button>
-        <button className="add-btn" onClick={() => { selectSymbol('halfrest'); }}>Half Rest</button>
-        <button className="add-btn" onClick={() => { selectSymbol('quarterrest'); }}>Quarter Rest</button>
-        <button className="add-btn" onClick={() => { selectSymbol('8threst'); }}>8th Rest</button>
-        <button className="add-btn" onClick={() => { selectSymbol('16threst'); }}>16th Rest</button>
-      </div>
-      <div className="column-selection">
-        <button className="add-btn" onClick={() => { selectNoteType('whole'); }}>Whole Note</button>
-        <button className="add-btn" onClick={() => { selectNoteType('half'); }}>Half Note</button>
-        <button className="add-btn" onClick={() => { selectNoteType('quarter'); }}>Quarter Note</button>
-        <button className="add-btn" onClick={() => { selectDotted(); }}>Dotted</button>
-        {/* <button className="add-btn" onClick={() => { selectStacatto(); }}>Stacatto</button> */}
-      </div>
-      <div className="note-selection">
-        {renderNotes}
-      </div>
-      <div className="column-selection">
-        <button className='note-btn' onClick={() => selectSymbol('SymbolMeasureBar')}> Measure Bar</button>
-        <button className='note-btn' onClick={() => selectSymbol('SymbolEndBar')}>End Bar</button>
-        <button className='note-btn' onClick={() => selectSymbol('SymbolLeftRepeatBar')}>Left Repeat Bar</button>
-        <button className='note-btn' onClick={() => selectSymbol('SymbolRightRepeatBar')}>Right Repeat Bar</button>
-      </div>
+    <div className="note-selection">
+      {renderNotes}
     </div>
   );
 };
@@ -265,9 +243,9 @@ const MusicSheetCreator = () => {
         currentBassIndex={bassIndex}
         selectBassItem={selectBassItem}
       />
-      <SymbolSelector selectKey={selectKey} selectNoteType={selectNoteType} selectDotted={selectDotted} selectStacatto={selectStacatto} selectSymbol={selectSymbol} isTreble={trebleIndex !== INDEX_NONE} />
-      <button className="add-btn" onClick={addNote}>Add New Note</button>
-      <button className="add-btn" onClick={removeNote}>Remove Selected Note</button>
+      <SymbolSelector selectKey={selectKey} isTreble={trebleIndex !== INDEX_NONE} />
+      <button className="add-btn" onClick={addNote}>Add New</button>
+      <button className="add-btn" onClick={removeNote}>Remove Selected</button>
     </div>
   );
 };
