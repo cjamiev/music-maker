@@ -40,7 +40,6 @@ Each object will properties
 ```
 
 ## ToDo
-- Create constants for sizes, locations of SvgObjects
 - Beam note generator
 - Test with json data for each of the conditionals/parameters
 - Text Component

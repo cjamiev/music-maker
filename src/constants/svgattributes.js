@@ -1,0 +1,12 @@
+export const STAFF_LINE_HEIGHT = 0.661;
+export const STAFF_LINE_WIDTH = 27.784;
+export const STAFF_LINE_BASE_Y = 76.970;
+export const NOTE_BEAM_HEIGHT = 3;
+export const NOTE_STEM_BASE_X = 81.417;
+export const NOTE_STEM_BASE_Y = 94.627;
+export const NOTE_STEM_WIDTH = 0.457;
+export const NOTE_STEM_HEIGHT = 16.6;
+export const DISTANCE_BETWEEN_STAFF_LINES = 5.02696235;
+export const MEASURE_SINGLE_STAFF_HEIGHT = 20.770;
+export const MEASURE_BOTH_STAFFS_HEIGHT = 79.188;
+export const HEIGHT_BETWEEN_ROWS = 30;
