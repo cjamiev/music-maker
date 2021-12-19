@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DisplaySelection from './DisplaySelection';
+import Piano from './Piano';
 import './music-sheet-creator.css';
 
 const keyList = ['F6', 'E6', 'D6', 'C6', 'B5', 'A5', 'G5', 'F5', 'E5', 'D5', 'C5', 'B4', 'A4', 'G4', 'F4', 'E4', 'D4', 'C4', 'B3', 'A3', 'G3', 'F3', 'E3'];
@@ -20,19 +21,6 @@ const DEFAULT_TREBLE = {
 const DEFAULT_BASS = {
   ...DEFAULT_TREBLE,
   key: 'A5'
-};
-
-const SymbolSelector = ({ selectKey, isTreble }) => {
-  const noteLabels = isTreble ? trebleList : bassList;
-  const renderNotes = keyList.map((item, index) => {
-    return (<button key={item + index} className='note-btn' onClick={() => selectKey(item)}>{noteLabels[index]}</button>);
-  });
-
-  return (
-    <div className="note-selection">
-      {renderNotes}
-    </div>
-  );
 };
 
 const MusicSheetCreator = () => {
@@ -243,7 +231,7 @@ const MusicSheetCreator = () => {
         currentBassIndex={bassIndex}
         selectBassItem={selectBassItem}
       />
-      <SymbolSelector selectKey={selectKey} isTreble={trebleIndex !== INDEX_NONE} />
+      <Piano selectPianoKey={selectKey} />
       <button className="add-btn" onClick={addNote}>Add New</button>
       <button className="add-btn" onClick={removeNote}>Remove Selected</button>
     </div>
