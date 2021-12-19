@@ -69,7 +69,8 @@ import {
   SegnoSVG
 } from './RepeatSVG';
 import {
-  RestSVG
+  RestSVG,
+  DottedRestSVG
 } from './RestSVG';
 import {
   TimeSignatureSVG,
@@ -95,7 +96,8 @@ const svgMap = {
   'MeasureStart': MeasureStartSVG,
   'Treble': TrebleSVG,
   'Bass': BassSVG,
-  'Dynamics': DynamicsSVG,'KeySignature': KeySignatureSVG,
+  'Dynamics': DynamicsSVG,
+  'KeySignature': KeySignatureSVG,
   'FlatKeySignature': FlatKeySignatureSVG,
   'SharpKeySignature': SharpKeySignatureSVG,
   'Measure': MeasureSVG,
@@ -140,11 +142,14 @@ const svgMap = {
   'RepeatText': RepeatTextSVG,
   'Coda': CodaSVG,
   'Segno': SegnoSVG,
-  'Rest': RestSVG,'TimeSignature': TimeSignatureSVG,
+  'Rest': RestSVG,
+  'DottedRest': DottedRestSVG,
+  'TimeSignature': TimeSignatureSVG,
   'CommonTime': CommonTimeSVG,
   'SingleDigitTime': SingleDigitTimeSVG,
   'TwoDigitTime': TwoDigitTimeSVG,
-  'Title': TitleSVG,'VoltaBracket': VoltaBracketSVG,
+  'Title': TitleSVG,
+  'VoltaBracket': VoltaBracketSVG,
   'VoltaBracketTopLine': VoltaBracketTopLineSVG,
   'VoltaBracketEnd': VoltaBracketEndSVG,
   'VoltaBracketStart': VoltaBracketStartSVG
