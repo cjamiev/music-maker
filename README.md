@@ -17,6 +17,8 @@ Each object will properties
 - component = name of the component that it will map to
 - transform = svg transform attribute as a string move the object to its right location
 - conditions = some elements will either be shown or hidden as opposed to moved around separately. 
+- attributes = object containing width, height, x,y,cx,cy, etc for svg elements. 
+- content = object containing textual information to be displayed in svg elements.
 - subcomponents = array of objects that also contain component, transform and conditions 
 ```
 [{
@@ -29,12 +31,9 @@ Each object will properties
       conditions: { showNoteStem: true, showHalfNote: true }
     },
     {
-      component: 'Dotted',
-      transform: 'translate(5,0)'
-    },
-    {
-      component: 'Sharp',
-      transform: 'translate(0,5)'
+      component: 'ChordNotation',
+      transform: 'translate(0,0)',
+      content: { notationKey: 'Cb', notationQuality: 'sus' }
     }
   ]
 }]

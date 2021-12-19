@@ -2,6 +2,7 @@ import React from 'react';
 import svgDataMapper from './index';
 
 const testData = [
+  { component: 'NoteBeam', transform: 'translate(0,0)' },
   { component: 'Curve', transform:'translate(0,0)', id: 1 },
   { component:'Clef', transform:'translate(0,0)', conditions:{}, subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},{ component:'Treble', transform:'translate(0,0)', conditions:{showGClefOttavaAlta:true,showGClefOttavaBass:true}},{ component:'Bass', transform:'translate(0,0)', conditions:{showFClefOttavaAlta:true,showFClefOttavaBass:true}}] },
   { component:'Dynamics', transform:'translate(0,0)', conditions:{showCrescendo:true,showDecrescendo:true,showDynamicText:true}, subcomponents:[] },
