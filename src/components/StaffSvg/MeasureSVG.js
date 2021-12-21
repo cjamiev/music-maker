@@ -67,7 +67,7 @@ export const MeasureSVG = ({ transform, subcomponents = [], conditions = {} }) =
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
 
-    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} subcomponents={item.subcomponents} />;
+    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} />;
   });
 
   return (

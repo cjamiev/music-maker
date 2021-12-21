@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+const ONE = 1;
+
 export const CommonTimeSVG = ({ transform, conditions = {} }) => {
   const { showCut } = conditions;
 
@@ -14,19 +16,14 @@ export const CommonTimeSVG = ({ transform, conditions = {} }) => {
   );
 };
 
-export const SingleDigitTimeSVG = ({ transform }) => {
-  return (
-    <text data-testid="subcomponent-single-digit-time" transform={transform} className="svg__12" aria-label="single digit time" x="74.846977" y="111.39356" >
-      <tspan data-testid="tspan1492" className="svg__13" x="74.846977" y="111.39356" >2
-      </tspan>
-    </text>
-  );
-};
+export const TimeValueSVG = ({ transform, content }) => {
+  const singleDigitXCoordinate = 75.747162;
+  const doubleDigitXCoordinate = 73.346977;
+  const xCoordinate = String(content.value).length > ONE ? doubleDigitXCoordinate: singleDigitXCoordinate;
 
-export const TwoDigitTimeSVG = ({ transform }) => {
   return (
-    <text data-testid="subcomponent-two-digit-time" transform={transform} className="svg__12" aria-label="two digit time" x="70.747162" y="111.39358" >
-      <tspan data-testid="tspan1534" className="svg__13" x="70.747162" y="111.39358" >12
+    <text data-testid="subcomponent-time-value" transform={transform} className="svg__12" aria-label="time value">
+      <tspan data-testid="tspan1492" className="svg__13" x={xCoordinate} y="111.39356" >{content.value}
       </tspan>
     </text>
   );
@@ -37,7 +34,7 @@ export const TimeSignatureSVG = ({ transform, subcomponents = [] }) => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
 
-    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} subcomponents={item.subcomponents} />;
+    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} content={item.content} />;
   });
 
   return (

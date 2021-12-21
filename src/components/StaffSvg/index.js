@@ -75,8 +75,8 @@ import {
 import {
   TimeSignatureSVG,
   CommonTimeSVG,
-  SingleDigitTimeSVG,
-  TwoDigitTimeSVG
+  TimeValueSVG,
+  DoubleDigitTimeSVG
 } from './TimeSignatureSVG';
 import {
   TitleSVG
@@ -146,8 +146,7 @@ const svgMap = {
   'DottedRest': DottedRestSVG,
   'TimeSignature': TimeSignatureSVG,
   'CommonTime': CommonTimeSVG,
-  'SingleDigitTime': SingleDigitTimeSVG,
-  'TwoDigitTime': TwoDigitTimeSVG,
+  'TimeValue': TimeValueSVG,
   'Title': TitleSVG,
   'VoltaBracket': VoltaBracketSVG,
   'VoltaBracketTopLine': VoltaBracketTopLineSVG,
