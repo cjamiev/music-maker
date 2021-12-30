@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 
 export const StaccatoSVG = ({ transform }) => {
@@ -206,22 +204,26 @@ export const FlippedFermataSVG = ({ transform }) => {
 
 export const NoteNaturalSVG = ({ transform }) => {
   return (
-    <g data-testid="subcomponent-note-natural" transform={transform} aria-label="note natural" transform="matrix(0.35852757,0,0,0.46440792,48.52996,29.664061)" >
-      <rect data-testid="rect1634-7" className="svg__1" width="0.7267859" height="18.201654" x="61.165066" y="166.01704" />
-      <rect data-testid="rect1636-3" className="svg__1" width="7.9662356" height="2.2366626" x="36.048428" y="192.58131" transform="matrix(0.97014993,-0.24250592,0.13683522,0.99059382,0,0)" />
-      <rect data-testid="rect1638-9" className="svg__1" width="0.7267859" height="18.201654" x="68.700806" y="171.44075" />
-      <rect data-testid="rect1640-0" className="svg__1" width="7.9662356" height="2.2366626" x="37.248775" y="184.07086" transform="matrix(0.97014993,-0.24250592,0.13683522,0.99059382,0,0)" />
+    <g data-testid="subcomponent-note-natural" transform={transform} aria-label="note natural" >
+      <g transform="matrix(0.35852757,0,0,0.46440792,48.52996,29.664061)" >
+        <rect data-testid="rect1634-7" className="svg__1" width="0.7267859" height="18.201654" x="61.165066" y="166.01704" />
+        <rect data-testid="rect1636-3" className="svg__1" width="7.9662356" height="2.2366626" x="36.048428" y="192.58131" transform="matrix(0.97014993,-0.24250592,0.13683522,0.99059382,0,0)" />
+        <rect data-testid="rect1638-9" className="svg__1" width="0.7267859" height="18.201654" x="68.700806" y="171.44075" />
+        <rect data-testid="rect1640-0" className="svg__1" width="7.9662356" height="2.2366626" x="37.248775" y="184.07086" transform="matrix(0.97014993,-0.24250592,0.13683522,0.99059382,0,0)" />
+      </g>
     </g>
   );
 };
 
 export const NoteSharpSVG = ({ transform }) => {
   return (
-    <g data-testid="subcomponent-note-sharp" transform={transform} aria-label="note sharp" transform="matrix(0.45148001,0,0,0.812313,18.60746,28.748861)" >
-      <rect data-testid="rect4180-4" className="svg__1" width="0.50682449" height="12.692932" x="116.30758" y="96.447319" />
-      <rect data-testid="rect4182-1" className="svg__1" width="0.50682449" height="12.692932" x="119.34854" y="96.447319" />
-      <rect data-testid="rect4184-4" className="svg__1" width="6.571476" height="1.8450588" x="100.60621" y="125.54735" transform="matrix(0.97014993,-0.24250592,0.13683521,0.99059382,0,0)" />
-      <rect data-testid="rect4186-9" className="svg__1" width="6.571476" height="1.8450588" x="99.805077" y="131.22731" transform="matrix(0.97014993,-0.24250592,0.13683521,0.99059382,0,0)" />
+    <g data-testid="subcomponent-note-sharp" aria-label="note sharp" transform={transform} >
+      <g transform='matrix(0.45148001,0,0,0.812313,18.60746,28.748861)' >
+        <rect data-testid="rect4180-4" className="svg__1" width="0.50682449" height="12.692932" x="116.30758" y="96.447319" />
+        <rect data-testid="rect4182-1" className="svg__1" width="0.50682449" height="12.692932" x="119.34854" y="96.447319" />
+        <rect data-testid="rect4184-4" className="svg__1" width="6.571476" height="1.8450588" x="100.60621" y="125.54735" transform="matrix(0.97014993,-0.24250592,0.13683521,0.99059382,0,0)" />
+        <rect data-testid="rect4186-9" className="svg__1" width="6.571476" height="1.8450588" x="99.805077" y="131.22731" transform="matrix(0.97014993,-0.24250592,0.13683521,0.99059382,0,0)" />
+      </g>
     </g>
   );
 };
@@ -249,4 +251,3 @@ export const NoteSVG = ({ transform, subcomponents = [] }) => {
     </g>
   );
 };
-
