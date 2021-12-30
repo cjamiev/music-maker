@@ -20,7 +20,7 @@ export const VoltaBracketStartSVG = ({ transform }) => {
   );
 };
 
-export const VoltaBracketSVG = ({ transform, subcomponents = [] }) => {
+export const VoltaBracketSVG = ({ transform, content, subcomponents = [] }) => {
   const renderData = subcomponents.map(item => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
@@ -31,7 +31,7 @@ export const VoltaBracketSVG = ({ transform, subcomponents = [] }) => {
   return (
     <g data-testid="component-volta-bracket" aria-label="volta bracket" transform={transform} >
       <text data-testid="element-bracket-number" className="svg__26" aria-label="element bracket number" x="66.596802" y="96.873428" >
-        <tspan data-testid="tspan10101" className="svg__27" x="66.596802" y="96.873428" >1.
+        <tspan data-testid="tspan10101" className="svg__27" x="66.596802" y="96.873428" >{content.value}
         </tspan>
       </text>
       {renderData}

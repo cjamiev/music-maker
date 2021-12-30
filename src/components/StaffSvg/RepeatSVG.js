@@ -2,11 +2,10 @@
 
 import React from 'react';
 
-export const RepeatTextSVG = ({ transform }) => {
+export const RepeatTextSVG = ({ transform, content }) => {
   return (
     <text data-testid="subcomponent-repeat-text" transform={transform} className="svg__18" aria-label="repeat text" x="121.73341" y="83.967583" transform="scale(0.87702874,1.1402135)" >
-      <tspan data-testid="tspan1927-48" className="svg__19" x="121.73341" y="83.967583" >Fine
-      </tspan>
+      <tspan data-testid="tspan1927-48" className="svg__19" x="121.73341" y="83.967583" >{content.value}</tspan>
     </text>
   );
 };
@@ -42,7 +41,7 @@ export const RepeatSVG = ({ transform, subcomponents = [] }) => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
 
-    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} />;
+    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} content={item.content} />;
   });
 
   return (
