@@ -14,7 +14,7 @@ export const DottedSVG = ({ transform }) => {
 
 export const TenutoSVG = ({ transform }) => {
   return (
-    <rect data-testid="subcomponent-tenuto" transform={transform} className="svg__44" aria-label="tenuto" width="6.3859529" height="0.2489385" x="75.520599" y="97.043755" />
+    <rect data-testid="subcomponent-tenuto" transform={transform} className="svg__44" aria-label="tenuto" width="5" height="0.5489385" x="76.170599" y="97.043755" />
   );
 };
 
@@ -99,29 +99,35 @@ export const StemmedNoteSVG = ({ transform, conditions = {} }) => {
 
 export const AccentSVG = ({ transform }) => {
   return (
-    <g data-testid="subcomponent-accent" transform={transform} aria-label="accent" transform="matrix(0.58867276,0,0,0.58867276,27.6079,66.233071)" >
-      <path data-testid="path1774-2" className="svg__32" d="m 80.384644,47.2925 11.97583,5.22465" />
-      <path data-testid="path1776-3" className="svg__32" d="M 80.384644,57.80885 92.360474,52.5842" />
-      <path data-testid="path1778-9" className="svg__32" transform="matrix(0.30347626,0.37790863,-0.5664694,0.17728172,94.017915,7.9363959)" d="M 93.690878,52.791369 93.023223,52.456865 93.646739,52.04591 Z" />
+    <g data-testid="subcomponent-accent" transform={transform} aria-label="accent" >
+      <g transform="matrix(0.58867276,0,0,0.58867276,27.6079,66.233071)" >
+        <path data-testid="path1774-2" className="svg__32" d="m 80.384644,47.2925 11.97583,5.22465" />
+        <path data-testid="path1776-3" className="svg__32" d="M 80.384644,57.80885 92.360474,52.5842" />
+        <path data-testid="path1778-9" className="svg__32" transform="matrix(0.30347626,0.37790863,-0.5664694,0.17728172,94.017915,7.9363959)" d="M 93.690878,52.791369 93.023223,52.456865 93.646739,52.04591 Z" />
+      </g>
     </g>
   );
 };
 
 export const FermataSVG = ({ transform }) => {
   return (
-    <g data-testid="subcomponent-fermata" transform={transform} aria-label="fermata" transform="matrix(0.54569976,0,0,0.54569976,-20.96507,1.372411)" >
-      <path data-testid="path1708-6" className="svg__33" d="m 174.21272,179.75685 c 0,0 1.29878,-8.3831 8.64814,-8.42082 7.1648,-0.0368 8.22875,6.96542 8.25268,8.23439 0.024,1.27127 -0.45058,-6.37202 -8.2917,-6.29429 -8.18967,0.0812 -8.40343,6.58357 -8.60912,6.48072 z" />
-      <path data-testid="path3032-8" className="svg__34" transform="rotate(-3.3018566)" d="m 172.98276,188.28404 a 0.87554854,0.83385581 0 0 1 -0.86754,0.83382 0.87554854,0.83385581 0 0 1 -0.88341,-0.81856 0.87554854,0.83385581 0 0 1 0.85137,-0.8488 0.87554854,0.83385581 0 0 1 0.89899,0.80303 l -0.87496,0.0305 z" />
+    <g data-testid="subcomponent-fermata" transform={transform} aria-label="fermata" >
+      <g transform="matrix(0.54569976,0,0,0.54569976,-20.96507,1.372411)" >
+        <path data-testid="path1708-6" className="svg__33" d="m 174.21272,179.75685 c 0,0 1.29878,-8.3831 8.64814,-8.42082 7.1648,-0.0368 8.22875,6.96542 8.25268,8.23439 0.024,1.27127 -0.45058,-6.37202 -8.2917,-6.29429 -8.18967,0.0812 -8.40343,6.58357 -8.60912,6.48072 z" />
+        <path data-testid="path3032-8" className="svg__34" transform="rotate(-3.3018566)" d="m 172.98276,188.28404 a 0.87554854,0.83385581 0 0 1 -0.86754,0.83382 0.87554854,0.83385581 0 0 1 -0.88341,-0.81856 0.87554854,0.83385581 0 0 1 0.85137,-0.8488 0.87554854,0.83385581 0 0 1 0.89899,0.80303 l -0.87496,0.0305 z" />
+      </g>
     </g>
   );
 };
 
 export const RolledSVG = ({ transform }) => {
   return (
-    <g data-testid="subcomponent-rolled" transform={transform} aria-label="rolled" transform="matrix(0.36873987,0,0,0.36873987,-54.14513,30.868401)" >
-      <path data-testid="path1771" className="svg__35" d="m 340.12282,224.60846 c 0,0 2.48553,3.32792 1.58274,5.59509 -0.62851,1.57834 -2.19852,1.67851 -2.70356,3.57022 -0.38904,1.45699 3.49815,4.63442 3.49815,4.63442 l -0.71961,-1.56769 c 0.0206,0.0539 -1.09795,-2.85781 2.9754,-5.81943 0.99653,-0.72454 -3.38773,-5.82792 -4.63306,-6.41261 z" />
-      <path data-testid="path1773" className="svg__35" d="m 340.12282,213.82862 c 0,0 2.48553,3.32792 1.58274,5.59509 -0.62851,1.57834 -2.19852,1.67851 -2.70356,3.57022 -0.38904,1.45699 3.49815,4.63442 3.49815,4.63442 l -0.71961,-1.5677 c 0.0206,0.0539 -1.09795,-2.8578 2.9754,-5.81943 0.99653,-0.72453 -3.38773,-5.82791 -4.63306,-6.4126 z" />
-      <path data-testid="path1775" className="svg__35" d="m 340.12282,203.04877 c 0,0 2.48553,3.32792 1.58274,5.59509 -0.62851,1.57835 -2.19852,1.67852 -2.70356,3.57023 -0.38904,1.45698 3.49815,4.63441 3.49815,4.63441 l -0.71961,-1.56769 c 0.0206,0.0539 -1.09795,-2.85781 2.9754,-5.81943 0.99653,-0.72453 -3.38773,-5.82792 -4.63306,-6.41261 z" />
+    <g data-testid="subcomponent-rolled" transform={transform} aria-label="rolled" >
+      <g transform="matrix(0.36873987,0,0,0.36873987,-54.14513,30.868401)" >
+        <path data-testid="path1771" className="svg__35" d="m 340.12282,224.60846 c 0,0 2.48553,3.32792 1.58274,5.59509 -0.62851,1.57834 -2.19852,1.67851 -2.70356,3.57022 -0.38904,1.45699 3.49815,4.63442 3.49815,4.63442 l -0.71961,-1.56769 c 0.0206,0.0539 -1.09795,-2.85781 2.9754,-5.81943 0.99653,-0.72454 -3.38773,-5.82792 -4.63306,-6.41261 z" />
+        <path data-testid="path1773" className="svg__35" d="m 340.12282,213.82862 c 0,0 2.48553,3.32792 1.58274,5.59509 -0.62851,1.57834 -2.19852,1.67851 -2.70356,3.57022 -0.38904,1.45699 3.49815,4.63442 3.49815,4.63442 l -0.71961,-1.5677 c 0.0206,0.0539 -1.09795,-2.8578 2.9754,-5.81943 0.99653,-0.72453 -3.38773,-5.82791 -4.63306,-6.4126 z" />
+        <path data-testid="path1775" className="svg__35" d="m 340.12282,203.04877 c 0,0 2.48553,3.32792 1.58274,5.59509 -0.62851,1.57835 -2.19852,1.67852 -2.70356,3.57023 -0.38904,1.45698 3.49815,4.63441 3.49815,4.63441 l -0.71961,-1.56769 c 0.0206,0.0539 -1.09795,-2.85781 2.9754,-5.81943 0.99653,-0.72453 -3.38773,-5.82792 -4.63306,-6.41261 z" />
+      </g>
     </g>
   );
 };
@@ -195,9 +201,11 @@ export const GraceNoteSVG = ({ transform, conditions = {} }) => {
 
 export const FlippedFermataSVG = ({ transform }) => {
   return (
-    <g data-testid="subcomponent-flipped-fermata" transform={transform} aria-label="flipped fermata" transform="matrix(0.54569975,0,0,-0.54569975,-20.96507,192.96403)" >
-      <path data-testid="path1708-0-0" className="svg__33" d="m 174.21272,179.75685 c 0,0 1.29878,-8.3831 8.64814,-8.42082 7.1648,-0.0368 8.22875,6.96542 8.25268,8.23439 0.024,1.27127 -0.45058,-6.37202 -8.2917,-6.29429 -8.18967,0.0812 -8.40343,6.58357 -8.60912,6.48072 z" />
-      <path data-testid="path3032-1-9" className="svg__34" transform="rotate(-3.3018566)" d="m 172.98276,188.28404 a 0.87554854,0.83385581 0 0 1 -0.86754,0.83382 0.87554854,0.83385581 0 0 1 -0.88341,-0.81856 0.87554854,0.83385581 0 0 1 0.85137,-0.8488 0.87554854,0.83385581 0 0 1 0.89899,0.80303 l -0.87496,0.0305 z" />
+    <g data-testid="subcomponent-flipped-fermata" transform={transform} aria-label="flipped fermata" >
+      <g transform="matrix(0.54569975,0,0,-0.54569975,-20.96507,223.12753)" >
+        <path data-testid="path1708-0-0" className="svg__33" d="m 174.21272,179.75685 c 0,0 1.29878,-8.3831 8.64814,-8.42082 7.1648,-0.0368 8.22875,6.96542 8.25268,8.23439 0.024,1.27127 -0.45058,-6.37202 -8.2917,-6.29429 -8.18967,0.0812 -8.40343,6.58357 -8.60912,6.48072 z" />
+        <path data-testid="path3032-1-9" className="svg__34" transform="rotate(-3.3018566)" d="m 172.98276,188.28404 a 0.87554854,0.83385581 0 0 1 -0.86754,0.83382 0.87554854,0.83385581 0 0 1 -0.88341,-0.81856 0.87554854,0.83385581 0 0 1 0.85137,-0.8488 0.87554854,0.83385581 0 0 1 0.89899,0.80303 l -0.87496,0.0305 z" />
+      </g>
     </g>
   );
 };
@@ -230,10 +238,12 @@ export const NoteSharpSVG = ({ transform }) => {
 
 export const TrillSVG = ({ transform }) => {
   return (
-    <text data-testid="subcomponent-trill" transform={transform} className="svg__18" aria-label="trill" x="86.599037" y="88.25956" transform="scale(0.87702874,1.1402135)" >
-      <tspan data-testid="tspan1973-9" className="svg__19" x="86.599037" y="88.25956" >tr
-      </tspan>
-    </text>
+    <g data-testid="subcomponent-trill" transform={transform} aria-label="trill" >
+      <text className="svg__18" x="86.599037" y="88.25956" transform="scale(0.87702874,1.1402135)" >
+        <tspan data-testid="tspan1973-9" className="svg__19" x="86.599037" y="88.25956" >tr
+        </tspan>
+      </text>
+    </g>
   );
 };
 
