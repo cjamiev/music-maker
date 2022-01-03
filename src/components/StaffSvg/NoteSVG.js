@@ -8,7 +8,7 @@ export const StaccatoSVG = ({ transform }) => {
 
 export const DottedSVG = ({ transform }) => {
   return (
-    <ellipse data-testid="subcomponent-dotted" transform={transform} className="svg__1" aria-label="dotted" cx="83.74295" cy="109.73623" rx="1.0583327" ry="1.0583323" />
+    <ellipse data-testid="subcomponent-dotted" transform={transform} className="svg__1" aria-label="dotted" cx="85.74295" cy="109.73623" rx="1.0583327" ry="1.0583323" />
   );
 };
 
@@ -63,35 +63,35 @@ export const ChordNotationSVG = ({ transform, conditions = {} }) => {
   );
 };
 
-export const StemmedNoteFlippedSVG = ({ transform, conditions = {} }) => {
-  const { showNoteStemFlipped, showEighthNoteFlagFlipped, showHalfNoteFlipped, showSixteenthNoteFlipped } = conditions;
-
-  return (
-    <g data-testid="subcomponent-stemmed-note-flipped" transform={transform} aria-label="stemmed note flipped" >
-      { showNoteStemFlipped && <rect data-testid="note-stem-flipped" className="svg__20" aria-label="condition note stem flipped" width="0.45734397" height="16.595196" x="75.51857" y="113.24175" /> }
-      { showEighthNoteFlagFlipped && <path data-testid="eighth-note-flag-flipped" className="svg__31" aria-label="condition eighth note flag flipped" d="m 75.96827,129.83626 c 0,0 -0.30133,-3.29712 2.86944,-4.79505 3.17077,-1.49795 0.69676,-9.39918 0.63805,-9.28395 -0.0588,0.11522 1.85547,6.80885 -1.01972,8.09327 -2.77486,1.2396 -2.56154,1.08227 -2.56154,1.08227 l 0.0738,4.90346" /> }
-      { showSixteenthNoteFlipped && <g data-testid="sixteenth-note-flipped" aria-label="condition sixteenth note flipped" >
-        <rect data-testid="sixteength-note-stem-flipped" className="svg__20" aria-label="sixteength note stem flipped" width="0.45734397" height="16.595196" x="75.51918" y="120.5059" />
-        <path data-testid="sixteength-note-flag-flipped" className="svg__31" aria-label="sixteength note flag flipped" d="m 75.96846,137.10053 c 0,0 -0.30133,-3.29712 2.86944,-4.79505 3.17077,-1.49795 0.69676,-9.39918 0.63805,-9.28395 -0.0588,0.11522 1.85547,6.80885 -1.01972,8.09327 -2.77486,1.2396 -2.56154,1.08227 -2.56154,1.08227 l 0.0738,4.90346" />
-      </g> }
-      <ellipse data-testid="element-note-head-flipped" className="svg__20" aria-label="element note head flipped" cx="47.135338" cy="132.56262" rx="3.3584781" ry="2.1639023" transform="matrix(0.94215292,-0.33518334,0.25876352,0.9659407,0,0)" />
-      { showHalfNoteFlipped && <ellipse data-testid="half-note-flipped" className="svg__21" aria-label="condition half note flipped" cx="-62.460808" cy="156.08153" rx="3.0865786" ry="1.3017182" transform="matrix(0.87023416,-0.49263832,0.85255896,0.52263106,0,0)" /> }
-    </g>
-  );
-};
-
 export const StemmedNoteSVG = ({ transform, conditions = {} }) => {
   const { showNoteStem, showEighthNoteFlag, showHalfNote, showSixteenthNoteFlag } = conditions;
 
   return (
     <g data-testid="subcomponent-stemmed-note" transform={transform} aria-label="stemmed note" >
-      <ellipse data-testid="element-note-head" className="svg__20" aria-label="element note head" cx="47.133865" cy="132.56401" rx="3.3584781" ry="2.1639023" transform="matrix(0.94215292,-0.33518334,0.25876352,0.9659407,0,0)" />
-      { showNoteStem && <rect data-testid="note-stem" className="svg__20" aria-label="condition note stem" width="0.45734397" height="16.595196" x="81.416672" y="94.62748" /> }
-      { showEighthNoteFlag && <path data-testid="eighth-note-flag" className="svg__31" aria-label="condition eighth note flag" d="m 81.86637,94.628111 c 0,0 -0.30133,3.29712 2.86944,4.79505 3.17077,1.497949 0.69676,9.399179 0.63805,9.283949 -0.0588,-0.11522 1.85547,-6.80885 -1.01972,-8.09327 -2.77486,-1.239599 -2.56154,-1.082269 -2.56154,-1.082269 l 0.0738,-4.90346" /> }
-      { showHalfNote && <ellipse data-testid="half-note" className="svg__21" aria-label="condition half note" cx="-62.463909" cy="156.08205" rx="3.0865786" ry="1.3017182" transform="matrix(0.87023416,-0.49263832,0.85255896,0.52263106,0,0)" /> }
+      <ellipse data-testid="element-note-head" className="svg__20" aria-label="note head" cx="47.138676" cy="132.56465" rx="3.9879844" ry="2.5694997" transform="matrix(0.94215293,-0.33518333,0.25876352,0.9659407,0,0)" />
+      { showHalfNote && <ellipse data-testid="half-note" className="svg__21" aria-label="condition half note" cx="-62.477371" cy="156.10141" rx="3.6651206" ry="1.5457097" transform="matrix(0.87023416,-0.49263832,0.85255896,0.52263106,0,0)" /> }
+      { showNoteStem && <rect data-testid="note-stem" className="svg__20" aria-label="condition note stem" width="0.45734397" height="16.595196" x="82.046173" y="94.627319" /> }
+      { showEighthNoteFlag && <path data-testid="eighth-note-flag" className="svg__31" aria-label="condition eighth note flag" d="m 82.49591,94.62796 c 0,0 -0.30133,3.29712 2.86944,4.79505 3.17077,1.49795 0.69676,9.39918 0.63805,9.28395 -0.0588,-0.11522 1.85547,-6.80885 -1.01972,-8.09327 -2.77486,-1.2396 -2.56154,-1.08227 -2.56154,-1.08227 l 0.0738,-4.90346" /> }
       { showSixteenthNoteFlag && <g data-testid="sixteenth-note-flag" aria-label="condition sixteenth note flag" >
-        <rect data-testid="sixteength-note-stem" className="svg__20" aria-label="sixteength note stem" width="0.45734397" height="16.595196" x="81.417274" y="87.36319" />
-        <path data-testid="sixteength-note-flag" className="svg__31" aria-label="sixteength note flag" d="m 81.86656,87.363851 c 0,0 -0.30133,3.29712 2.86944,4.79505 3.17077,1.49795 0.69676,9.399179 0.63805,9.283949 -0.0588,-0.11522 1.85547,-6.808849 -1.01972,-8.093269 -2.77486,-1.2396 -2.56154,-1.08227 -2.56154,-1.08227 l 0.0738,-4.90346" />
+        <rect data-testid="sixteength-note-stem" className="svg__20" width="0.45734397" height="16.595196" x="82.046814" y="87.363037" />
+        <path data-testid="sixteength-note-flag" className="svg__31" aria-label="sixteength note flag" d="m 82.4961,87.3637 c 0,0 -0.30133,3.29712 2.86944,4.79505 3.17077,1.49795 0.69676,9.39918 0.63805,9.28395 -0.0588,-0.11522 1.85547,-6.80885 -1.01972,-8.09327 -2.77486,-1.2396 -2.56154,-1.08227 -2.56154,-1.08227 l 0.0738,-4.90346" />
+      </g> }
+    </g>
+  );
+};
+
+export const StemmedNoteFlippedSVG = ({ transform, conditions = {} }) => {
+  const { showNoteStemFlipped, showEighthNoteFlagFlipped, showHalfNoteFlipped, showSixteenthNoteFlagFlipped } = conditions;
+
+  return (
+    <g data-testid="subcomponent-stemmed-note-flipped" transform={transform} aria-label="stemmed note flipped" >
+      <ellipse data-testid="element-note-head" className="svg__20" aria-label="note head" cx="-47.138428" cy="-132.52782" rx="3.9879844" ry="2.5694997" transform="matrix(-0.94215293,0.33518333,-0.25876352,-0.9659407,0,0)" />
+      { showHalfNoteFlipped && <ellipse data-testid="half-note" className="svg__21" aria-label="condition half note flipped" cx="62.230122" cy="-155.83528" rx="3.6651206" ry="1.5457097" transform="matrix(-0.87023416,0.49263832,-0.85255896,-0.52263106,0,0)" /> }
+      { showNoteStemFlipped && <rect data-testid="note-stem" className="svg__20" aria-label="condition note stem flipped" width="0.45734397" height="16.595196" x="74.956619" y="113.24069" /> }
+      { showEighthNoteFlagFlipped && <path data-testid="eighth-note-flag" className="svg__31" aria-label="condition eighth note flag flipped" d="m 75.40634,129.83554 c 0,0 -0.30133,-3.29712 2.86944,-4.79505 3.17077,-1.49795 0.69676,-9.39918 0.63805,-9.28395 -0.0588,0.11522 1.85547,6.80885 -1.01972,8.09327 -2.77486,1.2396 -2.56154,1.08227 -2.56154,1.08227 l 0.0738,4.90346" /> }
+      { showSixteenthNoteFlagFlipped && <g data-testid="sixteenth-note-flag" aria-label="condition sixteenth note flag flipped" transform="matrix(1,0,0,-1,-552.01334,421.78555)" >
+        <rect data-testid="sixteength-note-stem-flipped" className="svg__20" aria-label="sixteength note stem flipped" width="0.45734397" height="16.595196" x="626.97058" y="284.68509" />
+        <path data-testid="sixteength-note-flag-flipped" className="svg__31" aria-label="sixteength note flag flipped" d="m 627.41987,284.68575 c 0,0 -0.30133,3.29712 2.86944,4.79505 3.17077,1.49795 0.69676,9.39918 0.63805,9.28395 -0.0588,-0.11522 1.85547,-6.80885 -1.01972,-8.09327 -2.77486,-1.2396 -2.56154,-1.08227 -2.56154,-1.08227 l 0.0738,-4.90346" />
       </g> }
     </g>
   );
@@ -135,11 +135,11 @@ export const RolledSVG = ({ transform }) => {
 const StaffTopLedger = ({ conditions = {} }) => {
   const { showTopLedgerFive, showTopLedgerFour, showTopLedgerThree, showTopLedgerTwo, showTopLedgerOne } = conditions;
   return (<>
-    { showTopLedgerFive && <rect data-testid="staff-line-top-ledger-five" className="svg__36" aria-label="staff line top ledger five" width="7.4552097" height="0.17916849" x="74.985931" y="76.970314" /> }
-    { showTopLedgerFour && <rect data-testid="staff-line-top-ledger-four" className="svg__36" aria-label="staff line top ledger four" width="7.4552097" height="0.17916849" x="74.985931" y="81.997368" /> }
-    { showTopLedgerThree && <rect data-testid="staff-line-top-ledger-three" className="svg__36" aria-label="staff line top ledger three" width="7.4552097" height="0.17916857" x="74.985931" y="87.024467" /> }
-    { showTopLedgerTwo && <rect data-testid="staff-line-top-ledger-two" className="svg__36" aria-label="staff line top ledger two" width="7.4552097" height="0.17916857" x="74.985931" y="92.051582" /> }
-    { showTopLedgerOne && <rect data-testid="staff-line-top-ledger-one" className="svg__36" aria-label="staff line top ledger one" width="7.4552097" height="0.17916857" x="74.985931" y="97.078636" /> }
+    { showTopLedgerFive && <rect data-testid="staff-line-top-ledger-five" className="svg__36" aria-label="staff line top ledger five" width="9.4552097" height="0.17916849" x="73.985931" y="76.970314" /> }
+    { showTopLedgerFour && <rect data-testid="staff-line-top-ledger-four" className="svg__36" aria-label="staff line top ledger four" width="9.4552097" height="0.17916849" x="73.985931" y="81.997368" /> }
+    { showTopLedgerThree && <rect data-testid="staff-line-top-ledger-three" className="svg__36" aria-label="staff line top ledger three" width="9.4552097" height="0.17916857" x="73.985931" y="87.024467" /> }
+    { showTopLedgerTwo && <rect data-testid="staff-line-top-ledger-two" className="svg__36" aria-label="staff line top ledger two" width="9.4552097" height="0.17916857" x="73.985931" y="92.051582" /> }
+    { showTopLedgerOne && <rect data-testid="staff-line-top-ledger-one" className="svg__36" aria-label="staff line top ledger one" width="9.4552097" height="0.17916857" x="73.985931" y="97.078636" /> }
   </>);
 };
 
@@ -147,11 +147,11 @@ const StaffBottomLedger = ({ conditions = {} }) => {
   const { showBottomLedgerFive, showBottomLedgerFour, showBottomLedgerThree, showBottomLedgerTwo, showBottomLedgerOne } = conditions;
   return (
     <>
-      { showBottomLedgerOne && <rect data-testid="staff-line-bottom-ledger-one" className="svg__37" aria-label="staff line bottom ledger one" width="7.4552088" height="0.17916749" x="74.985931" y="127.24142" /> }
-      { showBottomLedgerTwo && <rect data-testid="staff-line-bottom-ledger-two" className="svg__36" aria-label="staff line bottom ledger two" width="7.4552097" height="0.17916857" x="74.985931" y="132.26854" /> }
-      { showBottomLedgerThree && <rect data-testid="staff-line-bottom-ledger-three" className="svg__36" aria-label="staff line bottom ledger three" width="7.4552097" height="0.17916857" x="74.985931" y="137.29558" /> }
-      { showBottomLedgerFour && <rect data-testid="staff-line-bottom-ledger-four" className="svg__36" aria-label="staff line bottom ledger four" width="7.4552097" height="0.17916857" x="74.985931" y="142.32262" /> }
-      { showBottomLedgerFive && <rect data-testid="staff-line-bottom-ledger-five" className="svg__36" aria-label="staff line bottom ledger five" width="7.4552097" height="0.17916857" x="74.985931" y="147.34975" /> }
+      { showBottomLedgerOne && <rect data-testid="staff-line-bottom-ledger-one" className="svg__37" aria-label="staff line bottom ledger one" width="9.4552097" height="0.17916749" x="73.985931" y="127.24142" /> }
+      { showBottomLedgerTwo && <rect data-testid="staff-line-bottom-ledger-two" className="svg__36" aria-label="staff line bottom ledger two" width="9.4552097" height="0.17916857" x="73.985931" y="132.26854" /> }
+      { showBottomLedgerThree && <rect data-testid="staff-line-bottom-ledger-three" className="svg__36" aria-label="staff line bottom ledger three" width="9.4552097" height="0.17916857" x="73.985931" y="137.29558" /> }
+      { showBottomLedgerFour && <rect data-testid="staff-line-bottom-ledger-four" className="svg__36" aria-label="staff line bottom ledger four" width="9.4552097" height="0.17916857" x="73.985931" y="142.32262" /> }
+      { showBottomLedgerFive && <rect data-testid="staff-line-bottom-ledger-five" className="svg__36" aria-label="staff line bottom ledger five" width="9.4552097" height="0.17916857" x="73.985931" y="147.34975" /> }
     </>
   );
 };
