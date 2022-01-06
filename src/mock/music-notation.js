@@ -481,6 +481,15 @@ export const allQuarterChordData = [
       { component:'StemmedNote', transform:`translate(0,${mapNotePosition['F3']})`, conditions:{ showNoteStem: true }},
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B3']}
     ]},
+  { component:'Note', transform:`translate(${0},-80)`, conditions:{},
+    subcomponents:[
+      { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['B3']})`, conditions:{}},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['B3']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(7,${mapNotePosition['C3']})`, conditions:{}},
+      { component: 'ChordLedger', transform:`translate(7,${mapNotePosition['B3']})`, conditions: {}},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['F3']})`, conditions:{ showNoteStem: true }},
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B3']}
+    ]},
   { component:'Note', transform:`translate(${2*-STAFF_LINE_WIDTH},10)`, conditions:{},
     subcomponents:[
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['D6']},
@@ -495,6 +504,24 @@ export const allQuarterChordData = [
       { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['E6']})`, conditions:{}},
       { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['A6']})`, conditions:{ showNoteStemFlipped: true }},
       { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['C6']})`, conditions:{ showNoteStemFlipped: true }},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['E6']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${0},10)`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['E6']},
+      { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['E6']})`, conditions:{}},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['A6']})`, conditions:{ showNoteStemFlipped: true }},
+      { component: 'ChordLedger', transform:`translate(-7,${mapNotePosition['E6']})`, conditions: {}},
+      { component:'StemmedNoteFlipped', transform:`translate(-7,${mapNotePosition['D6']})`, conditions:{ }},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['E6']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${STAFF_LINE_WIDTH},10)`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['E6']},
+      { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['E6']})`, conditions:{}},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['B6']})`, conditions:{ showNoteStemFlipped: true }},
+      { component: 'ChordLedger', transform:`translate(-7,${mapNotePosition['A6']})`, conditions: {}},
+      { component:'StemmedNoteFlipped', transform:`translate(-7,${mapNotePosition['A6']})`, conditions:{ showChordLedger: true }},
       { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['E6']})`, conditions:{ showNoteStemFlipped: true }}
     ]}
 ];

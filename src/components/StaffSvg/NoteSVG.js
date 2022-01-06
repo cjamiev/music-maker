@@ -132,6 +132,12 @@ export const RolledSVG = ({ transform }) => {
   );
 };
 
+export const ChordLedgerSVG = ({ transform }) => {
+  return (
+    <rect data-testid="chord-ledger" className="svg__36" transform={transform} aria-label="chord ledger" width="9.4552097" height="0.17916849" x="73.985931" y="112.17" />
+  );
+};
+
 const StaffTopLedger = ({ conditions = {} }) => {
   const { showTopLedgerFive, showTopLedgerFour, showTopLedgerThree, showTopLedgerTwo, showTopLedgerOne } = conditions;
   return (<>
