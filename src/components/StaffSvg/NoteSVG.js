@@ -35,13 +35,13 @@ export const TripletSVG = ({ transform }) => {
   );
 };
 
-export const ChordNotationSVG = ({ transform, conditions = {} }) => {
+export const ChordNotationSVG = ({ transform, content = {}, conditions = {} }) => {
   const { showChordNotationFlat, showChordNotationSharp, showChordNotationQuality } = conditions;
 
   return (
     <g data-testid="subcomponent-chord-notation" transform={transform} aria-label="chord notation" >
       <text data-testid="element-chord-notation-key" className="svg__30" aria-label="element chord notation key" x="69.375237" y="100.37735" >
-        <tspan data-testid="tspan4578-3-5-4" className="svg__30" x="69.375237" y="100.37735" dx="0" >C
+        <tspan data-testid="tspan4578-3-5-4" className="svg__30" x="69.375237" y="100.37735" dx="0" >{content.value}
         </tspan>
       </text>
       { showChordNotationFlat && <g data-testid="chord-notation-flat" aria-label="condition chord notation flat" transform="matrix(0.68676507,0,0,0.68676507,-126.65052,31.03619)" >
@@ -55,8 +55,8 @@ export const ChordNotationSVG = ({ transform, conditions = {} }) => {
         <rect data-testid="rect4184-4-8" className="svg__1" width="6.571476" height="1.8450588" x="100.60621" y="125.54735" transform="matrix(0.97014993,-0.24250592,0.13683521,0.99059382,0,0)" />
         <rect data-testid="rect4186-9-9" className="svg__1" width="6.571476" height="1.8450588" x="99.805077" y="131.22731" transform="matrix(0.97014993,-0.24250592,0.13683521,0.99059382,0,0)" />
       </g> }
-      { showChordNotationQuality && <text data-testid="chord-notation-quality" className="svg__30" aria-label="condition chord notation quality" x="77.285515" y="100.44415" >
-        <tspan data-testid="tspan4578-3-5-4-0" className="svg__30" x="77.285515" y="100.44415" dx="0 0 0" >sus
+      { content.suffix && <text data-testid="chord-notation-quality" className="svg__30" aria-label="condition chord notation quality" x="77.285515" y="100.44415" >
+        <tspan data-testid="tspan4578-3-5-4-0" className="svg__30" x="77.285515" y="100.44415" dx="0 0 0" >{content.suffix}
         </tspan>
       </text> }
     </g>
@@ -195,10 +195,10 @@ export const NoteFlatSVG = ({ transform }) => {
   );
 };
 
-export const FingerNumberSVG = ({ transform }) => {
+export const FingerNumberSVG = ({ transform, content = {} }) => {
   return (
     <text data-testid="subcomponent-finger-number" transform={transform} className="svg__39" aria-label="finger number" x="77.389923" y="126.77639" >
-      <tspan data-testid="tspan5559-9" className="svg__39" x="77.389923" y="126.77639" >1
+      <tspan data-testid="tspan5559-9" className="svg__39" x="77.389923" y="126.77639" >{content.value}
       </tspan>
     </text>
   );
@@ -274,7 +274,7 @@ export const NoteSVG = ({ transform, subcomponents = [] }) => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
 
-    return <SvgComponent key={key} transform={item.transform} conditions={item.conditions} />;
+    return <SvgComponent key={key} transform={item.transform} content={item.content} conditions={item.conditions} />;
   });
 
   return (

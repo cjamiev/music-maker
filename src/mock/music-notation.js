@@ -464,6 +464,7 @@ export const allQuarterNoteData = [
 export const allQuarterChordData = [
   { component:'Note', transform:`translate(${2*-STAFF_LINE_WIDTH},-80)`, conditions:{},
     subcomponents:[
+      { component: 'ChordNotation', transform: 'translate(3,0)', content: { value: 'F', suffix: '7' }, conditions: { showChordNotationSharp: true }},
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A3']},
       { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['A3']})`, conditions:{}},
       { component:'Dotted', transform:`translate(0,${mapDottedPosition['A3']})`, conditions:{}},
@@ -475,6 +476,9 @@ export const allQuarterChordData = [
     ]},
   { component:'Note', transform:`translate(${-STAFF_LINE_WIDTH},-80)`, conditions:{},
     subcomponents:[
+      { component: 'FingerNumber', transform: 'translate(0,-36)', content: { value: '5' }, conditions: {}},
+      { component: 'FingerNumber', transform: 'translate(0,-31)', content: { value: '3' }, conditions: {}},
+      { component: 'FingerNumber', transform: 'translate(0,-26)', content: { value: '1' }, conditions: {}},
       { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['B3']})`, conditions:{}},
       { component:'StemmedNote', transform:`translate(0,${mapNotePosition['B3']})`, conditions:{ showNoteStem: true }},
       { component:'StemmedNote', transform:`translate(0,${mapNotePosition['D3']})`, conditions:{ showNoteStem: true }},
