@@ -464,7 +464,6 @@ export const allQuarterNoteData = [
 export const allQuarterChordData = [
   { component:'Note', transform:`translate(${2*-STAFF_LINE_WIDTH},-80)`, conditions:{},
     subcomponents:[
-      { component: 'ChordNotation', transform: 'translate(3,0)', content: { value: 'F', suffix: '7' }, conditions: { showChordNotationSharp: true }},
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A3']},
       { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['A3']})`, conditions:{}},
       { component:'Dotted', transform:`translate(0,${mapDottedPosition['A3']})`, conditions:{}},
@@ -476,9 +475,6 @@ export const allQuarterChordData = [
     ]},
   { component:'Note', transform:`translate(${-STAFF_LINE_WIDTH},-80)`, conditions:{},
     subcomponents:[
-      { component: 'FingerNumber', transform: 'translate(0,-36)', content: { value: '5' }, conditions: {}},
-      { component: 'FingerNumber', transform: 'translate(0,-31)', content: { value: '3' }, conditions: {}},
-      { component: 'FingerNumber', transform: 'translate(0,-26)', content: { value: '1' }, conditions: {}},
       { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['B3']})`, conditions:{}},
       { component:'StemmedNote', transform:`translate(0,${mapNotePosition['B3']})`, conditions:{ showNoteStem: true }},
       { component:'StemmedNote', transform:`translate(0,${mapNotePosition['D3']})`, conditions:{ showNoteStem: true }},
@@ -527,5 +523,58 @@ export const allQuarterChordData = [
       { component: 'ChordLedger', transform:`translate(-7,${mapNotePosition['A6']})`, conditions: {}},
       { component:'StemmedNoteFlipped', transform:`translate(-7,${mapNotePosition['A6']})`, conditions:{ showChordLedger: true }},
       { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['E6']})`, conditions:{ showNoteStemFlipped: true }}
+    ]}
+];
+
+export const allModifierData = [
+  { component:'Note', transform:`translate(${2*-STAFF_LINE_WIDTH},-80)`, conditions:{},
+    subcomponents:[
+      { component: 'FingerNumber', transform: 'translate(0,-36)', content: { value: '5' }, conditions: {}},
+      { component: 'FingerNumber', transform: 'translate(0,-31)', content: { value: '3' }, conditions: {}},
+      { component: 'FingerNumber', transform: 'translate(0,-26)', content: { value: '1' }, conditions: {}},
+      { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['B3']})`, conditions:{}},
+      { component:'GraceNote', transform:`translate(0,${mapNotePosition['F3']})`, conditions:{ showGraceNoteUpperSlur: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['B3']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['D3']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['F3']})`, conditions:{ showNoteStem: true }},
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B3']}
+    ]},
+  { component:'Note', transform:`translate(${-STAFF_LINE_WIDTH},-80)`, conditions:{},
+    subcomponents:[
+      { component: 'ChordNotation', transform: 'translate(3,0)', content: { value: 'F', suffix: '7' }, conditions: { showChordNotationSharp: true }},
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A3']},
+      { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['A3']})`, conditions:{}},
+      { component:'Dotted', transform:`translate(0,${mapDottedPosition['A3']})`, conditions:{}},
+      { component:'Dotted', transform:`translate(0,${mapDottedPosition['C3']})`, conditions:{}},
+      { component:'Dotted', transform:`translate(0,${mapDottedPosition['E3']})`, conditions:{}},
+      { component:'NoteNatural', transform:`translate(0,${mapNotePosition['A3']})`, conditions:{}},
+      { component:'NoteFlat', transform:`translate(-5,${mapNotePosition['C3']})`, conditions:{}},
+      { component:'NoteSharp', transform:`translate(0,${mapNotePosition['E3']})`, conditions:{}},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['A3']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['C3']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['E3']})`, conditions:{ showNoteStem: true }}
+    ]},
+  { component:'Note', transform:'translate(0,-80)', conditions:{},
+    subcomponents:[
+      { component:'GraceNote', transform:`translate(-2.5,${mapNotePosition['A4']})`, conditions:{ showGraceNoteBottomSlur: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['G4']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['C4']})`, conditions:{ showNoteStem: true }},
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B3']}
+    ]},
+  { component:'Note', transform:`translate(${STAFF_LINE_WIDTH},-80)`, conditions:{},
+    subcomponents:[
+      { component:'Triplet', transform:'translate(13,0)', conditions:{}},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['G4']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['C4']})`, conditions:{ showNoteStem: true }},
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B3']}
+    ]},
+  { component:'Note', transform:`translate(${2*STAFF_LINE_WIDTH},-80)`, conditions:{},
+    subcomponents:[
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['G4']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['C4']})`, conditions:{ showNoteStem: true }},
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B3']}
     ]}
 ];
