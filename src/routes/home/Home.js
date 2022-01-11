@@ -6,7 +6,10 @@ const Home = () => {
 
   return (
     <div ref={ref}>
-      <svg className="svg--primary-color" width="1920" height="1080" viewBox="0 0 508 285.75">
+      <svg className="svg--primary-color"
+        width="5000"
+        height="3000"
+        viewBox="0 0 1322.9166 793.75005">
         <MusicNotationMapper parentRef={ref}/>
       </svg>
     </div>

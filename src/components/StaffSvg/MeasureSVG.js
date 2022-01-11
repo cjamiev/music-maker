@@ -2,14 +2,6 @@
 
 import React from 'react';
 
-export const MeasureBarSVG = ({ transform }) => {
-  return (
-    <g data-testid="subcomponent-measure-bar" aria-label="measure bar" transform={transform} >
-      <rect data-testid="element-measure-bar" className="svg__1" aria-label="element measure bar" width="0.65484279" height="78.978127" x="78.530006" y="102.0746" />
-    </g>
-  );
-};
-
 export const MeasureRepeatBarStartSVG = ({ transform, conditions = {} }) => {
   const { showBassRepeatStartDots } = conditions;
 
@@ -72,20 +64,6 @@ export const MeasureSVG = ({ transform, subcomponents = [], conditions = {} }) =
 
   return (
     <g data-testid="component-measure" aria-label="measure" transform={transform} >
-      { showStaffBassMeasure && <g data-testid="staff-bass-measure" aria-label="condition staff bass measure" >
-        <rect data-testid="rect3608-7-0-3-7-1-3-6-8" className="svg__0" width="27.192894" height="0.073101997" x="65.120537" y="160.3671" />
-        <rect data-testid="rect3610-9-9-5-2-5-4-3-8" className="svg__0" width="27.192894" height="0.07310199" x="65.120537" y="165.3942" />
-        <rect data-testid="rect3612-7-0-6-4-5-0-3-1" className="svg__0" width="27.192894" height="0.07310199" x="65.120537" y="170.42126" />
-        <rect data-testid="rect3614-5-8-6-9-1-6-1-3" className="svg__0" width="27.192894" height="0.07310199" x="65.120537" y="175.44832" />
-        <rect data-testid="rect3616-0-9-5-9-3-55-7-0" className="svg__0" width="27.192894" height="0.073101684" x="65.118217" y="180.47542" />
-      </g> }
-      <g data-testid="element-staff-treble-measure" aria-label="element staff treble measure" >
-        <rect data-testid="rect3608-7-0-3-7-1-3-7" className="svg__0" width="27.192894" height="0.073101997" x="65.120537" y="102.15876" />
-        <rect data-testid="rect3610-9-9-5-2-5-4-6" className="svg__0" width="27.192894" height="0.07310199" x="65.120537" y="107.18585" />
-        <rect data-testid="rect3612-7-0-6-4-5-0-4" className="svg__0" width="27.192894" height="0.07310199" x="65.120537" y="112.21293" />
-        <rect data-testid="rect3614-5-8-6-9-1-6-9" className="svg__0" width="27.192894" height="0.07310199" x="65.120537" y="117.23998" />
-        <rect data-testid="rect3616-0-9-5-9-3-55-2" className="svg__0" width="27.192894" height="0.073101684" x="65.118217" y="122.26708" />
-      </g>
       {renderData}
     </g>
   );

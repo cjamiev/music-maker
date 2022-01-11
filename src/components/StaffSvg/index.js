@@ -16,7 +16,6 @@ import {
 } from './KeySignatureSVG';
 import {
   MeasureSVG,
-  MeasureBarSVG,
   MeasureRepeatBarStartSVG,
   MeasureEndSVG,
   MeasureRepeatBarEndSVG
@@ -102,7 +101,6 @@ const svgMap = {
   'FlatKeySignature': FlatKeySignatureSVG,
   'SharpKeySignature': SharpKeySignatureSVG,
   'Measure': MeasureSVG,
-  'MeasureBar': MeasureBarSVG,
   'MeasureRepeatBarStart': MeasureRepeatBarStartSVG,
   'MeasureEnd': MeasureEndSVG,
   'MeasureRepeatBarEnd': MeasureRepeatBarEndSVG,
