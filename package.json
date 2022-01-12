@@ -1,6 +1,6 @@
 {
   "name": "piano-app",
-  "version": "0.3.21",
+  "version": "0.3.22",
   "private": true,
   "description": "Create Sheet music and display future songs to play",
   "main": "src/index.js",
