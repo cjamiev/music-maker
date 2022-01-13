@@ -12,7 +12,7 @@ export const TitleSVG = ({ transform, content }) => {
         <tspan data-testid="tspan2836-7" className="svg__46" x="179.65633" y="31.126183" >{content.subname}</tspan>
       </text>
       <text data-testid="element-music-by" className="svg__47" aria-label="element music by" x="369.57031" y="45.274078" >
-        <tspan data-testid="tspan2858-1" className="svg__48" x="369.57031" y="45.274078" >Music By</tspan>
+        <tspan data-testid="tspan2858-1" className="svg__48" x="369.57031" y="45.274078" >{content.author && 'Music By'}</tspan>
       </text>
       <text data-testid="element-author" className="svg__47" aria-label="element author" x="305.57031" y="55.274078" >
         <tspan data-testid="tspan2858" className="svg__48" x="305.57031" y="55.274078" >{content.author}</tspan>

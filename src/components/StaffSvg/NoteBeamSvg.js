@@ -17,10 +17,10 @@ const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
 
-const GenerateBeam = ({ widthMultiplier, heightMultipler, isAngle }) => {
+const GenerateBeam = ({ widthMultiplier, heightMultipler, angle }) => {
   const baseX = NOTE_STEM_BASE_X;
   const baseY = NOTE_STEM_BASE_Y + NOTE_STEM_HEIGHT + heightMultipler * DISTANCE_BETWEEN_STAFF_LINES;
-  const angleModifier = isAngle ? -(widthMultiplier - ONE) * DISTANCE_BETWEEN_STAFF_LINES : ZERO;
+  const angleModifier = -angle*(widthMultiplier - ONE) * DISTANCE_BETWEEN_STAFF_LINES;
 
   const originCoord = {
     x: baseX,
@@ -50,13 +50,16 @@ const GenerateBeam = ({ widthMultiplier, heightMultipler, isAngle }) => {
   );
 };
 
-const NoteBeamSvg = ({ transform }) => {
-  const heightMultiplier = -3;
-  const widthMultiplier = 3;
+const NoteBeamSvg = ({ transform, content = {} }) => {
+  const { widthMultiplier, heightMultiplier, angle } = content;
 
   return (
     <g transform={transform}>
-      <GenerateBeam widthMultiplier={widthMultiplier} heightMultipler={heightMultiplier} isAngle={true} />
+      <GenerateBeam
+        widthMultiplier={widthMultiplier}
+        heightMultipler={heightMultiplier}
+        angle={angle}
+      />
     </g>
   );
 };

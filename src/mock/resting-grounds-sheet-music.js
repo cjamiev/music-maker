@@ -123,7 +123,43 @@ const hollowKnightRestingGroundsDataPageOneLineOne = [
   { component:'Rest', transform:`translate(${12*STAFF_LINE_WIDTH},${BASS_GAP})`,
     conditions:{showQuarterRest:true}, subcomponents:[] },
   { component:'Measure', transform:`translate(${12*STAFF_LINE_WIDTH},0)`, conditions:{showStaffBassMeasure:true},
-    subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] }
+    subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalStart', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Pedal', transform:`translate(${12*STAFF_LINE_WIDTH},0)`, conditions:{},
+    subcomponents:[
+      { component:'PedalEnd', transform:'translate(0,0)', conditions:{}}] }
 ];
 const hollowKnightRestingGroundsDataPageOneLineTwo = [
   { component:'Clef', transform:`translate(0,${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
@@ -450,6 +486,8 @@ const hollowKnightRestingGroundsDataPageOne = [
   ...hollowKnightRestingGroundsDataPageOneLineFour
 ];
 const hollowKnightRestingGroundsDataPageTwoLineOne = [
+  { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[],
+    content: { name: 'Page 2', subname: 'Resting Grounds', author: '', tempo: '' } },
   { component:'Clef', transform:`translate(0,${0})`, conditions:{},
     subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},
       { component:'Treble', transform:'translate(0,0)', conditions:{}},
@@ -840,7 +878,114 @@ const hollowKnightRestingGroundsDataPageTwoLineFour = [
   { component:'Measure', transform:`translate(${8*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{showStaffBassMeasure:true},
     subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] },
   { component:'Measure', transform:`translate(${11*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{showStaffBassMeasure:true},
-    subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] }
+    subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Note', transform:`translate(${0*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['G4']},
+      { component:'Dotted', transform:`translate(0,${mapDottedPosition['G4']})`, conditions:{}},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['G4']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Rest', transform:`translate(${1*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[
+      { component:'DottedRest', transform:'translate(0,0)', conditions:{}}
+    ] },
+  { component:'Note', transform:`translate(${2*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['G4']}
+    ]},
+  { component:'Rest', transform:`translate(${3*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[
+    ] },
+  { component:'Rest', transform:`translate(${4*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[
+    ] },
+  { component:'Note', transform:`translate(${5*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['F4']},
+      { component:'StemmedNote', transform:`translate(-11,${mapNotePosition['F4']})`, conditions:{ showNoteStem: true }}
+    ]},
+  { component: 'NoteBeam', transform:`translate(${4*STAFF_LINE_WIDTH + 17.4},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS) - 4})`, conditions:{},
+    content: { heightMultiplier: -1, widthMultiplier: 2, angle: -1 },
+    subcomponents:[] },
+  { component:'Note', transform:`translate(${5*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'StemmedNote', transform:`translate(4,${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }}
+    ]},
+  { component:'Note', transform:`translate(${6*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['D4']},
+      { component:'StemmedNote', transform:`translate(4,${mapNotePosition['D4']})`, conditions:{ showNoteStem: true, showEighthNoteFlag: true }}
+    ]},
+  { component:'Rest', transform:`translate(${7*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[] },
+  { component:'Rest', transform:`translate(${8*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[{ component:'DottedRest', transform:'translate(0,0)', conditions:{}}] },
+  { component:'Rest', transform:`translate(${9*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[] },
+  { component:'Rest', transform:`translate(${10*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[] },
+  { component:'Rest', transform:`translate(${11*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`,
+    conditions:{showQuarterRest:true}, subcomponents:[] },
+  { component:'Note', transform:`translate(${0*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['A5']})`, conditions:{ showNoteStem: true }}
+    ]},
+  { component:'Note', transform:`translate(${1*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['D5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['D5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${2*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['E5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['E5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${3*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['A5']})`, conditions:{ showNoteStem: true }}
+    ]},
+  { component:'Note', transform:`translate(${4*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['D5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['D5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${5*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['E5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['E5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${6*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['A5']})`, conditions:{ showNoteStem: true }}
+    ]},
+  { component:'Note', transform:`translate(${7*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['C5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['C5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${8*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['D5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['D5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${9*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['A5']})`, conditions:{ showNoteStem: true }}
+    ]},
+  { component:'Note', transform:`translate(${10*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['B5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]},
+  { component:'Note', transform:`translate(${11*STAFF_LINE_WIDTH},${BASS_GAP+3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    subcomponents:[
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['C5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['C5']})`, conditions:{ showNoteStemFlipped: true }}
+    ]}
 ];
 const hollowKnightRestingGroundsDataPageTwo = [
   ...hollowKnightRestingGroundsDataPageTwoLineOne,
@@ -849,5 +994,6 @@ const hollowKnightRestingGroundsDataPageTwo = [
   ...hollowKnightRestingGroundsDataPageTwoLineFour
 ];
 export const hollowKnightRestingGroundsData = [
-  ...hollowKnightRestingGroundsDataPageTwo
+  hollowKnightRestingGroundsDataPageOne,
+  hollowKnightRestingGroundsDataPageTwo
 ];

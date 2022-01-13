@@ -1,6 +1,6 @@
 {
   "name": "music-maker",
-  "version": "0.3.23",
+  "version": "0.3.24",
   "private": true,
   "description": "Create and play music",
   "main": "src/index.js",
