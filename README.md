@@ -1,5 +1,5 @@
-# Sheet Music Creator
-Application to create sheet music. 
+# Music Maker
+Application to create & play music. 
 
 ## Features (WIP)
 - Create, View and Play Sheet Music
@@ -55,7 +55,3 @@ Each object will properties
 - Transpose scales
 - Save in localStorage and json file
 - Load from localStorage and json file
-
-SVG Objects: https://blog.landr.com/music-symbols/
-- Alto/Tenor Clef
-- Marcato Accent
