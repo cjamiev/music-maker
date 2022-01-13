@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import MusicNotationMapper from 'components/StaffSvg/MusicNotationMapper';
+import MusicNotationMapper from 'components/MusicNotationComponents/MusicNotationMapper';
 import {
   musicNotationData,
   allWholeNoteData,
