@@ -26,7 +26,7 @@ const Home = () => {
   };
 
   const nextPageNumber = () => {
-    if(pageNumber <= sheetMusic.length) {
+    if(pageNumber < sheetMusic.length - ONE) {
       setPageNumber(pageNumber + ONE);
     }
   };
