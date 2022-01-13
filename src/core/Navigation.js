@@ -4,6 +4,7 @@ import './navigation.css';
 
 const NAV_ITEMS = [
   { label: 'Home', url: '/home'},
+  { label: 'View', url: '/view'},
   { label: 'Archive', url: '/archive'}
 ];
 
