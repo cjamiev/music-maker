@@ -2,8 +2,8 @@ import React from 'react';
 
 const PageHeader = ({ title }) => {
   return (
-    <header className="pageheader">
-      <h1 className="pageheader__title">{title}</h1>
+    <header className="page__header">
+      <h1 className="page__header-title">{title}</h1>
     </header>
   );
 };

@@ -1,5 +1,5 @@
 export const ROUTES = {
   HOME: { label: 'Home', url: '/home' },
-  VIEW: { label: 'View', url: '/view' },
+  VIEW: { label: '', url: '/view' },
   ARCHIVE: { label: 'Archive', url: '/archive' }
 };

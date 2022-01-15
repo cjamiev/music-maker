@@ -5,7 +5,7 @@ const PageFooter = ({ children }) => {
     return null;
   }
 
-  return <footer className="pagefooter">{children}</footer>;
+  return <footer className="page__footer">{children}</footer>;
 };
 
 export default PageFooter;

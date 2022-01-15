@@ -15,7 +15,7 @@ const Page = ({ children, footerComponent }) => {
   return (
     <div className="page scrollbar">
       <div className="page__main">
-        <PageHeader title={currentPage.label} />
+        {currentPage.label && <PageHeader title={currentPage.label} />}
         <PageContent>{children}</PageContent>
         <PageFooter> {footerComponent} </PageFooter>
       </div>
