@@ -21,7 +21,7 @@ const DisplaySheetMusic = ({sheetMusic}) => {
   };
 
   return (
-    <div>
+    <div className="container--center">
       <button onClick={prevPageNumber}>Previous Page</button>
       <button onClick={nextPageNumber}>Next Page</button>
       <div ref={ref}>

@@ -1,0 +1,97 @@
+.page {
+  height: 100%;
+  display: flex;
+  min-height: 830px;
+  animation: fadeIn 500ms ease 0s 1 normal forwards;
+}
+
+.sidepanel {
+  width: 600px;
+  border-right: 1px solid rgb(228, 228, 228);
+}
+
+.sidepanel--full {
+  width: 100%;
+}
+
+.sidepanel--animate-in {
+  animation: slideIn 500ms ease-out 0s 1 normal forwards;
+}
+
+.sidepanel--animate-out {
+  animation: slideOut 500ms ease-out 0s 1 normal forwards;
+}
+
+.page__main {
+  padding-left: 10px;
+  width: 100%;
+}
+
+.page__main--hide {
+  width: 0px;
+}
+
+.pageheader, .sidepanel__header--full {
+  position: relative;
+  height: 100px;
+  white-space: nowrap;
+}
+
+.sidepanel__header {
+  height: 60px;
+}
+
+.pageheader__sidepanel_button,
+.sidepanel__button {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.pageheader__title, 
+.sidepanel__title {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.pagefooter {
+  position: absolute;
+  height: 50px;
+  top: calc(100% - 150px);
+}
+
+@keyframes slideIn {
+  0% {
+    width: 0;
+    opacity: 0;
+    transform: translateX(-600px);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  100% {
+    width: 0;
+    opacity: 0;
+    transform: translateX(-600px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

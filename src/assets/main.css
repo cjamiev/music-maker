@@ -3,6 +3,54 @@
 .root {
   height: 100%;
   width: 100%;
-  overflow: hidden;
   position: relative;
+}
+
+.container--center {
+  margin: 0 auto;
+  width: 90%;
+  padding: 20px 10px;
+}
+
+.flex--horizontal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex--vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex--center {
+  place-items: center;
+}
+
+.flex--one {
+  flex: 1;
+}
+
+.flex--two {
+  flex: 2;
+}
+
+.flex--three {
+  flex: 3;
+}
+
+.flex--four {
+  flex: 4;
+}
+
+.flex--five {
+  flex: 5;
+}
+
+.horizontal-center {
+  text-align: center;
+  place-items: center;
+}
+
+.clickable {
+  cursor: pointer;
 }
