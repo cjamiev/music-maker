@@ -12,3 +12,7 @@
   border: 1px solid #00B1BF;
   cursor: pointer;
 }
+
+.pagination__btn-numbers:disabled {
+  color: #3e4d5d;
+}

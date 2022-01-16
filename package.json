@@ -1,10 +1,11 @@
 {
   "name": "music-maker",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "private": true,
   "description": "Create and play music",
   "main": "src/index.js",
   "scripts": {
+    "build": "webpack --config config/webpack.prod.js",
     "start": "webpack serve --config config/webpack.dev.js",
     "lint": "eslint --fix --ext .js ./src",
     "eslint": "eslint --ext .js src/ -f html -o coverage/eslint-report.html"
