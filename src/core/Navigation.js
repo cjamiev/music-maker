@@ -1,16 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './navigation.css';
 
 const NAV_ITEMS = [
   { label: 'Home', url: '/home'},
   { label: 'View', url: '/view'},
-  { label: 'Archive', url: '/archive'}
+  { label: 'Create', url: '/create'}
 ];
 
 const Navigation = React.memo(() => {
   const history = useHistory();
-  const [toggleNav, setToggleNav] = useState(false);
   const [currentUrl, setCurrentUrl] = useState(history.location.pathname);
 
   const renderNavItems = NAV_ITEMS.map(item => {

@@ -10,7 +10,7 @@ import {
   hollowKnightRestingGroundsData
 } from 'mock/resting-grounds-sheet-music';
 import Card from 'components/Card';
-import DisplaySheetMusic from './DisplaySheetMusic';
+import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Page from 'components/layout';
 import Button from 'components/button';
 import './view.css';

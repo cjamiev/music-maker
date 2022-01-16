@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import Home from './home';
 import View from './view';
-import Archive from './archive';
+import Create from './create';
 
 const NotFoundPage = React.memo(() => {
   return (
@@ -19,7 +19,7 @@ const Routes = React.memo(() => {
       <Route exact path="/" component={Home} />
       <Route path="/home" component={Home} />
       <Route path="/view" component={View} />
-      <Route path="/archive" component={Archive} />
+      <Route path="/create" component={Create} />
       <Route component={NotFoundPage} />
     </Switch>
   );
