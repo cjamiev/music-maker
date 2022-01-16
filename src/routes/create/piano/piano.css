@@ -1,5 +1,9 @@
 .piano {
   display: flex;
+  position: fixed;
+  left: 150px;
+  bottom: 50px;
+  width: 100%;
 }
 
 .key {

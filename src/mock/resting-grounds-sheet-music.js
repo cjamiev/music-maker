@@ -7,9 +7,9 @@ import {
   MEASURE_BOTH_STAFFS_HEIGHT,
   MEASURE_SINGLE_STAFF_HEIGHT,
   STAFF_LINE_HEIGHT,
-  HEIGHT_BETWEEN_ROWS
+  HEIGHT_BETWEEN_ROWS,
+  BASS_GAP
 } from 'constants/svgattributes';
-const BASS_GAP = MEASURE_BOTH_STAFFS_HEIGHT - MEASURE_SINGLE_STAFF_HEIGHT - 0.66;
 
 const hollowKnightRestingGroundsDataPageOneLineOne = [
   { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[],
