@@ -10,9 +10,11 @@ const attributes = {
   height: 300,
   viewBox: '0 0 264.6 158.75'
 };
+const TWO = 2;
 
-const MusicSheetCreator = () => {
+const Create = () => {
   const [pianoKey, setPianoKey] = useState('C4');
+  const [index, setIndex] = useState[TWO];
 
   return (
     <div className="main">
@@ -28,4 +30,4 @@ const MusicSheetCreator = () => {
   );
 };
 
-export default MusicSheetCreator;
+export default Create;
