@@ -12,6 +12,7 @@ import {
 import Card from 'components/Card';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Page from 'components/layout';
+import Pagination from 'components/pagination';
 import Button from 'components/button';
 import './view.css';
 
@@ -36,16 +37,9 @@ const View = () => {
     viewBox: musicNotationSvgAttributes.viewBox
   };
 
-  const prevPageNumber = () => {
-    if(pageNumber > ZERO) {
-      setPageNumber(pageNumber - ONE);
-    }
-  };
 
-  const nextPageNumber = () => {
-    if(pageNumber < musicSelection.length - ONE) {
-      setPageNumber(pageNumber + ONE);
-    }
+  const handleChangePageNumber = (number) => {
+    setPageNumber(number);
   };
 
   const viewFooter = () => {
@@ -57,16 +51,7 @@ const View = () => {
             classColor="primary"
             onClick={() => { setMusicSelection([]);}}
           />
-          <Button
-            label="Previous Page"
-            classColor="primary"
-            onClick={prevPageNumber}
-          />
-          <Button
-            label="Next Page"
-            classColor="primary"
-            onClick={nextPageNumber}
-          />
+          <Pagination size={musicSelection.length} onChange={handleChangePageNumber} />
           <Button
             label="Zoom Increase"
             classColor="primary"
