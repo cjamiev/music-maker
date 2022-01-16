@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
-import Button from 'components/button';
 import PageHeader from './PageHeader';
 import PageContent from './PageContent';
 import PageFooter from './PageFooter';

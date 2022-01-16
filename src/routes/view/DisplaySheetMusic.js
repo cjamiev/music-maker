@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import MusicNotationMapper from 'components/MusicNotationComponents/MusicNotationMapper';
 
 const DisplaySheetMusic = ({ sheetMusic, width, height, viewBox }) => {
+  console.log('width', width);
   const ref = useRef();
 
   return (
