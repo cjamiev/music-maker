@@ -9,7 +9,7 @@ const NAV_ITEMS = Object.values(ROUTES);
 
 const Page = ({ children, footerComponent }) => {
   const history = useHistory();
-  const currentPage = NAV_ITEMS.find((item) => item.url === history.location.pathname);
+  const currentPage = NAV_ITEMS.find((item) => item.url === history.location.pathname) || {};
 
   return (
     <div className="page scrollbar">

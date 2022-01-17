@@ -15,7 +15,7 @@ const NotFoundPage = React.memo(() => {
 const Routes = React.memo(() => {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={View} />
       <Route path="/view" component={View} />
       <Route path="/create" component={Create} />
       <Route component={NotFoundPage} />
