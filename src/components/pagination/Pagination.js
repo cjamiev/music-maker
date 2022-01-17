@@ -7,7 +7,7 @@ const ONE = 1;
 const TWO = 2;
 const THREE = 3;
 
-const Pagination = ({ size, onChange }) => {
+const Pagination = ({ size, onChange, className = '' }) => {
   const [pageNumber, setPageNumber] = useState(ZERO);
 
   const prevBtn = () => {
@@ -96,7 +96,7 @@ const Pagination = ({ size, onChange }) => {
   };
 
   return (
-    <div className="pagination">
+    <div className={`pagination ${className}`}>
       {[prevBtn(), renderPreviousPageBtns, currentBtn(), renderNextPageBtns, nextBtn()]}
     </div>
   );

@@ -1,4 +1,20 @@
-.viewFooter {
-  background-color: #fff;
+.view {
+  margin-top: 20px;
   margin-left: 20px;
+}
+
+.viewFooter {
+  margin-left: 20px;
+  width: 100%;
+}
+
+.viewFooter__pagination {
+  margin-left: 25%;
+}
+
+.viewFooter__zoom {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
 }

@@ -54,27 +54,30 @@ const View = () => {
             onClick={() => { setMusicSelection([]);}}
           />
           <Pagination
+            className="viewFooter__pagination"
             size={musicSelection.length}
             onChange={handleChangePageNumber}
           />
-          <Button
-            label="Zoom Increase"
-            classColor="primary"
-            onClick={() => {
-              if(Number(currentZoom) < ZOOM_LEVELS.length - ONE) {
-                setCurrentZoom(Number(currentZoom)+ONE);
-              }
-            }}
-          />
-          <Button
-            label="Zoom Decrease"
-            classColor="primary"
-            onClick={() => {
-              if(Number(currentZoom) > ZERO) {
-                setCurrentZoom(Number(currentZoom)-ONE);
-              }
-            }}
-          />
+          <div className="viewFooter__zoom">
+            <Button
+              label="Zoom Increase"
+              classColor="primary"
+              onClick={() => {
+                if(Number(currentZoom) < ZOOM_LEVELS.length - ONE) {
+                  setCurrentZoom(Number(currentZoom)+ONE);
+                }
+              }}
+            />
+            <Button
+              label="Zoom Decrease"
+              classColor="primary"
+              onClick={() => {
+                if(Number(currentZoom) > ZERO) {
+                  setCurrentZoom(Number(currentZoom)-ONE);
+                }
+              }}
+            />
+          </div>
         </div>}
       </>
     );
@@ -82,7 +85,7 @@ const View = () => {
 
   return (
     <Page footerComponent={viewFooter()}>
-      <div className="container--center">
+      <div className="view">
         {!musicSelection.length &&
         <div className="flex--horizontal">
           <Card
