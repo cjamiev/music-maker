@@ -1,9 +1,12 @@
 @import './reset.css';
+@import './scroll.css';
+@import './variables.css';
 
 .root {
   height: 100%;
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 .container--center {

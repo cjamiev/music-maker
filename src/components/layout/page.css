@@ -3,6 +3,8 @@
   display: flex;
   min-height: 830px;
   animation: fadeIn 500ms ease 0s 1 normal forwards;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .page__main {

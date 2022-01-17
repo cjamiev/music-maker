@@ -3,9 +3,8 @@ import { useHistory } from 'react-router-dom';
 import './navigation.css';
 
 const NAV_ITEMS = [
-  { label: 'Home', url: '/home'},
-  { label: 'View', url: '/view'},
-  { label: 'Create', url: '/create'}
+  { label: 'Create', url: '/create'},
+  { label: 'View', url: '/view'}
 ];
 
 const Navigation = React.memo(() => {

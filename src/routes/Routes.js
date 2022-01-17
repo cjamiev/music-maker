@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import Home from './home';
 import View from './view';
 import Create from './create';
 
@@ -17,7 +16,6 @@ const Routes = React.memo(() => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/home" component={Home} />
       <Route path="/view" component={View} />
       <Route path="/create" component={Create} />
       <Route component={NotFoundPage} />

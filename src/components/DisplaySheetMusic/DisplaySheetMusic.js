@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import MusicNotationMapper from 'components/MusicNotationComponents/MusicNotationMapper';
-import './display-sheet-music.css';
 
 const DisplaySheetMusic = ({ sheetMusic, width, height, viewBox }) => {
   const ref = useRef();

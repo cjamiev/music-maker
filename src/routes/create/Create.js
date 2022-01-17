@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Piano from './Piano';
-import './music-sheet-creator.css';
 import { mapStaccatoPosition, mapDottedPosition, mapNotePosition } from 'constants';
 import { mapStaffLines } from 'constants/stafflines';
 import {

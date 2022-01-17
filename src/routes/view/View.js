@@ -3,9 +3,8 @@ import Card from 'components/Card';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Page from 'components/layout';
 import Pagination from 'components/pagination';
-import Button from 'components/button';
+import Button, { IconButton } from 'components/button';
 import useLocalStorage from 'hooks/useLocalStorage';
-import './view.css';
 import {
   musicNotationData,
   allWholeNoteData,
@@ -16,6 +15,7 @@ import {
 import {
   hollowKnightRestingGroundsData
 } from 'mock/resting-grounds-sheet-music';
+import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 
 const ZERO = 0;
 const ONE = 1;
@@ -49,7 +49,7 @@ const View = () => {
       <>
         {!!musicSelection.length && <div className="viewFooter">
           <Button
-            label="Go Back to Selection"
+            label="Back to Selection"
             classColor="primary"
             onClick={() => { setMusicSelection([]);}}
           />
@@ -59,18 +59,18 @@ const View = () => {
             onChange={handleChangePageNumber}
           />
           <div className="viewFooter__zoom">
-            <Button
-              label="Zoom Increase"
-              classColor="primary"
+            <IconButton
+              type={ICON_TYPES.PLUS}
+              size={ICON_SIZES.EXTRA_SMALL}
               onClick={() => {
                 if(Number(currentZoom) < ZOOM_LEVELS.length - ONE) {
                   setCurrentZoom(Number(currentZoom)+ONE);
                 }
               }}
             />
-            <Button
-              label="Zoom Decrease"
-              classColor="primary"
+            <IconButton
+              type={ICON_TYPES.MINUS}
+              size={ICON_SIZES.EXTRA_SMALL}
               onClick={() => {
                 if(Number(currentZoom) > ZERO) {
                   setCurrentZoom(Number(currentZoom)-ONE);
