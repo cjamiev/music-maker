@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import View from './view';
 import Create from './create';
 
@@ -12,15 +12,15 @@ const NotFoundPage = React.memo(() => {
   );
 });
 
-const Routes = React.memo(() => {
+const AppRoutes = React.memo(() => {
   return (
-    <Switch>
-      <Route exact path="/" component={View} />
-      <Route path="/view" component={View} />
-      <Route path="/create" component={Create} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <Routes>
+      <Route exact path="/" element={<View />} />
+      <Route path="/view" element={<View />} />
+      <Route path="/create" element={<Create />} />
+      <Route element={<NotFoundPage />} />
+    </Routes>
   );
 });
 
-export default Routes;
+export default AppRoutes;

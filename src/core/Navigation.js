@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './navigation.css';
 
 const NAV_ITEMS = [
@@ -8,13 +8,14 @@ const NAV_ITEMS = [
 ];
 
 const Navigation = React.memo(() => {
-  const history = useHistory();
-  const [currentUrl, setCurrentUrl] = useState(history.location.pathname);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [currentUrl, setCurrentUrl] = useState(location.pathname);
 
   const renderNavItems = NAV_ITEMS.map(item => {
     const handleClick = () => {
-      if(history.location.pathname !== item.url){
-        history.push(item.url);
+      if(location.pathname !== item.url){
+        navigate(item.url);
         setCurrentUrl(item.url);
       }
     };

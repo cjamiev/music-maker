@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import PageHeader from './PageHeader';
 import PageContent from './PageContent';
@@ -8,8 +8,8 @@ import PageFooter from './PageFooter';
 const NAV_ITEMS = Object.values(ROUTES);
 
 const Page = ({ children, footerComponent }) => {
-  const history = useHistory();
-  const currentPage = NAV_ITEMS.find((item) => item.url === history.location.pathname) || {};
+  const location = useLocation();
+  const currentPage = NAV_ITEMS.find((item) => item.url === location.pathname) || {};
 
   return (
     <div className="page scrollbar">
