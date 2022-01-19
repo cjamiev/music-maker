@@ -1,7 +1,7 @@
 .piano {
   display: flex;
   position: fixed;
-  left: 150px;
+  left: 750px;
   bottom: 50px;
   width: 100%;
 }

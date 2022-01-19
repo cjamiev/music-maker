@@ -288,12 +288,14 @@ export const mapKeySignatures = {
 };
 
 export const timeSignatures = [
-  { value: '2/2', label: '2/2' },
-  { value: '2/4', label: '2/4' },
-  { value: '3/4', label: '3/4' },
-  { value: '4/4', label: '4/4' },
-  { value: '3/8', label: '3/8' },
-  { value: '6/8', label: '6/8' }
+  { value: { numerator: 4, denominator: 4, commonTime: true }, label: 'Common Time' },
+  { value: { numerator: 2, denominator: 2, commonTime: true, cutTime: true }, label: 'Cut Time' },
+  { value: { numerator: 2, denominator: 2 }, label: '2/2' },
+  { value: { numerator: 2, denominator: 4 }, label: '2/4' },
+  { value: { numerator: 3, denominator: 4 }, label: '3/4' },
+  { value: { numerator: 4, denominator: 4 }, label: '4/4' },
+  { value: { numerator: 3, denominator: 8 }, label: '3/8' },
+  { value: { numerator: 6, denominator: 8 }, label: '6/8' }
 ];
 
 export const noteTypes = [

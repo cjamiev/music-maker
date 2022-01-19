@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Piano from './Piano';
-import { mapStaccatoPosition, mapDottedPosition, mapNotePosition } from 'constants';
+import {
+  mapKeySignatures,
+  mapStaccatoPosition,
+  mapDottedPosition,
+  mapNotePosition
+} from 'constants';
 import { mapStaffLines } from 'constants/stafflines';
 import {
   STAFF_LINE_WIDTH,
@@ -11,6 +16,8 @@ import {
   HEIGHT_BETWEEN_ROWS,
   BASS_GAP
 } from 'constants/svgattributes';
+import CreateSidePanel from './CreateSidePanel';
+import Page from 'components/layout';
 
 const attributes = {
   width: 1000,
@@ -22,28 +29,50 @@ const THREE = 3;
 const Create = () => {
   const [pianoKey, setPianoKey] = useState('C4');
   const [index, setIndex] = useState(THREE);
+  const [data, setData] = useState({
+    title: '',
+    subtitle: '',
+    tempo: '',
+    author: '',
+    keySignature: '',
+    timeSignature: {
+      numerator: 4,
+      denominator: 4,
+      commonTime: true,
+      cutTime: false
+    }
+  });
+
+  const handleChange = (update) => {
+    setData({
+      ...data,
+      ...update
+    });
+  };
 
   return (
-    <div className="main">
+    <Page sidePanelContent={<CreateSidePanel onChange={handleChange}/>}>
       <DisplaySheetMusic sheetMusic={[
+        { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[],
+          content: { name: data.title, subname: data.subtitle, author: data.author, tempo: data.tempo } },
         { component:'Clef', transform:'translate(0,0)', conditions:{},
           subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},
             { component:'Treble', transform:'translate(0,0)', conditions:{}},
             { component:'Bass', transform:'translate(0,0)', conditions:{}}] },
         { component:'KeySignature', transform:'translate(0,0)', conditions:{},
-          subcomponents:[{ component:'FlatKeySignature', transform:'translate(0,0)',
-            conditions:{showAFlat:true,showEFlat:true,showBFlat:true}}]},
+          subcomponents:[{ component: data.keySignature.includes('#') ? 'SharpKeySignature' : 'FlatKeySignature', transform:'translate(0,0)',
+            conditions:mapKeySignatures[data.keySignature]}]},
         { component:'KeySignature', transform:`translate(0,${BASS_GAP})`, conditions:{},
-          subcomponents:[{ component:'FlatKeySignature', transform:'translate(0,0)',
-            conditions:{showAFlat:true,showEFlat:true,showBFlat:true}}]},
+          subcomponents:[{ component:data.keySignature.includes('#') ? 'SharpKeySignature' : 'FlatKeySignature', transform:'translate(0,0)',
+            conditions:mapKeySignatures[data.keySignature]}]},
         { component:'TimeSignature', transform:'translate(0,0)', conditions:{},
           subcomponents:[
-            { component:'TimeValue', transform:'translate(0,0)', conditions:{}, content: { value: 3 }},
-            { component:'TimeValue', transform:'translate(0,10.04)', conditions:{}, content: { value: 4 } }] },
+            { component:data.timeSignature.commonTime ? 'CommonTime':'TimeValue', transform:'translate(0,0)', conditions:{ showCut: data.timeSignature.cutTime }, content: { value: data.timeSignature.numerator }},
+            { component:data.timeSignature.commonTime ? 'CommonTime':'TimeValue', transform:'translate(0,10.04)', conditions:{}, content: { value: data.timeSignature.denominator } }] },
         { component:'TimeSignature', transform:`translate(0,${BASS_GAP})`, conditions:{},
           subcomponents:[
-            { component:'TimeValue', transform:'translate(0,0)', conditions:{}, content: { value: 3 }},
-            { component:'TimeValue', transform:'translate(0,10.04)', conditions:{}, content: { value: 4 } }] },
+            { component:data.timeSignature.commonTime ? 'CommonTime':'TimeValue', transform:'translate(0,0)', conditions:{ showCut: data.timeSignature.cutTime }, content: { value: data.timeSignature.numerator }},
+            { component:data.timeSignature.commonTime ? 'CommonTime':'TimeValue', transform:'translate(0,10.04)', conditions:{}, content: { value: data.timeSignature.denominator } }] },
         { component:'Note', transform:`translate(${STAFF_LINE_WIDTH},0)`, conditions:{},
           subcomponents:[
             { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[pianoKey]},
@@ -51,7 +80,7 @@ const Create = () => {
           ]}
       ]} {...attributes}/>
       <Piano selectPianoKey={(id) => { setPianoKey(id); }} />
-    </div>
+    </Page>
   );
 };
 

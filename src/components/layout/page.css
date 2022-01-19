@@ -32,6 +32,11 @@
   background-color: #fff;
 }
 
+.sidepanel {
+  width: 600px;
+  border-right: 1px solid rgb(228, 228, 228);
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
