@@ -89,12 +89,27 @@ const View = () => {
         {!musicSelection.length &&
         <div className="flex--horizontal">
           <Card
-            className="clickable"
             title="Resting Grounds"
-            onClick={() => {
-              setMusicSelection(hollowKnightRestingGroundsData);
-              setPageNumber(ZERO);
-            }}
+            body={
+              <img
+                className="clickable view__image"
+                src="seer.jpg"
+                alt="Seer"
+                onClick={() => {
+                  setMusicSelection(hollowKnightRestingGroundsData);
+                  setPageNumber(ZERO);
+                }} />
+            }
+            footer={
+              <>
+                <div>
+                  <label>Song:</label> <a className="" href="https://www.youtube.com/watch?v=5rwagL7Yrxo" target="_blank">Resting Grounds</a>
+                </div>
+                <div>
+                  <label>Synthesia:</label> <a className="" href="https://www.youtube.com/watch?v=qZ2yWvholHw" target="_blank">Tutorial</a>
+                </div>
+              </>
+            }
           />
           <Card
             className="clickable"

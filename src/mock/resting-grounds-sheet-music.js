@@ -752,8 +752,8 @@ const hollowKnightRestingGroundsDataPageTwoLineTwo = [
     ] },
   { component:'Note', transform:`translate(${STAFF_LINE_WIDTH},${BASS_GAP+MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
     subcomponents:[
-      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['F5']},
-      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['F5']})`, conditions:{ showNoteStemFlipped: true }}
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['D5']},
+      { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['D5']})`, conditions:{ showNoteStemFlipped: true }}
     ]},
   { component:'Note', transform:`translate(${2*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
     subcomponents:[

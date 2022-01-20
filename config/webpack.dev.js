@@ -23,7 +23,7 @@ module.exports = (env) => {
       proxy: [
         {
           context: ['**'],
-          target: 'http://localhost:1000'
+          target: 'http://localhost:4000'
         }
       ]
     },
