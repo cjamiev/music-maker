@@ -1,11 +1,12 @@
 import React from 'react';
+import { MEASURE_SINGLE_STAFF_HEIGHT, MEASURE_BOTH_STAFFS_HEIGHT } from 'constants/svgattributes';
 
 export const MeasureStartSVG = ({ transform, conditions = {} }) => {
   const { showClefBrace } = conditions;
 
   return (
     <g data-testid="subcomponent-measure-start" aria-label="measure start" transform={transform} >
-      <rect data-testid="element-measure-start" className="svg__1" aria-label="element measure start" width="0.54693639" height="78.978127" x="9.2604179" y="101.80585" />
+      <rect data-testid="element-measure-start" className="svg__1" aria-label="element measure start" width="0.54693639" height={showClefBrace ? MEASURE_BOTH_STAFFS_HEIGHT : MEASURE_SINGLE_STAFF_HEIGHT} x="9.2604179" y="101.80585" />
       { showClefBrace && <g data-testid="clef-brace" aria-label="condition clef brace" transform="matrix(0.99050463,0,0,1.3810254,-39.630789,88.485859)" >
         <path data-testid="path2258" className="svg__54" d="m 46.372714,10.037741 c 0,0 -2.907118,1.830408 -3.553144,5.706565 -0.646026,3.876156 5.491221,16.150653 4.522184,17.658046 -0.96904,1.507396 -5.06054,5.06054 -5.06054,5.06054" />
         <path data-testid="path2260" className="svg__54" d="m 46.240488,66.441063 c 0,0 -2.907118,-1.830408 -3.553144,-5.706565 -0.646026,-3.876156 5.491221,-16.150653 4.522184,-17.658046 -0.96904,-1.507396 -5.06054,-5.060541 -5.06054,-5.060541" />

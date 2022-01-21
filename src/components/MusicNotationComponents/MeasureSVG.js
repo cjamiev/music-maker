@@ -53,8 +53,6 @@ export const MeasureRepeatBarEndSVG = ({ transform, conditions = {} }) => {
 };
 
 export const MeasureSVG = ({ transform, subcomponents = [], conditions = {} }) => {
-  const { showStaffBassMeasure } = conditions;
-
   const renderData = subcomponents.map(item => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);

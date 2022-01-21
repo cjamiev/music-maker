@@ -12,7 +12,7 @@ import {
 
 const hollowKnightRestingGroundsDataPageOneLineOne = [
   { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[],
-    content: { name: 'Hollow Knight', subname: 'Resting Grounds', author: 'Christopher Larkin', tempo: 'Moderate' } },
+    content: { title: 'Hollow Knight', subtitle: 'Resting Grounds', author: 'Christopher Larkin', tempo: 'Moderate' } },
   { component:'Clef', transform:'translate(0,0)', conditions:{},
     subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},
       { component:'Treble', transform:'translate(0,0)', conditions:{}},
@@ -595,7 +595,7 @@ const hollowKnightRestingGroundsDataPageOne = [
 
 const hollowKnightRestingGroundsDataPageTwoLineOne = [
   { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[],
-    content: { name: 'Page 2', subname: 'Resting Grounds', author: '', tempo: '' } },
+    content: { title: 'Page 2', subtitle: 'Resting Grounds', author: '', tempo: '' } },
   { component:'Clef', transform:`translate(0,${0})`, conditions:{},
     subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},
       { component:'Treble', transform:'translate(0,0)', conditions:{}},
@@ -1104,7 +1104,7 @@ const hollowKnightRestingGroundsDataPageTwo = [
 
 const hollowKnightRestingGroundsDataPageThreeLineOne = [
   { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[],
-    content: { name: 'Page 3', subname: 'Resting Grounds', author: '', tempo: '' } },
+    content: { title: 'Page 3', subtitle: 'Resting Grounds', author: '', tempo: '' } },
   { component:'Clef', transform:`translate(0,${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
     subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},
       { component:'Treble', transform:'translate(0,0)', conditions:{}},
@@ -1612,7 +1612,7 @@ const hollowKnightRestingGroundsDataPageThree = [
 
 const hollowKnightRestingGroundsDataPageFourLineOne = [
   { component:'Title', transform:'translate(0,0)', conditions:{}, subcomponents:[],
-    content: { name: 'Page 4', subname: 'Resting Grounds', author: '', tempo: '' } },
+    content: { title: 'Page 4', subtitle: 'Resting Grounds', author: '', tempo: '' } },
   { component:'Clef', transform:`translate(0,${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
     subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},
       { component:'Treble', transform:'translate(0,0)', conditions:{}},
