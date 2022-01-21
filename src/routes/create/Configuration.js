@@ -6,7 +6,7 @@ import {
 import {
   keySignatures,
   timeSignatures
-} from 'constants';
+} from 'constants/musicnotation';
 import {
   TEMPO
 } from 'constants/musictext';

@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable no-magic-numbers */
-import { mapStaccatoPosition, mapDottedPosition, mapNotePosition } from 'constants';
-import { mapStaffLines } from 'constants/stafflines';
+import { mapStaccatoPosition, mapDottedPosition, mapNotePosition, mapStaffLines } from 'constants/stafflines';
 import { STAFF_LINE_WIDTH } from 'constants/svgattributes';
 
 export const musicNotationData = [

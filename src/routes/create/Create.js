@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
-import Piano from './Piano';
+import Piano from 'components/piano';
 import {
-  mapKeySignatures,
+  mapKeySignatures
+} from 'constants/musicnotation';
+import {
   mapStaccatoPosition,
   mapDottedPosition,
-  mapNotePosition
-} from 'constants';
-import { mapStaffLines } from 'constants/stafflines';
+  mapNotePosition,
+  mapStaffLines
+} from 'constants/stafflines';
 import {
   STAFF_LINE_WIDTH,
   MEASURE_BOTH_STAFFS_HEIGHT,
