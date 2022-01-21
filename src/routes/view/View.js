@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Card from 'components/Card';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Page from 'components/layout';
-import Pagination from 'components/pagination';
-import Button, { IconButton } from 'components/button';
+import ViewFooter from './ViewFooter';
 import useLocalStorage from 'hooks/useLocalStorage';
 import {
   musicNotationData,
@@ -16,6 +15,7 @@ import {
   hollowKnightRestingGroundsData
 } from 'mock/resting-grounds-sheet-music';
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
+import 'assets/img/seer.jpg';
 
 const ZERO = 0;
 const ONE = 1;
@@ -39,52 +39,38 @@ const View = () => {
     viewBox: musicNotationSvgAttributes.viewBox
   };
 
+  const handleResetMusicSelection = () => {
+    setMusicSelection([]);
+  };
 
   const handleChangePageNumber = (number) => {
     setPageNumber(number);
   };
 
-  const viewFooter = () => {
-    return (
-      <>
-        {!!musicSelection.length && <div className="viewFooter">
-          <Button
-            label="Back to Selection"
-            classColor="primary"
-            onClick={() => { setMusicSelection([]);}}
-          />
-          <Pagination
-            className="viewFooter__pagination"
-            size={musicSelection.length}
-            onChange={handleChangePageNumber}
-          />
-          <div className="viewFooter__zoom">
-            <IconButton
-              type={ICON_TYPES.PLUS}
-              size={ICON_SIZES.EXTRA_SMALL}
-              onClick={() => {
-                if(Number(currentZoom) < ZOOM_LEVELS.length - ONE) {
-                  setCurrentZoom(Number(currentZoom)+ONE);
-                }
-              }}
-            />
-            <IconButton
-              type={ICON_TYPES.MINUS}
-              size={ICON_SIZES.EXTRA_SMALL}
-              onClick={() => {
-                if(Number(currentZoom) > ZERO) {
-                  setCurrentZoom(Number(currentZoom)-ONE);
-                }
-              }}
-            />
-          </div>
-        </div>}
-      </>
-    );
+  const handleZoomIn = () => {
+    if(Number(currentZoom) < ZOOM_LEVELS.length - ONE) {
+      setCurrentZoom(Number(currentZoom)+ONE);
+    }
+  };
+
+  const handleZoomOut = () => {
+    if(Number(currentZoom) > ZERO) {
+      setCurrentZoom(Number(currentZoom)-ONE);
+    }
   };
 
   return (
-    <Page footerComponent={viewFooter()}>
+    <Page
+      footerComponent={!!musicSelection.length
+        ? <ViewFooter
+          numberOfPages={musicSelection.length}
+          onBackToSelection={handleResetMusicSelection}
+          onChangePage={handleChangePageNumber}
+          onZoomIn={handleZoomIn}
+          onZoomOut={handleZoomOut}
+        />
+        : null}
+    >
       <div className="view">
         {!musicSelection.length &&
         <div className="flex--horizontal">
