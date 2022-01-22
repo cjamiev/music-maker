@@ -17,23 +17,29 @@ const attributes = {
   viewBox: '0 0 529.2 317.5'
 };
 const ZERO = 0;
+const ONE = 1;
 const THREE = 3;
 
 const Create = () => {
   const [pianoKey, setPianoKey] = useState('C4');
-  const [index, setIndex] = useState(THREE);
+  const [rowIndex, setRowIndex] = useState(ZERO);
+  const [columnIndex, setColumnIndex] = useState(ONE);
+  const [isBassSelection, setIsBassSelection] = useState(false);
   const [data, setData] = useState({
-    title: '',
-    subtitle: '',
-    tempo: '',
-    author: '',
-    keySignature: '',
-    timeSignature: {
-      numerator: 4,
-      denominator: 4,
-      commonTime: true,
-      cutTime: false
-    }
+    configuration: {
+      title: '',
+      subtitle: '',
+      tempo: '',
+      author: '',
+      keySignature: '',
+      timeSignature: {
+        numerator: 4,
+        denominator: 4,
+        commonTime: true,
+        cutTime: false
+      }
+    },
+    notes: []
   });
 
   const handleChange = (update) => {
@@ -43,23 +49,57 @@ const Create = () => {
     });
   };
 
+  const handlePianoKeyChange = (id) => {
+    const noteData = {
+      rowNumber: rowIndex,
+      columnNumber: columnIndex,
+      pianoKey: id,
+      isBassClef: isBassSelection
+    };
+
+    const existingIndex = data.notes.findIndex(item => item.rowNumber === rowIndex && item.columnNumber === columnIndex && item.isBassClef === isBassSelection);
+    const updatedNotes = existingIndex >= ZERO
+      ? data.notes.map((item, index) => { return index === existingIndex ? noteData : item; })
+      : data.notes.concat([noteData]);
+
+    setData({
+      ...data,
+      notes: updatedNotes
+    });
+  };
+
   return (
     <Page sidePanelContent={<CreateSidePanel onChange={handleChange}/>}>
       <DisplaySheetMusic sheetMusic={[
-        getTitleData({ title: data.title, subtitle: data.subtitle, author: data.author, tempo: data.tempo }),
+        getTitleData({
+          title: data.configuration.title,
+          subtitle: data.configuration.subtitle,
+          author: data.configuration.author,
+          tempo: data.configuration.tempo
+        }),
         getClefData({ rowNumber: ZERO, showBassClef: true }),
-        getKeySignatureData({ rowNumber: ZERO, keySignature: data.keySignature, isBassClef: false }),
-        getKeySignatureData({ rowNumber: ZERO, keySignature: data.keySignature, isBassClef: true }),
-        getTimeSignatureData({ rowNumber: ZERO, timeSignature: data.timeSignature, isBassClef: false }),
-        getTimeSignatureData({ rowNumber: ZERO, timeSignature: data.timeSignature, isBassClef: true }),
-        getNoteData({
+        getKeySignatureData({
           rowNumber: ZERO,
-          columnNumber: 1,
-          pianoKey,
+          keySignature: data.configuration.keySignature,
           isBassClef: false
-        })
+        }),
+        getKeySignatureData({
+          rowNumber: ZERO,
+          keySignature: data.configuration.keySignature,
+          isBassClef: true
+        }),
+        getTimeSignatureData({
+          rowNumber: ZERO,
+          timeSignature: data.configuration.timeSignature,
+          isBassClef: false }),
+        getTimeSignatureData({
+          rowNumber: ZERO,
+          timeSignature: data.configuration.timeSignature,
+          isBassClef: true
+        }),
+        ...data.notes.map(noteData => getNoteData(noteData))
       ]} {...attributes}/>
-      <Piano selectPianoKey={(id) => { setPianoKey(id); }} />
+      <Piano selectPianoKey={handlePianoKeyChange} />
     </Page>
   );
 };
