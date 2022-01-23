@@ -21,6 +21,7 @@ const ZERO = 0;
 const ONE = 1;
 const THREE = 3;
 
+// eslint-disable-next-line complexity
 const Create = () => {
   const [pianoKey, setPianoKey] = useState('C4');
   const [pageIndex, setPageIndex] = useState(ZERO);
@@ -78,6 +79,7 @@ const Create = () => {
     const noteId = String(pageIndex) + String(rowIndex) + String(columnIndex);
     const noteData = {
       id: noteId,
+      pageNumber: pageIndex,
       rowNumber: rowIndex,
       columnNumber: columnIndex,
       pianoKey: selectedPianoKey,
@@ -156,6 +158,7 @@ const Create = () => {
           }));
           const newNote = {
             id: noteId,
+            pageNumber: pageIndex,
             rowNumber: rowIndex,
             columnNumber: nextColumnIndex,
             pianoKey: 'C4',
@@ -164,12 +167,12 @@ const Create = () => {
           if(isBassSelection) {
             setData({
               ...data,
-              bassNotes: data.BassNotes.concat([newNote])
+              bassNotes: data.bassNotes.concat([newNote])
             });
           } else {
             setData({
               ...data,
-              trebleNotes: data.TrebleNotes.concat([newNote])
+              trebleNotes: data.trebleNotes.concat([newNote])
             });
           }
         }}
@@ -193,33 +196,52 @@ const Create = () => {
       <Button
         label="Delete Selected Note"
         classColor="primary"
-        disabled={isLastColumnIndex}
+        disabled={(isBassSelection && currentBassNotes.length === ONE) || (!isBassSelection && currentTrebleNotes.length === ONE)}
         onClick={() => {
-          if((rowIndex === ZERO && columnIndex > ONE) || (rowIndex > ZERO && columnIndex > ZERO)) {
-            const currentNotes = isBassSelection ? currentBassNotes : currentTrebleNotes;
-            const updatedNotes = currentNotes.filter((item) => !(item.rowNumber === rowIndex && item.columnNumber === columnIndex));
+          const currentNotes = isBassSelection ? currentBassNotes : currentTrebleNotes;
+          const updatedNotes = currentNotes
+            .filter((item) => !(item.rowNumber === rowIndex && item.columnNumber === columnIndex))
+            .map((item,index) => {
+              if(rowIndex === ZERO) {
+                const noteId = String(item.pageNumber) + String(item.rowNumber) + String(index + ONE);
+                return {
+                  ...item,
+                  id: noteId,
+                  columnNumber: index + ONE
+                };
+              }
+              else {
+                const noteId = String(item.pageNumber) + String(item.rowNumber) + String(index);
+                return {
+                  ...item,
+                  id: noteId,
+                  columnNumber: index
+                };
+              }
+            });
 
-            if(isBassSelection) {
-              setData({
-                ...data,
-                bassNotes: updatedNotes
-              });
-            } else {
-              setData({
-                ...data,
-                trebleNotes: updatedNotes
-              });
-            }
-            const nextColumnIndex = columnIndex - ONE;
-            setColumnIndex(nextColumnIndex);
-            setLargestColumnIndices(largestColumnIndices.map(item => {
-              return item.rowIndex === rowIndex ? {
-                rowIndex,
-                trebleColumnIndex: isBassSelection ? item.trebleColumnIndex : nextColumnIndex,
-                bassColumnIndex: isBassSelection ? nextColumnIndex : item.bassColumnIndex
-              } : item;
-            }));
-          }}}
+          if(isBassSelection) {
+            setData({
+              ...data,
+              bassNotes: updatedNotes
+            });
+          } else {
+            setData({
+              ...data,
+              trebleNotes: updatedNotes
+            });
+          }
+          const nextColumnIndex = (rowIndex === ZERO && columnIndex === ONE)
+            || (rowIndex > ZERO && columnIndex === ZERO)
+            ? columnIndex : columnIndex - ONE;
+          setLargestColumnIndices(largestColumnIndices.map(item => {
+            return item.rowIndex === rowIndex ? {
+              rowIndex,
+              trebleColumnIndex: isBassSelection ? item.trebleColumnIndex : nextColumnIndex,
+              bassColumnIndex: isBassSelection ? nextColumnIndex : item.bassColumnIndex
+            } : item;
+          }));
+        }}
       />
       <Button
         label={isBassSelection ? 'Switch To Treble Clef' : 'Switch To Bass Clef'}
@@ -242,6 +264,7 @@ const Create = () => {
           const noteId = String(pageIndex) + String(nextRowIndex) + String(ZERO);
           const newTrebleNote = {
             id: noteId,
+            pageNumber: pageIndex,
             rowNumber: nextRowIndex,
             columnNumber: ZERO,
             pianoKey: 'C4',
@@ -249,6 +272,7 @@ const Create = () => {
           };
           const newBassNote = {
             id: noteId,
+            pageNumber: pageIndex,
             rowNumber: nextRowIndex,
             columnNumber: ZERO,
             pianoKey: 'C4',
