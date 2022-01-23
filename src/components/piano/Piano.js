@@ -13,7 +13,7 @@ const Piano = ({ selectPianoKey }) => {
     const pianoKeyName = isBlackKey ? '' : pianoKeyId;
 
     return (
-      <div key={pianoKeyId} className={className} onClick={() => { selectPianoKey(pianoKeyId); }}>
+      <div key={pianoKeyId} className={className} onClick={() => { selectPianoKey(pianoKeyId.replace('#','')); }}>
         <span className='piano-text'>
           {pianoKeyName}
         </span>
