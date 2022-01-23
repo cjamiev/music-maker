@@ -1,3 +1,7 @@
 .display-sheet-music {
   margin-left: 25%;
 }
+
+.display-sheet-music--one-row {
+  height: 400px;
+}

@@ -28,6 +28,13 @@
   color: #aaa;
 }
 
+.btn--disabled {
+  background-color: #698ca3;
+  border: 1px solid #698ca3;
+  color: #fff;
+  cursor: not-allowed;
+}
+
 .btn--primary {
   background-color: #34a1eb;
   border: 1px solid #34a1eb;

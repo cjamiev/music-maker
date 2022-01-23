@@ -3,6 +3,7 @@ import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Piano from 'components/piano';
 import CreateSidePanel from './CreateSidePanel';
 import Page from 'components/layout';
+import Button from 'components/button';
 import {
   getTitleData,
   getClefData,
@@ -22,6 +23,7 @@ const THREE = 3;
 
 const Create = () => {
   const [pianoKey, setPianoKey] = useState('C4');
+  const [pageIndex, setPageIndex] = useState(ZERO);
   const [rowIndex, setRowIndex] = useState(ZERO);
   const [columnIndex, setColumnIndex] = useState(ONE);
   const [isBassSelection, setIsBassSelection] = useState(false);
@@ -39,7 +41,14 @@ const Create = () => {
         cutTime: false
       }
     },
-    notes: []
+    trebleNotes: [{
+      id: '001',
+      pageNumber: 0,
+      rowNumber: 0,
+      columnNumber: 1,
+      pianoKey,
+      isBassClef: false
+    }]
   });
 
   const handleChange = (update) => {
@@ -49,28 +58,30 @@ const Create = () => {
     });
   };
 
-  const handlePianoKeyChange = (id) => {
+  const handlePianoKeyChange = (selectedPianoKey) => {
+    const noteId = String(pageIndex) + String(rowIndex) + String(columnIndex);
     const noteData = {
+      id: noteId,
       rowNumber: rowIndex,
       columnNumber: columnIndex,
-      pianoKey: id,
+      pianoKey: selectedPianoKey,
       isBassClef: isBassSelection
     };
 
-    const existingIndex = data.notes.findIndex(item => item.rowNumber === rowIndex && item.columnNumber === columnIndex && item.isBassClef === isBassSelection);
-    const updatedNotes = existingIndex >= ZERO
-      ? data.notes.map((item, index) => { return index === existingIndex ? noteData : item; })
-      : data.notes.concat([noteData]);
+    const existingIndex = data.trebleNotes.findIndex(item => item.id === noteId);
+    const updatedTrebleNotes = existingIndex >= ZERO
+      ? data.trebleNotes.map((item, index) => { return index === existingIndex ? noteData : item; })
+      : data.trebleNotes.concat([noteData]);
 
     setData({
       ...data,
-      notes: updatedNotes
+      trebleNotes: updatedTrebleNotes
     });
   };
 
   return (
     <Page sidePanelContent={<CreateSidePanel onChange={handleChange}/>}>
-      <DisplaySheetMusic sheetMusic={[
+      <DisplaySheetMusic isOneRowMode={true} sheetMusic={[
         getTitleData({
           title: data.configuration.title,
           subtitle: data.configuration.subtitle,
@@ -97,8 +108,59 @@ const Create = () => {
           timeSignature: data.configuration.timeSignature,
           isBassClef: true
         }),
-        ...data.notes.map(noteData => getNoteData(noteData))
+        ...data.trebleNotes.map(noteData => getNoteData(noteData))
       ]} {...attributes}/>
+      <Button
+        label="Add Next Note"
+        classColor="primary"
+        onClick={() => {
+          const nextColumnIndex = columnIndex + ONE;
+          const noteId = String(pageIndex) + String(rowIndex) + String(columnIndex+ONE);
+          setColumnIndex(nextColumnIndex);
+          setData({
+            ...data,
+            trebleNotes: data.trebleNotes.concat([{
+              id: noteId,
+              rowNumber: rowIndex,
+              columnNumber: nextColumnIndex,
+              pianoKey: 'C4',
+              isBassClef: isBassSelection
+            }])
+          });
+        }}
+      />
+      <Button
+        label="Select Previous Note"
+        classColor="primary"
+        disabled={!(rowIndex === ZERO && columnIndex > ONE) || (rowIndex > ZERO && columnIndex > ZERO)}
+        onClick={() => {
+          setColumnIndex(columnIndex-ONE);
+        }}
+      />
+      <Button
+        label="Select Next Note"
+        classColor="primary"
+        disabled={(data.trebleNotes.findIndex(item => item.columnNumber === columnIndex + ONE) === -ONE)}
+        onClick={() => {
+          setColumnIndex(columnIndex+ONE);
+        }}
+      />
+      <Button
+        label="Delete Selected Note"
+        classColor="primary"
+        disabled={(data.trebleNotes.findIndex(item => item.columnNumber === columnIndex + ONE) !== -ONE)}
+        onClick={() => {
+          if((rowIndex === ZERO && columnIndex > ONE) || (rowIndex > ZERO && columnIndex > ZERO)) {
+            const updatedTrebleNotes = data.trebleNotes.filter((item) => !(item.rowNumber === rowIndex && item.columnNumber === columnIndex && item.isBassClef === isBassSelection));
+
+            setData({
+              ...data,
+              trebleNotes: updatedTrebleNotes
+            });
+            setColumnIndex(columnIndex-ONE);
+          }
+        }}
+      />
       <Piano selectPianoKey={handlePianoKeyChange} />
     </Page>
   );

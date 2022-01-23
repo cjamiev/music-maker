@@ -1,5 +1,7 @@
-export const getColor = (classColor) => {
-  if (classColor === 'primary') {
+export const getColor = (classColor,isDisabled) => {
+  if(isDisabled) {
+    return ' btn--disabled';
+  } else if (classColor === 'primary') {
     return ' btn--primary';
   } else if (classColor === 'secondary') {
     return ' btn--secondary';
