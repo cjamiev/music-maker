@@ -258,7 +258,7 @@ const Create = () => {
           const nextRowIndex = rowIndex + ONE;
           setRowIndex(nextRowIndex);
           setColumnIndex(ZERO);
-          setLargestColumnIndices(largestColumnIndices.concat([{ rowIndex: ZERO, trebleColumnIndex: ONE, bassColumnIndex: ONE }]));
+          setLargestColumnIndices(largestColumnIndices.concat([{ rowIndex: nextRowIndex, trebleColumnIndex: ZERO, bassColumnIndex: ZERO }]));
           setIsBassSelection(false);
 
           const noteId = String(pageIndex) + String(nextRowIndex) + String(ZERO);
@@ -299,6 +299,85 @@ const Create = () => {
         disabled={!isLastRowIndex}
         onClick={() => {
           setRowIndex(rowIndex+ONE);
+        }}
+      />
+      <Button
+        label="Delete Selected Row"
+        classColor="primary"
+        disabled={largestColumnIndices.length === ONE}
+        onClick={() => {
+          const updatedTrebleNotes = data.trebleNotes
+            .filter((item) => !(item.rowNumber === rowIndex))
+            .map((item,index) => {
+              const newRowNumber = item.rowNumber > ZERO ? item.rowNumber - ONE : ZERO;
+              if(rowIndex === ZERO) {
+                const noteId = String(item.pageNumber) + String(newRowNumber) + String(item.columnNumber+ONE);
+                return {
+                  ...item,
+                  id: noteId,
+                  rowNumber: newRowNumber,
+                  columnNumber: item.columnNumber + ONE
+                };
+              }
+              else if(item.rowNumber > rowIndex) {
+                const noteId = String(item.pageNumber) + String(newRowNumber) + String(item.columnNumber);
+                return {
+                  ...item,
+                  id: noteId,
+                  rowNumber: newRowNumber
+                };
+              }
+              else {
+                return item;
+              }
+            });
+          const updatedBassNotes = data.bassNotes
+            .filter((item) => !(item.rowNumber === rowIndex))
+            .map((item,index) => {
+              const newRowNumber = item.rowNumber > ZERO ? item.rowNumber - ONE : ZERO;
+              const noteId = String(item.pageNumber) + String(newRowNumber) + String(item.columnNumber);
+              if(rowIndex === ZERO) {
+                return {
+                  ...item,
+                  id: noteId,
+                  rowNumber: newRowNumber,
+                  columnNumber: item.columnNumber + ONE
+                };
+              }
+              else if(item.rowNumber > rowIndex) {
+                return {
+                  ...item,
+                  id: noteId,
+                  rowNumber: newRowNumber
+                };
+              }
+              else {
+                return item;
+              }
+            });
+
+          setData({
+            ...data,
+            trebleNotes: updatedTrebleNotes,
+            bassNotes: updatedBassNotes
+          });
+
+          setColumnIndex(rowIndex === ZERO ? ONE: ZERO);
+          setRowIndex(largestColumnIndices.length - ONE === rowIndex ? rowIndex - ONE: rowIndex);
+          setLargestColumnIndices(largestColumnIndices
+            .filter(item => item.rowIndex !== rowIndex)
+            .map(item => {
+              if(item.rowIndex > rowIndex) {
+                return {
+                  ...item,
+                  rowIndex: item.rowIndex - ONE,
+                  trebleColumnIndex: rowIndex === ZERO ? item.trebleColumnIndex + ONE : item.trebleColumnIndex,
+                  bassColumnIndex: rowIndex === ZERO ? item.bassColumnIndex + ONE : item.bassColumnIndex
+                };
+              }
+
+              return item;
+            }));
         }}
       />
       <Piano selectPianoKey={handlePianoKeyChange} />
