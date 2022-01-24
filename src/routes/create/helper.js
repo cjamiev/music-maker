@@ -90,14 +90,17 @@ const getTimeSignatureData = ({
 };
 
 const getNoteData = ({
+  id,
   rowNumber,
   columnNumber,
   pianoKey,
-  isBassClef
+  isBassClef,
+  className
 }) => {
   return {
     ...defaultData,
     component:'Note',
+    className,
     transform:`translate(${columnNumber*STAFF_LINE_WIDTH},${rowNumber*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)+Number(isBassClef)*BASS_GAP})`,
     subcomponents:[
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[pianoKey]},

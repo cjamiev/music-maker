@@ -20,6 +20,7 @@ const attributes = {
 const ZERO = 0;
 const ONE = 1;
 const THREE = 3;
+const SELECTED_HIGHLIGHT_CLASSNAME = 'svg--selected-color';
 
 // eslint-disable-next-line complexity
 const Create = () => {
@@ -49,7 +50,8 @@ const Create = () => {
       rowNumber: 0,
       columnNumber: 1,
       pianoKey,
-      isBassClef: false
+      isBassClef: false,
+      className: SELECTED_HIGHLIGHT_CLASSNAME
     }],
     bassNotes: [{
       id: '001',
@@ -75,6 +77,37 @@ const Create = () => {
     });
   };
 
+  const handleSelectionChange = (newColumnIndex) => {
+    const currentNotes = isBassSelection ? data.bassNotes : data.trebleNotes;
+    const updatedNotes = currentNotes.map((item) => {
+      if(item.columnNumber === newColumnIndex && item.pageNumber === pageIndex && item.rowNumber === rowIndex) {
+        return {
+          ...item,
+          className: SELECTED_HIGHLIGHT_CLASSNAME
+        };
+      } else {
+        return {
+          ...item,
+          className: ''
+        };
+      }
+    });
+
+    if(isBassSelection) {
+      setData({
+        ...data,
+        bassNotes: updatedNotes
+      });
+    } else {
+      setData({
+        ...data,
+        trebleNotes: updatedNotes
+      });
+    }
+
+    setColumnIndex(newColumnIndex);
+  };
+
   const handlePianoKeyChange = (selectedPianoKey) => {
     const noteId = String(pageIndex) + String(rowIndex) + String(columnIndex);
     const noteData = {
@@ -83,6 +116,7 @@ const Create = () => {
       rowNumber: rowIndex,
       columnNumber: columnIndex,
       pianoKey: selectedPianoKey,
+      className: SELECTED_HIGHLIGHT_CLASSNAME,
       isBassClef: isBassSelection
     };
 
@@ -162,6 +196,7 @@ const Create = () => {
             rowNumber: rowIndex,
             columnNumber: nextColumnIndex,
             pianoKey: 'C4',
+            className: SELECTED_HIGHLIGHT_CLASSNAME,
             isBassClef: isBassSelection
           };
           if(isBassSelection) {
@@ -182,7 +217,7 @@ const Create = () => {
         classColor="primary"
         disabled={!(rowIndex === ZERO && columnIndex > ONE) || (rowIndex > ZERO && columnIndex > ZERO)}
         onClick={() => {
-          setColumnIndex(columnIndex-ONE);
+          handleSelectionChange(columnIndex-ONE);
         }}
       />
       <Button
@@ -190,7 +225,7 @@ const Create = () => {
         classColor="primary"
         disabled={!isLastColumnIndex}
         onClick={() => {
-          setColumnIndex(columnIndex+ONE);
+          handleSelectionChange(columnIndex+ONE);
         }}
       />
       <Button
@@ -207,7 +242,8 @@ const Create = () => {
                 return {
                   ...item,
                   id: noteId,
-                  columnNumber: index + ONE
+                  columnNumber: index + ONE,
+                  className: columnIndex === index + ONE ? SELECTED_HIGHLIGHT_CLASSNAME: ''
                 };
               }
               else {
@@ -215,7 +251,8 @@ const Create = () => {
                 return {
                   ...item,
                   id: noteId,
-                  columnNumber: index
+                  columnNumber: index,
+                  className: columnIndex === index ? SELECTED_HIGHLIGHT_CLASSNAME: ''
                 };
               }
             });
@@ -248,7 +285,7 @@ const Create = () => {
         classColor="primary"
         onClick={() => {
           setIsBassSelection(!isBassSelection);
-          setColumnIndex(rowIndex === ZERO ? ONE : ZERO);
+          handleSelectionChange(rowIndex === ZERO ? ONE : ZERO);
         }}
       />
       <Button
@@ -257,7 +294,7 @@ const Create = () => {
         onClick={() => {
           const nextRowIndex = rowIndex + ONE;
           setRowIndex(nextRowIndex);
-          setColumnIndex(ZERO);
+          handleSelectionChange(ZERO);
           setLargestColumnIndices(largestColumnIndices.concat([{ rowIndex: nextRowIndex, trebleColumnIndex: ZERO, bassColumnIndex: ZERO }]));
           setIsBassSelection(false);
 
@@ -362,7 +399,7 @@ const Create = () => {
             bassNotes: updatedBassNotes
           });
 
-          setColumnIndex(rowIndex === ZERO ? ONE: ZERO);
+          handleSelectionChange(rowIndex === ZERO ? ONE: ZERO);
           setRowIndex(largestColumnIndices.length - ONE === rowIndex ? rowIndex - ONE: rowIndex);
           setLargestColumnIndices(largestColumnIndices
             .filter(item => item.rowIndex !== rowIndex)

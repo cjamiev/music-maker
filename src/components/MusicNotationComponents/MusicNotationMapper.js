@@ -11,6 +11,7 @@ const MusicNotationMapper = ({ data, parentRef } ) => {
         key={key}
         reference={parentRef}
         dataid={item.id}
+        className={item.className}
         transform={item.transform}
         conditions={item.conditions}
         content={item.content}

@@ -8,6 +8,11 @@
   stroke: #ff0000;
 }
 
+.svg--selected-color {
+  fill: #0084AD;
+  stroke: #0084AD;
+}
+
 .svg__curve {
   stroke-width: 2;
   stroke: #1E1935;

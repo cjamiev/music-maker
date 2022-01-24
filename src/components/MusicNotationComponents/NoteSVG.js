@@ -269,7 +269,7 @@ export const TrillSVG = ({ transform }) => {
   );
 };
 
-export const NoteSVG = ({ transform, subcomponents = [] }) => {
+export const NoteSVG = ({ className = '', transform, subcomponents = [] }) => {
   const renderData = subcomponents.map(item => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
@@ -278,7 +278,7 @@ export const NoteSVG = ({ transform, subcomponents = [] }) => {
   });
 
   return (
-    <g data-testid="component-note" aria-label="note" transform={transform} >
+    <g className={className} data-testid="component-note" aria-label="note" transform={transform} >
       {renderData}
     </g>
   );
