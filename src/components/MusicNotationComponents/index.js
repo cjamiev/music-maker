@@ -73,6 +73,9 @@ import {
   DottedRestSVG
 } from './RestSVG';
 import {
+  SelectionSVG
+} from './SelectionSVG';
+import {
   TimeSignatureSVG,
   CommonTimeSVG,
   TimeValueSVG,
@@ -151,7 +154,8 @@ const svgMap = {
   'VoltaBracket': VoltaBracketSVG,
   'VoltaBracketTopLine': VoltaBracketTopLineSVG,
   'VoltaBracketEnd': VoltaBracketEndSVG,
-  'VoltaBracketStart': VoltaBracketStartSVG
+  'VoltaBracketStart': VoltaBracketStartSVG,
+  'Selection': SelectionSVG
 };
 
 const entryMapper = (entry) => {

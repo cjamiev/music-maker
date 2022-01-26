@@ -101,7 +101,11 @@ const Create = () => {
 
   return (
     <Page sidePanelContent={<CreateSidePanel configuration={configuration} onChange={handleConfigurationChange}/>}>
-      <DisplaySheetMusic isOneRowMode={true} sheetMusic={getSheetMusic(configuration, data[editorPosition.rowIndex], editorPosition.rowIndex)} {...attributes} />
+      <DisplaySheetMusic
+        isOneRowMode={true}
+        sheetMusic={getSheetMusic(configuration, data[editorPosition.rowIndex], editorPosition)}
+        {...attributes}
+      />
       <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
       <RowPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
       <Piano selectPianoKey={handlePianoKeyChange} />
