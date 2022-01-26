@@ -16,8 +16,6 @@ const attributes = {
 };
 const ZERO = 0;
 const ONE = 1;
-const THREE = 3;
-const SELECTED_HIGHLIGHT_CLASSNAME = 'svg--selected-color';
 
 const Create = () => {
   const [editorPosition, setEditorPositon] = useState({
@@ -46,8 +44,7 @@ const Create = () => {
       rowIndex: ZERO,
       columnIndex: ONE,
       component: 'Note',
-      pianoKey: 'C4',
-      className: SELECTED_HIGHLIGHT_CLASSNAME
+      pianoKey: 'C4'
     }],
     center: [],
     bass: [{
@@ -56,8 +53,7 @@ const Create = () => {
       rowIndex: ZERO,
       columnIndex: ONE,
       component: 'Note',
-      pianoKey: 'C4',
-      className: SELECTED_HIGHLIGHT_CLASSNAME
+      pianoKey: 'C4'
     }],
     pedal: []
   }]);
@@ -66,7 +62,7 @@ const Create = () => {
 
   const handlePositionChange = (updatedEditorPosition, updatedData) => {
     setEditorPositon(updatedEditorPosition);
-    setData(updatedData);
+    updatedData && setData(updatedData);
   };
 
   const handlePianoKeyChange = (selectedPianoKey) => {
