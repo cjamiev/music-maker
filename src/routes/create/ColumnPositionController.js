@@ -7,8 +7,7 @@ const ONE = 1;
 const ColumnPositionController = ({ editorPosition, data, onChange }) => {
   const { pageIndex, rowIndex, columnIndex, isBassSelection } = editorPosition;
   const currentLine = data[rowIndex];
-  const firstColumnIndex = rowIndex === ZERO ? ONE : ZERO;
-  const lastColumnIndex = isBassSelection ? currentLine.bass.length : currentLine.treble.length;
+  const lastColumnIndex = isBassSelection ? currentLine.bass.length - ONE : currentLine.treble.length - ONE;
 
   return (
     <>
@@ -16,7 +15,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
         label="Add Next Note"
         classColor="primary"
         onClick={() => {
-          const nextColumnIndex = rowIndex === ZERO ? lastColumnIndex + ONE : lastColumnIndex;
+          const nextColumnIndex = lastColumnIndex + ONE;
           const noteId = String(pageIndex) + String(rowIndex) + String(nextColumnIndex);
           const newNote = {
             id: noteId,
@@ -56,7 +55,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
       <Button
         label="Select Previous Note"
         classColor="primary"
-        disabled={columnIndex === firstColumnIndex}
+        disabled={columnIndex === ZERO}
         onClick={() => {
           onChange({
             ...editorPosition,
@@ -78,18 +77,17 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
       <Button
         label="Delete Selected Note"
         classColor="primary"
-        disabled={columnIndex === lastColumnIndex && columnIndex === firstColumnIndex}
+        disabled={lastColumnIndex === ZERO}
         onClick={() => {
           const currentSection = isBassSelection ? currentLine.bass : currentLine.treble;
           const updatedSection = currentSection
             .filter((item) => !(item.columnIndex === columnIndex))
             .map((item,index) => {
-              const newColumnIndex = rowIndex === ZERO ? index + ONE : index;
-              const noteId = String(item.pageIndex) + String(item.rowIndex) + String(newColumnIndex);
+              const noteId = String(item.pageIndex) + String(item.rowIndex) + String(index);
               return {
                 ...item,
                 id: noteId,
-                columnIndex: newColumnIndex
+                columnIndex: index
               };
             });
 
@@ -123,7 +121,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
         onClick={() => {
           onChange({
             ...editorPosition,
-            columnIndex: firstColumnIndex,
+            columnIndex: ZERO,
             isBassSelection: !isBassSelection
           });
         }}

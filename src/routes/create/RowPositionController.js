@@ -50,7 +50,7 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
           onChange({
             ...editorPosition,
             rowIndex: rowIndex - ONE,
-            columnIndex: rowIndex - ONE === ZERO ? ONE : ZERO,
+            columnIndex: ZERO,
             isBassSelection: false
           });
         }}
@@ -115,7 +115,7 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
           const updatedEditorPosition = {
             ...editorPosition,
             rowIndex: updatedEditorRowIndex,
-            columnIndex: updatedEditorRowIndex === ZERO ? ONE : ZERO,
+            columnIndex: ZERO,
             isBassSelection: false
           };
 

@@ -18,6 +18,7 @@ import {
 import { pianoKeyList } from 'constants/pianokeys';
 
 const ZERO = 0;
+const ONE = 1;
 const TWENTY_SIX = 26;
 
 const defaultData = {
@@ -130,23 +131,26 @@ const getSubcomponents = (item) => {
 const getSheetMusic = (configuration, line, editorPosition) => {
   const { treble, center, bass, pedal } = line;
   const mappedTrebleData = treble.map(item => {
+    const columnIndexModifier = item.rowIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: getTransformProperty(ZERO, item.columnIndex, false),
+      transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, false),
       subcomponents:getSubcomponents(item)
     };
   });
   const mappedBassData = bass.map(item => {
+    const columnIndexModifier = item.rowIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: getTransformProperty(ZERO, item.columnIndex, true),
+      transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, true),
       subcomponents:getSubcomponents(item)
     };
   });
 
+  const columnIndexModifier = editorPosition.rowIndex === ZERO ? ONE : ZERO;
   return [
     { component: 'Selection',
-      transform:`translate(${editorPosition.columnIndex*STAFF_LINE_WIDTH},${Number(editorPosition.isBassSelection)*BASS_GAP})`},
+      transform:`translate(${(editorPosition.columnIndex +columnIndexModifier)*STAFF_LINE_WIDTH},${Number(editorPosition.isBassSelection)*BASS_GAP})`},
     getTitleData(configuration),
     getClefData({}),
     getKeySignatureData({ rowNumber: ZERO, keySignature: configuration.keySignature, isBassClef: false}),

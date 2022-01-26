@@ -21,7 +21,7 @@ const STARTING_NOTE = {
   id: '001',
   pageIndex: ZERO,
   rowIndex: ZERO,
-  columnIndex: ONE,
+  columnIndex: ZERO,
   component: 'Note',
   pianoKey: 'C4'
 };
@@ -30,7 +30,7 @@ const Create = () => {
   const [editorPosition, setEditorPositon] = useState({
     pageIndex: ZERO,
     rowIndex: ZERO,
-    columnIndex: ONE,
+    columnIndex: ZERO,
     isBassSelection: false
   });
   const [configuration, setConfiguration] = useState({
