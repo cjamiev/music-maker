@@ -15,6 +15,7 @@ import {
   HEIGHT_BETWEEN_ROWS,
   BASS_GAP
 } from 'constants/svgattributes';
+import { pianoKeyList } from 'constants/pianokeys';
 
 const ZERO = 0;
 
@@ -108,10 +109,49 @@ const getNoteData = ({
     ]};
 };
 
+const getTransformProperty = (rowIndex, columnIndex, isBassClef) => {
+  return `translate(${columnIndex*STAFF_LINE_WIDTH},${rowIndex*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)+Number(isBassClef)*BASS_GAP})`;
+};
+
+const TWENTY_SIX = 26;
+const getSubcomponents = (item) => {
+  if(item.component === 'Note') {
+    const stemmedNote = pianoKeyList.findIndex(key => key === item.pianoKey) > TWENTY_SIX ? 'StemmedNoteFlipped' : 'StemmedNote';
+    const conditions = stemmedNote === 'StemmedNoteFlipped' ? { showNoteStemFlipped: true } : { showNoteStem: true };
+    return [
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[item.pianoKey]},
+      { component: stemmedNote, transform:`translate(0,${mapNotePosition[item.pianoKey]})`, conditions}
+    ];
+  } else {
+    return [];
+  }
+};
+
+const getSheetMusic = (line) => {
+  const { treble, center, bass, pedal } = line;
+  const mappedTrebleData = treble.map(item => {
+    return {
+      ...item,
+      transform: getTransformProperty(item.rowIndex, item.columnIndex, false),
+      subcomponents:getSubcomponents(item)
+    };
+  });
+  const mappedBassData = bass.map(item => {
+    return {
+      ...item,
+      transform: getTransformProperty(item.rowIndex, item.columnIndex, true),
+      subcomponents:getSubcomponents(item)
+    };
+  });
+
+  return [...mappedTrebleData,...mappedBassData];
+};
+
 export {
   getTitleData,
   getClefData,
   getKeySignatureData,
   getTimeSignatureData,
-  getNoteData
+  getNoteData,
+  getSheetMusic
 };
