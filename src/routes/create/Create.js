@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import Piano from 'components/piano';
 import CreateSidePanel from './CreateSidePanel';
-import PositionController from './PositionController';
+import ColumnPositionController from './ColumnPositionController';
+import RowPositionController from './RowPositionController';
 import Page from 'components/layout';
 import Button from 'components/button';
 import {
@@ -16,6 +17,14 @@ const attributes = {
 };
 const ZERO = 0;
 const ONE = 1;
+const STARTING_NOTE = {
+  id: '001',
+  pageIndex: ZERO,
+  rowIndex: ZERO,
+  columnIndex: ONE,
+  component: 'Note',
+  pianoKey: 'C4'
+};
 
 const Create = () => {
   const [editorPosition, setEditorPositon] = useState({
@@ -38,29 +47,16 @@ const Create = () => {
     }
   });
   const [data, setData] = useState([{
-    treble: [{
-      id: '001',
-      pageIndex: ZERO,
-      rowIndex: ZERO,
-      columnIndex: ONE,
-      component: 'Note',
-      pianoKey: 'C4'
-    }],
+    treble: [STARTING_NOTE],
     center: [],
-    bass: [{
-      id: '001',
-      pageIndex: ZERO,
-      rowIndex: ZERO,
-      columnIndex: ONE,
-      component: 'Note',
-      pianoKey: 'C4'
-    }],
-    pedal: []
+    bass: [STARTING_NOTE],
+    bottom: []
   }]);
 
   const currentLine = data[editorPosition.rowIndex];
 
   const handlePositionChange = (updatedEditorPosition, updatedData) => {
+    console.log(updatedData);
     setEditorPositon(updatedEditorPosition);
     updatedData && setData(updatedData);
   };
@@ -100,7 +96,8 @@ const Create = () => {
   return (
     <Page>
       <DisplaySheetMusic isOneRowMode={true} sheetMusic={getSheetMusic(data[editorPosition.rowIndex])} {...attributes} />
-      <PositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
+      <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
+      <RowPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
       <Piano selectPianoKey={handlePianoKeyChange} />
     </Page>
   );

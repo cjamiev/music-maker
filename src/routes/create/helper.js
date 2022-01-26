@@ -132,14 +132,14 @@ const getSheetMusic = (line) => {
   const mappedTrebleData = treble.map(item => {
     return {
       ...item,
-      transform: getTransformProperty(item.rowIndex, item.columnIndex, false),
+      transform: getTransformProperty(ZERO, item.columnIndex, false),
       subcomponents:getSubcomponents(item)
     };
   });
   const mappedBassData = bass.map(item => {
     return {
       ...item,
-      transform: getTransformProperty(item.rowIndex, item.columnIndex, true),
+      transform: getTransformProperty(ZERO, item.columnIndex, true),
       subcomponents:getSubcomponents(item)
     };
   });

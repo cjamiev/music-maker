@@ -4,7 +4,7 @@ import Button from 'components/button';
 const ZERO = 0;
 const ONE = 1;
 
-const PositionController = ({ editorPosition, data, onChange }) => {
+const ColumnPositionController = ({ editorPosition, data, onChange }) => {
   const { pageIndex, rowIndex, columnIndex, isBassSelection } = editorPosition;
   const currentLine = data[rowIndex];
   const firstColumnIndex = rowIndex === ZERO ? ONE : ZERO;
@@ -16,7 +16,7 @@ const PositionController = ({ editorPosition, data, onChange }) => {
         label="Add Next Note"
         classColor="primary"
         onClick={() => {
-          const nextColumnIndex = lastColumnIndex + ONE;
+          const nextColumnIndex = rowIndex === ZERO ? lastColumnIndex + ONE : lastColumnIndex;
           const noteId = String(pageIndex) + String(rowIndex) + String(nextColumnIndex);
           const newNote = {
             id: noteId,
@@ -132,4 +132,4 @@ const PositionController = ({ editorPosition, data, onChange }) => {
   );
 };
 
-export default PositionController;
+export default ColumnPositionController;
