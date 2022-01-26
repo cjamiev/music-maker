@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dropdown,
   Text
@@ -21,13 +21,19 @@ const TIME_SIGNATURES = timeSignatures.map((opts) => {
   return { ...opts, selected: false };
 });
 
-const Configuration = ({ onChange }) => {
+const Configuration = ({ configuration, onChange }) => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [tempoOptions, setTempoOptions] = useState(tempo);
   const [author, setAuthor] = useState('');
   const [timeSignatureOptions, setTimeSignatureOptions] = useState(TIME_SIGNATURES);
   const [keySignatureOptions, setKeySignatureOptions] = useState(KEY_SIGNATURES);
+
+  useEffect(() => {
+    setTitle(configuration.title);
+    setSubtitle(configuration.subtitle);
+    setAuthor(configuration.author);
+  }, [configuration]);
 
   return (
     <div className="main">

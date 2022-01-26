@@ -18,6 +18,7 @@ import {
 import { pianoKeyList } from 'constants/pianokeys';
 
 const ZERO = 0;
+const TWENTY_SIX = 26;
 
 const defaultData = {
   transform:'translate(0,0)',
@@ -113,7 +114,6 @@ const getTransformProperty = (rowIndex, columnIndex, isBassClef) => {
   return `translate(${columnIndex*STAFF_LINE_WIDTH},${rowIndex*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)+Number(isBassClef)*BASS_GAP})`;
 };
 
-const TWENTY_SIX = 26;
 const getSubcomponents = (item) => {
   if(item.component === 'Note') {
     const stemmedNote = pianoKeyList.findIndex(key => key === item.pianoKey) > TWENTY_SIX ? 'StemmedNoteFlipped' : 'StemmedNote';
@@ -127,7 +127,7 @@ const getSubcomponents = (item) => {
   }
 };
 
-const getSheetMusic = (line) => {
+const getSheetMusic = (configuration, line, rowIndex) => {
   const { treble, center, bass, pedal } = line;
   const mappedTrebleData = treble.map(item => {
     return {
@@ -144,7 +144,16 @@ const getSheetMusic = (line) => {
     };
   });
 
-  return [...mappedTrebleData,...mappedBassData];
+  return [
+    getTitleData(configuration),
+    getClefData({}),
+    getKeySignatureData({ rowNumber: ZERO, keySignature: configuration.keySignature, isBassClef: false}),
+    getKeySignatureData({ rowNumber: ZERO, keySignature: configuration.keySignature, isBassClef: true}),
+    rowIndex === ZERO && getTimeSignatureData({ rowNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: false}),
+    rowIndex === ZERO && getTimeSignatureData({ rowNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: true}),
+    ...mappedTrebleData,
+    ...mappedBassData
+  ].filter(Boolean);
 };
 
 export {

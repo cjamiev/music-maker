@@ -55,8 +55,14 @@ const Create = () => {
 
   const currentLine = data[editorPosition.rowIndex];
 
+  const handleConfigurationChange = (updatedConfig) => {
+    setConfiguration({
+      ...configuration,
+      ...updatedConfig
+    });
+  };
+
   const handlePositionChange = (updatedEditorPosition, updatedData) => {
-    console.log(updatedData);
     setEditorPositon(updatedEditorPosition);
     updatedData && setData(updatedData);
   };
@@ -94,8 +100,8 @@ const Create = () => {
   };
 
   return (
-    <Page>
-      <DisplaySheetMusic isOneRowMode={true} sheetMusic={getSheetMusic(data[editorPosition.rowIndex])} {...attributes} />
+    <Page sidePanelContent={<CreateSidePanel configuration={configuration} onChange={handleConfigurationChange}/>}>
+      <DisplaySheetMusic isOneRowMode={true} sheetMusic={getSheetMusic(configuration, data[editorPosition.rowIndex], editorPosition.rowIndex)} {...attributes} />
       <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
       <RowPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
       <Piano selectPianoKey={handlePianoKeyChange} />

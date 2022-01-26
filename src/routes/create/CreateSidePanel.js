@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Configuration from './Configuration';
 
 
-const CreateSidePanel = ({ onChange }) => {
+const CreateSidePanel = ({ configuration, onChange }) => {
   return (
     <div className="sidepanel">
-      <Configuration onChange={onChange} />
+      <Configuration configuration={configuration} onChange={onChange} />
     </div>
   );
 };
