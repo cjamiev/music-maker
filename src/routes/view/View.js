@@ -5,6 +5,8 @@ import ViewCards from './ViewCards';
 import ViewFooter from './ViewFooter';
 import useLocalStorage from 'hooks/useLocalStorage';
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
+import Button from 'components/button';
+import 'assets/img/dearly-beloved.jpg';
 
 const ZERO = 0;
 const ONE = 1;
@@ -23,6 +25,7 @@ const getSvgAttributes = (currentZoom) => {
 
 const View = () => {
   const [musicSelection, setMusicSelection] = useState([]);
+  const [isImageShown, setIsImageShown] = useState(false);
   const [pageNumber, setPageNumber] = useState(ZERO);
   const [currentZoom, setCurrentZoom] = useLocalStorage(LS_ZOOM, DEFAULT_ZOOM_INDEX, false);
   const musicNotationSvgAttributes = getSvgAttributes(Number(currentZoom));
@@ -53,6 +56,31 @@ const View = () => {
     }
   };
 
+  const handleShowImage = () => {
+    setIsImageShown(!isImageShown);
+  };
+
+  const renderView = () => {
+    if(musicSelection.length > ZERO) {
+      return <DisplaySheetMusic sheetMusic={musicSelection[pageNumber]} {...musicNotationSvgAttributes}/>;
+    } else if (isImageShown) {
+      return (<div>
+        <img
+          className="view__sheet_music_image"
+          src="dearly-beloved.jpg"
+          alt="Seer"
+        />
+        <Button
+          label="Back to Selection"
+          classColor="primary"
+          onClick={handleShowImage}
+        />
+      </div>);
+    } else {
+      return <ViewCards onChangeSelection={handleChangeMusicSelection} onShowImage={handleShowImage} />;
+    }
+  };
+
   return (
     <Page
       footerComponent={!!musicSelection.length
@@ -66,10 +94,7 @@ const View = () => {
         : null}
     >
       <div className="view">
-        {!!musicSelection.length
-          ? <DisplaySheetMusic sheetMusic={musicSelection[pageNumber]} {...musicNotationSvgAttributes}/>
-          : <ViewCards onChangeSelection={handleChangeMusicSelection} />
-        }
+        {renderView()}
       </div>
     </Page>
   );

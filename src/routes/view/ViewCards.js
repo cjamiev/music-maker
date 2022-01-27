@@ -13,7 +13,7 @@ import {
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 import 'assets/img/seer.jpg';
 
-const ViewCards = ({ onChangeSelection }) => {
+const ViewCards = ({ onChangeSelection, onShowImage }) => {
   return (
     <div className="flex--horizontal">
       <Card
@@ -43,6 +43,13 @@ const ViewCards = ({ onChangeSelection }) => {
         title="Test"
         onClick={() => {
           onChangeSelection([allWholeNoteData,allQuarterNoteData, allQuarterChordData, allModifierData]);
+        }}
+      />
+      <Card
+        className="clickable"
+        title="Dearly Beloved"
+        onClick={() => {
+          onShowImage();
         }}
       />
     </div>
