@@ -99,16 +99,25 @@ const Create = () => {
     setData(updatedData);
   };
 
+  // <CreateSidePanel configuration={configuration} onConfigurationChange={handleConfigurationChange} />
   return (
-    <Page sidePanelContent={<CreateSidePanel configuration={configuration} onChange={handleConfigurationChange}/>}>
-      <DisplaySheetMusic
-        isOneRowMode={true}
-        sheetMusic={getSheetMusic(configuration, data[editorPosition.rowIndex], editorPosition)}
-        {...attributes}
-      />
-      <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
-      <RowPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
-      <Piano selectPianoKey={handlePianoKeyChange} />
+    <Page >
+      <div className="create__grid">
+        <div className="create__sheet-music">
+          <DisplaySheetMusic
+            isOneRowMode={true}
+            sheetMusic={getSheetMusic(configuration, data[editorPosition.rowIndex], editorPosition)}
+            {...attributes}
+          />
+        </div>
+        <div className="create__position-controller">
+          <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
+          <RowPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
+        </div>
+        <div className="create__sheet-music-form">
+          <Piano selectPianoKey={handlePianoKeyChange} />
+        </div>
+      </div>
     </Page>
   );
 };

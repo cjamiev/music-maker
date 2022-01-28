@@ -11,9 +11,10 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
   const isLastRowIndex = data.length - ONE === rowIndex;
 
   return (
-    <>
+    <div className="create__btn-group">
       <Button
-        label="Add Next Row"
+        label="Add Row"
+        className="create__btn"
         classColor="primary"
         onClick={() => {
           const nextRowIndex = rowIndex + ONE;
@@ -43,7 +44,8 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
         }}
       />
       <Button
-        label="Select Previous Row"
+        label="Prev Row"
+        className="create__btn"
         classColor="primary"
         disabled={isFirstRowIndex}
         onClick={() => {
@@ -56,7 +58,8 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
         }}
       />
       <Button
-        label="Select Next Row"
+        label="Next Row"
+        className="create__btn"
         classColor="primary"
         disabled={isLastRowIndex}
         onClick={() => {
@@ -69,7 +72,8 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
         }}
       />
       <Button
-        label="Delete Selected Row"
+        label="Delete Row"
+        className="create__btn"
         classColor="primary"
         disabled={isLastRowIndex && isFirstRowIndex}
         onClick={() => {
@@ -122,7 +126,7 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
           onChange(updatedEditorPosition, updatedData);
         }}
       />
-    </>
+    </div>
   );
 };
 

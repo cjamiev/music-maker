@@ -1,54 +1,41 @@
-.main {
+.create__configuration {
   margin: 10px;
 }
 
-.display-selection {
+.create__btn-group {
   display: flex;
-  flex-direction: row;
-  place-items: center;  
+  flex-wrap:wrap;
 }
 
-.display-note {
-  height: 150px;
-  width: 50px;
-}
-
-.display-note-active {
-  border: 1px dashed darkblue;
-}
-
-.symbol-selection {
-  display: flex;
-}
-
-.note-selection {
-  display: flex;
-  flex-wrap: wrap;
-  place-items: center;
-  justify-content: center;
-}
-
-.column-selection {
-  display: flex;
-  flex-direction: column;
-}
-
-.note-btn {
-  flex: 1 0 16%;
-  background-color: #3287a8;
-  color: white;
-  outline: none;
-  margin: 3px;
-}
-
-.add-btn {
-  background-color: #005475;
-  color: white;
-  outline: none;
-  margin: 3px;
+.create__btn {
+  width: 80px;
 }
 
 .sidepanel {
-  width: 350px;
+  width: 400px;
   border-right: 1px solid rgb(228, 228, 228);
+}
+
+.create__grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: [col] 500px [col] 100px [col] 100px [col] 100px;
+  grid-template-rows: [row] auto [row] auto [row] ;
+}
+
+.create__sheet-music {
+  grid-column: col 2 / span 2;
+  grid-row: row ;
+}
+.create__position-controller {
+  grid-column: col ;
+  grid-row: row 2 ;
+}
+.create__sheet-music-form {
+  grid-row: row 2;
+}
+
+.create__footer {
+  grid-column: col / span 4;
+  grid-row: row 3;
 }

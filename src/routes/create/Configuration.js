@@ -36,7 +36,7 @@ const Configuration = ({ configuration, onChange }) => {
   }, [configuration]);
 
   return (
-    <div className="main">
+    <div className="create__configuration">
       <Text
         label="Title"
         selected={title}

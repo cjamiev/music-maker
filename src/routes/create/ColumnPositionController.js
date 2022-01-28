@@ -10,9 +10,10 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
   const lastColumnIndex = isBassSelection ? currentLine.bass.length - ONE : currentLine.treble.length - ONE;
 
   return (
-    <>
+    <div className="create__btn-group">
       <Button
-        label="Add Next Note"
+        label="Add"
+        className="create__btn"
         classColor="primary"
         onClick={() => {
           const nextColumnIndex = lastColumnIndex + ONE;
@@ -53,7 +54,8 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
         }}
       />
       <Button
-        label="Select Previous Note"
+        label="Prev"
+        className="create__btn"
         classColor="primary"
         disabled={columnIndex === ZERO}
         onClick={() => {
@@ -64,7 +66,8 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
         }}
       />
       <Button
-        label="Select Next Note"
+        label="Next"
+        className="create__btn"
         classColor="primary"
         disabled={columnIndex === lastColumnIndex}
         onClick={() => {
@@ -75,7 +78,8 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
         }}
       />
       <Button
-        label="Delete Selected Note"
+        label="Delete"
+        className="create__btn"
         classColor="primary"
         disabled={lastColumnIndex === ZERO}
         onClick={() => {
@@ -116,7 +120,8 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
         }}
       />
       <Button
-        label={isBassSelection ? 'Switch To Treble Clef' : 'Switch To Bass Clef'}
+        label={isBassSelection ? 'Treble Mode' : 'Bass Mode'}
+        className="create__btn"
         classColor="primary"
         onClick={() => {
           onChange({
@@ -126,7 +131,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
           });
         }}
       />
-    </>
+    </div>
   );
 };
 
