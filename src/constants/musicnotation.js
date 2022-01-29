@@ -183,16 +183,16 @@ export const barTypes = [
 ];
 
 export const restTypes = [
-  { key: 'whole-rest', label: 'Whole Rest' },
-  { key: 'half-rest', label: 'Half Rest' },
-  { key: 'quarter-rest', label: 'Quarter Rest' },
-  { key: 'eigth-rest', label: '8th Rest' },
-  { key: 'sixteenth-rest', label: '16th Rest' },
-  { key: 'dotted-whole-rest', label: 'Dotted Whole Rest' },
-  { key: 'dotted-half-rest', label: 'Dotted Half Rest' },
-  { key: 'dotted-quarter-rest', label: 'Dotted Quarter Rest' },
-  { key: 'dotted-eigth-rest', label: 'Dotted 8th Rest' },
-  { key: 'dotted-sixteenth-rest', label: 'Dotted 16th Rest' }
+  { key: 'whole-rest', label: 'Whole Rest', value: { showWholeRest: true } },
+  { key: 'half-rest', label: 'Half Rest', value: { showHalfRest: true } },
+  { key: 'quarter-rest', label: 'Quarter Rest', value: { showQuarterRest: true } },
+  { key: 'eigth-rest', label: '8th Rest', value: { showEighthRest: true } },
+  { key: 'sixteenth-rest', label: '16th Rest', value: { showSixteenthRest: true } },
+  { key: 'dotted-whole-rest', label: 'Dotted Whole Rest', value: { showWholeRest: true, showDotted: true } },
+  { key: 'dotted-half-rest', label: 'Dotted Half Rest', value: { showHalfRest: true, showDotted: true } },
+  { key: 'dotted-quarter-rest', label: 'Dotted Quarter Rest', value: { showQuarterRest: true, showDotted: true } },
+  { key: 'dotted-eigth-rest', label: 'Dotted 8th Rest', value: { showEighthRest: true, showDotted: true } },
+  { key: 'dotted-sixteenth-rest', label: 'Dotted 16th Rest', value: { showSixteenthRest: true, showDotted: true } }
 ];
 
 export const pedalTypes = [

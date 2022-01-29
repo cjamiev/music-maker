@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
-import Piano from 'components/piano';
+import MusicForm from 'components/musicform';
 import CreateSidePanel from './CreateSidePanel';
 import ColumnPositionController from './ColumnPositionController';
 import RowPositionController from './RowPositionController';
 import Page from 'components/layout';
-import Button from 'components/button';
 import {
   getSheetMusic
 } from './helper';
@@ -75,7 +74,41 @@ const Create = () => {
       && item.columnIndex === editorPosition.columnIndex) {
         return {
           ...item,
+          component: 'Note',
           pianoKey: selectedPianoKey
+        };
+      }
+      return item;
+    });
+    const updatedLine = editorPosition.isBassSelection
+      ? {
+        ...currentLine,
+        bass: updatedSection
+      }
+      : {
+        ...currentLine,
+        treble: updatedSection
+      };
+    const updatedData = data.map((item, index) => {
+      if(index === editorPosition.rowIndex) {
+        return updatedLine;
+      }
+      return item;
+    });
+
+    setData(updatedData);
+  };
+
+  const handleRestChange = (selectedRestSymbol) => {
+    const currentSection = editorPosition.isBassSelection ? currentLine.bass : currentLine.treble;
+    const updatedSection = currentSection.map(item => {
+      if(item.pageIndex === editorPosition.pageIndex
+      && item.rowIndex === editorPosition.rowIndex
+      && item.columnIndex === editorPosition.columnIndex) {
+        return {
+          ...item,
+          component: 'Rest',
+          conditions: selectedRestSymbol
         };
       }
       return item;
@@ -115,7 +148,7 @@ const Create = () => {
           <RowPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
         </div>
         <div className="create__sheet-music-form">
-          <Piano selectPianoKey={handlePianoKeyChange} />
+          <MusicForm selectRestSymbol={handleRestChange} selectPianoKey={handlePianoKeyChange} />
         </div>
       </div>
     </Page>
