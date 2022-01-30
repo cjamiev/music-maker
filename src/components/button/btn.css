@@ -147,6 +147,15 @@
   animation: translateLeft 250ms ease-out 0s 1 normal forwards;
 }
 
+.music--icon {
+  border: 2px solid #000;
+  margin-right: 10px;
+}
+
+.music--icon:hover {
+  border: 2px solid #0084AD;
+}
+
 @keyframes translateRight {
   0% {
     transform: translateX(0);

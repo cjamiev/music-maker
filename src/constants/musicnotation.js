@@ -186,7 +186,7 @@ export const restTypes = [
   { key: 'whole-rest', label: 'Whole Rest', value: { showWholeRest: true } },
   { key: 'half-rest', label: 'Half Rest', value: { showHalfRest: true } },
   { key: 'quarter-rest', label: 'Quarter Rest', value: { showQuarterRest: true } },
-  { key: 'eigth-rest', label: '8th Rest', value: { showEighthRest: true } },
+  { key: 'eighth-rest', label: '8th Rest', value: { showEighthRest: true } },
   { key: 'sixteenth-rest', label: '16th Rest', value: { showSixteenthRest: true } },
   { key: 'dotted-whole-rest', label: 'Dotted Whole Rest', value: { showWholeRest: true, showDotted: true } },
   { key: 'dotted-half-rest', label: 'Dotted Half Rest', value: { showHalfRest: true, showDotted: true } },
