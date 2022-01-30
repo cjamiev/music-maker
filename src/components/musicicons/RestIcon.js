@@ -10,7 +10,7 @@ const RestIcon = ({
   return (
     <g>
       {showWholeRest && <g
-        data-testid="whole-rest"
+        data-testdata-testid="whole-rest"
         transform="translate(60.112709,-23.393517)"
       >
         <rect
@@ -28,7 +28,7 @@ const RestIcon = ({
         />
       </g>}
       {showHalfRest && <g
-        data-testid="half-rest"
+        data-testdata-testid="half-rest"
         transform="translate(107.1777,-113.68709)"
       >
         <rect
@@ -46,7 +46,7 @@ const RestIcon = ({
         />
       </g>}
       {showQuarterRest && <g
-        data-testid="quarter-rest"
+        data-testdata-testid="quarter-rest"
         transform="matrix(1.5503427,0,0,1.5503427,-15.750592,-81.635622)"
       >
         <path
@@ -54,7 +54,7 @@ const RestIcon = ({
           d="m 0,0 82.08,92.16 c -13.4787,20.141 -41.7493,32.885 -40.32,60.48 l 52.56,84.24 c -17.3546,-6.1 -29.1391,-22.21 -44.64,-7.92 -5.3545,9.999 -8.9941,38.302 -2.88,65.52 L 18.72,239.76 c -4.2349,-11.28 -1.5134,-22.56 5.76,-33.84 14.443,-5.017 29.0379,-10.375 36,1.44 L 0.72,123.12 21.6,89.28 C 33.3057,74.4 25.7337,59.52 20.88,44.64 12.72,27.84 5.76,12.96 0,0 Z" />
       </g>}
       {showEighthRest && <g
-        data-testid="eight-rest"
+        data-testdata-testid="eight-rest"
         transform="matrix(0.95722367,0,0,0.95722367,-162.18461,-24.305939)"
       >
         <path
@@ -70,7 +70,7 @@ const RestIcon = ({
         />
       </g>}
       {showSixteenthRest && <g
-        data-testid="sixteenth-rest"
+        data-testdata-testid="sixteenth-rest"
         transform="matrix(3.0994994,0,0,3.0994994,-645.48141,-422.52207)"
       >
         <path

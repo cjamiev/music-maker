@@ -1,5 +1,11 @@
 import React from 'react';
 import {
+  CrescendoIcon,
+  MeasureIcon,
+  ModifierIcon,
+  NoteIcon,
+  OttavaIcon,
+  PedalIcon,
   RestIcon
 } from 'components/musicicons';
 import { ICON_SIZES, MUSIC_ICON_TYPES } from 'constants/icon';
@@ -9,11 +15,36 @@ const ICON_HEIGHT = '106px';
 const ICON_WIDTH = '106px';
 const ICON_VIEWBOX = '0 0 53 53';
 const iconMap = {
+  [MUSIC_ICON_TYPES.WHOLE_NOTE]: ComponentWrapper(NoteIcon, { showWholeNote: true }),
+  [MUSIC_ICON_TYPES.HALF_NOTE]: ComponentWrapper(NoteIcon, { showHalfNote: true }),
+  [MUSIC_ICON_TYPES.QUARTER_NOTE]: ComponentWrapper(NoteIcon, { showQuarterNote: true }),
+  [MUSIC_ICON_TYPES.EIGHTH_NOTE]: ComponentWrapper(NoteIcon, { showEighthNote: true }),
+  [MUSIC_ICON_TYPES.SIXTEENTH_NOTE]: ComponentWrapper(NoteIcon, { showSixteenthNote: true }),
+  [MUSIC_ICON_TYPES.ACCENT]: ComponentWrapper(ModifierIcon, { showAccent: true }),
+  [MUSIC_ICON_TYPES.FERMATA]: ComponentWrapper(ModifierIcon, { showFermata: true }),
+  [MUSIC_ICON_TYPES.GRACE_NOTE]: ComponentWrapper(ModifierIcon, { showGraceNote: true }),
+  [MUSIC_ICON_TYPES.NOTE_FLAT]: ComponentWrapper(ModifierIcon, { showNoteFlat: true }),
+  [MUSIC_ICON_TYPES.NOTE_NATURAL]: ComponentWrapper(ModifierIcon, { showNoteNatural: true }),
+  [MUSIC_ICON_TYPES.NOTE_SHARP]: ComponentWrapper(ModifierIcon, { showNoteSharp: true }),
+  [MUSIC_ICON_TYPES.ROLLED]: ComponentWrapper(ModifierIcon, { showRolled: true }),
+  [MUSIC_ICON_TYPES.TENUTO]: ComponentWrapper(ModifierIcon, { showTenuto: true }),
+  [MUSIC_ICON_TYPES.TRILL]: ComponentWrapper(ModifierIcon, { showTrill: true }),
+  [MUSIC_ICON_TYPES.CRESCENDO]: ComponentWrapper(CrescendoIcon, { showCrescendo: true }),
+  [MUSIC_ICON_TYPES.DECRESCENDO]: ComponentWrapper(CrescendoIcon, { showDecrescendo: true }),
+  [MUSIC_ICON_TYPES.MEASURE_END]: ComponentWrapper(MeasureIcon, { showMeasureEnd: true }),
+  [MUSIC_ICON_TYPES.REPEAT_START]: ComponentWrapper(MeasureIcon, { showRepeatStart: true }),
+  [MUSIC_ICON_TYPES.REPEAT_END]: ComponentWrapper(MeasureIcon, { showRepeatEnd: true }),
+  [MUSIC_ICON_TYPES.PEDAL_START]: ComponentWrapper(PedalIcon, { showPedalStart: true }),
+  [MUSIC_ICON_TYPES.PEDAL_CONTINUE]: ComponentWrapper(PedalIcon, { showPedalContinue: true }),
+  [MUSIC_ICON_TYPES.PEDAL_QUICK_RELEASE]: ComponentWrapper(PedalIcon, { showPedalQuickRelease: true }),
+  [MUSIC_ICON_TYPES.PEDAL_END]: ComponentWrapper(PedalIcon, { showPedalEnd: true }),
   [MUSIC_ICON_TYPES.WHOLE_REST]: ComponentWrapper(RestIcon, { showWholeRest: true }),
   [MUSIC_ICON_TYPES.HALF_REST]: ComponentWrapper(RestIcon, { showHalfRest: true }),
   [MUSIC_ICON_TYPES.QUARTER_REST]: ComponentWrapper(RestIcon, { showQuarterRest: true }),
   [MUSIC_ICON_TYPES.EIGHTH_REST]: ComponentWrapper(RestIcon, { showEighthRest: true }),
-  [MUSIC_ICON_TYPES.SIXTEENTH_REST]: ComponentWrapper(RestIcon, { showSixteenthRest: true })
+  [MUSIC_ICON_TYPES.SIXTEENTH_REST]: ComponentWrapper(RestIcon, { showSixteenthRest: true }),
+  [MUSIC_ICON_TYPES.OTTAVA]: ComponentWrapper(OttavaIcon, { showBassa: false }),
+  [MUSIC_ICON_TYPES.OTTAVA_BASSA]: ComponentWrapper(OttavaIcon, { showBassa: true })
 };
 
 const SCALE_SIZES = {

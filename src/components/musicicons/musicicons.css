@@ -35,3 +35,20 @@
   stroke:#000000;
   stroke-width:0.432794;
 }
+
+.musicicon__ottava {
+  /* font-style:normal;font-weight:normal;font-size:28.7799px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:4.28224;stroke-miterlimit:4;stroke-dasharray:none; */
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  font-stretch:normal;
+  font-size:28.7799px;
+  font-family:Gabriola;-inkscape-font-specification:'Gabriola, Normal';
+  font-variant-ligatures:normal;
+  font-variant-caps:normal;
+  font-variant-numeric:normal;
+  font-variant-east-asian:normal;
+  stroke-width:4.28224;
+  stroke-miterlimit:4;
+  stroke-dasharray:none;
+}
