@@ -157,29 +157,30 @@ export const timeSignatures = [
 ];
 
 export const noteTypes = [
-  { value: 'whole-note', label: 'Whole Note' },
-  { value: 'half-note', label: 'Half Note' },
-  { value: 'quarter-note', label: 'Quarter Note' },
-  { value: 'eigth-note', label: '8th Note' },
-  { value: 'sixteenth-note', label: '16th Note' }
+  { key: 'whole-note', label: 'Whole Note' },
+  { key: 'half-note', label: 'Half Note' },
+  { key: 'quarter-note', label: 'Quarter Note' },
+  { key: 'eigth-note', label: '8th Note' },
+  { key: 'sixteenth-note', label: '16th Note' }
 ];
 
 export const noteModifierTypes = [
-  { value: 'dotted', label: 'Dotted' },
-  { value: 'flat', label: 'Flat' },
-  { value: 'sharp', label: 'Sharp' },
-  { value: 'natural', label: 'Natural' },
-  { value: 'accent', label: 'Accent' },
-  { value: 'rolled', label: 'Rolled' },
-  { value: 'fermata', label: 'Fermata' },
-  { value: 'stacatto', label: 'Stacatto' }
+  { key: 'dotted', label: 'Dotted' },
+  { key: 'grace-note', label: 'Grace Note', value: { showGraceNote: true } },
+  { key: 'note-flat', label: 'Note Flat', value: { showNoteFlat: true } },
+  { key: 'note-sharp', label: 'Note Sharp', value: { showNoteSharp: true } },
+  { key: 'note-natural', label: 'Note Natural', value: { showNoteNatural: true } },
+  { key: 'accent', label: 'Accent', value: { showAccent: true } },
+  { key: 'fermata', label: 'Fermata', value: { showFermata: true } },
+  { key: 'rolled', label: 'Rolled', value: { showRolled: true } },
+  { key: 'tenuto', label: 'Tenuto', value: { showTenuto: true } },
+  { key: 'trill', label: 'Trill', value: { showTrill: true } }
 ];
 
 export const barTypes = [
-  { value: 'measure-bar', label: 'Measure Bar' },
-  { value: 'line-end-bar', label: 'Line End Bar' },
-  { value: 'repeat-start-bar', label: 'Repeat Bar Start' },
-  { value: 'repeat-end-bar', label: 'Repeat Bar End' }
+  { key: 'measure-end', label: 'Measure End Bar', value: { showRepeatBarStart: true } },
+  { key: 'repeat-start', label: 'Repeat Bar Start', value: { showRepeatBarEnd: true } },
+  { key: 'repeat-end', label: 'Repeat Bar End', value: { showMeasureEnd: true } }
 ];
 
 export const restTypes = [
@@ -196,9 +197,9 @@ export const restTypes = [
 ];
 
 export const pedalTypes = [
-  { value: 'pedal-start', label: 'Pedal Start' },
-  { value: 'pedal-continue', label: 'Continue' },
-  { value: 'pedal-overlap', label: 'Overlap' },
-  { value: 'pedal-end', label: 'End' },
-  { value: '', label: 'Remove' }
+  { key: 'pedal-start', label: 'Pedal Start' },
+  { key: 'pedal-continue', label: 'Continue' },
+  { key: 'pedal-overlap', label: 'Overlap' },
+  { key: 'pedal-end', label: 'End' },
+  { key: '', label: 'Remove' }
 ];

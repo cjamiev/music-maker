@@ -1,3 +1,13 @@
+.musicicon__staff {
+  opacity:0.998;
+  fill:#000000;
+  fill-opacity:0.995413;
+  stroke:#000000;
+  stroke-width:0.588357;
+  stroke-linecap:round;
+  stroke-opacity:1;
+}
+
 .musicicon__staff-line {
   stroke:#000000;
   stroke-width:1.70786;
