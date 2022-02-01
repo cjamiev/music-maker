@@ -56,11 +56,7 @@ import {
   OttavaBassaTextSVG
 } from './OttavaBassaSVG';
 import {
-  PedalSVG,
-  PedalQuickReleaseSVG,
-  PedalContinueSVG,
-  PedalStartSVG,
-  PedalEndSVG
+  PedalSVG
 } from './PedalSVG';
 import {
   RepeatSVG,
@@ -137,10 +133,6 @@ const svgMap = {
   'OttavaBassaEnd': OttavaBassaEndSVG,
   'OttavaBassaText': OttavaBassaTextSVG,
   'Pedal': PedalSVG,
-  'PedalQuickRelease': PedalQuickReleaseSVG,
-  'PedalContinue': PedalContinueSVG,
-  'PedalStart': PedalStartSVG,
-  'PedalEnd': PedalEndSVG,
   'Repeat': RepeatSVG,
   'RepeatText': RepeatTextSVG,
   'Coda': CodaSVG,

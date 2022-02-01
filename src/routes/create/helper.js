@@ -129,7 +129,8 @@ const getSubcomponents = (item) => {
 };
 
 const getSheetMusic = (configuration, line, editorPosition) => {
-  const { treble, center, bass, pedal } = line;
+  const { treble, center, bass, bottom } = line;
+
   const mappedTrebleData = treble.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
@@ -146,11 +147,19 @@ const getSheetMusic = (configuration, line, editorPosition) => {
       subcomponents:getSubcomponents(item)
     };
   });
+  const mappedBottomData = bottom.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      transform: `translate(${columnIndexModifier*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      subcomponents: []
+    };
+  });
 
   const columnIndexModifier = editorPosition.lineIndex === ZERO ? ONE : ZERO;
   return [
     { component: 'Selection',
-      transform:`translate(${(editorPosition.columnIndex +columnIndexModifier)*STAFF_LINE_WIDTH},${Number(editorPosition.isBassSelection)*BASS_GAP})`},
+      transform:`translate(${(editorPosition.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${Number(editorPosition.isBassSelection)*BASS_GAP})`},
     getTitleData(configuration),
     getClefData({}),
     getKeySignatureData({ lineNumber: ZERO, keySignature: configuration.keySignature, isBassClef: false}),
@@ -158,7 +167,8 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: false}),
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: true}),
     ...mappedTrebleData,
-    ...mappedBassData
+    ...mappedBassData,
+    ...mappedBottomData
   ].filter(Boolean);
 };
 

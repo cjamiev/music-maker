@@ -25,7 +25,7 @@ const STARTING_NOTE = {
   pianoKey: 'C4'
 };
 
-const getUpdatedSheetMusic = ({ editorPosition, currentLine, data, update }) => {
+const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {
   const currentSection = editorPosition.isBassSelection ? currentLine.bass : currentLine.treble;
   const updatedSection = currentSection.map(item => {
     if(item.pageIndex === editorPosition.pageIndex
@@ -47,6 +47,43 @@ const getUpdatedSheetMusic = ({ editorPosition, currentLine, data, update }) => 
       ...currentLine,
       treble: updatedSection
     };
+  const updatedData = data.map((item, index) => {
+    if(index === editorPosition.lineIndex) {
+      return updatedLine;
+    }
+    return item;
+  });
+
+  return updatedData;
+};
+
+const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
+  const matched = currentLine.bottom.find(item => item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex);
+  const updatedSection = matched ? currentLine.bottom.map(item => {
+    if(item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex) {
+      return {
+        ...item,
+        ...update
+      };
+    }
+    return item;
+  })
+    : currentLine.bottom.concat({
+      pageIndex: editorPosition.pageIndex,
+      lineIndex: editorPosition.lineIndex,
+      columnIndex: editorPosition.columnIndex,
+      ...update
+    });
+
+  const updatedLine = {
+    ...currentLine,
+    bottom: updatedSection
+  };
+
   const updatedData = data.map((item, index) => {
     if(index === editorPosition.lineIndex) {
       return updatedLine;
@@ -98,22 +135,14 @@ const Create = () => {
     updatedData && setData(updatedData);
   };
 
-  const handlePianoKeyChange = (selectedPianoKey) => {
-    const updatedData = getUpdatedSheetMusic({ editorPosition, currentLine, data, update: {
-      component: 'Note',
-      pianoKey: selectedPianoKey
-    } });
-
+  const handleDataChange = (update) => {
+    const updatedData = update.component === 'Pedal'
+      ? getUpdatedPedal({ editorPosition, currentLine, data, update })
+      : getUpdatedSymbols({ editorPosition, currentLine, data, update });
     setData(updatedData);
   };
 
-  const handleRestChange = (selectedRestSymbol) => {
-    const updatedData = getUpdatedSheetMusic({ editorPosition, currentLine, data, update: {
-      component: 'Rest',
-      conditions: selectedRestSymbol
-    } });
-    setData(updatedData);
-  };
+  console.log(currentLine);
 
   // <CreateSidePanel configuration={configuration} onConfigurationChange={handleConfigurationChange} />
   return (
@@ -131,7 +160,7 @@ const Create = () => {
           <LinePositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
         </div>
         <div className="create__sheet-music-form">
-          <MusicForm selectRestSymbol={handleRestChange} selectPianoKey={handlePianoKeyChange} />
+          <MusicForm selectSymbol={handleDataChange} />
         </div>
       </div>
     </Page>

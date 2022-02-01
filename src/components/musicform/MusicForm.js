@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import RestSelector from './RestSelector';
+import PedalSelector from './PedalSelector';
 import Piano from './Piano';
 import Button from 'components/button';
 
-const MusicForm = ({ selectRestSymbol, selectPianoKey }) => {
+const MusicForm = ({ selectSymbol }) => {
   const [type, setType] = useState('piano');
 
   return (
@@ -23,8 +24,24 @@ const MusicForm = ({ selectRestSymbol, selectPianoKey }) => {
         classColor="primary"
         onClick={() => { setType('pedal'); }}
       />
-      {type === 'rest' && <RestSelector selectRestSymbol={selectRestSymbol} />}
-      {type === 'piano' && <Piano selectPianoKey={selectPianoKey} />}
+      {type === 'rest' && <RestSelector selectRestSymbol={(selectedRestSymbol) => {
+        selectSymbol({
+          component: 'Rest',
+          conditions: selectedRestSymbol
+        });
+      }} />}
+      {type === 'pedal' && <PedalSelector selectPedalSymbol={(selectedPedalSymbol) => {
+        selectSymbol({
+          component: 'Pedal',
+          conditions: selectedPedalSymbol
+        });
+      }} />}
+      {type === 'piano' && <Piano selectPianoKey={(selectedNoteSymbol) => {
+        selectSymbol({
+          component: 'Note',
+          pianoKey: selectedNoteSymbol
+        });
+      }} />}
     </div>
   );
 };

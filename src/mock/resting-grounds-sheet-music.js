@@ -123,42 +123,37 @@ const hollowKnightRestingGroundsDataPageOneLineOne = [
     conditions:{showQuarterRest:true}, subcomponents:[] },
   { component:'Measure', transform:`translate(${12*STAFF_LINE_WIDTH},0)`, conditions:{showStaffBassMeasure:true},
     subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${STAFF_LINE_WIDTH},0)`, conditions:{},
+  { component:'Pedal', transform:`translate(${1*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalStart: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalStart', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},0)`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},0)`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},0)`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},0)`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},0)`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},0)`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},0)`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},0)`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},0)`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},0)`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${12*STAFF_LINE_WIDTH},0)`, conditions:{},
-    subcomponents:[
-      { component:'PedalEnd', transform:'translate(0,0)', conditions:{}}] }
+    ] },
+  { component:'Pedal', transform:`translate(${12*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalEnd: true },
+    subcomponents:[] }
 ];
 const hollowKnightRestingGroundsDataPageOneLineTwo = [
   { component:'Clef', transform:`translate(0,${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
@@ -266,39 +261,37 @@ const hollowKnightRestingGroundsDataPageOneLineTwo = [
   { component:'Pedal', transform:`translate(${0*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
     subcomponents:[
       { component:'PedalStart', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${1*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
+  { component:'Pedal', transform:`translate(${0*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalStart: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${1*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},${MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS})`, conditions:{},
-    subcomponents:[
-      { component:'PedalEnd', transform:'translate(0,0)', conditions:{}}] }
+    ] },
+  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},${1*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalEnd: true },
+    subcomponents:[] }
 ];
 const hollowKnightRestingGroundsDataPageOneLineThree = [
   { component:'Clef', transform:`translate(0,${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
@@ -406,42 +399,37 @@ const hollowKnightRestingGroundsDataPageOneLineThree = [
     conditions:{showQuarterRest:true}, subcomponents:[] },
   { component:'Measure', transform:`translate(${11*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{showStaffBassMeasure:true},
     subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${0*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+  { component:'Pedal', transform:`translate(${0*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalStart: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${1*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalStart', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${1*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalEnd', transform:'translate(0,0)', conditions:{}}] }
+    ] },
+  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},${2*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalEnd: true },
+    subcomponents:[] }
 ];
 const hollowKnightRestingGroundsDataPageOneLineFour = [
   { component:'Clef', transform:`translate(0,${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
@@ -549,42 +537,37 @@ const hollowKnightRestingGroundsDataPageOneLineFour = [
     conditions:{showQuarterRest:true}, subcomponents:[] },
   { component:'Measure', transform:`translate(${11*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{showStaffBassMeasure:true},
     subcomponents:[{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${0*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+  { component:'Pedal', transform:`translate(${0*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalStart: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${1*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
+    subcomponents:[] },
+  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalStart', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${1*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${2*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${3*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${4*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${5*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${6*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    ] },
+  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalContinue: true },
     subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${7*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${8*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${9*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${10*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalContinue', transform:'translate(0,0)', conditions:{}}] },
-  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'PedalEnd', transform:'translate(0,0)', conditions:{}}] }
+    ] },
+  { component:'Pedal', transform:`translate(${11*STAFF_LINE_WIDTH},${3*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{ showPedalEnd: true },
+    subcomponents:[] }
 ];
 const hollowKnightRestingGroundsDataPageOne = [
   ...hollowKnightRestingGroundsDataPageOneLineOne,
