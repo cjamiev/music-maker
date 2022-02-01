@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import MusicNotationMapper from 'components/MusicNotationComponents/MusicNotationMapper';
 
-const DisplaySheetMusic = ({ sheetMusic, width, height, viewBox, isOneRowMode = false }) => {
+const DisplaySheetMusic = ({ sheetMusic, width, height, viewBox, isOneLineMode = false }) => {
   const ref = useRef();
-  const className = isOneRowMode ? 'display-sheet-music--one-row' : 'display-sheet-music';
+  const className = isOneLineMode ? 'display-sheet-music--one-line' : 'display-sheet-music';
 
   return (
     <div className={className} ref={ref}>

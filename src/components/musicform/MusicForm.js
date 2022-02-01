@@ -18,6 +18,11 @@ const MusicForm = ({ selectRestSymbol, selectPianoKey }) => {
         classColor="primary"
         onClick={() => { setType('piano'); }}
       />
+      <Button
+        label='Select Pedal'
+        classColor="primary"
+        onClick={() => { setType('pedal'); }}
+      />
       {type === 'rest' && <RestSelector selectRestSymbol={selectRestSymbol} />}
       {type === 'piano' && <Piano selectPianoKey={selectPianoKey} />}
     </div>

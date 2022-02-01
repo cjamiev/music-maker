@@ -20,22 +20,22 @@
   display: grid;
   grid-gap: 10px;
   grid-template-columns: [col] 500px [col] 100px [col] 100px [col] 100px;
-  grid-template-rows: [row] auto [row] auto [row] ;
+  grid-template-lines: [line] auto [line] auto [line] ;
 }
 
 .create__sheet-music {
   grid-column: col 2 / span 2;
-  grid-row: row ;
+  grid-line: line ;
 }
 .create__position-controller {
   grid-column: col ;
-  grid-row: row 2 ;
+  grid-line: line 2 ;
 }
 .create__sheet-music-form {
-  grid-row: row 2;
+  grid-line: line 2;
 }
 
 .create__footer {
   grid-column: col / span 4;
-  grid-row: row 3;
+  grid-line: line 3;
 }

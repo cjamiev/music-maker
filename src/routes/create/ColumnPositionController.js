@@ -5,8 +5,8 @@ const ZERO = 0;
 const ONE = 1;
 
 const ColumnPositionController = ({ editorPosition, data, onChange }) => {
-  const { pageIndex, rowIndex, columnIndex, isBassSelection } = editorPosition;
-  const currentLine = data[rowIndex];
+  const { pageIndex, lineIndex, columnIndex, isBassSelection } = editorPosition;
+  const currentLine = data[lineIndex];
   const lastColumnIndex = isBassSelection ? currentLine.bass.length - ONE : currentLine.treble.length - ONE;
 
   return (
@@ -17,11 +17,11 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
         classColor="primary"
         onClick={() => {
           const nextColumnIndex = lastColumnIndex + ONE;
-          const noteId = String(pageIndex) + String(rowIndex) + String(nextColumnIndex);
+          const noteId = String(pageIndex) + String(lineIndex) + String(nextColumnIndex);
           const newNote = {
             id: noteId,
             pageIndex,
-            rowIndex,
+            lineIndex,
             columnIndex: nextColumnIndex,
             component: 'Note',
             pianoKey: 'C4'
@@ -44,7 +44,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
             };
 
           const updatedData = data.map((item, index) => {
-            if(index === rowIndex) {
+            if(index === lineIndex) {
               return updatedLine;
             }
             return item;
@@ -87,7 +87,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
           const updatedSection = currentSection
             .filter((item) => !(item.columnIndex === columnIndex))
             .map((item,index) => {
-              const noteId = String(item.pageIndex) + String(item.rowIndex) + String(index);
+              const noteId = String(item.pageIndex) + String(item.lineIndex) + String(index);
               return {
                 ...item,
                 id: noteId,
@@ -106,7 +106,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
             };
 
           const updatedData = data.map((item, index) => {
-            if(index === rowIndex) {
+            if(index === lineIndex) {
               return updatedLine;
             }
             return item;

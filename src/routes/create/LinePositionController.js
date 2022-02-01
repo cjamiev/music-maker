@@ -4,80 +4,80 @@ import Button from 'components/button';
 const ZERO = 0;
 const ONE = 1;
 
-const RowPositionController = ({ editorPosition, data, onChange }) => {
-  const { pageIndex, rowIndex, columnIndex, isBassSelection } = editorPosition;
-  const currentLine = data[rowIndex];
-  const isFirstRowIndex = rowIndex === ZERO;
-  const isLastRowIndex = data.length - ONE === rowIndex;
+const LinePositionController = ({ editorPosition, data, onChange }) => {
+  const { pageIndex, lineIndex, columnIndex, isBassSelection } = editorPosition;
+  const currentLine = data[lineIndex];
+  const isFirstLineIndex = lineIndex === ZERO;
+  const isLastLineIndex = data.length - ONE === lineIndex;
 
   return (
     <div className="create__btn-group">
       <Button
-        label="Add Row"
+        label="Add Line"
         className="create__btn"
         classColor="primary"
         onClick={() => {
-          const nextRowIndex = rowIndex + ONE;
-          const noteId = String(pageIndex) + String(nextRowIndex) + String(ZERO);
+          const nextLineIndex = lineIndex + ONE;
+          const noteId = String(pageIndex) + String(nextLineIndex) + String(ZERO);
           const newNote = {
             id: noteId,
             pageIndex,
-            rowIndex: nextRowIndex,
+            lineIndex: nextLineIndex,
             columnIndex: ZERO,
             component: 'Note',
             pianoKey: 'C4'
           };
-          const nextRow = {
+          const nextLine = {
             treble: [newNote],
             center: [],
             bass: [newNote],
             bottom: []
           };
-          const updateData = data.concat([nextRow]);
+          const updateData = data.concat([nextLine]);
 
           onChange({
             ...editorPosition,
-            rowIndex: rowIndex + ONE,
+            lineIndex: lineIndex + ONE,
             columnIndex: ZERO,
             isBassSelection: false
           },updateData);
         }}
       />
       <Button
-        label="Prev Row"
+        label="Prev Line"
         className="create__btn"
         classColor="primary"
-        disabled={isFirstRowIndex}
+        disabled={isFirstLineIndex}
         onClick={() => {
           onChange({
             ...editorPosition,
-            rowIndex: rowIndex - ONE,
+            lineIndex: lineIndex - ONE,
             columnIndex: ZERO,
             isBassSelection: false
           });
         }}
       />
       <Button
-        label="Next Row"
+        label="Next Line"
         className="create__btn"
         classColor="primary"
-        disabled={isLastRowIndex}
+        disabled={isLastLineIndex}
         onClick={() => {
           onChange({
             ...editorPosition,
-            rowIndex: rowIndex + ONE,
+            lineIndex: lineIndex + ONE,
             columnIndex: ZERO,
             isBassSelection: false
           });
         }}
       />
       <Button
-        label="Delete Row"
+        label="Delete Line"
         className="create__btn"
         classColor="primary"
-        disabled={isLastRowIndex && isFirstRowIndex}
+        disabled={isLastLineIndex && isFirstLineIndex}
         onClick={() => {
-          const updatedData = data.filter((item, index) => index !== rowIndex)
+          const updatedData = data.filter((item, index) => index !== lineIndex)
             .map((entry,entryIndex) => {
               const updatedEntry = {
                 treble: entry.treble.map(item => {
@@ -85,7 +85,7 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
                   return {
                     ...item,
                     id: noteId,
-                    rowIndex: entryIndex
+                    lineIndex: entryIndex
                   };
                 }),
                 center: entry.center.map(item => {
@@ -93,7 +93,7 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
                   return {
                     ...item,
                     id: noteId,
-                    rowIndex: entryIndex
+                    lineIndex: entryIndex
                   };
                 }),
                 bass: entry.bass.map(item => {
@@ -101,7 +101,7 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
                   return {
                     ...item,
                     id: noteId,
-                    rowIndex: entryIndex
+                    lineIndex: entryIndex
                   };
                 }),
                 bottom: entry.bottom.map(item => {
@@ -109,16 +109,16 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
                   return {
                     ...item,
                     id: noteId,
-                    rowIndex: entryIndex
+                    lineIndex: entryIndex
                   };
                 })
               };
               return updatedEntry;
             });
-          const updatedEditorRowIndex = isLastRowIndex ? rowIndex - ONE: rowIndex;
+          const updatedEditorLineIndex = isLastLineIndex ? lineIndex - ONE: lineIndex;
           const updatedEditorPosition = {
             ...editorPosition,
-            rowIndex: updatedEditorRowIndex,
+            lineIndex: updatedEditorLineIndex,
             columnIndex: ZERO,
             isBassSelection: false
           };
@@ -130,4 +130,4 @@ const RowPositionController = ({ editorPosition, data, onChange }) => {
   );
 };
 
-export default RowPositionController;
+export default LinePositionController;
