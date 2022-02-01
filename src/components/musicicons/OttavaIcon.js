@@ -1,12 +1,13 @@
 import React from 'react';
 
 const OttavaIcon = ({
-  showBassa
+  showOttava,
+  showOttavaBassa
 }) => {
   return (
     <g
     >
-      {showBassa && <text
+      {showOttavaBassa && <text
         x="14.411576"
         y="32.556782"
         data-testdata-testid="ottava-bassa"
@@ -20,7 +21,7 @@ const OttavaIcon = ({
           8vb
         </tspan>
       </text>}
-      {!showBassa && <text
+      {showOttava && <text
         x="14.39401"
         y="30.603458"
         data-testdata-testid="ottava"

@@ -32,8 +32,8 @@ const iconMap = {
   [MUSIC_ICON_TYPES.CRESCENDO]: ComponentWrapper(CrescendoIcon, { showCrescendo: true }),
   [MUSIC_ICON_TYPES.DECRESCENDO]: ComponentWrapper(CrescendoIcon, { showDecrescendo: true }),
   [MUSIC_ICON_TYPES.MEASURE_END]: ComponentWrapper(MeasureIcon, { showMeasureEnd: true }),
-  [MUSIC_ICON_TYPES.REPEAT_START]: ComponentWrapper(MeasureIcon, { showRepeatStart: true }),
-  [MUSIC_ICON_TYPES.REPEAT_END]: ComponentWrapper(MeasureIcon, { showRepeatEnd: true }),
+  [MUSIC_ICON_TYPES.REPEAT_START]: ComponentWrapper(MeasureIcon, { showRepeatBarStart: true }),
+  [MUSIC_ICON_TYPES.REPEAT_END]: ComponentWrapper(MeasureIcon, { showRepeatBarEnd: true }),
   [MUSIC_ICON_TYPES.PEDAL_START]: ComponentWrapper(PedalIcon, { showPedalStart: true }),
   [MUSIC_ICON_TYPES.PEDAL_CONTINUE]: ComponentWrapper(PedalIcon, { showPedalContinue: true }),
   [MUSIC_ICON_TYPES.PEDAL_QUICK_RELEASE]: ComponentWrapper(PedalIcon, { showPedalQuickRelease: true }),
@@ -43,8 +43,8 @@ const iconMap = {
   [MUSIC_ICON_TYPES.QUARTER_REST]: ComponentWrapper(RestIcon, { showQuarterRest: true }),
   [MUSIC_ICON_TYPES.EIGHTH_REST]: ComponentWrapper(RestIcon, { showEighthRest: true }),
   [MUSIC_ICON_TYPES.SIXTEENTH_REST]: ComponentWrapper(RestIcon, { showSixteenthRest: true }),
-  [MUSIC_ICON_TYPES.OTTAVA]: ComponentWrapper(OttavaIcon, { showBassa: false }),
-  [MUSIC_ICON_TYPES.OTTAVA_BASSA]: ComponentWrapper(OttavaIcon, { showBassa: true })
+  [MUSIC_ICON_TYPES.OTTAVA]: ComponentWrapper(OttavaIcon, { showOttava: true }),
+  [MUSIC_ICON_TYPES.OTTAVA_BASSA]: ComponentWrapper(OttavaIcon, { showOttavaBassa: true })
 };
 
 const SCALE_SIZES = {

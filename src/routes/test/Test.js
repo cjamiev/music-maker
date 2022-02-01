@@ -2,9 +2,47 @@ import React from 'react';
 import Page from 'components/layout';
 import Button, { MusicIconButton } from 'components/button';
 import { ICON_SIZES, MUSIC_ICON_TYPES } from 'constants/icon';
-import { barTypes, noteModifierTypes, noteTypes, restTypes } from 'constants/musicnotation';
+import {
+  barTypes,
+  noteModifierTypes,
+  noteTypes,
+  restTypes,
+  pedalTypes,
+  ottavaTypes,
+  crescendoTypes
+} from 'constants/musicnotation';
 
 const Test = () => {
+  const renderCrescendoSymbol = crescendoTypes.map(item => {
+    return (
+      <MusicIconButton
+        key={item.key}
+        type={item.key}
+        onClick={() => { console.log(item.value); }}
+      />
+    );
+  }).filter(Boolean);
+
+  const renderOttavaSymbol = ottavaTypes.map(item => {
+    return (
+      <MusicIconButton
+        key={item.key}
+        type={item.key}
+        onClick={() => { console.log(item.value); }}
+      />
+    );
+  }).filter(Boolean);
+
+  const renderPedalSymbol = pedalTypes.map(item => {
+    return (
+      <MusicIconButton
+        key={item.key}
+        type={item.key}
+        onClick={() => { console.log(item.value); }}
+      />
+    );
+  }).filter(Boolean);
+
   const renderBarSymbol = barTypes.map(item => {
     return (
       <MusicIconButton
@@ -45,10 +83,11 @@ const Test = () => {
     );
   }).filter(Boolean);
 
-  console.log(renderBarSymbol);
-
   return (
     <Page>
+      {renderCrescendoSymbol}
+      {renderOttavaSymbol}
+      {renderPedalSymbol}
       {renderBarSymbol}
       {renderModifierSymbol}
       {renderNoteSymbol}

@@ -157,11 +157,11 @@ export const timeSignatures = [
 ];
 
 export const noteTypes = [
-  { key: 'whole-note', label: 'Whole Note' },
-  { key: 'half-note', label: 'Half Note' },
-  { key: 'quarter-note', label: 'Quarter Note' },
-  { key: 'eigth-note', label: '8th Note' },
-  { key: 'sixteenth-note', label: '16th Note' }
+  { key: 'whole-note', label: 'Whole Note', value: { showWholeNote: true } },
+  { key: 'half-note', label: 'Half Note', value: { showHalfNote: true } },
+  { key: 'quarter-note', label: 'Quarter Note', value: { showQuarterNote: true } },
+  { key: 'eighth-note', label: '8th Note', value: { showEighthNote: true } },
+  { key: 'sixteenth-note', label: '16th Note', value: { showSixteenthNote: true } }
 ];
 
 export const noteModifierTypes = [
@@ -178,9 +178,9 @@ export const noteModifierTypes = [
 ];
 
 export const barTypes = [
-  { key: 'measure-end', label: 'Measure End Bar', value: { showRepeatBarStart: true } },
-  { key: 'repeat-start', label: 'Repeat Bar Start', value: { showRepeatBarEnd: true } },
-  { key: 'repeat-end', label: 'Repeat Bar End', value: { showMeasureEnd: true } }
+  { key: 'measure-end', label: 'Measure End Bar', value: { showMeasureEnd: true } },
+  { key: 'repeat-start', label: 'Repeat Bar Start', value: { showRepeatBarStart: true } },
+  { key: 'repeat-end', label: 'Repeat Bar End', value: { showRepeatBarEnd: true } }
 ];
 
 export const restTypes = [
@@ -197,9 +197,18 @@ export const restTypes = [
 ];
 
 export const pedalTypes = [
-  { key: 'pedal-start', label: 'Pedal Start' },
-  { key: 'pedal-continue', label: 'Continue' },
-  { key: 'pedal-overlap', label: 'Overlap' },
-  { key: 'pedal-end', label: 'End' },
-  { key: '', label: 'Remove' }
+  { key: 'pedal-start', label: 'Pedal Start', value: { showPedalStart: true } },
+  { key: 'pedal-continue', label: 'Continue', value: { showPedalContinue: true } },
+  { key: 'pedal-quick-release', label: 'Quick Release', value: { showPedalQuickRelease: true } },
+  { key: 'pedal-end', label: 'End', value: { showPedalEnd: true } }
+];
+
+export const crescendoTypes = [
+  { key: 'crescendo', label: 'Pedal Start', value: { showCrescendo: true } },
+  { key: 'decrescendo', label: 'Continue', value: { showDecrescendo: true } }
+];
+
+export const ottavaTypes = [
+  { key: 'ottava', label: 'Ottava', value: { showOttava: true } },
+  { key: 'ottava-bassa', label: 'Ottava Bassa', value: { showOttavaBassa: true } }
 ];

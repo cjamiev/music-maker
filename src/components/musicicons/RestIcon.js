@@ -20,7 +20,7 @@ const RestIcon = ({
           y="46.787033"
         />
         <rect
-          className="musicicon__staff-line"
+          className="musicicon__rest-staff-line"
           width="48.928936"
           height="0.34232843"
           x="-58.118843"
@@ -38,7 +38,7 @@ const RestIcon = ({
           y="137.08061"
         />
         <rect
-          className="musicicon__staff-line"
+          className="musicicon__rest-staff-line"
           width="48.928936"
           height="0.34232843"
           x="-105.18384"
