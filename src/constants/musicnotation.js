@@ -203,10 +203,30 @@ export const pedalTypes = [
   { key: 'pedal-end', label: 'End', value: { showPedalEnd: true } }
 ];
 
-export const crescendoTypes = [
-  { key: 'crescendo', label: 'Pedal Start', value: { showCrescendo: true } },
-  { key: 'decrescendo', label: 'Continue', value: { showDecrescendo: true } }
+export const dynamicsTypes = [
+  { key: 'crescendo', label: 'Pedal Start', conditions: { showCrescendo: true } },
+  { key: 'decrescendo', label: 'Continue', conditions: { showDecrescendo: true } },
+  { key: 'ppp', value: 'ppp' },
+  { key: 'pp', value: 'pp' },
+  { key: 'p', value: 'p' },
+  { key: 'mp', value: 'mp' },
+  { key: 'fp', value: 'fp' },
+  { key: 'mf', value: 'mf' },
+  { key: 'f', value: 'f' },
+  { key: 'ff', value: 'ff' },
+  { key: 'fff', value: 'fff' },
+  { key: 'sfz', value: 'sfz' },
+  { key: 'dim.', value: 'dim.' },
+  { key: 'rit.', value: 'rit.' },
+  { key: 'decresc.', value: 'decresc' },
+  { key: 'cresc.', value: 'cresc.' },
+  { key: 'leggiero', value: 'leggiero' },
+  { key: 'a tempo', value: 'a tempo' },
+  { key: 'risoluto', value: 'risoluto' },
+  { key: 'dim. e poco rit.', value: 'dim. e poco rit.' },
+  { key: 'poco rit.', value: 'poco rit.' }
 ];
+
 
 export const ottavaTypes = [
   { key: 'ottava', label: 'Ottava', value: { showOttava: true } },

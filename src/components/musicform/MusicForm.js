@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RestSelector from './RestSelector';
 import PedalSelector from './PedalSelector';
+import DynamicsSelector from './DynamicsSelector';
 import Piano from './Piano';
 import Button from 'components/button';
 
@@ -24,6 +25,11 @@ const MusicForm = ({ selectSymbol }) => {
         classColor="primary"
         onClick={() => { setType('pedal'); }}
       />
+      <Button
+        label='Select Dynamics'
+        classColor="primary"
+        onClick={() => { setType('dynamic'); }}
+      />
       {type === 'rest' && <RestSelector selectRestSymbol={(selectedRestSymbol) => {
         selectSymbol({
           component: 'Rest',
@@ -40,6 +46,13 @@ const MusicForm = ({ selectSymbol }) => {
         selectSymbol({
           component: 'Note',
           pianoKey: selectedNoteSymbol
+        });
+      }} />}
+      {type === 'dynamic' && <DynamicsSelector selectDynamicsSymbol={(selectDynamicsSymbol) => {
+        console.log(selectDynamicsSymbol);
+        selectSymbol({
+          component: 'Dynamics',
+          ...selectDynamicsSymbol
         });
       }} />}
     </div>

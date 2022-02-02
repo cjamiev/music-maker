@@ -147,11 +147,19 @@ const getSheetMusic = (configuration, line, editorPosition) => {
       subcomponents:getSubcomponents(item)
     };
   });
+  const mappedCenterData = center.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      subcomponents: []
+    };
+  });
   const mappedBottomData = bottom.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: `translate(${columnIndexModifier*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
       subcomponents: []
     };
   });
@@ -167,6 +175,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: false}),
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: true}),
     ...mappedTrebleData,
+    ...mappedCenterData,
     ...mappedBassData,
     ...mappedBottomData
   ].filter(Boolean);

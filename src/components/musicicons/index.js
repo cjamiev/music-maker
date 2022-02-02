@@ -1,4 +1,4 @@
-export { default as CrescendoIcon } from './CrescendoIcon';
+export { default as DynamicsIcon } from './DynamicsIcon';
 export { default as MeasureIcon } from './MeasureIcon';
 export { default as ModifierIcon } from './ModifierIcon';
 export { default as NoteIcon } from './NoteIcon';

@@ -15,7 +15,7 @@ const PedalSelector = ({ selectPedalSymbol }) => {
   }).filter(Boolean);
 
   return (
-    <div className='music-form__rest-selector'>
+    <div className='music-form__selector'>
       {renderPedalSymbol}
     </div>
   );

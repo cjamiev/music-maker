@@ -57,6 +57,43 @@ const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {
   return updatedData;
 };
 
+const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
+  const matched = currentLine.center.find(item => item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex);
+  const updatedSection = matched ? currentLine.center.map(item => {
+    if(item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex) {
+      return {
+        ...item,
+        ...update
+      };
+    }
+    return item;
+  })
+    : currentLine.center.concat({
+      pageIndex: editorPosition.pageIndex,
+      lineIndex: editorPosition.lineIndex,
+      columnIndex: editorPosition.columnIndex,
+      ...update
+    });
+
+  const updatedLine = {
+    ...currentLine,
+    center: updatedSection
+  };
+
+  const updatedData = data.map((item, index) => {
+    if(index === editorPosition.lineIndex) {
+      return updatedLine;
+    }
+    return item;
+  });
+
+  return updatedData;
+};
+
 const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
   const matched = currentLine.bottom.find(item => item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
@@ -136,13 +173,14 @@ const Create = () => {
   };
 
   const handleDataChange = (update) => {
-    const updatedData = update.component === 'Pedal'
-      ? getUpdatedPedal({ editorPosition, currentLine, data, update })
-      : getUpdatedSymbols({ editorPosition, currentLine, data, update });
-    setData(updatedData);
+    if(update.component === 'Pedal') {
+      setData(getUpdatedPedal({ editorPosition, currentLine, data, update }));
+    } else if(update.component === 'Dynamics') {
+      setData(getUpdatedDynamics({ editorPosition, currentLine, data, update }));
+    } else {
+      setData(getUpdatedSymbols({ editorPosition, currentLine, data, update }));
+    }
   };
-
-  console.log(currentLine);
 
   // <CreateSidePanel configuration={configuration} onConfigurationChange={handleConfigurationChange} />
   return (

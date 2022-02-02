@@ -26,8 +26,6 @@ export const MUSIC_ICON_TYPES = {
   QUARTER_REST: 'quarter-rest',
   EIGHTH_REST: 'eighth-rest',
   SIXTEENTH_REST: 'sixteenth-rest',
-  CRESCENDO: 'crescendo',
-  DECRESCENDO: 'decrescendo',
   REPEAT_START: 'repeat-start',
   REPEAT_END: 'repeat-end',
   MEASURE_END: 'measure-end',
@@ -36,7 +34,28 @@ export const MUSIC_ICON_TYPES = {
   PEDAL_QUICK_RELEASE: 'pedal-quick-release',
   PEDAL_END: 'pedal-end',
   OTTAVA: 'ottava',
-  OTTAVA_BASSA: 'ottava-bassa'
+  OTTAVA_BASSA: 'ottava-bassa',
+  PIANISSISSIMO: 'ppp',
+  PIANISSIMO: 'pp',
+  PIANO: 'p',
+  MEZZOPIANO: 'mp',
+  FORTEPIANO: 'fp',
+  MEZZOFORTE: 'mf',
+  FORTE: 'f',
+  FORTISSIMO: 'ff',
+  FORTISSISSIMO: 'fff',
+  SFORZANDO: 'sfz',
+  DIMINUENDO: 'dim.',
+  RITARDANO: 'rit.',
+  DECRESCENDO: 'decrescendo',
+  CRESCENDO: 'crescendo',
+  DECRESCENDO_TEXT: 'decresc.',
+  CRESCENDO_TEXT: 'cresc.',
+  LEGGIERO: 'leggiero',
+  A_TEMPO: 'a tempo',
+  RISOLUTO: 'risoluto',
+  DIMINUENDO_E_POCO_RITARDANDO: 'dim. e poco rit.',
+  POCO_RITARDANO: 'poco rit.'
 };
 
 export const ICON_SIZES = {

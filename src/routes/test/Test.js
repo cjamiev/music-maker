@@ -9,16 +9,19 @@ import {
   restTypes,
   pedalTypes,
   ottavaTypes,
-  crescendoTypes
+  dynamicsTypes
 } from 'constants/musicnotation';
 
 const Test = () => {
-  const renderCrescendoSymbol = crescendoTypes.map(item => {
+  const renderDynamicsSymbol = dynamicsTypes.map(item => {
     return (
       <MusicIconButton
         key={item.key}
         type={item.key}
-        onClick={() => { console.log(item.value); }}
+        onClick={() => { console.log({
+          conditions: item.conditions || {},
+          value: item.value
+        }); }}
       />
     );
   }).filter(Boolean);
@@ -85,7 +88,7 @@ const Test = () => {
 
   return (
     <Page>
-      {renderCrescendoSymbol}
+      {renderDynamicsSymbol}
       {renderOttavaSymbol}
       {renderPedalSymbol}
       {renderBarSymbol}
