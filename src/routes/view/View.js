@@ -7,6 +7,8 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
 import Button from 'components/button';
 import 'assets/img/dearly-beloved.jpg';
+import 'assets/img/ff7-prelude.jpg';
+import 'assets/img/mario-theme.jpg';
 
 const ZERO = 0;
 const ONE = 1;
@@ -25,13 +27,14 @@ const getSvgAttributes = (currentZoom) => {
 
 const View = () => {
   const [musicSelection, setMusicSelection] = useState([]);
-  const [isImageShown, setIsImageShown] = useState(false);
+  const [musicImage, setMusicImage] = useState('');
   const [pageNumber, setPageNumber] = useState(ZERO);
   const [currentZoom, setCurrentZoom] = useLocalStorage(LS_ZOOM, DEFAULT_ZOOM_INDEX, false);
   const musicNotationSvgAttributes = getSvgAttributes(Number(currentZoom));
 
   const handleResetMusicSelection = () => {
     setMusicSelection([]);
+    setMusicImage('');
     setPageNumber([]);
   };
 
@@ -56,25 +59,26 @@ const View = () => {
     }
   };
 
-  const handleShowImage = () => {
-    setIsImageShown(!isImageShown);
+  const handleShowImage = (src) => {
+    setMusicImage(src);
   };
 
   const renderView = () => {
     if(musicSelection.length > ZERO) {
       return <DisplaySheetMusic sheetMusic={musicSelection[pageNumber]} {...musicNotationSvgAttributes}/>;
-    } else if (isImageShown) {
+    } else if (musicImage) {
       return (<div>
         <img
           className="view__sheet_music_image"
-          src="dearly-beloved.jpg"
-          alt="Seer"
+          src={musicImage}
         />
-        <Button
-          label="Back to Selection"
-          classColor="primary"
-          onClick={handleShowImage}
-        />
+        <div className="viewHeader">
+          <Button
+            label="Back to Selection"
+            classColor="primary"
+            onClick={handleResetMusicSelection}
+          />
+        </div>
       </div>);
     } else {
       return <ViewCards onChangeSelection={handleChangeMusicSelection} onShowImage={handleShowImage} />;

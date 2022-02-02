@@ -12,10 +12,55 @@ import {
 } from 'mock/resting-grounds-sheet-music';
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 import 'assets/img/seer.jpg';
+import 'assets/img/mario.jpg';
+import 'assets/img/meteor.jpg';
+import 'assets/img/sora.jpg';
 
 const ViewCards = ({ onChangeSelection, onShowImage }) => {
   return (
     <div className="flex--horizontal">
+      <Card
+        className="clickable"
+        title="Dearly Beloved"
+        body={
+          <img
+            className="view__image"
+            src="sora.jpg"
+            alt="Sora"
+          />
+        }
+        onClick={() => {
+          onShowImage('dearly-beloved.jpg');
+        }}
+      />
+      <Card
+        className="clickable"
+        title="FF7 Prelude"
+        body={
+          <img
+            className="view__image"
+            src="meteor.jpg"
+            alt="Meteor"
+          />
+        }
+        onClick={() => {
+          onShowImage('ff7-prelude.jpg');
+        }}
+      />
+      <Card
+        className="clickable"
+        title="Mario Theme"
+        body={
+          <img
+            className="view__image"
+            src="mario.jpg"
+            alt="mario"
+          />
+        }
+        onClick={() => {
+          onShowImage('mario-theme.jpg');
+        }}
+      />
       <Card
         title="Resting Grounds"
         body={
@@ -43,13 +88,6 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
         title="Test"
         onClick={() => {
           onChangeSelection([allWholeNoteData,allQuarterNoteData, allQuarterChordData, allModifierData]);
-        }}
-      />
-      <Card
-        className="clickable"
-        title="Dearly Beloved"
-        onClick={() => {
-          onShowImage();
         }}
       />
     </div>
