@@ -11,31 +11,23 @@
   width: 80px;
 }
 
-.sidepanel {
-  width: 400px;
+.create__displaymusic {
+  grid-area: displaymusic;
+}
+.create__config {
+  grid-area: config;
   border-right: 1px solid rgb(228, 228, 228);
+  margin-right: 10px;
+}
+.create__form {
+  grid-area: form;
 }
 
-.create__grid {
+.create__container {
+  margin-top: 10px;
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: [col] 500px [col] 100px [col] 100px [col] 100px;
-  grid-template-lines: [line] auto [line] auto [line] ;
-}
-
-.create__sheet-music {
-  grid-column: col 2 / span 2;
-  grid-line: line ;
-}
-.create__position-controller {
-  grid-column: col ;
-  grid-line: line 2 ;
-}
-.create__sheet-music-form {
-  grid-line: line 2;
-}
-
-.create__footer {
-  grid-column: col / span 4;
-  grid-line: line 3;
+  grid-template-areas: 
+    "config displaymusic displaymusic displaymusic displaymusic displaymusic"
+    "config form form form form form"
+    "config form form form form form";
 }

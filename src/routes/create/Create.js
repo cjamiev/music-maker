@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import MusicForm from 'components/musicform';
-import CreateSidePanel from './CreateSidePanel';
+import Configuration from './Configuration';
 import ColumnPositionController from './ColumnPositionController';
 import LinePositionController from './LinePositionController';
 import Page from 'components/layout';
@@ -182,22 +182,22 @@ const Create = () => {
     }
   };
 
-  // <CreateSidePanel configuration={configuration} onConfigurationChange={handleConfigurationChange} />
   return (
     <Page >
-      <div className="create__grid">
-        <div className="create__sheet-music">
+      <div className="create__container">
+        <div className="create__displaymusic">
           <DisplaySheetMusic
             isOneLineMode={true}
             sheetMusic={getSheetMusic(configuration, data[editorPosition.lineIndex], editorPosition)}
             {...attributes}
           />
         </div>
-        <div className="create__position-controller">
+        <div className="create__config">
           <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
           <LinePositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
+          <Configuration configuration={configuration} onConfigurationChange={handleConfigurationChange} />
         </div>
-        <div className="create__sheet-music-form">
+        <div className="create__form">
           <MusicForm selectSymbol={handleDataChange} />
         </div>
       </div>

@@ -3,7 +3,7 @@ import Configuration from './Configuration';
 
 const CreateSidePanel = ({ configuration, onConfigurationChange }) => {
   return (
-    <div className="sidepanel">
+    <div>
       <Configuration configuration={configuration} onChange={onConfigurationChange} />
     </div>
   );

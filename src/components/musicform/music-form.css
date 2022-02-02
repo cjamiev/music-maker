@@ -1,3 +1,9 @@
-.music-form__selector {
+.music-form__btn-group {
   display: flex;
+}
+
+.music-form__selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
 }
