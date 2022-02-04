@@ -21,7 +21,7 @@ const TIME_SIGNATURES = timeSignatures.map((opts) => {
   return { ...opts, selected: false };
 });
 
-const Configuration = ({ configuration, onChange }) => {
+const Configuration = ({ configuration, onConfigurationChange }) => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [tempoOptions, setTempoOptions] = useState(tempo);
@@ -42,7 +42,7 @@ const Configuration = ({ configuration, onChange }) => {
         selected={title}
         onChange={({ selected }) => {
           setTitle(selected);
-          onChange({ title: selected });
+          onConfigurationChange({ title: selected });
         }}
       />
       <Text
@@ -50,7 +50,7 @@ const Configuration = ({ configuration, onChange }) => {
         selected={subtitle}
         onChange={({ selected }) => {
           setSubtitle(selected);
-          onChange({ subtitle: selected });
+          onConfigurationChange({ subtitle: selected });
         }}
       />
       <Dropdown
@@ -58,7 +58,7 @@ const Configuration = ({ configuration, onChange }) => {
         values={tempoOptions}
         onChange={({ values }) => {
           setTempoOptions(values);
-          onChange({ tempo: values.find(item => item.selected).label });
+          onConfigurationChange({ tempo: values.find(item => item.selected).label });
         }}
       />
       <Text
@@ -66,7 +66,7 @@ const Configuration = ({ configuration, onChange }) => {
         selected={author}
         onChange={({ selected }) => {
           setAuthor(selected);
-          onChange({ author: selected });
+          onConfigurationChange({ author: selected });
         }}
       />
       <Dropdown
@@ -74,7 +74,7 @@ const Configuration = ({ configuration, onChange }) => {
         values={timeSignatureOptions}
         onChange={({ values }) => {
           setTimeSignatureOptions(values);
-          onChange({ timeSignature: values.find(item => item.selected).value });
+          onConfigurationChange({ timeSignature: values.find(item => item.selected).value });
         }}
       />
       <Dropdown
@@ -82,7 +82,7 @@ const Configuration = ({ configuration, onChange }) => {
         values={keySignatureOptions}
         onChange={({ values }) => {
           setKeySignatureOptions(values);
-          onChange({ keySignature: values.find(item => item.selected).value });
+          onConfigurationChange({ keySignature: values.find(item => item.selected).value });
         }}
       />
     </div>

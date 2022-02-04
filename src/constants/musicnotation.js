@@ -224,7 +224,7 @@ export const dynamicsTypes = [
   { key: 'leggiero', value: 'leggiero' },
   { key: 'a tempo', value: 'a tempo' },
   { key: 'risoluto', value: 'risoluto' },
-  { key: 'dim. e poco rit.', value: 'dim. e poco rit.' },
+  { key: 'e', value: 'e' },
   { key: 'poco rit.', value: 'poco rit.' },
   { key: 'dynamics-remove', label: 'Remove', value: { }, shouldRemove: true }
 ];

@@ -54,7 +54,7 @@ export const MUSIC_ICON_TYPES = {
   LEGGIERO: 'leggiero',
   A_TEMPO: 'a tempo',
   RISOLUTO: 'risoluto',
-  DIMINUENDO_E_POCO_RITARDANDO: 'dim. e poco rit.',
+  E: 'e',
   POCO_RITARDANO: 'poco rit.',
   DYNAMICS_REMOVE: 'dynamics-remove',
   PEDAL_REMOVE: 'pedal-remove'

@@ -48,7 +48,7 @@ const iconMap = {
   [MUSIC_ICON_TYPES.LEGGIERO]: ComponentWrapper(DynamicsIcon, { value:'leggiero' }),
   [MUSIC_ICON_TYPES.A_TEMPO]: ComponentWrapper(DynamicsIcon, { value:'a tempo' }),
   [MUSIC_ICON_TYPES.RISOLUTO]: ComponentWrapper(DynamicsIcon, { value:'risoluto' }),
-  [MUSIC_ICON_TYPES.DIMINUENDO_E_POCO_RITARDANDO]: ComponentWrapper(DynamicsIcon, { value:'dim. e poco rit.' }),
+  [MUSIC_ICON_TYPES.E]: ComponentWrapper(DynamicsIcon, { value:'e' }),
   [MUSIC_ICON_TYPES.POCO_RITARDANO]: ComponentWrapper(DynamicsIcon, { value:'poco rit.' }),
   [MUSIC_ICON_TYPES.DYNAMICS_REMOVE]: ComponentWrapper(DynamicsIcon, { value:'Remove' }),
   [MUSIC_ICON_TYPES.MEASURE_END]: ComponentWrapper(MeasureIcon, { showMeasureEnd: true }),

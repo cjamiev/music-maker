@@ -1,10 +1,15 @@
 import React from 'react';
 
+const BASE_TEXT_X = '27.918215';
+const X_MODIFIER = '2.538988';
+
 const CrescendoIcon = ({
   showCrescendo,
   showDecrescendo,
   value
 }) => {
+  const xCoordinate = value ? BASE_TEXT_X - (value.length * X_MODIFIER) : BASE_TEXT_X;
+
   return (
     <g>
       {showCrescendo && <path
@@ -19,16 +24,16 @@ const CrescendoIcon = ({
       />}
       { value &&
         <text
-          x="16.918215"
+          x={xCoordinate}
           y="28.169075"
           data-testid="condition-dynamic-text"
-          className="musicicon__dynamic-text"
+          className="musicicon__text"
           transform="scale(0.87702874,1.1402135)">
           <tspan
             role="line"
             data-testid="dynamic-text"
-            className="musicicon__dynamic-text"
-            x="16.918215"
+            className="musicicon__text"
+            x={xCoordinate}
             y="28.169075"
           >
             {value}

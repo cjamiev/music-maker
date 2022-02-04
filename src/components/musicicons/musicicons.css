@@ -88,8 +88,22 @@
   stroke-width:0.71827;
 }
 
-.musicicon__dynamic-text {
-  font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.8662px;font-family:Gabriola;-inkscape-font-specification:'Gabriola, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke:#000000;stroke-width:0.793725;stroke-miterlimit:4;stroke-dasharray:none;
+.musicicon__text {
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  font-stretch:normal;
+  font-size:18px;
+  font-family:Gabriola;-inkscape-font-specification:'Gabriola, Normal';
+  font-variant-ligatures:normal;
+  font-variant-caps:normal;
+  font-variant-numeric:normal;
+  font-variant-east-asian:normal;
+  fill:#000000;
+  stroke:#000000;
+  stroke-width:0.793725;
+  stroke-miterlimit:4;
+  stroke-dasharray:none;
 }
 
 .musicicon__ottava {

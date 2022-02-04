@@ -60,16 +60,16 @@ const PedalIcon = ({
       </g>}
       { value &&
         <text
-          x="16.918215"
+          x="12.684287"
           y="28.169075"
           data-testid="condition-pedal-text"
-          className="musicicon__pedal-text"
+          className="musicicon__text"
           transform="scale(0.87702874,1.1402135)">
           <tspan
             role="line"
             data-testid="pedal-text"
-            className="musicicon__pedal-text"
-            x="16.918215"
+            className="musicicon__text"
+            x="12.684287"
             y="28.169075"
           >
             {value}
