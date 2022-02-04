@@ -13,11 +13,12 @@ const DynamicsSelector = ({ selectDynamicsSymbol }) => {
           conditions: item.conditions || {},
           content: {
             value: item.value
-          }
+          },
+          shouldRemove: item.shouldRemove
         }); }}
       />
     );
-  }).filter(Boolean);
+  });
 
   return (
     <div className='music-form__selector'>

@@ -9,7 +9,10 @@ const PedalSelector = ({ selectPedalSymbol }) => {
       <MusicIconButton
         key={item.key}
         type={item.key}
-        onClick={() => { selectPedalSymbol(item.value); }}
+        onClick={() => { selectPedalSymbol({
+          conditions: item.value,
+          shouldRemove: item.shouldRemove
+        }); }}
       />
     );
   }).filter(Boolean);

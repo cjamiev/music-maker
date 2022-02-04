@@ -61,7 +61,7 @@ const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
   const matched = currentLine.center.find(item => item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex);
-  const updatedSection = matched ? currentLine.center.map(item => {
+  const updatedSection = (matched || update.shouldRemove) ? currentLine.center.map(item => {
     if(item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex) {
@@ -71,7 +71,7 @@ const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
       };
     }
     return item;
-  })
+  }).filter(item => !item.shouldRemove)
     : currentLine.center.concat({
       pageIndex: editorPosition.pageIndex,
       lineIndex: editorPosition.lineIndex,
@@ -98,7 +98,7 @@ const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
   const matched = currentLine.bottom.find(item => item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex);
-  const updatedSection = matched ? currentLine.bottom.map(item => {
+  const updatedSection = (matched || update.shouldRemove) ? currentLine.bottom.map(item => {
     if(item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex) {
@@ -108,7 +108,7 @@ const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
       };
     }
     return item;
-  })
+  }).filter(item => !item.shouldRemove)
     : currentLine.bottom.concat({
       pageIndex: editorPosition.pageIndex,
       lineIndex: editorPosition.lineIndex,

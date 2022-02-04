@@ -4,7 +4,8 @@ const PedalIcon = ({
   showPedalStart,
   showPedalContinue,
   showPedalQuickRelease,
-  showPedalEnd
+  showPedalEnd,
+  value
 }) => {
   return (
     <g>
@@ -57,6 +58,24 @@ const PedalIcon = ({
           transform="rotate(-90)"
         />
       </g>}
+      { value &&
+        <text
+          x="16.918215"
+          y="28.169075"
+          data-testid="condition-pedal-text"
+          className="musicicon__pedal-text"
+          transform="scale(0.87702874,1.1402135)">
+          <tspan
+            role="line"
+            data-testid="pedal-text"
+            className="musicicon__pedal-text"
+            x="16.918215"
+            y="28.169075"
+          >
+            {value}
+          </tspan>
+        </text>
+      }
     </g>
   );
 };

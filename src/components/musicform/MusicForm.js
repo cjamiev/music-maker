@@ -18,7 +18,7 @@ const renderSelector = (type, selectSymbol) => {
     return (<PedalSelector selectPedalSymbol={(selectedPedalSymbol) => {
       selectSymbol({
         component: 'Pedal',
-        conditions: selectedPedalSymbol
+        ...selectedPedalSymbol
       });
     }} />);
   }

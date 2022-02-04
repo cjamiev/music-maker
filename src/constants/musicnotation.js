@@ -200,7 +200,8 @@ export const pedalTypes = [
   { key: 'pedal-start', label: 'Pedal Start', value: { showPedalStart: true } },
   { key: 'pedal-continue', label: 'Continue', value: { showPedalContinue: true } },
   { key: 'pedal-quick-release', label: 'Quick Release', value: { showPedalQuickRelease: true } },
-  { key: 'pedal-end', label: 'End', value: { showPedalEnd: true } }
+  { key: 'pedal-end', label: 'End', value: { showPedalEnd: true } },
+  { key: 'pedal-remove', label: 'Remove', value: { }, shouldRemove: true }
 ];
 
 export const dynamicsTypes = [
@@ -224,7 +225,8 @@ export const dynamicsTypes = [
   { key: 'a tempo', value: 'a tempo' },
   { key: 'risoluto', value: 'risoluto' },
   { key: 'dim. e poco rit.', value: 'dim. e poco rit.' },
-  { key: 'poco rit.', value: 'poco rit.' }
+  { key: 'poco rit.', value: 'poco rit.' },
+  { key: 'dynamics-remove', label: 'Remove', value: { }, shouldRemove: true }
 ];
 
 

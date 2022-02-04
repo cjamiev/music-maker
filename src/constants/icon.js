@@ -55,7 +55,9 @@ export const MUSIC_ICON_TYPES = {
   A_TEMPO: 'a tempo',
   RISOLUTO: 'risoluto',
   DIMINUENDO_E_POCO_RITARDANDO: 'dim. e poco rit.',
-  POCO_RITARDANO: 'poco rit.'
+  POCO_RITARDANO: 'poco rit.',
+  DYNAMICS_REMOVE: 'dynamics-remove',
+  PEDAL_REMOVE: 'pedal-remove'
 };
 
 export const ICON_SIZES = {
