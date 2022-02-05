@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-const BASE_TITLE_X = '192.07258';
-const BASE_SUBTITLE_X = '229.358114';
-const BASE_AUTHOR_X = '413.57031';
-const X_TITLE_MODIFIER = '2.538988';
-const X_SUBTITLE_MODIFIER = '3';
-const X_AUTHOR_MODIFIER = '6';
+const BASE_TITLE_X = 247.75562;
+const X_TITLE_MODIFIER = 6.51944;
+const BASE_SUBTITLE_X = 250.11121;
+const X_SUBTITLE_MODIFIER = 4.05045;
+const BASE_AUTHOR_X = 413.57031;
+const X_AUTHOR_MODIFIER = 6;
 
 export const TitleSVG = ({ transform, content }) => {
   const { title, subtitle, author, tempo } = content;

@@ -5,7 +5,7 @@ import DynamicsSelector from './DynamicsSelector';
 import Piano from './Piano';
 import Button from 'components/button';
 
-const renderSelector = (type, selectSymbol) => {
+const renderSelector = (type, selectSymbol, isBassSelection) => {
   if(type === 'rest') {
     return (<RestSelector selectRestSymbol={(selectedRestSymbol) => {
       selectSymbol({
@@ -35,11 +35,12 @@ const renderSelector = (type, selectSymbol) => {
         component: 'Note',
         pianoKey: selectedNoteSymbol
       });
-    }} />);
+    }} isBassSelection={isBassSelection}
+    />);
   }
 };
 
-const MusicForm = ({ selectSymbol }) => {
+const MusicForm = ({ selectSymbol, isBassSelection }) => {
   const [type, setType] = useState('piano');
 
   return (
@@ -66,7 +67,7 @@ const MusicForm = ({ selectSymbol }) => {
           onClick={() => { setType('dynamic'); }}
         />
       </div>
-      {renderSelector(type, selectSymbol)}
+      {renderSelector(type, selectSymbol, isBassSelection)}
     </div>
   );
 };

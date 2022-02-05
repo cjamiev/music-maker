@@ -198,7 +198,7 @@ const Create = () => {
           <Configuration configuration={configuration} onConfigurationChange={handleConfigurationChange} />
         </div>
         <div className="create__form">
-          <MusicForm selectSymbol={handleDataChange} />
+          <MusicForm selectSymbol={handleDataChange} isBassSelection={editorPosition.isBassSelection} />
         </div>
       </div>
     </Page>

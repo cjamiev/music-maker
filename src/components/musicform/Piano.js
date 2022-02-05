@@ -1,16 +1,16 @@
 import React from 'react';
-import { pianoKeyList } from 'constants/pianokeys';
+import { pianoKeyList, bassPianoKeyList } from 'constants/pianokeys';
 
-const Piano = ({ selectPianoKey }) => {
-  const renderPianoKeys = pianoKeyList.map(pianoKeyId => {
-    const isBlackKey = pianoKeyId.includes('#');
+const Piano = ({ selectPianoKey, isBassSelection }) => {
+  const renderPianoKeys = pianoKeyList.map((pianoKeyId, index) => {
+    const isBlackKey = isBassSelection ? bassPianoKeyList[index].includes('#') : pianoKeyId.includes('#');
     const className = isBlackKey ? 'key black' : 'key white';
-    const pianoKeyName = isBlackKey ? '' : pianoKeyId;
+    const pianoKeyName = isBassSelection ? bassPianoKeyList[index] : pianoKeyId;
 
     return (
       <div key={pianoKeyId} className={className} onClick={() => { selectPianoKey(pianoKeyId.replace('#','')); }}>
         <span className='piano-text'>
-          {pianoKeyName}
+          {!isBlackKey ? pianoKeyName : ''}
         </span>
       </div>
     );
