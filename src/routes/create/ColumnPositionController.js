@@ -5,7 +5,7 @@ const ZERO = 0;
 const ONE = 1;
 
 const ColumnPositionController = ({ editorPosition, data, onChange }) => {
-  const { pageIndex, lineIndex, columnIndex, isBassSelection } = editorPosition;
+  const { pageIndex, lineIndex, columnIndex, noteType, isBassSelection } = editorPosition;
   const currentLine = data[lineIndex];
   const lastColumnIndex = isBassSelection ? currentLine.bass.length - ONE : currentLine.treble.length - ONE;
 
@@ -24,7 +24,8 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
             lineIndex,
             columnIndex: nextColumnIndex,
             component: 'Note',
-            pianoKey: 'C4'
+            pianoKey: 'C4',
+            noteType
           };
           const updatedEditorPosition = {
             ...editorPosition,

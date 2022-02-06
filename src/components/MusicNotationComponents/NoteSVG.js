@@ -64,13 +64,13 @@ export const ChordNotationSVG = ({ transform, content = {}, conditions = {} }) =
 };
 
 export const StemmedNoteSVG = ({ transform, conditions = {} }) => {
-  const { showNoteStem, showEighthNoteFlag, showHalfNote, showSixteenthNoteFlag } = conditions;
+  const { showEighthNoteFlag, showHalfNote, showSixteenthNoteFlag } = conditions;
 
   return (
     <g data-testid="subcomponent-stemmed-note" transform={transform} aria-label="stemmed note" >
       <ellipse data-testid="element-note-head" className="svg__20" aria-label="note head" cx="47.138676" cy="132.56465" rx="3.9879844" ry="2.5694997" transform="matrix(0.94215293,-0.33518333,0.25876352,0.9659407,0,0)" />
       { showHalfNote && <ellipse data-testid="half-note" className="svg__21" aria-label="condition half note" cx="-62.477371" cy="156.10141" rx="3.6651206" ry="1.5457097" transform="matrix(0.87023416,-0.49263832,0.85255896,0.52263106,0,0)" /> }
-      { showNoteStem && <rect data-testid="note-stem" className="svg__20" aria-label="condition note stem" width="0.45734397" height="16.595196" x="82.046173" y="94.627319" /> }
+      { <rect data-testid="note-stem" className="svg__20" aria-label="condition note stem" width="0.45734397" height="16.595196" x="82.046173" y="94.627319" /> }
       { showEighthNoteFlag && <path data-testid="eighth-note-flag" className="svg__31" aria-label="condition eighth note flag" d="m 82.49591,94.62796 c 0,0 -0.30133,3.29712 2.86944,4.79505 3.17077,1.49795 0.69676,9.39918 0.63805,9.28395 -0.0588,-0.11522 1.85547,-6.80885 -1.01972,-8.09327 -2.77486,-1.2396 -2.56154,-1.08227 -2.56154,-1.08227 l 0.0738,-4.90346" /> }
       { showSixteenthNoteFlag && <g data-testid="sixteenth-note-flag" aria-label="condition sixteenth note flag" >
         <rect data-testid="sixteength-note-stem" className="svg__20" width="0.45734397" height="16.595196" x="82.046814" y="87.363037" />
@@ -81,15 +81,15 @@ export const StemmedNoteSVG = ({ transform, conditions = {} }) => {
 };
 
 export const StemmedNoteFlippedSVG = ({ transform, conditions = {} }) => {
-  const { showNoteStemFlipped, showEighthNoteFlagFlipped, showHalfNoteFlipped, showSixteenthNoteFlagFlipped } = conditions;
+  const { showEighthNoteFlag, showHalfNote, showSixteenthNoteFlag } = conditions;
 
   return (
     <g data-testid="subcomponent-stemmed-note-flipped" transform={transform} aria-label="stemmed note flipped" >
       <ellipse data-testid="element-note-head" className="svg__20" aria-label="note head" cx="-47.138428" cy="-132.52782" rx="3.9879844" ry="2.5694997" transform="matrix(-0.94215293,0.33518333,-0.25876352,-0.9659407,0,0)" />
-      { showHalfNoteFlipped && <ellipse data-testid="half-note" className="svg__21" aria-label="condition half note flipped" cx="62.230122" cy="-155.83528" rx="3.6651206" ry="1.5457097" transform="matrix(-0.87023416,0.49263832,-0.85255896,-0.52263106,0,0)" /> }
-      { showNoteStemFlipped && <rect data-testid="note-stem" className="svg__20" aria-label="condition note stem flipped" width="0.45734397" height="16.595196" x="74.956619" y="113.24069" /> }
-      { showEighthNoteFlagFlipped && <path data-testid="eighth-note-flag" className="svg__31" aria-label="condition eighth note flag flipped" d="m 75.40634,129.83554 c 0,0 -0.30133,-3.29712 2.86944,-4.79505 3.17077,-1.49795 0.69676,-9.39918 0.63805,-9.28395 -0.0588,0.11522 1.85547,6.80885 -1.01972,8.09327 -2.77486,1.2396 -2.56154,1.08227 -2.56154,1.08227 l 0.0738,4.90346" /> }
-      { showSixteenthNoteFlagFlipped && <g data-testid="sixteenth-note-flag" aria-label="condition sixteenth note flag flipped" transform="matrix(1,0,0,-1,-552.01334,421.78555)" >
+      { showHalfNote && <ellipse data-testid="half-note" className="svg__21" aria-label="condition half note flipped" cx="62.230122" cy="-155.83528" rx="3.6651206" ry="1.5457097" transform="matrix(-0.87023416,0.49263832,-0.85255896,-0.52263106,0,0)" /> }
+      { <rect data-testid="note-stem" className="svg__20" aria-label="condition note stem flipped" width="0.45734397" height="16.595196" x="74.956619" y="113.24069" /> }
+      { showEighthNoteFlag && <path data-testid="eighth-note-flag" className="svg__31" aria-label="condition eighth note flag flipped" d="m 75.40634,129.83554 c 0,0 -0.30133,-3.29712 2.86944,-4.79505 3.17077,-1.49795 0.69676,-9.39918 0.63805,-9.28395 -0.0588,0.11522 1.85547,6.80885 -1.01972,8.09327 -2.77486,1.2396 -2.56154,1.08227 -2.56154,1.08227 l 0.0738,4.90346" /> }
+      { showSixteenthNoteFlag && <g data-testid="sixteenth-note-flag" aria-label="condition sixteenth note flag flipped" transform="matrix(1,0,0,-1,-552.01334,421.78555)" >
         <rect data-testid="sixteength-note-stem-flipped" className="svg__20" aria-label="sixteength note stem flipped" width="0.45734397" height="16.595196" x="626.97058" y="284.68509" />
         <path data-testid="sixteength-note-flag-flipped" className="svg__31" aria-label="sixteength note flag flipped" d="m 627.41987,284.68575 c 0,0 -0.30133,3.29712 2.86944,4.79505 3.17077,1.49795 0.69676,9.39918 0.63805,9.28395 -0.0588,-0.11522 1.85547,-6.80885 -1.01972,-8.09327 -2.77486,-1.2396 -2.56154,-1.08227 -2.56154,-1.08227 l 0.0738,-4.90346" />
       </g> }

@@ -115,13 +115,53 @@ const getTransformProperty = (lineIndex, columnIndex, isBassClef) => {
   return `translate(${columnIndex*STAFF_LINE_WIDTH},${lineIndex*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)+Number(isBassClef)*BASS_GAP})`;
 };
 
+const getNoteType = (type, pianoKey) => {
+  const stemmedNote = pianoKeyList.findIndex(key => key === pianoKey) > TWENTY_SIX ? 'StemmedNoteFlipped' : 'StemmedNote';
+  const conditions = stemmedNote === 'StemmedNoteFlipped' ? { showNoteStemFlipped: true } : { showNoteStem: true };
+  if (type === 'half-note') {
+    return {
+      noteType: stemmedNote,
+      conditions : {
+        ...conditions,
+        showHalfNote: true
+      }
+    };
+  } else if (type === 'quarter-note') {
+    return {
+      noteType: stemmedNote,
+      conditions
+    };
+  } else if (type === 'eighth-note') {
+    return {
+      noteType: stemmedNote,
+      conditions: {
+        ...conditions,
+        showEighthNoteFlag: true
+      }
+    };
+  } else {
+    return {
+      noteType: stemmedNote,
+      conditions: {
+        ...conditions,
+        showEighthNoteFlag: true,
+        showSixteenthNoteFlag: true
+      }
+    };
+  }
+};
+
 const getSubcomponents = (item) => {
   if(item.component === 'Note') {
-    const stemmedNote = pianoKeyList.findIndex(key => key === item.pianoKey) > TWENTY_SIX ? 'StemmedNoteFlipped' : 'StemmedNote';
-    const conditions = stemmedNote === 'StemmedNoteFlipped' ? { showNoteStemFlipped: true } : { showNoteStem: true };
+    const { noteType, conditions } = item.noteType === 'whole-note'
+      ? {
+        noteType: 'WholeNote',
+        conditions: {}
+      }
+      : getNoteType(item.noteType, item.pianoKey);
     return [
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[item.pianoKey]},
-      { component: stemmedNote, transform:`translate(0,${mapNotePosition[item.pianoKey]})`, conditions}
+      { component: noteType, transform:`translate(0,${mapNotePosition[item.pianoKey]})`, conditions}
     ];
   } else {
     return [];

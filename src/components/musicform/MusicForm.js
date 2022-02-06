@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import RestSelector from './RestSelector';
 import PedalSelector from './PedalSelector';
 import DynamicsSelector from './DynamicsSelector';
+import NoteTypeSelector from './NoteTypeSelector';
 import Piano from './Piano';
 import Button from 'components/button';
 
-const renderSelector = (type, selectSymbol, isBassSelection) => {
+const renderSelector = ({type, selectSymbol, noteType, selectNoteType, isBassSelection}) => {
   if(type === 'rest') {
     return (<RestSelector selectRestSymbol={(selectedRestSymbol) => {
       selectSymbol({
@@ -29,18 +30,22 @@ const renderSelector = (type, selectSymbol, isBassSelection) => {
         ...selectDynamicsSymbol
       });
     }} />);
+  } else if (type === 'note-type') {
+    return ( <NoteTypeSelector selectNoteType={selectNoteType} />);
   } else {
-    return (<Piano selectPianoKey={(selectedNoteSymbol) => {
-      selectSymbol({
-        component: 'Note',
-        pianoKey: selectedNoteSymbol
-      });
-    }} isBassSelection={isBassSelection}
-    />);
+    return (
+      <Piano selectPianoKey={(selectedNoteSymbol) => {
+        selectSymbol({
+          component: 'Note',
+          pianoKey: selectedNoteSymbol,
+          noteType
+        });
+      }} isBassSelection={isBassSelection}
+      />);
   }
 };
 
-const MusicForm = ({ selectSymbol, isBassSelection }) => {
+const MusicForm = ({ selectSymbol, noteType, selectNoteType, isBassSelection }) => {
   const [type, setType] = useState('piano');
 
   return (
@@ -57,6 +62,11 @@ const MusicForm = ({ selectSymbol, isBassSelection }) => {
           onClick={() => { setType('piano'); }}
         />
         <Button
+          label='Select Note Type'
+          classColor="primary"
+          onClick={() => { setType('note-type'); }}
+        />
+        <Button
           label='Select Pedal'
           classColor="primary"
           onClick={() => { setType('pedal'); }}
@@ -67,7 +77,7 @@ const MusicForm = ({ selectSymbol, isBassSelection }) => {
           onClick={() => { setType('dynamic'); }}
         />
       </div>
-      {renderSelector(type, selectSymbol, isBassSelection)}
+      {renderSelector({type, selectSymbol, noteType, selectNoteType, isBassSelection})}
     </div>
   );
 };

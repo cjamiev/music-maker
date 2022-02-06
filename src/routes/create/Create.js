@@ -22,7 +22,8 @@ const STARTING_NOTE = {
   lineIndex: ZERO,
   columnIndex: ZERO,
   component: 'Note',
-  pianoKey: 'C4'
+  pianoKey: 'C4',
+  noteType: 'quarter-note'
 };
 
 const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {
@@ -136,7 +137,8 @@ const Create = () => {
     pageIndex: ZERO,
     lineIndex: ZERO,
     columnIndex: ZERO,
-    isBassSelection: false
+    isBassSelection: false,
+    noteType: 'quarter-note'
   });
   const [configuration, setConfiguration] = useState({
     title: '',
@@ -172,6 +174,14 @@ const Create = () => {
     updatedData && setData(updatedData);
   };
 
+  const handleNoteTypeChange = (updatedNoteType) => {
+    setEditorPositon({
+      ...editorPosition,
+      noteType: updatedNoteType
+    });
+    handleDataChange({ noteType: updatedNoteType });
+  };
+
   const handleDataChange = (update) => {
     if(update.component === 'Pedal') {
       setData(getUpdatedPedal({ editorPosition, currentLine, data, update }));
@@ -198,7 +208,12 @@ const Create = () => {
           <Configuration configuration={configuration} onConfigurationChange={handleConfigurationChange} />
         </div>
         <div className="create__form">
-          <MusicForm selectSymbol={handleDataChange} isBassSelection={editorPosition.isBassSelection} />
+          <MusicForm
+            selectSymbol={handleDataChange}
+            noteType={editorPosition.noteType}
+            selectNoteType={handleNoteTypeChange}
+            isBassSelection={editorPosition.isBassSelection}
+          />
         </div>
       </div>
     </Page>
