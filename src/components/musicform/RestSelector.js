@@ -15,7 +15,7 @@ const RestSelector = ({ selectRestSymbol }) => {
   }).filter(Boolean);
 
   return (
-    <div className='music-form__selector'>
+    <div className='music-form__btn-group'>
       {renderRestSymbol}
     </div>
   );

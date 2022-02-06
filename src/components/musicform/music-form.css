@@ -1,9 +1,28 @@
-.music-form__btn-group {
-  display: flex;
+.music-form {
+  background-color: black;
+  width: 1270px;
+  border-radius: 5px;
+  padding: 8px;
 }
 
-.music-form__selector {
+.music-form__top-buttons {
+  width: 1260px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
+  justify-items: center;
+}
+
+.music-form__bottom-buttons {
+  margin-left: 50px;
+  width: 1260px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: auto;
+  justify-items: center;
+}
+
+.music-form__btn-group {
+  display: flex;
+  margin: 0px 5px;
 }

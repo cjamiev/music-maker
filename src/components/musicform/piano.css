@@ -1,6 +1,6 @@
 .piano {
   display: flex;
-  margin-top: 30px;
+  margin: 10px;
   width: 100%;
 }
 
@@ -32,22 +32,21 @@
   background-image: linear-gradient(grey, black);
 }
 
-
 @media screen and (min-width: 1500px) {
   .white {
-    --width: 50px;
-    border-radius: 0 0 5px 5px;
+    --width: 40px;
+    border-radius: 0 0 4px 4px;
   }
 
   .black {
-    --width: 30px;
+    --width: 24px;
     margin-left: calc(var(--width) / -2);
     margin-right: calc(var(--width) / -2);
-    border-radius: 5px;
+    border-radius: 4px;
   }
 
   .piano-text {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 

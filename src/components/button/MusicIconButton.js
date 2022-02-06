@@ -11,8 +11,8 @@ import {
 import { ICON_SIZES, MUSIC_ICON_TYPES } from 'constants/icon';
 import ComponentWrapper from 'components/ComponentWrapper';
 
-const ICON_HEIGHT = '106px';
-const ICON_WIDTH = '106px';
+const ICON_HEIGHT = '26.5px';
+const ICON_WIDTH = '26.5px';
 const ICON_VIEWBOX = '0 0 53 53';
 const iconMap = {
   [MUSIC_ICON_TYPES.WHOLE_NOTE]: ComponentWrapper(NoteIcon, { showWholeNote: true }),
@@ -50,14 +50,14 @@ const iconMap = {
   [MUSIC_ICON_TYPES.RISOLUTO]: ComponentWrapper(DynamicsIcon, { value:'risoluto' }),
   [MUSIC_ICON_TYPES.E]: ComponentWrapper(DynamicsIcon, { value:'e' }),
   [MUSIC_ICON_TYPES.POCO_RITARDANO]: ComponentWrapper(DynamicsIcon, { value:'poco rit.' }),
-  [MUSIC_ICON_TYPES.DYNAMICS_REMOVE]: ComponentWrapper(DynamicsIcon, { value:'Remove' }),
+  [MUSIC_ICON_TYPES.DYNAMICS_REMOVE]: ComponentWrapper(DynamicsIcon, { value:'DEL' }),
   [MUSIC_ICON_TYPES.MEASURE_END]: ComponentWrapper(MeasureIcon, { showMeasureEnd: true }),
   [MUSIC_ICON_TYPES.REPEAT_START]: ComponentWrapper(MeasureIcon, { showRepeatBarStart: true }),
   [MUSIC_ICON_TYPES.REPEAT_END]: ComponentWrapper(MeasureIcon, { showRepeatBarEnd: true }),
   [MUSIC_ICON_TYPES.PEDAL_START]: ComponentWrapper(PedalIcon, { showPedalStart: true }),
   [MUSIC_ICON_TYPES.PEDAL_CONTINUE]: ComponentWrapper(PedalIcon, { showPedalContinue: true }),
   [MUSIC_ICON_TYPES.PEDAL_QUICK_RELEASE]: ComponentWrapper(PedalIcon, { showPedalQuickRelease: true }),
-  [MUSIC_ICON_TYPES.PEDAL_REMOVE]: ComponentWrapper(PedalIcon, { value: 'Remove' }),
+  [MUSIC_ICON_TYPES.PEDAL_REMOVE]: ComponentWrapper(PedalIcon, { value: 'DEL' }),
   [MUSIC_ICON_TYPES.PEDAL_END]: ComponentWrapper(PedalIcon, { showPedalEnd: true }),
   [MUSIC_ICON_TYPES.WHOLE_REST]: ComponentWrapper(RestIcon, { showWholeRest: true }),
   [MUSIC_ICON_TYPES.HALF_REST]: ComponentWrapper(RestIcon, { showHalfRest: true }),

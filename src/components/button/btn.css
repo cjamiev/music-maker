@@ -148,8 +148,11 @@
 }
 
 .music--icon {
+  background-color: white;
+  width: 40px;
+  height: 40px;
   border: 2px solid #000;
-  margin: 10px;
+  border-radius: 5px;
 }
 
 .music--icon:hover {

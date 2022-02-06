@@ -165,16 +165,12 @@ export const noteTypes = [
 ];
 
 export const noteModifierTypes = [
-  { key: 'dotted', label: 'Dotted' },
-  { key: 'grace-note', label: 'Grace Note', value: { showGraceNote: true } },
   { key: 'note-flat', label: 'Note Flat', value: { showNoteFlat: true } },
   { key: 'note-sharp', label: 'Note Sharp', value: { showNoteSharp: true } },
   { key: 'note-natural', label: 'Note Natural', value: { showNoteNatural: true } },
   { key: 'accent', label: 'Accent', value: { showAccent: true } },
-  { key: 'fermata', label: 'Fermata', value: { showFermata: true } },
-  { key: 'rolled', label: 'Rolled', value: { showRolled: true } },
   { key: 'tenuto', label: 'Tenuto', value: { showTenuto: true } },
-  { key: 'trill', label: 'Trill', value: { showTrill: true } }
+  { key: 'fermata', label: 'Fermata', value: { showFermata: true } }
 ];
 
 export const barTypes = [
@@ -205,13 +201,10 @@ export const pedalTypes = [
 ];
 
 export const dynamicsTypes = [
-  { key: 'crescendo', label: 'Pedal Start', conditions: { showCrescendo: true } },
-  { key: 'decrescendo', label: 'Continue', conditions: { showDecrescendo: true } },
   { key: 'ppp', value: 'ppp' },
   { key: 'pp', value: 'pp' },
   { key: 'p', value: 'p' },
   { key: 'mp', value: 'mp' },
-  { key: 'fp', value: 'fp' },
   { key: 'mf', value: 'mf' },
   { key: 'f', value: 'f' },
   { key: 'ff', value: 'ff' },
@@ -224,7 +217,6 @@ export const dynamicsTypes = [
   { key: 'leggiero', value: 'leggiero' },
   { key: 'a tempo', value: 'a tempo' },
   { key: 'risoluto', value: 'risoluto' },
-  { key: 'e', value: 'e' },
   { key: 'poco rit.', value: 'poco rit.' },
   { key: 'dynamics-remove', label: 'Remove', value: { }, shouldRemove: true }
 ];
