@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import RestSelector from './RestSelector';
+import MeasureBarSelector from './MeasureBarSelector';
 import PedalSelector from './PedalSelector';
 import DynamicsSelector from './DynamicsSelector';
 import NoteTypeSelector from './NoteTypeSelector';
@@ -7,7 +8,12 @@ import NoteModifierSelector from './NoteModifierSelector';
 import Piano from './Piano';
 import Button from 'components/button';
 
-const MusicForm = ({ noteConfig, selectSymbol, selectNoteType, isBassSelection }) => {
+const MusicForm = ({
+  noteConfig,
+  selectSymbol,
+  selectNoteType,
+  isBassSelection
+}) => {
   const [type, setType] = useState('piano');
 
   return (
@@ -34,6 +40,12 @@ const MusicForm = ({ noteConfig, selectSymbol, selectNoteType, isBassSelection }
           selectSymbol({
             component: 'Pedal',
             ...selectedPedalSymbol
+          });
+        }} />
+        <MeasureBarSelector selectMeasureBar={(selectedMeasureBar) => {
+          selectSymbol({
+            component: 'Measure',
+            ...selectedMeasureBar
           });
         }} />
         <DynamicsSelector selectDynamicsSymbol={(selectDynamicsSymbol) => {

@@ -70,11 +70,49 @@ const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {
   return updatedData;
 };
 
-const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
-  const matched = currentLine.center.find(item => item.pageIndex === editorPosition.pageIndex
+const getUpdatedMeasure = ({ editorPosition, currentLine, data, update }) => {
+  const matched = currentLine.measure.find(item => item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex);
-  const updatedSection = (matched || update.shouldRemove) ? currentLine.center.map(item => {
+  const updatedSection = matched ? currentLine.measure.map(item => {
+    if(item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex) {
+      return {
+        pageIndex: item.pageIndex,
+        lineIndex: item.lineIndex,
+        columnIndex: item.columnIndex,
+        ...update
+      };
+    }
+    return item;
+  }).filter(item => !item.shouldRemove)
+    : currentLine.measure.concat({
+      pageIndex: editorPosition.pageIndex,
+      lineIndex: editorPosition.lineIndex,
+      columnIndex: editorPosition.columnIndex,
+      ...update
+    });
+  const updatedLine = {
+    ...currentLine,
+    measure: updatedSection
+  };
+
+  const updatedData = data.map((item, index) => {
+    if(index === editorPosition.lineIndex) {
+      return updatedLine;
+    }
+    return item;
+  });
+
+  return updatedData;
+};
+
+const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
+  const matched = currentLine.dynamics.find(item => item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex);
+  const updatedSection = (matched || update.shouldRemove) ? currentLine.dynamics.map(item => {
     if(item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex) {
@@ -85,7 +123,7 @@ const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
     }
     return item;
   }).filter(item => !item.shouldRemove)
-    : currentLine.center.concat({
+    : currentLine.dynamics.concat({
       pageIndex: editorPosition.pageIndex,
       lineIndex: editorPosition.lineIndex,
       columnIndex: editorPosition.columnIndex,
@@ -94,7 +132,7 @@ const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
 
   const updatedLine = {
     ...currentLine,
-    center: updatedSection
+    dynamics: updatedSection
   };
 
   const updatedData = data.map((item, index) => {
@@ -108,10 +146,10 @@ const getUpdatedDynamics = ({ editorPosition, currentLine, data, update }) => {
 };
 
 const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
-  const matched = currentLine.bottom.find(item => item.pageIndex === editorPosition.pageIndex
+  const matched = currentLine.pedal.find(item => item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex);
-  const updatedSection = (matched || update.shouldRemove) ? currentLine.bottom.map(item => {
+  const updatedSection = (matched || update.shouldRemove) ? currentLine.pedal.map(item => {
     if(item.pageIndex === editorPosition.pageIndex
       && item.lineIndex === editorPosition.lineIndex
       && item.columnIndex === editorPosition.columnIndex) {
@@ -122,7 +160,7 @@ const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
     }
     return item;
   }).filter(item => !item.shouldRemove)
-    : currentLine.bottom.concat({
+    : currentLine.pedal.concat({
       pageIndex: editorPosition.pageIndex,
       lineIndex: editorPosition.lineIndex,
       columnIndex: editorPosition.columnIndex,
@@ -131,7 +169,7 @@ const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
 
   const updatedLine = {
     ...currentLine,
-    bottom: updatedSection
+    pedal: updatedSection
   };
 
   const updatedData = data.map((item, index) => {
@@ -167,9 +205,10 @@ const Create = () => {
   });
   const [data, setData] = useState([{
     treble: [STARTING_NOTE],
-    center: [],
+    measure: [],
+    dynamics: [],
     bass: [STARTING_NOTE],
-    bottom: []
+    pedal: []
   }]);
 
   const currentLine = data[editorPosition.lineIndex];
@@ -194,6 +233,8 @@ const Create = () => {
   const handleDataChange = (updatedSymbol) => {
     if(updatedSymbol.component === 'Pedal') {
       setData(getUpdatedPedal({ editorPosition, currentLine, data, update: updatedSymbol }));
+    } else if(updatedSymbol.component === 'Measure') {
+      setData(getUpdatedMeasure({ editorPosition, currentLine, data, update: updatedSymbol }));
     } else if(updatedSymbol.component === 'Dynamics') {
       setData(getUpdatedDynamics({ editorPosition, currentLine, data, update: updatedSymbol }));
     } else {

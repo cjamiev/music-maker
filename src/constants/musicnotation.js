@@ -162,7 +162,7 @@ export const noteTypes = [
   { key: 'half-note', label: 'Half Note', value: { ...noteflags, showHalfNote: true } },
   { key: 'quarter-note', label: 'Quarter Note', value: { ...noteflags, showQuarterNote: true } },
   { key: 'eighth-note', label: '8th Note', value: { ...noteflags, showEighthNote: true } },
-  { key: 'sixteenth-note', label: '16th Note', value: { ...noteflags, showEighthNote: true, showSixteenthNote: true } }
+  { key: 'sixteenth-note', label: '16th Note', value: { ...noteflags, showSixteenthNote: true } }
 ];
 
 export const noteModifierTypes = [
@@ -174,10 +174,11 @@ export const noteModifierTypes = [
   { key: 'fermata', label: 'Fermata', value: { showFermata: true } }
 ];
 
-export const barTypes = [
+export const measureBarTypes = [
   { key: 'measure-end', label: 'Measure End Bar', value: { showMeasureEnd: true } },
   { key: 'repeat-start', label: 'Repeat Bar Start', value: { showRepeatBarStart: true } },
-  { key: 'repeat-end', label: 'Repeat Bar End', value: { showRepeatBarEnd: true } }
+  { key: 'repeat-end', label: 'Repeat Bar End', value: { showRepeatBarEnd: true } },
+  { key: 'measure-remove', label: 'Remove', value: { shouldRemove: true } }
 ];
 
 export const restTypes = [

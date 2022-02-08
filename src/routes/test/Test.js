@@ -3,7 +3,7 @@ import Page from 'components/layout';
 import Button, { MusicIconButton } from 'components/button';
 import { ICON_SIZES, MUSIC_ICON_TYPES } from 'constants/icon';
 import {
-  barTypes,
+  measureBarTypes,
   noteModifierTypes,
   noteTypes,
   restTypes,
@@ -46,7 +46,7 @@ const Test = () => {
     );
   }).filter(Boolean);
 
-  const renderBarSymbol = barTypes.map(item => {
+  const renderMeasureBarSymbol = measureBarTypes.map(item => {
     return (
       <MusicIconButton
         key={item.key}
@@ -91,7 +91,7 @@ const Test = () => {
       {renderDynamicsSymbol}
       {renderOttavaSymbol}
       {renderPedalSymbol}
-      {renderBarSymbol}
+      {renderMeasureBarSymbol}
       {renderModifierSymbol}
       {renderNoteSymbol}
       {renderRestSymbol}

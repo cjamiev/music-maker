@@ -62,7 +62,7 @@ const PedalIcon = ({
         <text
           x="12.684287"
           y="28.169075"
-          data-testid="condition-pedal-text"
+          data-testid="pedal-text"
           className="musicicon__text"
           transform="scale(0.87702874,1.1402135)">
           <tspan

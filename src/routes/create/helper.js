@@ -159,7 +159,7 @@ const getNoteModifier = ({
   ].filter(Boolean);
 };
 
-const getSubcomponents = (item) => {
+const getNoteSubcomponents = (item) => {
   if(item.component === 'Note') {
     const noteSubcomponent = getNoteType(item);
     const noteModifierSubcomponent = getNoteModifier(item);
@@ -173,26 +173,40 @@ const getSubcomponents = (item) => {
   }
 };
 
+const getMeasureSubcomponents = ({
+  showRepeatBarStart,
+  showRepeatBarEnd,
+  showMeasureEnd
+}) => {
+  if(showRepeatBarStart) {
+    return [{ component:'MeasureRepeatBarStart', transform:'translate(0,0)', conditions:{}}];
+  } else if(showRepeatBarEnd) {
+    return [{ component:'MeasureRepeatBarEnd', transform:'translate(0,0)', conditions:{}}];
+  } else {
+    return [{ component:'MeasureEnd', transform:'translate(0,0)', conditions:{}}];
+  }
+};
+
 const getSheetMusic = (configuration, line, editorPosition) => {
-  const { treble, center, bass, bottom } = line;
+  const { treble, measure, dynamics, bass, pedal } = line;
 
   const mappedTrebleData = treble.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
       transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, false),
-      subcomponents:getSubcomponents(item)
+      subcomponents:getNoteSubcomponents(item)
     };
   });
-  const mappedBassData = bass.map(item => {
+  const mappedMeasureData = measure.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, true),
-      subcomponents:getSubcomponents(item)
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      subcomponents: getMeasureSubcomponents(item)
     };
   });
-  const mappedCenterData = center.map(item => {
+  const mappedDynamicsData = dynamics.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
@@ -200,7 +214,15 @@ const getSheetMusic = (configuration, line, editorPosition) => {
       subcomponents: []
     };
   });
-  const mappedBottomData = bottom.map(item => {
+  const mappedBassData = bass.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, true),
+      subcomponents:getNoteSubcomponents(item)
+    };
+  });
+  const mappedPedalData = pedal.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
@@ -220,9 +242,10 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: false}),
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: true}),
     ...mappedTrebleData,
-    ...mappedCenterData,
+    ...mappedMeasureData,
+    ...mappedDynamicsData,
     ...mappedBassData,
-    ...mappedBottomData
+    ...mappedPedalData
   ].filter(Boolean);
 };
 

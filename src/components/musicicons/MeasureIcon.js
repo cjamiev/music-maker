@@ -3,7 +3,8 @@ import React from 'react';
 const MeasureIcon = ({
   showRepeatBarStart,
   showRepeatBarEnd,
-  showMeasureEnd
+  showMeasureEnd,
+  value
 }) => {
   return (
     <g>
@@ -137,6 +138,24 @@ const MeasureIcon = ({
           y="316.2272"
         />
       </g>}
+      { value &&
+        <text
+          x="12.684287"
+          y="28.169075"
+          data-testid="measure-text"
+          className="musicicon__text"
+          transform="scale(0.87702874,1.1402135)">
+          <tspan
+            role="line"
+            data-testid="measure-text"
+            className="musicicon__text"
+            x="12.684287"
+            y="28.169075"
+          >
+            {value}
+          </tspan>
+        </text>
+      }
     </g>
   );
 };

@@ -54,6 +54,7 @@ const iconMap = {
   [MUSIC_ICON_TYPES.MEASURE_END]: ComponentWrapper(MeasureIcon, { showMeasureEnd: true }),
   [MUSIC_ICON_TYPES.REPEAT_START]: ComponentWrapper(MeasureIcon, { showRepeatBarStart: true }),
   [MUSIC_ICON_TYPES.REPEAT_END]: ComponentWrapper(MeasureIcon, { showRepeatBarEnd: true }),
+  [MUSIC_ICON_TYPES.MEASURE_REMOVE]: ComponentWrapper(PedalIcon, { value: 'DEL' }),
   [MUSIC_ICON_TYPES.PEDAL_START]: ComponentWrapper(PedalIcon, { showPedalStart: true }),
   [MUSIC_ICON_TYPES.PEDAL_CONTINUE]: ComponentWrapper(PedalIcon, { showPedalContinue: true }),
   [MUSIC_ICON_TYPES.PEDAL_QUICK_RELEASE]: ComponentWrapper(PedalIcon, { showPedalQuickRelease: true }),

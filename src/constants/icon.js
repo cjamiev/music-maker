@@ -29,6 +29,7 @@ export const MUSIC_ICON_TYPES = {
   REPEAT_START: 'repeat-start',
   REPEAT_END: 'repeat-end',
   MEASURE_END: 'measure-end',
+  MEASURE_REMOVE: 'measure-remove',
   PEDAL_START: 'pedal-start',
   PEDAL_CONTINUE: 'pedal-continue',
   PEDAL_QUICK_RELEASE: 'pedal-quick-release',
