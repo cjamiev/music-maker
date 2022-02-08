@@ -115,53 +115,58 @@ const getTransformProperty = (lineIndex, columnIndex, isBassClef) => {
   return `translate(${columnIndex*STAFF_LINE_WIDTH},${lineIndex*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)+Number(isBassClef)*BASS_GAP})`;
 };
 
-const getNoteType = (type, pianoKey) => {
-  const stemmedNote = pianoKeyList.findIndex(key => key === pianoKey) > TWENTY_SIX ? 'StemmedNoteFlipped' : 'StemmedNote';
-  const conditions = stemmedNote === 'StemmedNoteFlipped' ? { showNoteStemFlipped: true } : { showNoteStem: true };
-  if (type === 'half-note') {
-    return {
-      noteType: stemmedNote,
-      conditions : {
-        ...conditions,
-        showHalfNote: true
-      }
-    };
-  } else if (type === 'quarter-note') {
-    return {
-      noteType: stemmedNote,
-      conditions
-    };
-  } else if (type === 'eighth-note') {
-    return {
-      noteType: stemmedNote,
-      conditions: {
-        ...conditions,
-        showEighthNoteFlag: true
-      }
-    };
-  } else {
-    return {
-      noteType: stemmedNote,
-      conditions: {
-        ...conditions,
-        showEighthNoteFlag: true,
-        showSixteenthNoteFlag: true
-      }
-    };
+const getNoteType = ({
+  showWholeNote,
+  showHalfNote,
+  showQuarterNote,
+  showEighthNote,
+  showSixteenthNote,
+  pianoKey
+}) => {
+  const translateY = mapNotePosition[pianoKey];
+
+  if (showWholeNote) {
+    return { component: 'WholeNote', transform:`translate(0,${translateY})`, conditions: {}};
   }
+
+  const stemmedNote = pianoKeyList.findIndex(key => key === pianoKey) > TWENTY_SIX
+    ? 'StemmedNoteFlipped' : 'StemmedNote';
+  const conditions = stemmedNote === 'StemmedNoteFlipped'
+    ? { showNoteStemFlipped: true, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote }
+    : { showNoteStem: true, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
+
+  return { component: stemmedNote, transform:`translate(0,${translateY})`, conditions};
+};
+
+const getNoteModifier = ({
+  showNoteFlat,
+  showNoteSharp,
+  showNoteNatural,
+  showAccent,
+  showTenuto,
+  showFermata,
+  pianoKey
+}) => {
+  const translateY = mapNotePosition[pianoKey];
+
+  return [
+    showNoteFlat && { component:'NoteFlat', transform:`translate(0,${translateY})`, conditions:{}},
+    showNoteSharp && { component:'NoteSharp', transform:`translate(0,${translateY})`, conditions:{}},
+    showNoteNatural && { component:'NoteNatural', transform:`translate(0,${translateY})`, conditions:{}},
+    showAccent && { component:'Accent', transform:'translate(0,0)', conditions:{}},
+    showTenuto && { component:'Tenuto', transform:'translate(0,0)', conditions:{}},
+    showFermata && { component:'Fermata', transform:'translate(0,0)', conditions:{}}
+  ].filter(Boolean);
 };
 
 const getSubcomponents = (item) => {
   if(item.component === 'Note') {
-    const { noteType, conditions } = item.noteType === 'whole-note'
-      ? {
-        noteType: 'WholeNote',
-        conditions: {}
-      }
-      : getNoteType(item.noteType, item.pianoKey);
+    const noteSubcomponent = getNoteType(item);
+    const noteModifierSubcomponent = getNoteModifier(item);
     return [
-      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[item.pianoKey]},
-      { component: noteType, transform:`translate(0,${mapNotePosition[item.pianoKey]})`, conditions}
+      { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[item.pianoKey]},
+      noteSubcomponent,
+      ...noteModifierSubcomponent
     ];
   } else {
     return [];

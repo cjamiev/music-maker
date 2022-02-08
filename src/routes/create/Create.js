@@ -16,14 +16,26 @@ const attributes = {
 };
 const ZERO = 0;
 const ONE = 1;
+const DEFAULT_NOTE = {
+  showWholeNote: false,
+  showHalfNote: false,
+  showQuarterNote: true,
+  showEighthNote: false,
+  showSixteenthNote: false,
+  showNoteFlat: false,
+  showNoteSharp: false,
+  showNoteNatural: false,
+  showAccent: false,
+  showTenuto: false,
+  showFermata: false
+};
 const STARTING_NOTE = {
   id: '001',
   pageIndex: ZERO,
   lineIndex: ZERO,
   columnIndex: ZERO,
   component: 'Note',
-  pianoKey: 'C4',
-  noteType: 'quarter-note'
+  pianoKey: 'C4'
 };
 
 const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {
@@ -137,9 +149,9 @@ const Create = () => {
     pageIndex: ZERO,
     lineIndex: ZERO,
     columnIndex: ZERO,
-    isBassSelection: false,
-    noteType: 'quarter-note'
+    isBassSelection: false
   });
+  const [noteConfig, setNoteConfig] = useState(DEFAULT_NOTE);
   const [configuration, setConfiguration] = useState({
     title: '',
     subtitle: '',
@@ -174,21 +186,18 @@ const Create = () => {
     updatedData && setData(updatedData);
   };
 
-  const handleNoteTypeChange = (updatedNoteType) => {
-    setEditorPositon({
-      ...editorPosition,
-      noteType: updatedNoteType
-    });
-    handleDataChange({ noteType: updatedNoteType });
+  const handleNoteTypeChange = (updatedNote) => {
+    setNoteConfig({ ...noteConfig, ...updatedNote });
+    handleDataChange(updatedNote);
   };
 
-  const handleDataChange = (update) => {
-    if(update.component === 'Pedal') {
-      setData(getUpdatedPedal({ editorPosition, currentLine, data, update }));
-    } else if(update.component === 'Dynamics') {
-      setData(getUpdatedDynamics({ editorPosition, currentLine, data, update }));
+  const handleDataChange = (updatedSymbol) => {
+    if(updatedSymbol.component === 'Pedal') {
+      setData(getUpdatedPedal({ editorPosition, currentLine, data, update: updatedSymbol }));
+    } else if(updatedSymbol.component === 'Dynamics') {
+      setData(getUpdatedDynamics({ editorPosition, currentLine, data, update: updatedSymbol }));
     } else {
-      setData(getUpdatedSymbols({ editorPosition, currentLine, data, update }));
+      setData(getUpdatedSymbols({ editorPosition, currentLine, data, update: {...noteConfig, ...updatedSymbol } }));
     }
   };
 
@@ -209,8 +218,8 @@ const Create = () => {
         </div>
         <div className="create__form">
           <MusicForm
+            noteConfig={noteConfig}
             selectSymbol={handleDataChange}
-            noteType={editorPosition.noteType}
             selectNoteType={handleNoteTypeChange}
             isBassSelection={editorPosition.isBassSelection}
           />

@@ -159,6 +159,10 @@
   border: 2px solid #0084AD;
 }
 
+.music--icon-active {
+  border: 3px solid #644600;
+}
+
 @keyframes translateRight {
   0% {
     transform: translateX(0);

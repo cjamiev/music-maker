@@ -68,27 +68,19 @@ const iconMap = {
   [MUSIC_ICON_TYPES.OTTAVA_BASSA]: ComponentWrapper(OttavaIcon, { showOttavaBassa: true })
 };
 
-const SCALE_SIZES = {
-  [ICON_SIZES.EXTRA_SMALL]: 'scale(0.5)',
-  [ICON_SIZES.SMALL]: 'scale(0.8)',
-  [ICON_SIZES.MEDIUM]: 'scale(1)',
-  [ICON_SIZES.LARGE]: 'scale(1.2)',
-  [ICON_SIZES.EXTRA_LARGE]: 'scale(1.5)'
-};
 
-const MusicIconButton = ({ type, size = 'm', onClick }) => {
+const MusicIconButton = ({ type, isActive, onClick }) => {
   const IconSVG = iconMap.hasOwnProperty(type) ? iconMap[type] : null;
+  const className = isActive ? 'btn--icon music--icon music--icon-active' : 'btn--icon music--icon';
 
   if(!IconSVG) {
     return null;
   }
 
   return (
-    <button className="btn--icon music--icon" onClick={onClick}>
+    <button className={className} onClick={onClick}>
       <svg height={ICON_HEIGHT} width={ICON_WIDTH} viewBox={ICON_VIEWBOX}>
-        <g transform={SCALE_SIZES[size]}>
-          <IconSVG />
-        </g>
+        <IconSVG />
       </svg>
     </button>
   );

@@ -6,7 +6,7 @@ import {
   allQuarterNoteData,
   allQuarterChordData,
   allModifierData
-} from 'mock/music-notation';
+} from 'mock/testing-notation';
 import {
   hollowKnightRestingGroundsData
 } from 'mock/resting-grounds-sheet-music';

@@ -7,14 +7,14 @@ import NoteModifierSelector from './NoteModifierSelector';
 import Piano from './Piano';
 import Button from 'components/button';
 
-const MusicForm = ({ selectSymbol, noteType, selectNoteType, selectNoteModifier, isBassSelection }) => {
+const MusicForm = ({ noteConfig, selectSymbol, selectNoteType, isBassSelection }) => {
   const [type, setType] = useState('piano');
 
   return (
     <div className='music-form'>
       <div className='music-form__top-buttons'>
-        <NoteTypeSelector selectNoteType={selectNoteType} />
-        <NoteModifierSelector selectNoteModifier={selectNoteModifier} />
+        <NoteTypeSelector noteConfig={noteConfig} selectNoteType={selectNoteType} />
+        <NoteModifierSelector noteConfig={noteConfig} selectNoteModifier={selectNoteType} />
         <RestSelector selectRestSymbol={(selectedRestSymbol) => {
           selectSymbol({
             component: 'Rest',
@@ -25,8 +25,7 @@ const MusicForm = ({ selectSymbol, noteType, selectNoteType, selectNoteModifier,
       <Piano selectPianoKey={(selectedNoteSymbol) => {
         selectSymbol({
           component: 'Note',
-          pianoKey: selectedNoteSymbol,
-          noteType
+          pianoKey: selectedNoteSymbol
         });
       }} isBassSelection={isBassSelection}
       />

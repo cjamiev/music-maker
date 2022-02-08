@@ -30,9 +30,9 @@ export const musicNotationData = [
       { component:'ChordNotation', transform:'translate(0,0)',
         conditions:{showChordNotationFlat:true,showChordNotationSharp:true,showChordNotationQuality:true}},
       { component:'StemmedNoteFlipped', transform:'translate(0,0)',
-        conditions:{showNoteStemFlipped:true,showEighthNoteFlagFlipped:true,showHalfNoteFlipped:true,showSixteenthNoteFlipped:true}},
+        conditions:{showNoteStemFlipped:true,showEighthNote:true,showHalfNoteFlipped:true,showSixteenthNoteFlipped:true}},
       { component:'StemmedNote', transform:'translate(0,0)',
-        conditions:{showNoteStem:true,showEighthNoteFlag:true,showHalfNote:true,showSixteenthNoteFlag:true}},
+        conditions:{showNoteStem:true,showEighthNote:true,showHalfNote:true,showSixteenthNote:true}},
       { component:'Accent', transform:'translate(0,0)', conditions:{}},
       { component:'Fermata', transform:'translate(0,0)', conditions:{}},
       { component:'Rolled', transform:'translate(0,0)', conditions:{}},
@@ -275,7 +275,7 @@ export const allQuarterNoteData = [
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A3']},
       { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['A3']})`, conditions:{}},
       { component:'StemmedNote', transform:`translate(0,${mapNotePosition['A3']})`,
-        conditions:{ showNoteStem: true, showEighthNoteFlag: true, showSixteenthNoteFlag: true }}
+        conditions:{ showNoteStem: true, showEighthNote: true, showSixteenthNote: true }}
     ]},
   { component:'Note', transform:`translate(${-STAFF_LINE_WIDTH},-80)`, conditions:{},
     subcomponents:[
@@ -456,7 +456,7 @@ export const allQuarterNoteData = [
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B7']},
       { component:'Staccato', transform:`translate(0,${mapStaccatoPosition['C7']})`, conditions:{}},
       { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition['C7']})`,
-        conditions:{ showNoteStemFlipped: true, showEighthNoteFlagFlipped: true, showSixteenthNoteFlagFlipped: true }}
+        conditions:{ showNoteStemFlipped: true, showEighthNote: true, showSixteenthNote: true }}
     ]}
 ];
 

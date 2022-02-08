@@ -156,12 +156,13 @@ export const timeSignatures = [
   { value: { numerator: 6, denominator: 8 }, label: '6/8' }
 ];
 
+const noteflags = { showWholeNote: false, showHalfNote: false, showQuarterNote: false, showEighthNote: false, showSixteenthNote: false };
 export const noteTypes = [
-  { key: 'whole-note', label: 'Whole Note', value: { showWholeNote: true } },
-  { key: 'half-note', label: 'Half Note', value: { showHalfNote: true } },
-  { key: 'quarter-note', label: 'Quarter Note', value: { showQuarterNote: true } },
-  { key: 'eighth-note', label: '8th Note', value: { showEighthNote: true } },
-  { key: 'sixteenth-note', label: '16th Note', value: { showSixteenthNote: true } }
+  { key: 'whole-note', label: 'Whole Note', value: { ...noteflags, showWholeNote: true } },
+  { key: 'half-note', label: 'Half Note', value: { ...noteflags, showHalfNote: true } },
+  { key: 'quarter-note', label: 'Quarter Note', value: { ...noteflags, showQuarterNote: true } },
+  { key: 'eighth-note', label: '8th Note', value: { ...noteflags, showEighthNote: true } },
+  { key: 'sixteenth-note', label: '16th Note', value: { ...noteflags, showEighthNote: true, showSixteenthNote: true } }
 ];
 
 export const noteModifierTypes = [
