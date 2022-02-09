@@ -1,6 +1,9 @@
+/* eslint-disable complexity */
 import React from 'react';
 
 const ModifierIcon = ({
+  showStaccato,
+  showDotted,
   showAccent,
   showFermata,
   showGraceNote,
@@ -13,6 +16,66 @@ const ModifierIcon = ({
 }) => {
   return (
     <g>
+      {showStaccato && <g
+        data-testid="subcomponent-staccato"
+        transform="matrix(3.3629984,0,0,3.3629984,-168.67955,-83.799986)">
+        <g
+          data-testid="element-whole-note"
+          transform="translate(-317.3242,-26.27077)">
+          <ellipse
+            className="svg__1"
+            data-testid="ellipse3050-3"
+            cx="374.15756"
+            cy="62.147362"
+            rx="3.1077557"
+            ry="2.4171433" />
+          <ellipse
+            className="svg__9"
+            data-testid="ellipse3052-8"
+            cx="337.9754"
+            cy="172.13019"
+            rx="1.5423677"
+            ry="2.1869392"
+            transform="rotate(-17.558954)" />
+        </g>
+        <ellipse
+          className="svg__1"
+          data-testid="subcomponent-staccato"
+          cx="56.833611"
+          cy="28.336035"
+          rx="1.0583327"
+          ry="1.0583323" />
+      </g>}
+      {showDotted && <g
+        data-testid="subcomponent-dotted"
+        transform="matrix(3.3629984,0,0,3.3629984,-168.67955,-83.799986)">
+        <g
+          data-testid="element-whole-note"
+          transform="translate(-317.3242,-26.27077)">
+          <ellipse
+            className="svg__1"
+            data-testid="ellipse3050-3"
+            cx="374.15756"
+            cy="62.147362"
+            rx="3.1077557"
+            ry="2.4171433" />
+          <ellipse
+            className="svg__9"
+            data-testid="ellipse3052-8"
+            cx="337.9754"
+            cy="172.13019"
+            rx="1.5423677"
+            ry="2.1869392"
+            transform="rotate(-17.558954)" />
+        </g>
+        <ellipse
+          className="svg__1"
+          data-testid="element-dotted"
+          cx="61.86071"
+          cy="33.363228"
+          rx="1.0583327"
+          ry="1.0583323" />
+      </g>}
       {showAccent && <g
         data-testid="accent"
         transform="matrix(2.2245103,0,0,2.2245103,-163.66257,-90.441184)"
@@ -149,14 +212,14 @@ const ModifierIcon = ({
         />
       </g>}
       {showTrill && <text
-        x="12.260199"
-        y="24.693336"
+        x="6.260199"
+        y="20.693336"
         data-testid="trill"
-        transform="scale(1.7,1.4)"
+        transform="scale(2.2,2)"
       >
         <tspan
-          x="12.260199"
-          y="24.693336"
+          x="6.260199"
+          y="20.693336"
         >
           tr
         </tspan>

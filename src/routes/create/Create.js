@@ -25,9 +25,12 @@ const DEFAULT_NOTE = {
   showNoteFlat: false,
   showNoteSharp: false,
   showNoteNatural: false,
+  showStaccato: false,
+  showDotted: false,
   showAccent: false,
   showTenuto: false,
-  showFermata: false
+  showFermata: false,
+  showTrill: false
 };
 const STARTING_NOTE = {
   id: '001',

@@ -166,12 +166,15 @@ export const noteTypes = [
 ];
 
 export const noteModifierTypes = [
+  { key: 'staccato', label: 'Staccato', value: { showStaccato: true } },
+  { key: 'dotted', label: 'Dotted', value: { showDotted: true } },
   { key: 'note-flat', label: 'Note Flat', value: { showNoteFlat: true } },
   { key: 'note-sharp', label: 'Note Sharp', value: { showNoteSharp: true } },
   { key: 'note-natural', label: 'Note Natural', value: { showNoteNatural: true } },
   { key: 'accent', label: 'Accent', value: { showAccent: true } },
   { key: 'tenuto', label: 'Tenuto', value: { showTenuto: true } },
-  { key: 'fermata', label: 'Fermata', value: { showFermata: true } }
+  { key: 'fermata', label: 'Fermata', value: { showFermata: true } },
+  { key: 'trill', label: 'Trill', value: { showTrill: true } }
 ];
 
 export const measureBarTypes = [

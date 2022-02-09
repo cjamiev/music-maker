@@ -20,6 +20,8 @@ const iconMap = {
   [MUSIC_ICON_TYPES.QUARTER_NOTE]: ComponentWrapper(NoteIcon, { showQuarterNote: true }),
   [MUSIC_ICON_TYPES.EIGHTH_NOTE]: ComponentWrapper(NoteIcon, { showEighthNote: true }),
   [MUSIC_ICON_TYPES.SIXTEENTH_NOTE]: ComponentWrapper(NoteIcon, { showSixteenthNote: true }),
+  [MUSIC_ICON_TYPES.STACCATO]: ComponentWrapper(ModifierIcon, { showStaccato: true }),
+  [MUSIC_ICON_TYPES.DOTTED]: ComponentWrapper(ModifierIcon, { showDotted: true }),
   [MUSIC_ICON_TYPES.ACCENT]: ComponentWrapper(ModifierIcon, { showAccent: true }),
   [MUSIC_ICON_TYPES.FERMATA]: ComponentWrapper(ModifierIcon, { showFermata: true }),
   [MUSIC_ICON_TYPES.GRACE_NOTE]: ComponentWrapper(ModifierIcon, { showGraceNote: true }),

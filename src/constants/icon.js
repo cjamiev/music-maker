@@ -12,6 +12,8 @@ export const MUSIC_ICON_TYPES = {
   QUARTER_NOTE: 'quarter-note',
   EIGHTH_NOTE: 'eighth-note',
   SIXTEENTH_NOTE: 'sixteenth-note',
+  STACCATO: 'staccato',
+  DOTTED: 'dotted',
   ACCENT: 'accent',
   FERMATA: 'fermata',
   GRACE_NOTE: 'grace-note',

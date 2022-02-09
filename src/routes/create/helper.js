@@ -139,23 +139,29 @@ const getNoteType = ({
 };
 
 const getNoteModifier = ({
+  showStaccato,
+  showDotted,
   showNoteFlat,
   showNoteSharp,
   showNoteNatural,
   showAccent,
   showTenuto,
   showFermata,
+  showTrill,
   pianoKey
 }) => {
   const translateY = mapNotePosition[pianoKey];
 
   return [
+    showStaccato && { component:'Staccato', transform:`translate(0,${mapStaccatoPosition[pianoKey]})`, conditions:{}},
+    showDotted && { component:'Dotted', transform:`translate(0,${mapDottedPosition[pianoKey]})`, conditions:{}},
     showNoteFlat && { component:'NoteFlat', transform:`translate(0,${translateY})`, conditions:{}},
     showNoteSharp && { component:'NoteSharp', transform:`translate(0,${translateY})`, conditions:{}},
     showNoteNatural && { component:'NoteNatural', transform:`translate(0,${translateY})`, conditions:{}},
     showAccent && { component:'Accent', transform:'translate(0,0)', conditions:{}},
     showTenuto && { component:'Tenuto', transform:'translate(0,0)', conditions:{}},
-    showFermata && { component:'Fermata', transform:'translate(0,0)', conditions:{}}
+    showFermata && { component:'Fermata', transform:'translate(0,0)', conditions:{}},
+    showTrill && { component:'Trill', transform:'translate(0,0)', conditions:{}}
   ].filter(Boolean);
 };
 
@@ -194,6 +200,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
+      conditions: { ...item.conditions, showDotted: item.showDotted },
       transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, false),
       subcomponents:getNoteSubcomponents(item)
     };
