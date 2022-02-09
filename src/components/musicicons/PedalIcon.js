@@ -74,8 +74,7 @@ const PedalIcon = ({
           >
             {value}
           </tspan>
-        </text>
-      }
+        </text>}
     </g>
   );
 };

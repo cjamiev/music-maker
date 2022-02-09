@@ -87,7 +87,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
         className="clickable"
         title="Test"
         onClick={() => {
-          onChangeSelection([allWholeNoteData,allQuarterNoteData, allQuarterChordData, allModifierData]);
+          onChangeSelection([musicNotationData, allWholeNoteData,allQuarterNoteData, allQuarterChordData, allModifierData]);
         }}
       />
     </div>

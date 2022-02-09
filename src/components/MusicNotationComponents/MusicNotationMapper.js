@@ -4,7 +4,7 @@ import svgDataMapper from './index';
 const MusicNotationMapper = ({ data, parentRef } ) => {
   const renderData = svgDataMapper(data).map(item => {
     const SvgComponent = item.component;
-    const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents);
+    const key = SvgComponent.name + item.transform + JSON.stringify(item.conditions) + JSON.stringify(item.subcomponents);
 
     return (
       <SvgComponent

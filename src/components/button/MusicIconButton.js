@@ -67,8 +67,14 @@ const iconMap = {
   [MUSIC_ICON_TYPES.QUARTER_REST]: ComponentWrapper(RestIcon, { showQuarterRest: true }),
   [MUSIC_ICON_TYPES.EIGHTH_REST]: ComponentWrapper(RestIcon, { showEighthRest: true }),
   [MUSIC_ICON_TYPES.SIXTEENTH_REST]: ComponentWrapper(RestIcon, { showSixteenthRest: true }),
-  [MUSIC_ICON_TYPES.OTTAVA]: ComponentWrapper(OttavaIcon, { showOttava: true }),
-  [MUSIC_ICON_TYPES.OTTAVA_BASSA]: ComponentWrapper(OttavaIcon, { showOttavaBassa: true })
+  [MUSIC_ICON_TYPES.OTTAVA_ALTA_START]: ComponentWrapper(OttavaIcon, { showOttavaAltaStart: true }),
+  [MUSIC_ICON_TYPES.OTTAVA_ALTA_CONTINUE]: ComponentWrapper(OttavaIcon, { showOttavaAltaContinue: true }),
+  [MUSIC_ICON_TYPES.OTTAVA_ALTA_END]: ComponentWrapper(OttavaIcon, { showOttavaAltaEnd: true }),
+  [MUSIC_ICON_TYPES.OTTAVA_ALTA_REMOVE]: ComponentWrapper(OttavaIcon, { value: 'DEL' }),
+  [MUSIC_ICON_TYPES.OTTAVA_BASSA_START]: ComponentWrapper(OttavaIcon, { showOttavaBassaStart: true }),
+  [MUSIC_ICON_TYPES.OTTAVA_BASSA_CONTINUE]: ComponentWrapper(OttavaIcon, { showOttavaBassaContinue: true }),
+  [MUSIC_ICON_TYPES.OTTAVA_BASSA_END]: ComponentWrapper(OttavaIcon, { showOttavaBassaEnd: true }),
+  [MUSIC_ICON_TYPES.OTTAVA_BASSA_REMOVE]: ComponentWrapper(OttavaIcon, { value: 'DEL' })
 };
 
 

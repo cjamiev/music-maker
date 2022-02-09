@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import RestSelector from './RestSelector';
 import MeasureBarSelector from './MeasureBarSelector';
 import PedalSelector from './PedalSelector';
+import OttavaSelector from './OttavaSelector';
 import DynamicsSelector from './DynamicsSelector';
 import NoteTypeSelector from './NoteTypeSelector';
 import NoteModifierSelector from './NoteModifierSelector';
@@ -42,12 +43,20 @@ const MusicForm = ({
             ...selectedPedalSymbol
           });
         }} />
+        <OttavaSelector selectOttavaSymbol={(selectedOttavaSymbol) => {
+          selectSymbol({
+            component: 'Ottava',
+            ...selectedOttavaSymbol
+          });
+        }} />
         <MeasureBarSelector selectMeasureBar={(selectedMeasureBar) => {
           selectSymbol({
             component: 'Measure',
             ...selectedMeasureBar
           });
         }} />
+      </div>
+      <div className='music-form__dynamics-buttons'>
         <DynamicsSelector selectDynamicsSymbol={(selectDynamicsSymbol) => {
           selectSymbol({
             component: 'Dynamics',

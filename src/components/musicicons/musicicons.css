@@ -1,3 +1,16 @@
+.musicicon__ottava-continue {
+  stroke:#000000;
+  fill: none;
+  stroke-dasharray: 1.5;
+  stroke-width: 2.802789;
+}
+
+.musicicon__ottava-end {
+  stroke:#000000;
+  fill: none;
+  stroke-width: 2.802789;
+}
+
 .musicicon__staff-line {
   stroke:#000000;
   stroke-width:0.588357;

@@ -194,8 +194,16 @@ const getMeasureSubcomponents = ({
 };
 
 const getSheetMusic = (configuration, line, editorPosition) => {
-  const { treble, measure, dynamics, bass, pedal } = line;
+  const { ottavaAlta, treble, measure, dynamics, bass, ottavaBassa, pedal } = line;
 
+  const mappedOttavaAltaData = ottavaAlta.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      subcomponents: []
+    };
+  });
   const mappedTrebleData = treble.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
@@ -229,6 +237,14 @@ const getSheetMusic = (configuration, line, editorPosition) => {
       subcomponents:getNoteSubcomponents(item)
     };
   });
+  const mappedOttavaBassaData = ottavaBassa.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      subcomponents: []
+    };
+  });
   const mappedPedalData = pedal.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
@@ -248,10 +264,12 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     getKeySignatureData({ lineNumber: ZERO, keySignature: configuration.keySignature, isBassClef: true}),
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: false}),
     editorPosition.lineIndex === ZERO && getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: true}),
+    ...mappedOttavaAltaData,
     ...mappedTrebleData,
     ...mappedMeasureData,
     ...mappedDynamicsData,
     ...mappedBassData,
+    ...mappedOttavaBassaData,
     ...mappedPedalData
   ].filter(Boolean);
 };

@@ -14,12 +14,18 @@
 }
 
 .music-form__bottom-buttons {
-  margin-left: 50px;
+  margin-left: 20px;
   width: 1260px;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   justify-items: center;
+}
+
+.music-form__dynamics-buttons {
+  display: flex;
+  margin-top: 5px;
+  margin-left: 250px;
 }
 
 .music-form__btn-group {

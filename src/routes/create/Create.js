@@ -185,6 +185,51 @@ const getUpdatedPedal = ({ editorPosition, currentLine, data, update }) => {
   return updatedData;
 };
 
+const getUpdatedOttava = ({ editorPosition, currentLine, data, update }) => {
+  const currentSection = update.isAlta ? currentLine.ottavaAlta : currentLine.ottavaBassa;
+  const matched = currentSection.find(item => item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex);
+  const updatedSection = matched ? currentSection.map(item => {
+    if(item.pageIndex === editorPosition.pageIndex
+      && item.lineIndex === editorPosition.lineIndex
+      && item.columnIndex === editorPosition.columnIndex) {
+      return {
+        pageIndex: editorPosition.pageIndex,
+        lineIndex: editorPosition.lineIndex,
+        columnIndex: editorPosition.columnIndex,
+        ...update
+      };
+    }
+    return item;
+  }).filter(item => !item.shouldRemove)
+    : currentSection.concat({
+      pageIndex: editorPosition.pageIndex,
+      lineIndex: editorPosition.lineIndex,
+      columnIndex: editorPosition.columnIndex,
+      ...update
+    });
+
+  const updatedLine = update.isAlta
+    ? {
+      ...currentLine,
+      ottavaAlta: updatedSection
+    }
+    : {
+      ...currentLine,
+      ottavaBassa: updatedSection
+    };
+
+  const updatedData = data.map((item, index) => {
+    if(index === editorPosition.lineIndex) {
+      return updatedLine;
+    }
+    return item;
+  });
+
+  return updatedData;
+};
+
 const Create = () => {
   const [editorPosition, setEditorPositon] = useState({
     pageIndex: ZERO,
@@ -207,10 +252,12 @@ const Create = () => {
     }
   });
   const [data, setData] = useState([{
+    ottavaAlta: [],
     treble: [STARTING_NOTE],
     measure: [],
     dynamics: [],
     bass: [STARTING_NOTE],
+    ottavaBassa: [],
     pedal: []
   }]);
 
@@ -236,6 +283,8 @@ const Create = () => {
   const handleDataChange = (updatedSymbol) => {
     if(updatedSymbol.component === 'Pedal') {
       setData(getUpdatedPedal({ editorPosition, currentLine, data, update: updatedSymbol }));
+    } else if(updatedSymbol.component === 'Ottava') {
+      setData(getUpdatedOttava({ editorPosition, currentLine, data, update: updatedSymbol }));
     } else if(updatedSymbol.component === 'Measure') {
       setData(getUpdatedMeasure({ editorPosition, currentLine, data, update: updatedSymbol }));
     } else if(updatedSymbol.component === 'Dynamics') {

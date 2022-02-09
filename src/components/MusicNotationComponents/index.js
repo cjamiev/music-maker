@@ -44,17 +44,8 @@ import {
   TrillSVG
 } from './NoteSVG';
 import {
-  OttavaAltaSVG,
-  OttavaAltaBarSVG,
-  OttavaAltaEndSVG,
-  OttavaAltaTextSVG
-} from './OttavaAltaSVG';
-import {
-  OttavaBassaSVG,
-  OttavaBassaBarSVG,
-  OttavaBassaEndSVG,
-  OttavaBassaTextSVG
-} from './OttavaBassaSVG';
+  OttavaSVG
+} from './OttavaSVG';
 import {
   PedalSVG
 } from './PedalSVG';
@@ -124,14 +115,7 @@ const svgMap = {
   'NoteNatural': NoteNaturalSVG,
   'NoteSharp': NoteSharpSVG,
   'Trill': TrillSVG,
-  'OttavaAlta': OttavaAltaSVG,
-  'OttavaAltaBar': OttavaAltaBarSVG,
-  'OttavaAltaEnd': OttavaAltaEndSVG,
-  'OttavaAltaText': OttavaAltaTextSVG,
-  'OttavaBassa': OttavaBassaSVG,
-  'OttavaBassaBar': OttavaBassaBarSVG,
-  'OttavaBassaEnd': OttavaBassaEndSVG,
-  'OttavaBassaText': OttavaBassaTextSVG,
+  'Ottava': OttavaSVG,
   'Pedal': PedalSVG,
   'Repeat': RepeatSVG,
   'RepeatText': RepeatTextSVG,

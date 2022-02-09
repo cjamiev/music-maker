@@ -228,6 +228,12 @@ export const dynamicsTypes = [
 
 
 export const ottavaTypes = [
-  { key: 'ottava', label: 'Ottava', value: { showOttava: true } },
-  { key: 'ottava-bassa', label: 'Ottava Bassa', value: { showOttavaBassa: true } }
+  { key: 'ottava-alta-start', label: 'Ottava Alta Start', value: { showOttavaAltaStart: true }, isAlta: true },
+  { key: 'ottava-alta-continue', label: 'Ottava Alta Continue', value: { showOttavaAltaContinue: true }, isAlta: true },
+  { key: 'ottava-alta-end', label: 'Ottava Alta End', value: { showOttavaAltaEnd: true }, isAlta: true },
+  { key: 'ottava-alta-remove', label: 'Ottava Alta Remove', value: { }, shouldRemove: true, isAlta: true },
+  { key: 'ottava-bassa-start', label: 'Ottava Bassa Start', value: { showOttavaBassaStart: true } },
+  { key: 'ottava-bassa-continue', label: 'Ottava Bassa Continue', value: { showOttavaBassaContinue: true } },
+  { key: 'ottava-bassa-end', label: 'Ottava Bassa End', value: { showOttavaBassaEnd: true } },
+  { key: 'ottava-bassa-remove', label: 'Ottava Bassa Remove', value: { }, shouldRemove: true }
 ];
