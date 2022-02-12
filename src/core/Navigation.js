@@ -4,7 +4,8 @@ import './navigation.css';
 
 const NAV_ITEMS = [
   { label: 'Create', url: '/create'},
-  { label: 'View', url: '/view'}
+  { label: 'View', url: '/view'},
+  { label: 'Test', url: '/test'}
 ];
 
 const Navigation = React.memo(() => {

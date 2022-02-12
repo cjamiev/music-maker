@@ -29,16 +29,13 @@ import {
   ChordNotationSVG,
   StemmedNoteFlippedSVG,
   StemmedNoteSVG,
-  ChordLedgerSVG,
   AccentSVG,
   FermataSVG,
   RolledSVG,
-  StaffSVG,
   WholeNoteSVG,
   NoteFlatSVG,
   FingerNumberSVG,
   GraceNoteSVG,
-  FlippedFermataSVG,
   NoteNaturalSVG,
   NoteSharpSVG,
   TrillSVG
@@ -62,6 +59,10 @@ import {
 import {
   SelectionSVG
 } from './SelectionSVG';
+import {
+  ChordLedgerSVG,
+  StaffSVG
+} from './StaffSVG';
 import {
   TimeSignatureSVG,
   CommonTimeSVG,
@@ -111,7 +112,6 @@ const svgMap = {
   'NoteFlat': NoteFlatSVG,
   'FingerNumber': FingerNumberSVG,
   'GraceNote': GraceNoteSVG,
-  'FlippedFermata': FlippedFermataSVG,
   'NoteNatural': NoteNaturalSVG,
   'NoteSharp': NoteSharpSVG,
   'Trill': TrillSVG,
