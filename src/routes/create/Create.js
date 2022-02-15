@@ -7,7 +7,7 @@ import LinePositionController from './LinePositionController';
 import Page from 'components/layout';
 import {
   getSheetMusic
-} from './helper';
+} from './utils';
 
 const attributes = {
   width: 1000,

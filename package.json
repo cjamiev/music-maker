@@ -1,6 +1,6 @@
 {
   "name": "music-maker",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "private": true,
   "description": "Create and play music",
   "main": "src/index.js",
@@ -11,8 +11,8 @@
     "eslint": "eslint --ext .js src/ -f html -o coverage/eslint-report.html"
   },
   "devDependencies": {
-    "@babel/core": "7.16.12",
-    "@babel/eslint-parser": "7.16.5",
+    "@babel/core": "7.17.2",
+    "@babel/eslint-parser": "7.17.0",
     "@babel/plugin-proposal-class-properties": "7.16.7",
     "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
@@ -20,8 +20,8 @@
     "@testing-library/react-hooks": "7.0.2",
     "babel-loader": "8.2.3",
     "babel-plugin-module-resolver": "4.1.0",
-    "css-loader": "6.5.1",
-    "eslint": "8.7.0",
+    "css-loader": "6.6.0",
+    "eslint": "8.9.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-react": "1.1.7",
     "eslint-plugin-react": "7.28.0",
@@ -32,10 +32,10 @@
     "html-webpack-plugin": "5.5.0",
     "prettier": "2.5.1",
     "style-loader": "3.3.1",
-    "webpack": "5.67.0",
+    "webpack": "5.68.0",
     "webpack-bundle-analyzer": "4.5.0",
     "webpack-cli": "4.9.2",
-    "webpack-dev-server": "4.7.3"
+    "webpack-dev-server": "4.7.4"
   },
   "dependencies": {
     "react": "17.0.2",
