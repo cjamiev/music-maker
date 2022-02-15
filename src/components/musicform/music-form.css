@@ -1,12 +1,22 @@
 .music-form {
   background-color: black;
-  width: 1270px;
+  width: 1350px;
   border-radius: 5px;
   padding: 8px;
 }
 
+.music-form__piano {
+  display: flex;
+}
+
+.music-form__side-btns {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
 .music-form__top-buttons {
-  width: 1260px;
+  width: 1340px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
@@ -15,7 +25,7 @@
 
 .music-form__bottom-buttons {
   margin-left: 20px;
-  width: 1260px;
+  width: 1340px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;

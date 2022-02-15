@@ -30,7 +30,10 @@ const DEFAULT_NOTE = {
   showAccent: false,
   showTenuto: false,
   showFermata: false,
-  showTrill: false
+  showTrill: false,
+  isChordMode: false,
+  chord: [],
+  pianoKey: 'C4'
 };
 const STARTING_NOTE = {
   id: '001',
@@ -272,6 +275,7 @@ const Create = () => {
 
   const handlePositionChange = (updatedEditorPosition, updatedData) => {
     setEditorPositon(updatedEditorPosition);
+    setNoteConfig({ ...noteConfig, chord: [], isChordMode: false });
     updatedData && setData(updatedData);
   };
 

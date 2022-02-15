@@ -29,13 +29,32 @@ const MusicForm = ({
           });
         }} />
       </div>
-      <Piano selectPianoKey={(selectedNoteSymbol) => {
-        selectSymbol({
-          component: 'Note',
-          pianoKey: selectedNoteSymbol
-        });
-      }} isBassSelection={isBassSelection}
-      />
+      <div className="music-form__piano">
+        <div className="music-form__side-btns">
+          <button onClick={() => { selectNoteType({ isChordMode: !noteConfig.isChordMode, chord: [noteConfig.pianoKey], pianoKey: !noteConfig.isChordMode ? '' : noteConfig.pianoKey });}}>Build Chord</button>
+        </div>
+        <Piano
+          selectPianoKey={(selectedNoteSymbol) => {
+            if(noteConfig.isChordMode) {
+              const matched = noteConfig.chord.find(item => item === selectedNoteSymbol);
+              const updatedChord = matched
+                ? noteConfig.chord.filter(item => item !== selectedNoteSymbol)
+                : noteConfig.chord.concat(selectedNoteSymbol);
+
+              selectNoteType({
+                component: 'Note',
+                chord: updatedChord
+              });
+            } else {
+              selectNoteType({
+                component: 'Note',
+                pianoKey: selectedNoteSymbol
+              });
+            }
+          }}
+          isBassSelection={isBassSelection}
+        />
+      </div>
       <div className='music-form__bottom-buttons'>
         <PedalSelector selectPedalSymbol={(selectedPedalSymbol) => {
           selectSymbol({

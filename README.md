@@ -40,9 +40,15 @@ Each object will properties
 ```
 
 ## ToDo
-- Beam note generator
-- Test with json data for each of the conditionals/parameters
-- Text Component
+- Chord Constructor 
+  - rolled modifier
+- Beam Constructor
+- Triplet Constructor
+- Grace Note Constructor
+- Slur/Tie Constructor
+- Clef Ottava option
+- Repeat Selector
+- Custom Text Component
   - Normal Font -> font-family: Arial, sans-serif;
   - Small gap Font -> font-family: Tahoma, sans-serif;
   - Large gap Font -> font-family: 'Courier New', monospace;
@@ -50,8 +56,8 @@ Each object will properties
 - Custom SVG placer
 	- Cycle through any existing svg component
 	- Be able to drag or use controller to place it anywhere in the sheet music
-- Form for creating json data
-- Outline (clickable) for each cell of the grid
+- Evenly Spacing Note
+- Select Column on Click
+- Move, Duplicate a row
 - Transpose scales
-- Save in localStorage and json file
-- Load from localStorage and json file
+- Save/Load from localStorage and json file

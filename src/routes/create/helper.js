@@ -166,7 +166,20 @@ const getNoteModifier = ({
 };
 
 const getNoteSubcomponents = (item) => {
-  if(item.component === 'Note') {
+  if(item.component === 'Note' && item.isChordMode) {
+    const noteSubcomponent = item.chord.map(pianoKey => {
+      return getNoteType({
+        ...item,
+        pianoKey
+      });
+    });
+    const noteModifierSubcomponent = getNoteModifier(item);
+    return [
+      { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[item.pianoKey]},
+      ...noteSubcomponent,
+      ...noteModifierSubcomponent
+    ];
+  } else if(item.component === 'Note') {
     const noteSubcomponent = getNoteType(item);
     const noteModifierSubcomponent = getNoteModifier(item);
     return [
