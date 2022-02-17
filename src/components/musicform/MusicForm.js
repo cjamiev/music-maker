@@ -6,6 +6,7 @@ import OttavaSelector from './OttavaSelector';
 import DynamicsSelector from './DynamicsSelector';
 import NoteTypeSelector from './NoteTypeSelector';
 import NoteModifierSelector from './NoteModifierSelector';
+import ChordBuilder from './ChordBuilder';
 import Piano from './Piano';
 import Button from 'components/button';
 
@@ -29,31 +30,18 @@ const MusicForm = ({
           });
         }} />
       </div>
-      <div className="music-form__piano">
+      <div className="music-form__middle">
         <div className="music-form__side-btns">
-          <button onClick={() => { selectNoteType({ isChordMode: !noteConfig.isChordMode, chord: [noteConfig.pianoKey], pianoKey: !noteConfig.isChordMode ? '' : noteConfig.pianoKey });}}>Build Chord</button>
+          <ChordBuilder pianoKey={noteConfig.pianoKey} isBassSelection={isBassSelection} selectNoteType={selectNoteType}/>
         </div>
-        <Piano
-          selectPianoKey={(selectedNoteSymbol) => {
-            if(noteConfig.isChordMode) {
-              const matched = noteConfig.chord.find(item => item === selectedNoteSymbol);
-              const updatedChord = matched
-                ? noteConfig.chord.filter(item => item !== selectedNoteSymbol)
-                : noteConfig.chord.concat(selectedNoteSymbol);
-
-              selectNoteType({
-                component: 'Note',
-                chord: updatedChord
-              });
-            } else {
-              selectNoteType({
-                component: 'Note',
-                pianoKey: selectedNoteSymbol
-              });
-            }
-          }}
-          isBassSelection={isBassSelection}
-        />
+        <div className="music-form__piano">
+          <Piano
+            selectPianoKey={(selectedNoteSymbol) => {
+              selectNoteType({ component: 'Note', pianoKey: selectedNoteSymbol });
+            }}
+            isBassSelection={isBassSelection}
+          />
+        </div>
       </div>
       <div className='music-form__bottom-buttons'>
         <PedalSelector selectPedalSymbol={(selectedPedalSymbol) => {

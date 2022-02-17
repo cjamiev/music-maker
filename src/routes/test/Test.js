@@ -1,100 +1,25 @@
-import React from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import Page from 'components/layout';
-import Button, { MusicIconButton } from 'components/button';
-import { ICON_SIZES, MUSIC_ICON_TYPES } from 'constants/icon';
 import {
-  measureBarTypes,
-  noteModifierTypes,
-  noteTypes,
-  restTypes,
-  pedalTypes,
-  ottavaTypes,
-  dynamicsTypes
-} from 'constants/musicnotation';
+  DynamicsIcons,
+  OttavaIcons,
+  PedalIcons,
+  MeasureBarIcons,
+  ModifierIcons,
+  NoteIcons,
+  RestIcons
+} from './IconTest';
 
 const Test = () => {
-  const renderDynamicsSymbol = dynamicsTypes.map(item => {
-    return (
-      <MusicIconButton
-        key={item.key}
-        type={item.key}
-        onClick={() => { console.log({
-          conditions: item.conditions || {},
-          value: item.value
-        }); }}
-      />
-    );
-  }).filter(Boolean);
-
-  const renderOttavaSymbol = ottavaTypes.map(item => {
-    return (
-      <MusicIconButton
-        key={item.key}
-        type={item.key}
-        onClick={() => { console.log(item.value); }}
-      />
-    );
-  }).filter(Boolean);
-
-  const renderPedalSymbol = pedalTypes.map(item => {
-    return (
-      <MusicIconButton
-        key={item.key}
-        type={item.key}
-        onClick={() => { console.log(item.value); }}
-      />
-    );
-  }).filter(Boolean);
-
-  const renderMeasureBarSymbol = measureBarTypes.map(item => {
-    return (
-      <MusicIconButton
-        key={item.key}
-        type={item.key}
-        onClick={() => { console.log(item.value); }}
-      />
-    );
-  }).filter(Boolean);
-
-  const renderModifierSymbol = noteModifierTypes.map(item => {
-    return (
-      <MusicIconButton
-        key={item.key}
-        type={item.key}
-        onClick={() => { console.log(item.value); }}
-      />
-    );
-  }).filter(Boolean);
-
-  const renderNoteSymbol = noteTypes.map(item => {
-    return (
-      <MusicIconButton
-        key={item.key}
-        type={item.key}
-        onClick={() => { console.log(item.value); }}
-      />
-    );
-  }).filter(Boolean);
-
-  const renderRestSymbol = restTypes.map(item => {
-    return (
-      <MusicIconButton
-        key={item.key}
-        type={item.key}
-        onClick={() => { console.log(item.value); }}
-      />
-    );
-  }).filter(Boolean);
-
   return (
     <Page>
-      {renderDynamicsSymbol}
-      {renderOttavaSymbol}
-      {renderPedalSymbol}
-      {renderMeasureBarSymbol}
-      {renderModifierSymbol}
-      {renderNoteSymbol}
-      {renderRestSymbol}
+      <DynamicsIcons />
+      <OttavaIcons />
+      <PedalIcons />
+      <MeasureBarIcons />
+      <ModifierIcons />
+      <NoteIcons />
+      <RestIcons />
     </Page>
   );
 };

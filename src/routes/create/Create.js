@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
+import Page from 'components/layout';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import MusicForm from 'components/musicform';
 import Configuration from './Configuration';
 import ColumnPositionController from './ColumnPositionController';
 import LinePositionController from './LinePositionController';
-import Page from 'components/layout';
-import {
-  getSheetMusic
-} from './utils';
+import { getSheetMusic } from './utils';
 
 const attributes = {
   width: 1000,
@@ -31,9 +29,8 @@ const DEFAULT_NOTE = {
   showTenuto: false,
   showFermata: false,
   showTrill: false,
-  isChordMode: false,
-  chord: [],
-  pianoKey: 'C4'
+  pianoKey: 'C4',
+  chord: []
 };
 const STARTING_NOTE = {
   id: '001',
@@ -41,7 +38,8 @@ const STARTING_NOTE = {
   lineIndex: ZERO,
   columnIndex: ZERO,
   component: 'Note',
-  pianoKey: 'C4'
+  pianoKey: 'C4',
+  chord: []
 };
 
 const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {

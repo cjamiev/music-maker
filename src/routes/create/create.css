@@ -1,3 +1,26 @@
+.create__container {
+  margin-top: 10px;
+  display: grid;
+  grid-template-areas: 
+    "config displaymusic displaymusic displaymusic displaymusic displaymusic"
+    "config form form form form form"
+    "config form form form form form";
+}
+
+.create__displaymusic {
+  grid-area: displaymusic;
+}
+
+.create__config {
+  grid-area: config;
+  border-right: 1px solid rgb(228, 228, 228);
+  margin-right: 10px;
+}
+
+.create__form {
+  grid-area: form;
+}
+
 .create__configuration {
   margin: 10px;
 }
@@ -11,23 +34,14 @@
   width: 80px;
 }
 
-.create__displaymusic {
-  grid-area: displaymusic;
-}
-.create__config {
-  grid-area: config;
-  border-right: 1px solid rgb(228, 228, 228);
-  margin-right: 10px;
-}
-.create__form {
-  grid-area: form;
-}
-
-.create__container {
-  margin-top: 10px;
-  display: grid;
-  grid-template-areas: 
-    "config displaymusic displaymusic displaymusic displaymusic displaymusic"
-    "config form form form form form"
-    "config form form form form form";
+.create__chord-builder {
+  width: 1300px;
+  height: 700px;
+  top: 100px;
+  left: 600px;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: white;
+  position: absolute;
+  z-index: 2;
 }

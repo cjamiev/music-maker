@@ -12,3 +12,20 @@ export const bassPianoKeyList = [
   'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A5', 'A#5', 'B5',
   'C5'
 ];
+
+export const intervalList = [
+  {label: 'minor 2nd', value: 1},
+  {label: 'major 2nd', value: 2},
+  {label: 'minor 3rd', value: 3},
+  {label: 'major 3rd', value: 4},
+  {label: 'perfect 4rth', value: 5},
+  {label: 'tritone', value: 6},
+  {label: 'perfect 5th', value: 7},
+  {label: 'minor 6th', value: 8},
+  {label: 'major 6th', value: 9},
+  {label: 'minor 7th', value: 10},
+  {label: 'major 7th', value: 11},
+  {label: 'octave', value: 12},
+  {label: 'minor 9th', value: 13},
+  {label: 'major 9th', value: 14}
+];
