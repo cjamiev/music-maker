@@ -14,7 +14,7 @@ const NoteModifierSelector = ({ noteConfig, selectNoteModifier }) => {
         key={key}
         type={key}
         isActive={isActive}
-        onClick={() => { selectNoteModifier({ [selectedKey]: !isActive }); }}
+        onClick={() => { selectNoteModifier({ ...value, [selectedKey]: !isActive }); }}
       />
     );
   }).filter(Boolean);

@@ -36,8 +36,8 @@ const MusicForm = ({
         </div>
         <div className="music-form__piano">
           <Piano
-            selectPianoKey={(selectedNoteSymbol) => {
-              selectNoteType({ component: 'Note', pianoKey: selectedNoteSymbol });
+            selectedNote={(note) => {
+              selectNoteType({ component: 'Note', ...note });
             }}
             isBassSelection={isBassSelection}
           />

@@ -91,16 +91,22 @@ const getNoteModifier = ({
 
 const getNoteSubcomponents = (item) => {
   if(item.component === 'Note') {
-    const noteSubcomponent = getNoteType(item);
+    const parsedPianoKey = item.pianoKey.replace('#','');
+    const sharpConditional = item.pianoKey.includes('#') ? { showNoteSharp: true } : { };
+    const parsedItem = {
+      ...item,
+      pianoKey: parsedPianoKey
+    };
+    const noteSubcomponent = getNoteType(parsedItem);
     const chordNoteSubcomponent = item.chord.filter(chordItem => chordItem.pianoKey).map(chordItem => {
       return getNoteType({
         ...item,
-        pianoKey: chordItem.pianoKey
+        pianoKey: chordItem.pianoKey.replace('#','')
       });
     });
-    const noteModifierSubcomponent = getNoteModifier(item);
+    const noteModifierSubcomponent = getNoteModifier({...parsedItem, ...sharpConditional });
     return [
-      { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[item.pianoKey]},
+      { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[parsedPianoKey]},
       noteSubcomponent,
       ...chordNoteSubcomponent,
       ...noteModifierSubcomponent
