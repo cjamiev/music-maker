@@ -66,31 +66,33 @@ const getNoteModifier = ({
 
 const getChordSubcomponent = (item) => {
   const [chordNote2, chordNote3, chordNote4, chordNote5] = item.chord;
+  const { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote } = item;
+  const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
   const rootIndex = pianoKeyList.findIndex(key => key === item.pianoKey);
   const isRootNoteAdjacent = item.isStemmedNoteFlipped && chordNote2.value - rootIndex < THREE;
   const rootNote = [getNoteType({...item, isAdjacentNote: isRootNoteAdjacent }), ...getNoteModifier(item)];
   const isNote2Adjacent = item.isStemmedNoteFlipped ? false: chordNote2.value < THREE;
   const secondPianoKey = pianoKeyList[rootIndex + chordNote2.value];
   const secondNote = [
-    getNoteType({...chordNote2, pianoKey:secondPianoKey, isAdjacentNote: isNote2Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
+    getNoteType({...chordNote2, pianoKey:secondPianoKey, isAdjacentNote: isNote2Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped, ...noteType}),
     ...getNoteModifier({...chordNote2, pianoKey: secondPianoKey})
   ];
   const isNote3Adjacent = chordNote3 && chordNote3.value - chordNote2.value < THREE;
   const thirdPianoKey = chordNote3 && pianoKeyList[rootIndex + chordNote3.value];
   const thirdNote = chordNote3 ? [
-    getNoteType({...chordNote3, pianoKey:thirdPianoKey, isAdjacentNote: isNote3Adjacent && !isNote2Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
+    getNoteType({...chordNote3, pianoKey:thirdPianoKey, isAdjacentNote: isNote3Adjacent && !isNote2Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped, ...noteType}),
     ...getNoteModifier({...chordNote3, pianoKey: thirdPianoKey})
   ]:[];
   const isNote4Adjacent = chordNote4 && chordNote4.value - chordNote3.value < THREE;
   const fourthPianoKey = chordNote4 && pianoKeyList[rootIndex + chordNote4.value];
   const fourthNote = chordNote4 ? [
-    getNoteType({...chordNote4, pianoKey:fourthPianoKey, isAdjacentNote: isNote4Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
+    getNoteType({...chordNote4, pianoKey:fourthPianoKey, isAdjacentNote: isNote4Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped, ...noteType}),
     ...getNoteModifier({...chordNote4, pianoKey: fourthPianoKey})
   ]:[];
   const isNote5Adjacent = chordNote5 && chordNote5.value - chordNote4.value < THREE;
   const fifthPianoKey = chordNote5 && pianoKeyList[rootIndex + chordNote5.value];
   const fifthNote = chordNote5 ? [
-    getNoteType({...chordNote5, pianoKey:fifthPianoKey, isAdjacentNote: isNote5Adjacent && !isNote4Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
+    getNoteType({...chordNote5, pianoKey:fifthPianoKey, isAdjacentNote: isNote5Adjacent && !isNote4Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped, ...noteType}),
     ...getNoteModifier({...chordNote5, pianoKey: fifthPianoKey})
   ]:[];
 
