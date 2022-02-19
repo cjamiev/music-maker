@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import {
   mapStaccatoPosition,
   mapDottedPosition,
@@ -19,23 +20,21 @@ const getNoteType = ({
   showQuarterNote,
   showEighthNote,
   showSixteenthNote,
-  isStemmedNote,
+  isStemmedNoteFlipped,
   isAdjacentNote,
   pianoKey
 }) => {
   // TODO move replace
   const translateY = mapNotePosition[pianoKey.replace('#','')];
-  const translateX = isAdjacentNote ? (-ONE*Number(isStemmedNote)) + ADJACENT_NOTE_TRANSLATE_X: ZERO;
+  const translateX = isAdjacentNote ? (-ONE+TWO*Number(!isStemmedNoteFlipped)) * ADJACENT_NOTE_TRANSLATE_X: ZERO;
 
   if (showWholeNote) {
     return { component: 'WholeNote', transform:`translate(${translateX},${translateY})`, conditions: {}};
   }
 
-  const conditions = isStemmedNote
-    ? { showNoteStem: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote }
-    : { showNoteStem: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
+  const conditions = { showNoteStem: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
 
-  return { component: isStemmedNote ? 'StemmedNoteFlipped' : 'StemmedNote', transform:`translate(${translateX},${translateY})`, conditions};
+  return { component: isStemmedNoteFlipped ? 'StemmedNoteFlipped' : 'StemmedNote', transform:`translate(${translateX},${translateY})`, conditions};
 };
 
 const getNoteModifier = ({
@@ -68,29 +67,30 @@ const getNoteModifier = ({
 const getChordSubcomponent = (item) => {
   const [chordNote2, chordNote3, chordNote4, chordNote5] = item.chord;
   const rootIndex = pianoKeyList.findIndex(key => key === item.pianoKey);
-  const rootNote = [getNoteType(item), ...getNoteModifier(item)];
-  const isNote2Adjacent = chordNote2.value < THREE;
+  const isRootNoteAdjacent = item.isStemmedNoteFlipped && chordNote2.value - rootIndex < THREE;
+  const rootNote = [getNoteType({...item, isAdjacentNote: isRootNoteAdjacent }), ...getNoteModifier(item)];
+  const isNote2Adjacent = item.isStemmedNoteFlipped ? false: chordNote2.value < THREE;
   const secondPianoKey = pianoKeyList[rootIndex + chordNote2.value];
   const secondNote = [
-    getNoteType({...chordNote2, pianoKey:secondPianoKey, isAdjacentNote: isNote2Adjacent, isStemmedNote: item.isStemmedNote}),
+    getNoteType({...chordNote2, pianoKey:secondPianoKey, isAdjacentNote: isNote2Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
     ...getNoteModifier({...chordNote2, pianoKey: secondPianoKey})
   ];
   const isNote3Adjacent = chordNote3 && chordNote3.value - chordNote2.value < THREE;
   const thirdPianoKey = chordNote3 && pianoKeyList[rootIndex + chordNote3.value];
   const thirdNote = chordNote3 ? [
-    getNoteType({...chordNote3, pianoKey:thirdPianoKey, isAdjacentNote: isNote3Adjacent, isStemmedNote: item.isStemmedNote}),
+    getNoteType({...chordNote3, pianoKey:thirdPianoKey, isAdjacentNote: isNote3Adjacent && !isNote2Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
     ...getNoteModifier({...chordNote3, pianoKey: thirdPianoKey})
   ]:[];
   const isNote4Adjacent = chordNote4 && chordNote4.value - chordNote3.value < THREE;
   const fourthPianoKey = chordNote4 && pianoKeyList[rootIndex + chordNote4.value];
   const fourthNote = chordNote4 ? [
-    getNoteType({...chordNote4, pianoKey:fourthPianoKey, isAdjacentNote: isNote4Adjacent, isStemmedNote: item.isStemmedNote}),
+    getNoteType({...chordNote4, pianoKey:fourthPianoKey, isAdjacentNote: isNote4Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
     ...getNoteModifier({...chordNote4, pianoKey: fourthPianoKey})
   ]:[];
   const isNote5Adjacent = chordNote5 && chordNote5.value - chordNote4.value < THREE;
   const fifthPianoKey = chordNote5 && pianoKeyList[rootIndex + chordNote5.value];
   const fifthNote = chordNote5 ? [
-    getNoteType({...chordNote5, pianoKey:fifthPianoKey, isAdjacentNote: isNote5Adjacent, isStemmedNote: item.isStemmedNote}),
+    getNoteType({...chordNote5, pianoKey:fifthPianoKey, isAdjacentNote: isNote5Adjacent && !isNote4Adjacent, isStemmedNoteFlipped: item.isStemmedNoteFlipped}),
     ...getNoteModifier({...chordNote5, pianoKey: fifthPianoKey})
   ]:[];
 
@@ -103,7 +103,7 @@ const getNoteSubcomponents = (item) => {
   }
 
   const rootPianoKey = item.pianoKey.replace('#','');
-  const isStemmedNote = pianoKeyList.findIndex(key => key === rootPianoKey) > STAFF_MIDPOINT;
+  const isStemmedNoteFlipped = pianoKeyList.findIndex(key => key === rootPianoKey) > STAFF_MIDPOINT;
   const sharpConditional = item.pianoKey.includes('#')
     ? { showNoteSharp: true }
     : { };
@@ -111,7 +111,7 @@ const getNoteSubcomponents = (item) => {
   const updatedItem = {
     ...item,
     pianoKey: rootPianoKey,
-    isStemmedNote,
+    isStemmedNoteFlipped,
     ...sharpConditional,
     chord: filteredChordWithoutRoot
   };
