@@ -88,16 +88,33 @@ const getAdjacentNotes = ({
     : [isSecondNoteAdjacent, isThirdNoteAdjacent, isFourthNoteAdjacent, isFifthNoteAdjacent, false];
 };
 
-const getChordNoteTypes = ({ adjacentNotes, isStemmedNoteFlipped, noteType }) => {
+const getChordNoteTypes = ({ adjacentNotes, isStemmedNoteFlipped, noteType, size }) => {
   const noFlagsNoteType = {
     ...noteType,
     showEighthNote: false,
     showSixteenthNote:false
   };
-  const rootNoteType = isStemmedNoteFlipped && adjacentNotes[ZERO] ? noFlagsNoteType : noteType;
-  const secondNoteType = isStemmedNoteFlipped && adjacentNotes[ZERO] ? noteType : noFlagsNoteType;
 
-  return [rootNoteType,secondNoteType,noFlagsNoteType,noFlagsNoteType,noFlagsNoteType];
+  if(isStemmedNoteFlipped) {
+    const rootNoteType = adjacentNotes[ZERO] ? noFlagsNoteType : noteType;
+    const secondNoteType = adjacentNotes[ZERO] ? noteType : noFlagsNoteType;
+
+    return [rootNoteType,secondNoteType,noFlagsNoteType,noFlagsNoteType,noFlagsNoteType];
+  } else {
+    const lastNoteType = adjacentNotes[size - ONE] ? noFlagsNoteType : noteType;
+    const secondLastNoteType = adjacentNotes[size - ONE] ? noteType : noFlagsNoteType;
+
+    return Array.apply(null, Array(size)).map((x, i) => {
+      if(i === size - ONE) {
+        return lastNoteType;
+      }
+      else if(i === size - TWO) {
+        return secondLastNoteType;
+      }
+
+      return noFlagsNoteType;
+    });
+  }
 };
 
 const getChordNote = ({
@@ -139,7 +156,13 @@ const getChordSubcomponent = (item) => {
     fourthPianoKey,
     fifthPianoKey
   });
-  const chordNoteTypes = getChordNoteTypes({ adjacentNotes, isStemmedNoteFlipped: item.isStemmedNoteFlipped, noteType });
+
+  const chordNoteTypes = getChordNoteTypes({
+    adjacentNotes,
+    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
+    noteType,
+    size: item.chord.length + ONE
+  });
 
   const rootNote = getChordNote({
     pianoKey: item.pianoKey,
