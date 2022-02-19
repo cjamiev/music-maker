@@ -1,17 +1,11 @@
-const minorSecond = 1;
-const majorSecond = 2;
-const minorThird = 3;
-const majorThird = 4;
-const perfectFourth = 5;
-const tritone = 6;
-const perfectFifth = 7;
-const minorSixth = 8;
-const majorSixth = 9;
-const minorSeventh = 10;
-const majorSeventh = 11;
+const second = 2;
+const third = 4;
+const fourth = 5;
+const fifth = 7;
+const sixth = 9;
+const seventh = 11;
 const octave = 12;
-const minorNinth = 13;
-const majorNinth = 14;
+const ninth = 14;
 
 export const pianoKeyList = ['A3', 'A#3', 'B3',
   'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A4', 'A#4', 'B4',
@@ -29,34 +23,52 @@ export const bassPianoKeyList = [
 ];
 
 export const intervalList = [
-  {label: 'minor 2nd', value: minorSecond},
-  {label: 'major 2nd', value: majorSecond},
-  {label: 'minor 3rd', value: minorThird},
-  {label: 'major 3rd', value: majorThird},
-  {label: 'perfect 4rth', value: perfectFourth},
-  {label: 'tritone', value: tritone},
-  {label: 'perfect 5th', value: perfectFifth},
-  {label: 'minor 6th', value: minorSixth},
-  {label: 'major 6th', value: majorSixth},
-  {label: 'minor 7th', value: minorSeventh},
-  {label: 'major 7th', value: majorSeventh},
-  {label: 'octave', value: octave},
-  {label: 'minor 9th', value: minorNinth},
-  {label: 'major 9th', value: majorNinth}
+  {label: '2nd', value: second },
+  {label: '2nd with natural', value: second, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false },
+  {label: '2nd with flat', value: second, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: '2nd with sharp', value: second, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
+  {label: '3rd', value: third },
+  {label: '3rd with natural', value: third, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
+  {label: '3rd with flat', value: third, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: '3rd with sharp', value: third, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
+  {label: '4rth', value: fourth },
+  {label: '4rth with natural', value: fourth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
+  {label: '4rth with flat', value: fourth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: '4rth with sharp', value: fourth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
+  {label: '5th', value: fifth },
+  {label: '5th with natural', value: fifth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
+  {label: '5th with flat', value: fifth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: '5th with sharp', value: fifth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
+  {label: '6th', value: sixth },
+  {label: '6th with natural', value: sixth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
+  {label: '6th with flat', value: sixth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: '6th with sharp', value: sixth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
+  {label: '7th', value: seventh },
+  {label: '7th with natural', value: seventh, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
+  {label: '7th with flat', value: seventh, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: '7th with sharp', value: seventh, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
+  {label: 'octave', value: octave },
+  {label: 'octave with natural', value: octave, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
+  {label: 'octave with flat', value: octave, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: 'octave with sharp', value: octave, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
+  {label: '9th', value: ninth },
+  {label: '9th with natural', value: ninth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
+  {label: '9th with flat', value: ninth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
+  {label: '9th with sharp', value: ninth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false}
 ];
 
 export const chordList = [
-  {label: 'Minor', value: [minorThird, perfectFifth]},
-  {label: 'Major', value: [majorThird, perfectFifth]},
-  {label: 'Sus2', value: [majorSecond, perfectFifth]},
-  {label: 'Sus4', value: [perfectFourth, perfectFifth]},
-  {label: 'Augmented', value: [majorThird, minorSixth]},
-  {label: 'Diminished', value: [minorThird, tritone]},
-  {label: 'M6', value: [majorThird, majorSixth]},
-  {label: 'm6', value: [minorThird, majorSixth]},
-  {label: 'Dominant 7th', value: [majorThird, perfectFifth, minorSeventh]},
-  {label: 'Major 7th', value: [majorThird, perfectFifth, majorSeventh]},
-  {label: 'Minor Major 7th', value: [minorThird, perfectFifth, majorSeventh]},
-  {label: 'Minor 7th', value: [minorThird, perfectFifth, minorSeventh]},
-  {label: 'Diminished 7th', value: [minorThird, tritone, majorSixth]}
+  {label: 'Minor', chord: [{ label: '3rd with flat' },{ label: '5th' }]},
+  {label: 'Major', chord: [{ label: '3rd' }, { label: '5th' }]},
+  {label: 'Sus2', chord: [{ label: '2nd' }, { label: '5th' }]},
+  {label: 'Sus4', chord: [{ label: '4rth' }, { label: '5th' }]},
+  {label: 'Augmented', chord: [{ label: '3rd' }, { label: '5th with sharp' }]},
+  {label: 'Diminished', chord: [{ label: '3rd with flat' }, { label: '5th with flat' }]},
+  {label: 'm6', chord: [{ label: '3rd' }, { label: '6th' }]},
+  {label: 'M6', chord: [{ label: '3rd' }, { label: '6th' }]},
+  {label: 'Dominant 7th', chord: [{ label: '3rd' }, { label: '5th' }, { label: '7th with flat' }]},
+  {label: 'Major 7th', chord: [{ label: '3rd' }, { label: '5th' }, { label: '7th' }]},
+  {label: 'Minor Major 7th', chord: [{ label: '3rd with flat' }, { label: '5th' }, { label: '7th' }]},
+  {label: 'Minor 7th', chord: [{ label: '3rd with flat' }, { label: '5th' }, { label: '7th with flat' }]},
+  {label: 'Diminished 7th', chord: [{ label: '3rd with flat' }, { label: '5th with flat' }, { label: '7th with flat' }]}
 ];

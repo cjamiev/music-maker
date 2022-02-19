@@ -32,7 +32,7 @@ const getNoteType = ({
   }
 
   const conditions = isStemmedNote
-    ? { showNoteStemFlipped: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote }
+    ? { showNoteStem: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote }
     : { showNoteStem: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
 
   return { component: isStemmedNote ? 'StemmedNoteFlipped' : 'StemmedNote', transform:`translate(${translateX},${translateY})`, conditions};
@@ -68,17 +68,31 @@ const getNoteModifier = ({
 const getChordSubcomponent = (item) => {
   const [chordNote2, chordNote3, chordNote4, chordNote5] = item.chord;
   const rootIndex = pianoKeyList.findIndex(key => key === item.pianoKey);
-  const chordIndices = item.chord.map(note => pianoKeyList.findIndex(key => key === note.pianoKey));
   const rootNote = [getNoteType(item), ...getNoteModifier(item)];
-  const isNote2Adjacent = chordIndices[ZERO] - rootIndex < THREE;
-  const secondNote = [getNoteType({...item.chord[ZERO], isAdjacentNote: isNote2Adjacent, isStemmedNote: item.isStemmedNote}), ...getNoteModifier(item.chord[ZERO])];
-  const isNote3Adjacent = chordNote3 && (chordIndices[ONE] - chordIndices[ZERO] < THREE) && !isNote2Adjacent;
-  const thirdNote = chordNote3 ? [getNoteType({...item.chord[ONE], isAdjacentNote: isNote3Adjacent, isStemmedNote: item.isStemmedNote}), ...getNoteModifier(item.chord[ONE])] : [];
-  const isNote4Adjacent = chordNote4 && (chordIndices[TWO] - chordIndices[ONE] < THREE) && !isNote3Adjacent;
-  const fourthNote = chordNote4 ? [getNoteType({...item.chord[TWO], isAdjacentNote: isNote4Adjacent, isStemmedNote: item.isStemmedNote}), ...getNoteModifier(item.chord[TWO])] : [];
-  const isNote5Adjacent = chordNote5 && (chordIndices[THREE] - chordIndices[TWO] < THREE) && !isNote4Adjacent;
-  const fifthNote = chordNote5 ? [getNoteType({...item.chord[THREE], isAdjacentNote: isNote5Adjacent, isStemmedNote: item.isStemmedNote}), ...getNoteModifier(item.chord[THREE])] : [];
-
+  const isNote2Adjacent = chordNote2.value < THREE;
+  const secondPianoKey = pianoKeyList[rootIndex + chordNote2.value];
+  const secondNote = [
+    getNoteType({...chordNote2, pianoKey:secondPianoKey, isAdjacentNote: isNote2Adjacent, isStemmedNote: item.isStemmedNote}),
+    ...getNoteModifier({...chordNote2, pianoKey: secondPianoKey})
+  ];
+  const isNote3Adjacent = chordNote3 && chordNote3.value - chordNote2.value < THREE;
+  const thirdPianoKey = chordNote3 && pianoKeyList[rootIndex + chordNote3.value];
+  const thirdNote = chordNote3 ? [
+    getNoteType({...chordNote3, pianoKey:thirdPianoKey, isAdjacentNote: isNote3Adjacent, isStemmedNote: item.isStemmedNote}),
+    ...getNoteModifier({...chordNote3, pianoKey: thirdPianoKey})
+  ]:[];
+  const isNote4Adjacent = chordNote4 && chordNote4.value - chordNote3.value < THREE;
+  const fourthPianoKey = chordNote4 && pianoKeyList[rootIndex + chordNote4.value];
+  const fourthNote = chordNote4 ? [
+    getNoteType({...chordNote4, pianoKey:fourthPianoKey, isAdjacentNote: isNote4Adjacent, isStemmedNote: item.isStemmedNote}),
+    ...getNoteModifier({...chordNote4, pianoKey: fourthPianoKey})
+  ]:[];
+  const isNote5Adjacent = chordNote5 && chordNote5.value - chordNote4.value < THREE;
+  const fifthPianoKey = chordNote5 && pianoKeyList[rootIndex + chordNote5.value];
+  const fifthNote = chordNote5 ? [
+    getNoteType({...chordNote5, pianoKey:fifthPianoKey, isAdjacentNote: isNote5Adjacent, isStemmedNote: item.isStemmedNote}),
+    ...getNoteModifier({...chordNote5, pianoKey: fifthPianoKey})
+  ]:[];
 
   return [...rootNote,...secondNote,...thirdNote,...fourthNote,...fifthNote];
 };
@@ -93,7 +107,7 @@ const getNoteSubcomponents = (item) => {
   const sharpConditional = item.pianoKey.includes('#')
     ? { showNoteSharp: true }
     : { };
-  const filteredChordWithoutRoot = item.chord.filter(chordItem => chordItem.pianoKey);
+  const filteredChordWithoutRoot = item.chord.filter(chordItem => chordItem.value);
   const updatedItem = {
     ...item,
     pianoKey: rootPianoKey,
