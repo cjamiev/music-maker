@@ -30,7 +30,7 @@ const DEFAULT_NOTE = {
   showFermata: false,
   showTrill: false,
   pianoKey: 'C4',
-  chord: []
+  chord: [{},{},{},{}]
 };
 const STARTING_NOTE = {
   id: '001',
@@ -39,7 +39,7 @@ const STARTING_NOTE = {
   columnIndex: ZERO,
   component: 'Note',
   pianoKey: 'C4',
-  chord: []
+  chord: [{},{},{},{}]
 };
 
 const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {

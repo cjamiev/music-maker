@@ -14,6 +14,21 @@ const FOUR = 4;
 const ADJACENT_NOTE_TRANSLATE_X = 7;
 const STAFF_MIDPOINT = 26;
 
+const getFilteredChord = (chord) => {
+  const secondValue = chord[ZERO].value;
+  const thirdValue = chord[ONE].value;
+  const fourthValue = chord[TWO].value;
+  const fifthValue = chord[THREE].value;
+
+  const unqiueChord = [
+    chord[ZERO],
+    thirdValue === secondValue ? {} : chord[ONE],
+    fourthValue === secondValue || fourthValue === thirdValue ? {} : chord[TWO],
+    fifthValue === secondValue || fifthValue === thirdValue || fifthValue === fourthValue ? {} : chord[THREE]
+  ];
+  return unqiueChord.filter(chordItem => chordItem.value);
+};
+
 const getNoteType = ({
   showWholeNote,
   showHalfNote,
@@ -212,15 +227,15 @@ const getNoteSubcomponents = (item) => {
   const sharpConditional = item.pianoKey.includes('#')
     ? { showNoteSharp: true }
     : { };
-  const filteredChordWithoutRoot = item.chord.filter(chordItem => chordItem.value);
+  const filteredChord = getFilteredChord(item.chord);
   const updatedItem = {
     ...item,
     pianoKey: rootPianoKey,
     isStemmedNoteFlipped,
     ...sharpConditional,
-    chord: filteredChordWithoutRoot
+    chord: filteredChord
   };
-  const noteSubcomponent = filteredChordWithoutRoot.length > ZERO
+  const noteSubcomponent = filteredChord.length > ZERO
     ? getChordSubcomponent(updatedItem)
     : [getNoteType(updatedItem), ...getNoteModifier(updatedItem)];
 

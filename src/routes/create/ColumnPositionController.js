@@ -26,7 +26,7 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
             component: 'Note',
             pianoKey: 'C4',
             noteType,
-            chord: []
+            chord: [{},{},{},{}]
           };
           const updatedEditorPosition = {
             ...editorPosition,

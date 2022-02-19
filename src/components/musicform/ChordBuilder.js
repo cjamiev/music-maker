@@ -12,7 +12,6 @@ import {
 } from 'constants/pianokeys';
 import ChordAccidentalModifier from './ChordAccidentalModifier';
 
-const NOT_FOUND = -1;
 const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
@@ -21,7 +20,7 @@ const DEFAULT_CHORD = [{},{},{},{}];
 
 const getUpdatedValues = (list, selectedValue, filterValue) => {
   return list.map(item => {
-    if(item.value === selectedValue)
+    if(item.value === selectedValue && item.value > filterValue)
       return {
         ...item,
         selected: true
@@ -41,17 +40,12 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
   const [chordNote4, setChordNote4] = useState(intervalList);
   const [chordNote5, setChordNote5] = useState(intervalList);
   const selectedChordQuality = chordQuality.findIndex(item => item.selected);
-  const selectedNote2Index = chordNote2.findIndex(item => item.selected);
-  const selectedNote3Index = chordNote3.findIndex(item => item.selected);
-  const selectedNote4Index = chordNote4.findIndex(item => item.selected);
-  const selectedNote5Index = chordNote5.findIndex(item => item.selected);
+  const selectedChord2 = selectedChord[ZERO];
+  const selectedChord3 = selectedChord[ONE];
+  const selectedChord4 = selectedChord[TWO];
+  const selectedChord5 = selectedChord[THREE];
 
   useMemo(() => {
-    const selectedChord2 = selectedChord[ZERO] || {};
-    const selectedChord3 = selectedChord[ONE] || {};
-    const selectedChord4 = selectedChord[TWO] || {};
-    const selectedChord5 = selectedChord[THREE] || {};
-
     if(selectedChord2.value) {
       const updatedNote3 = getUpdatedValues(intervalList, selectedChord3.value, selectedChord2.value);
       setChordNote3(updatedNote3);
@@ -64,8 +58,7 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
       const updatedNote5 = getUpdatedValues(intervalList, selectedChord5.value, selectedChord4.value);
       setChordNote5(updatedNote5);
     }
-  }, [selectedChord]);
-
+  }, [selectedChord2.value, selectedChord3.value, selectedChord4.value, selectedChord5.value]);
 
   const handleAccidentalChangeForNote2 = (update) => {
     const updatedChord = [{...selectedChord[ZERO], ...update}, selectedChord[ONE], selectedChord[TWO], selectedChord[THREE]];
@@ -105,26 +98,19 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
           showDescription={false}
           values={chordQuality}
           onChange={({ values }) => {
-            const selectedChordValues = values.find(item => item.selected).chord;
-            const selectedChord2 = selectedChordValues[ZERO];
-            const selectedChord3 = selectedChordValues[ONE];
-            const selectedChord4 = selectedChordValues[TWO] || {};
+            const updatedChordValues = values.find(item => item.selected).chord;
+            const updatedChord2 = updatedChordValues[ZERO];
+            const updatedChord3 = updatedChordValues[ONE];
+            const updatedChord4 = updatedChordValues[TWO] || {};
 
-            const updatedNote2 = intervalList.map(item => {
-              if(item.value === selectedChord2.value)
-                return {
-                  ...item,
-                  selected: true
-                };
-              return item;
-            });
-            const updatedNote3 = getUpdatedValues(intervalList, selectedChord3.value, selectedChord2.value);
-            const updatedNote4 = getUpdatedValues(intervalList, selectedChord4.value, selectedChord3.value);
+            const updatedNote2 = getUpdatedValues(intervalList, updatedChord2.value, ZERO);
+            const updatedNote3 = getUpdatedValues(intervalList, updatedChord3.value, updatedChord2.value);
+            const updatedNote4 = getUpdatedValues(intervalList, updatedChord4.value, updatedChord3.value);
 
             const updatedChord = [
-              selectedChord2,
-              selectedChord3,
-              selectedChord4,
+              updatedChord2,
+              updatedChord3,
+              updatedChord4,
               {}
             ];
 
@@ -161,9 +147,9 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
             selectNoteType({ chord: updatedChord});
           }}
         />
-        {selectedNote2Index > NOT_FOUND && <ChordAccidentalModifier noteConfig={selectedChord[ZERO]} selectNoteModifier={handleAccidentalChangeForNote2} />}
+        {selectedChord2.value && <ChordAccidentalModifier noteConfig={selectedChord[ZERO]} selectNoteModifier={handleAccidentalChangeForNote2} />}
       </div>
-      {selectedNote2Index > NOT_FOUND &&
+      {selectedChord2.value &&
         <div className="flex--horizontal">
           <Dropdown
             classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
@@ -179,10 +165,10 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
               selectNoteType({ chord: updatedChord});
             }}
           />
-          {selectedNote3Index > NOT_FOUND &&<ChordAccidentalModifier noteConfig={selectedChord[ONE]} selectNoteModifier={handleAccidentalChangeForNote3 } />}
+          {selectedChord3.value &&<ChordAccidentalModifier noteConfig={selectedChord[ONE]} selectNoteModifier={handleAccidentalChangeForNote3 } />}
         </div>
       }
-      {selectedNote3Index > NOT_FOUND &&
+      {selectedChord3.value &&
         <div className="flex--horizontal">
           <Dropdown
             classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
@@ -198,10 +184,10 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
               selectNoteType({ chord: updatedChord});
             }}
           />
-          {selectedNote4Index > NOT_FOUND &&<ChordAccidentalModifier noteConfig={selectedChord[TWO]} selectNoteModifier={handleAccidentalChangeForNote4} />}
+          {selectedChord4.value &&<ChordAccidentalModifier noteConfig={selectedChord[TWO]} selectNoteModifier={handleAccidentalChangeForNote4} />}
         </div>
       }
-      {selectedNote4Index > NOT_FOUND &&
+      {selectedChord4.value &&
           <div className="flex--horizontal">
             <Dropdown
               classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
@@ -217,7 +203,7 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
                 selectNoteType({ chord: updatedChord});
               }}
             />
-            {selectedNote5Index > NOT_FOUND && <ChordAccidentalModifier noteConfig={selectedChord[THREE]} selectNoteModifier={handleAccidentalChangeForNote5} />}
+            {selectedChord5.value && <ChordAccidentalModifier noteConfig={selectedChord[THREE]} selectNoteModifier={handleAccidentalChangeForNote5} />}
           </div>
       }
     </>
