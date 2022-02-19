@@ -4,7 +4,7 @@ import {
   mapNotePosition,
   mapStaffLines
 } from 'constants/stafflines';
-import { pianoKeyList } from 'constants/pianokeys';
+import { pianoKeyList, pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 
 const ZERO = 0;
 const ONE = 1;
@@ -71,12 +71,11 @@ const getAdjacentNotes = ({
   fourthPianoKey,
   fifthPianoKey
 }) => {
-  const pianoKeys = ['A','B','C','D','E','F','G'];
-  const rootIndex = pianoKeys.findIndex(letter => pianoKey.includes(letter));
-  const secondIndex = pianoKeys.findIndex(letter => secondPianoKey.includes(letter));
-  const thirdIndex = pianoKeys.findIndex(letter => thirdPianoKey.includes(letter));
-  const fourthIndex = pianoKeys.findIndex(letter => fourthPianoKey.includes(letter));
-  const fifthIndex = pianoKeys.findIndex(letter => fifthPianoKey.includes(letter));
+  const rootIndex = pianoKeyListWithoutAccidentals.findIndex(letter => pianoKey.includes(letter));
+  const secondIndex = pianoKeyListWithoutAccidentals.findIndex(letter => secondPianoKey.includes(letter));
+  const thirdIndex = pianoKeyListWithoutAccidentals.findIndex(letter => thirdPianoKey.includes(letter));
+  const fourthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => fourthPianoKey.includes(letter));
+  const fifthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => fifthPianoKey.includes(letter));
 
   const isSecondNoteAdjacent = (secondIndex - rootIndex) === ONE;
   const isThirdNoteAdjacent = isSecondNoteAdjacent ? false : (thirdIndex - secondIndex) === ONE;
