@@ -26,23 +26,41 @@
   flex-direction: column;
 }
 
+.music-form__chord-builder-reset {
+  margin-left: 5px;
+  margin-top: 12px;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(11, 16, 70);
+  color: rgb(194, 194, 194);
+}
+
 .music-form__chord-builder-label {
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 
 .music-form__chord-builder-dropdown {
   margin: 15px 0px;
 }
 
+.music-form__chord-builder-preselect-dropdown-label {
+  background-color: rgb(11, 16, 70);
+  color: rgb(194, 194, 194);
+  font-size: 0.8em;
+}
+
 .music-form__chord-builder-dropdown-label {
-  background-color: #fff;
-  color: #000;
+  background-color: rgb(61, 61, 61);
+  color: rgb(194, 194, 194);
   font-size: 0.8em;
 }
 
 .music-form__chord-builder-dropdown-content {
   max-height: 200px;
   z-index: 2;
+  position: absolute;
+  left: 70px;
+  bottom: -80px;
 }
 
 .music-form__piano {
@@ -53,10 +71,9 @@
 
 .music-form__bottom-buttons {
   position: absolute;
-  top: 265px;
-  margin-top: 45px;
-  margin-left: 55px;
-  width: 1540px;
+  top: 310px;
+  left: 175px;
+  width: 1340px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;

@@ -3,12 +3,14 @@ import Page from 'components/layout';
 import {
   Dropdown
 } from 'components/form';
+import Button from 'components/button';
 import {
   pianoKeyList,
   bassPianoKeyList,
   intervalList,
   chordList
 } from 'constants/pianokeys';
+import ChordAccidentalModifier from './ChordAccidentalModifier';
 
 const NOT_FOUND = -1;
 const ZERO = 0;
@@ -48,107 +50,165 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
     }
   }, [chordNote4, selectedNote4Index, selectedChordQuality]);
 
+  const handleAccidentalChangeForNote2 = (update) => {
+    const updatedChord = [{...selectedChord[ZERO], ...update}, selectedChord[ONE], selectedChord[TWO], selectedChord[THREE]];
+
+    setSelectedChord(updatedChord);
+    selectNoteType({ chord: updatedChord});
+  };
+
+  const handleAccidentalChangeForNote3 = (update) => {
+    const updatedChord = [selectedChord[ZERO], {...selectedChord[ONE], ...update}, selectedChord[TWO], selectedChord[THREE]];
+
+    setSelectedChord(updatedChord);
+    selectNoteType({ chord: updatedChord});
+  };
+
+  const handleAccidentalChangeForNote4 = (update) => {
+    const updatedChord = [selectedChord[ZERO], selectedChord[ONE], {...selectedChord[TWO], ...update}, selectedChord[THREE]];
+
+    setSelectedChord(updatedChord);
+    selectNoteType({ chord: updatedChord});
+  };
+
+  const handleAccidentalChangeForNote5 = (update) => {
+    const updatedChord = [selectedChord[ZERO], selectedChord[ONE], selectedChord[TWO], {...selectedChord[THREE], ...update}];
+
+    setSelectedChord(updatedChord);
+    selectNoteType({ chord: updatedChord});
+  };
+
   return (
     <>
       <label className="music-form__chord-builder-label">Build Chord</label>
-      <button onClick={() => {
-        setChordQuality(chordList);
-        setChordNote2(intervalList);
-        setChordNote3(intervalList);
-        setChordNote4(intervalList);
-        setChordNote5(intervalList);
-        selectNoteType({ chord: DEFAULT_CHORD});
-      }}>Reset</button>
-      <Dropdown
-        classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
-        label='Chord Quality'
-        values={chordQuality}
-        onChange={({ values }) => {
-          const selectedChordValues = values.find(item => item.selected).chord;
-          const updatedNote2 = intervalList.map(item => {
-            if(item.label === selectedChordValues[ZERO].label)
-              return {
-                ...item,
-                selected: true
-              };
-            return item;
-          });
-          const updatedNote3 = intervalList.map(item => {
-            if(item.label === selectedChordValues[ONE].label)
-              return {
-                ...item,
-                selected: true
-              };
-            return item;
-          });
-          const updatedNote4 = selectedChordValues[TWO]
-            ? intervalList.map(item => {
-              if(item.label === selectedChordValues[TWO].label)
+      <div className="flex--horizontal">
+        <Dropdown
+          classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-preselect-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
+          label='Preselect Chord'
+          showDescription={false}
+          values={chordQuality}
+          onChange={({ values }) => {
+            const selectedChordValues = values.find(item => item.selected).chord;
+            const updatedNote2 = intervalList.map(item => {
+              if(item.label === selectedChordValues[ZERO].label)
                 return {
                   ...item,
                   selected: true
                 };
               return item;
-            })
-            : intervalList;
-          const updatedChord = [updatedNote2.find(item => item.selected), updatedNote3.find(item => item.selected), updatedNote4.find(item => item.selected) || {}, { }];
-          setChordQuality(values);
-          setSelectedChord(updatedChord);
-          setChordNote2(updatedNote2);
-          setChordNote3(updatedNote3);
-          setChordNote4(updatedNote4);
-          selectNoteType({ chord: updatedChord});
-        }}
-      />
-      <Dropdown
-        classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
-        label='2nd Chord Note'
-        values={chordNote2}
-        onChange={({ values }) => {
-          const selectedNote2 = values.find(item => item.selected);
-          const updatedChord = [selectedNote2, selectedChord[ONE], selectedChord[TWO], selectedChord[THREE]];
+            });
+            const updatedNote3 = intervalList.map(item => {
+              if(item.label === selectedChordValues[ONE].label)
+                return {
+                  ...item,
+                  selected: true
+                };
+              return item;
+            });
+            const updatedNote4 = selectedChordValues[TWO]
+              ? intervalList.map(item => {
+                if(item.label === selectedChordValues[TWO].label)
+                  return {
+                    ...item,
+                    selected: true
+                  };
+                return item;
+              })
+              : intervalList;
+            const updatedChord = [updatedNote2.find(item => item.selected), updatedNote3.find(item => item.selected), updatedNote4.find(item => item.selected) || {}, { }];
 
-          setSelectedChord(updatedChord);
-          setChordNote2(values);
-          selectNoteType({ chord: updatedChord});
-        }}
-      />
-      {selectedNote2Index > NOT_FOUND && <Dropdown
-        classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
-        label='3rd Chord Note'
-        values={chordNote3}
-        onChange={({ values }) => {
-          const selectedNote3 = values.find(item => item.selected);
-          const updatedChord = [selectedChord[ZERO], selectedNote3, selectedChord[TWO], selectedChord[THREE]];
-          setSelectedChord(updatedChord);
-          setChordNote3(values);
-          selectNoteType({ chord: updatedChord});
-        }}
-      />}
-      {selectedNote3Index > NOT_FOUND && <Dropdown
-        classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
-        label='4rth Chord Note'
-        values={chordNote4}
-        onChange={({ values }) => {
-          const selectedNote4 = values.find(item => item.selected);
-          const updatedChord = [selectedChord[ZERO], selectedChord[ONE], selectedNote4, selectedChord[THREE]];
-          setSelectedChord(updatedChord);
-          setChordNote4(values);
-          selectNoteType({ chord: updatedChord});
-        }}
-      />}
-      {selectedNote4Index > NOT_FOUND && <Dropdown
-        classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
-        label='5th Chord Note'
-        values={chordNote5}
-        onChange={({ values }) => {
-          const selectedNote5 = values.find(item => item.selected);
-          const updatedChord = [selectedChord[ZERO], selectedChord[ONE], selectedChord[TWO], selectedNote5];
-          setSelectedChord(updatedChord);
-          setChordNote5(values);
-          selectNoteType({ chord: updatedChord});
-        }}
-      />}
+            setChordQuality(values);
+            setSelectedChord(updatedChord);
+            setChordNote2(updatedNote2);
+            setChordNote3(updatedNote3);
+            setChordNote4(updatedNote4);
+            selectNoteType({ chord: updatedChord});
+          }}
+        />
+        <Button label="X" className="music-form__chord-builder-reset" onClick={() => {
+          setChordQuality(chordList);
+          setChordNote2(intervalList);
+          setChordNote3(intervalList);
+          setChordNote4(intervalList);
+          setChordNote5(intervalList);
+          setSelectedChord(DEFAULT_CHORD);
+          selectNoteType({ chord: DEFAULT_CHORD});
+        }} />
+      </div>
+      <div className="flex--horizontal">
+        <Dropdown
+          classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
+          label='Add'
+          showDescription={false}
+          values={chordNote2}
+          onChange={({ values }) => {
+            const selectedNote2 = values.find(item => item.selected);
+            const updatedChord = [selectedNote2, selectedChord[ONE], selectedChord[TWO], selectedChord[THREE]];
+
+            setSelectedChord(updatedChord);
+            setChordNote2(values);
+            selectNoteType({ chord: updatedChord});
+          }}
+        />
+        {selectedNote2Index > NOT_FOUND &&<ChordAccidentalModifier noteConfig={selectedChord[ZERO]} selectNoteModifier={handleAccidentalChangeForNote2} />}
+      </div>
+      {selectedNote2Index > NOT_FOUND &&
+        <div className="flex--horizontal">
+          <Dropdown
+            classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
+            label='Add'
+            showDescription={false}
+            values={chordNote3}
+            onChange={({ values }) => {
+              const selectedNote3 = values.find(item => item.selected);
+              const updatedChord = [selectedChord[ZERO], selectedNote3, selectedChord[TWO], selectedChord[THREE]];
+
+              setSelectedChord(updatedChord);
+              setChordNote3(values);
+              selectNoteType({ chord: updatedChord});
+            }}
+          />
+          {selectedNote3Index > NOT_FOUND &&<ChordAccidentalModifier noteConfig={selectedChord[ONE]} selectNoteModifier={handleAccidentalChangeForNote3 } />}
+        </div>
+      }
+      {selectedNote3Index > NOT_FOUND &&
+        <div className="flex--horizontal">
+          <Dropdown
+            classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
+            label='Add'
+            showDescription={false}
+            values={chordNote4}
+            onChange={({ values }) => {
+              const selectedNote4 = values.find(item => item.selected);
+              const updatedChord = [selectedChord[ZERO], selectedChord[ONE], selectedNote4, selectedChord[THREE]];
+
+              setSelectedChord(updatedChord);
+              setChordNote4(values);
+              selectNoteType({ chord: updatedChord});
+            }}
+          />
+          {selectedNote4Index > NOT_FOUND &&<ChordAccidentalModifier noteConfig={selectedChord[TWO]} selectNoteModifier={handleAccidentalChangeForNote4} />}
+        </div>
+      }
+      {selectedNote4Index > NOT_FOUND &&
+          <div className="flex--horizontal">
+            <Dropdown
+              classNames={{container: 'music-form__chord-builder-dropdown', label: 'music-form__chord-builder-dropdown-label', content: 'music-form__chord-builder-dropdown-content'}}
+              label='Add'
+              showDescription={false}
+              values={chordNote5}
+              onChange={({ values }) => {
+                const selectedNote5 = values.find(item => item.selected);
+                const updatedChord = [selectedChord[ZERO], selectedChord[ONE], selectedChord[TWO], selectedNote5];
+
+                setSelectedChord(updatedChord);
+                setChordNote5(values);
+                selectNoteType({ chord: updatedChord});
+              }}
+            />
+            {selectedNote5Index > NOT_FOUND && <ChordAccidentalModifier noteConfig={selectedChord[THREE]} selectNoteModifier={handleAccidentalChangeForNote5} />}
+          </div>
+      }
     </>
   );
 };

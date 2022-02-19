@@ -25,7 +25,8 @@ const ColumnPositionController = ({ editorPosition, data, onChange }) => {
             columnIndex: nextColumnIndex,
             component: 'Note',
             pianoKey: 'C4',
-            noteType
+            noteType,
+            chord: []
           };
           const updatedEditorPosition = {
             ...editorPosition,

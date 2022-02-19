@@ -1,7 +1,22 @@
 import React, { useRef, useState } from 'react';
 import useOnClickOutside from 'hooks/useOnClickOutside';
 
-const Dropdown = React.memo(({ id, classNames = { container: '', label: '', content: '', item: ''}, label, values, onChange }) => {
+const getDropdownLabel = ({ description, selected, showDescription }) => {
+  if(showDescription) {
+    return selected ? description + ' ' + selected : description;
+  }
+
+  return selected ? selected : description;
+};
+
+const Dropdown = React.memo(({
+  id,
+  classNames = { container: '', label: '', content: '', item: ''},
+  label,
+  showDescription = true,
+  values,
+  onChange
+}) => {
   const ref = useRef();
   const [show, setShow] = useState(false);
   useOnClickOutside(ref, () => setShow(false));
@@ -25,7 +40,9 @@ const Dropdown = React.memo(({ id, classNames = { container: '', label: '', cont
   };
 
   const renderContent = values.map((item) => {
-    const itemClassName = item.selected ? `dropdown__item ${classNames.item} dropdown__item--active` : `dropdown__item ${classNames.item}`;
+    const itemClassName = item.selected
+      ? `dropdown__item ${classNames.item} dropdown__item--active`
+      : `dropdown__item ${classNames.item}`;
     const ariaLabel = item.selected
       ? `${item.label} dropdown option is selected`
       : `${item.label} dropdown option is not selected`;
@@ -44,7 +61,7 @@ const Dropdown = React.memo(({ id, classNames = { container: '', label: '', cont
     );
   });
 
-  const selectedValue = values.find((item) => item.selected) || {};
+  const selectedValue = values.find((item) => item.selected) || { label: ''};
   const containerClassName = `dropdown ${classNames.container}`;
   const labelClassName = `dropdown__label ${classNames.label}`;
   const contentClassName = `dropdown__content scrollbar ${classNames.content}`;
@@ -61,7 +78,7 @@ const Dropdown = React.memo(({ id, classNames = { container: '', label: '', cont
           setShow(!show);
         }}
       >
-        {label} {selectedValue.label}
+        {getDropdownLabel({ description: label, selected: selectedValue.label, showDescription }) }
       </label>
       {show && <div className={contentClassName}>{renderContent}</div>}
     </div>

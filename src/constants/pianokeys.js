@@ -33,37 +33,13 @@ export const bassPianoKeyList = [
 
 export const intervalList = [
   {label: '2nd', value: second },
-  {label: '2nd with natural', value: second, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false },
-  {label: '2nd with flat', value: second, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: '2nd with sharp', value: second, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
   {label: '3rd', value: third },
-  {label: '3rd with natural', value: third, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
-  {label: '3rd with flat', value: third, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: '3rd with sharp', value: third, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
   {label: '4rth', value: fourth },
-  {label: '4rth with natural', value: fourth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
-  {label: '4rth with flat', value: fourth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: '4rth with sharp', value: fourth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
   {label: '5th', value: fifth },
-  {label: '5th with natural', value: fifth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
-  {label: '5th with flat', value: fifth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: '5th with sharp', value: fifth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
   {label: '6th', value: sixth },
-  {label: '6th with natural', value: sixth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
-  {label: '6th with flat', value: sixth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: '6th with sharp', value: sixth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
   {label: '7th', value: seventh },
-  {label: '7th with natural', value: seventh, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
-  {label: '7th with flat', value: seventh, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: '7th with sharp', value: seventh, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
   {label: 'octave', value: octave },
-  {label: 'octave with natural', value: octave, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
-  {label: 'octave with flat', value: octave, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: 'octave with sharp', value: octave, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false},
-  {label: '9th', value: ninth },
-  {label: '9th with natural', value: ninth, showNoteNatural: true, showNoteFlat: false, showNoteSharp: false},
-  {label: '9th with flat', value: ninth, showNoteFlat: true, showNoteNatural: false, showNoteSharp: false},
-  {label: '9th with sharp', value: ninth, showNoteSharp: true, showNoteNatural: false, showNoteFlat: false}
+  {label: '9th', value: ninth }
 ];
 
 export const chordList = [

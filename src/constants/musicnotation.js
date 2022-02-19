@@ -165,12 +165,16 @@ export const noteTypes = [
   { key: 'sixteenth-note', label: '16th Note', value: { ...noteflags, showSixteenthNote: true } }
 ];
 
+export const noteAccidentals = [
+  { key: 'note-flat', label: 'Note Flat', value: { showNoteFlat: true, showNoteSharp: false, showNoteNatural: false } },
+  { key: 'note-sharp', label: 'Note Sharp', value: { showNoteSharp: true, showNoteFlat: false, showNoteNatural: false } },
+  { key: 'note-natural', label: 'Note Natural', value: { showNoteNatural: true, showNoteSharp: false, showNoteFlat: false } }
+];
+
 export const noteModifierTypes = [
   { key: 'staccato', label: 'Staccato', value: { showStaccato: true } },
   { key: 'dotted', label: 'Dotted', value: { showDotted: true } },
-  { key: 'note-flat', label: 'Note Flat', value: { showNoteFlat: true, showNoteSharp: false, showNoteNatural: false } },
-  { key: 'note-sharp', label: 'Note Sharp', value: { showNoteSharp: true, showNoteFlat: false, showNoteNatural: false } },
-  { key: 'note-natural', label: 'Note Natural', value: { showNoteNatural: true, showNoteSharp: false, showNoteFlat: false } },
+  ...noteAccidentals,
   { key: 'accent', label: 'Accent', value: { showAccent: true, showTenuto: false } },
   { key: 'tenuto', label: 'Tenuto', value: { showTenuto: true, showAccent: false } },
   { key: 'fermata', label: 'Fermata', value: { showFermata: true } },
