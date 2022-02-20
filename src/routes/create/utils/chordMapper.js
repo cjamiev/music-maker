@@ -19,6 +19,13 @@ const getPianoKey = (index = -ONE) => {
   return pianoKeyListWithoutAccidentals[index - ONE] || '';
 };
 
+const getLastKey = (chord) => {
+  const filteredChord = chord.filter(item => item.pianoKey);
+  const lastItemIndex = filteredChord.length - ONE;
+
+  return filteredChord[lastItemIndex].pianoKey;
+};
+
 const getChordNote = ({
   pianoKey,
   isAdjacentNote,
@@ -45,89 +52,89 @@ const getChordNote = ({
 };
 
 const getChordSubcomponent = (item) => {
-  const [chordNote2, chordNote3, chordNote4, chordNote5] = getUniqueChord(item.chord);
-  const { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote } = item;
-  const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
   const rootIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === item.pianoKey);
-  const secondPianoKey = getPianoKey(rootIndex + chordNote2.value);
-  const thirdPianoKey = getPianoKey(rootIndex + chordNote3.value);
-  const fourthPianoKey = getPianoKey(rootIndex + chordNote4.value);
-  const fifthPianoKey = getPianoKey(rootIndex + chordNote5.value);
-  const lastKey = fifthPianoKey || fourthPianoKey || thirdPianoKey || secondPianoKey;
+  const uniqueChord = getUniqueChord(item.chord).map(chordKey => {
+    return {
+      ...chordKey,
+      pianoKey: getPianoKey(rootIndex + chordKey.value)
+    };
+  });
+  const { isStemmedNoteFlipped, showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote } = item;
+  const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
+  const lastKey = getLastKey(uniqueChord);
 
+  const chordData = [item].concat(uniqueChord);
+  const chordPianoKeys = chordData.map(d => d.pianoKey);
   const shiftedAccidentals = getShiftedAccidentals(item);
   const adjacentNotes = getAdjacentNotes({
-    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
-    pianoKey: item.pianoKey,
-    secondPianoKey,
-    thirdPianoKey,
-    fourthPianoKey,
-    fifthPianoKey
+    isStemmedNoteFlipped,
+    chordPianoKeys
   });
   const chordNoteTypes = getChordNoteTypes({
     adjacentNotes,
-    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
+    isStemmedNoteFlipped,
     noteType,
     size: item.chord.length + ONE
   });
   const shouldShiftDotted = adjacentNotes.some(isAdjacent => isAdjacent) && !item.isStemmedNoteFlipped;
 
   const rootNote = getChordNote({
-    pianoKey: item.pianoKey,
+    isStemmedNoteFlipped,
+    shouldShiftDotted,
     lastKey,
+    pianoKey: chordPianoKeys[ZERO],
     isAdjacentNote: adjacentNotes[ZERO],
-    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[ZERO],
-    conditions: item,
-    shouldShiftDotted
+    shouldShiftAccidental: shiftedAccidentals[ZERO],
+    conditions: chordData[ZERO]
   });
   const secondNote = getChordNote({
-    pianoKey: secondPianoKey,
+    isStemmedNoteFlipped,
+    shouldShiftDotted,
+    pianoKey: chordPianoKeys[ONE],
     isAdjacentNote: adjacentNotes[ONE],
-    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[ONE],
+    shouldShiftAccidental: shiftedAccidentals[ONE],
     conditions: {
-      ...chordNote2,
+      ...chordData[ONE],
       showDotted: item.showDotted
-    },
-    shouldShiftAccidental: shiftedAccidentals[ZERO],
-    shouldShiftDotted
+    }
   });
   const thirdNote = getChordNote({
-    pianoKey: thirdPianoKey,
+    isStemmedNoteFlipped,
+    shouldShiftDotted,
+    pianoKey: chordPianoKeys[TWO],
     isAdjacentNote: adjacentNotes[TWO],
-    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[TWO],
+    shouldShiftAccidental: shiftedAccidentals[TWO],
     conditions: {
-      ...chordNote3,
+      ...chordData[TWO],
       showDotted: item.showDotted
-    },
-    shouldShiftAccidental: shiftedAccidentals[ONE],
-    shouldShiftDotted
+    }
   });
   const fourthNote = getChordNote({
-    pianoKey: fourthPianoKey,
+    isStemmedNoteFlipped,
+    shouldShiftDotted,
+    pianoKey: chordPianoKeys[THREE],
     isAdjacentNote: adjacentNotes[THREE],
-    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[THREE],
+    shouldShiftAccidental: shiftedAccidentals[THREE],
     conditions: {
-      ...chordNote4,
+      ...chordData[THREE],
       showDotted: item.showDotted
-    },
-    shouldShiftAccidental: shiftedAccidentals[TWO],
-    shouldShiftDotted
+    }
   });
   const fifthNote = getChordNote({
-    pianoKey: fifthPianoKey,
+    isStemmedNoteFlipped,
+    shouldShiftDotted,
+    pianoKey: chordPianoKeys[FOUR],
     isAdjacentNote: adjacentNotes[FOUR],
-    isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[FOUR],
+    shouldShiftAccidental: shiftedAccidentals[FOUR],
     conditions: {
-      ...chordNote5,
+      ...chordData[FOUR],
       showDotted: item.showDotted
-    },
-    shouldShiftAccidental: shiftedAccidentals[THREE],
-    shouldShiftDotted
+    }
   });
 
   return [...rootNote,...secondNote,...thirdNote,...fourthNote,...fifthNote];

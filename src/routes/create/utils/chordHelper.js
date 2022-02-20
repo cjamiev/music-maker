@@ -4,6 +4,7 @@ const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
 const THREE = 3;
+const FOUR = 4;
 
 const getUniqueChord = (chord) => {
   const secondValue = chord[ZERO].value;
@@ -31,22 +32,18 @@ const getShiftedAccidentals = (item) => {
   const isFourthNoteShifted = !isThirdNoteShifted && (getHasAccidental(item.chord[ONE]));
   const isFifthNoteShifted = !isFourthNoteShifted && (getHasAccidental(item.chord[TWO]));
 
-  return [isSecondNoteShifted,isThirdNoteShifted,isFourthNoteShifted,isFifthNoteShifted];
+  return [false, isSecondNoteShifted,isThirdNoteShifted,isFourthNoteShifted,isFifthNoteShifted];
 };
 
 const getAdjacentNotes = ({
   isStemmedNoteFlipped,
-  pianoKey,
-  secondPianoKey,
-  thirdPianoKey,
-  fourthPianoKey,
-  fifthPianoKey
+  chordPianoKeys
 }) => {
-  const rootIndex = pianoKeyListWithoutAccidentals.findIndex(letter => pianoKey.includes(letter));
-  const secondIndex = pianoKeyListWithoutAccidentals.findIndex(letter => secondPianoKey.includes(letter));
-  const thirdIndex = pianoKeyListWithoutAccidentals.findIndex(letter => thirdPianoKey.includes(letter));
-  const fourthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => fourthPianoKey.includes(letter));
-  const fifthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => fifthPianoKey.includes(letter));
+  const rootIndex = pianoKeyListWithoutAccidentals.findIndex(letter => chordPianoKeys[ZERO].includes(letter));
+  const secondIndex = pianoKeyListWithoutAccidentals.findIndex(letter => chordPianoKeys[ONE].includes(letter));
+  const thirdIndex = pianoKeyListWithoutAccidentals.findIndex(letter => chordPianoKeys[TWO].includes(letter));
+  const fourthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => chordPianoKeys[THREE].includes(letter));
+  const fifthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => chordPianoKeys[FOUR].includes(letter));
 
   const isSecondNoteAdjacent = (secondIndex - rootIndex) === ONE;
   const isThirdNoteAdjacent = isSecondNoteAdjacent ? false : (thirdIndex - secondIndex) === ONE;
