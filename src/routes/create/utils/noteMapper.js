@@ -12,7 +12,10 @@ const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 const ADJACENT_NOTE_TRANSLATE_X = 7;
+const ADJUST_Y = -10;
+const STACCATO_ADJUSTMENT = 5;
 const STAFF_MIDPOINT = 26;
+const STAFF_TOPPOINT = 33;
 
 const getPianoKey = (index = -ONE) => {
   const pianoKey = pianoKeyList[index];
@@ -59,12 +62,53 @@ const getNoteType = ({
 };
 
 // eslint-disable-next-line complexity
-const getNoteModifier = ({
+const getTopSymbols = ({
   showStaccato,
+  showAccent,
+  showTenuto,
+  showFermata,
+  showTrill,
+  pianoKey
+}) => {
+  const staccatoTranslateY = showStaccato ? mapStaccatoPosition[pianoKey] : ZERO;
+  const staccatoShift = pianoKeyList.findIndex(key => key === pianoKey) > STAFF_TOPPOINT
+    ? staccatoTranslateY + STACCATO_ADJUSTMENT : ZERO;
+  const accentTranslateY = showAccent || showTenuto ? staccatoShift + ADJUST_Y : staccatoShift;
+  const fermataTranslateY = showFermata ? accentTranslateY + ADJUST_Y : accentTranslateY;
+  const trillTranslateY = fermataTranslateY + ADJUST_Y;
+
+  return [
+    showStaccato && { component:'Staccato', transform:`translate(0,${staccatoTranslateY})`, conditions:{}},
+    showAccent && { component:'Accent', transform:`translate(0,${accentTranslateY})`, conditions:{}},
+    showTenuto && { component:'Tenuto', transform:`translate(0,${accentTranslateY})`, conditions:{}},
+    showFermata && { component:'Fermata', transform:`translate(0,${fermataTranslateY})`, conditions:{}},
+    showTrill && { component:'Trill', transform:`translate(0,${trillTranslateY})`, conditions:{}}
+  ];
+};
+
+const getNoteAccidentals = ({
+  showNoteFlat,
+  showNoteSharp,
+  showNoteNatural,
+  shouldShiftAccidental,
+  pianoKey
+}) => {
+  const translateY = mapNotePosition[pianoKey];
+  const accidentalTranslateX = shouldShiftAccidental ? -ADJACENT_NOTE_TRANSLATE_X: ZERO;
+
+  return [
+    showNoteFlat && { component:'NoteFlat', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
+    showNoteSharp && { component:'NoteSharp', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
+    showNoteNatural && { component:'NoteNatural', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}}
+  ];
+};
+
+const getNoteModifier = ({
   showDotted,
   showNoteFlat,
   showNoteSharp,
   showNoteNatural,
+  showStaccato,
   showAccent,
   showTenuto,
   showFermata,
@@ -73,20 +117,25 @@ const getNoteModifier = ({
   shouldShiftAccidental,
   shouldShiftDotted
 }) => {
-  const translateY = mapNotePosition[pianoKey];
-  const accidentalTranslateX = shouldShiftAccidental ? -ADJACENT_NOTE_TRANSLATE_X: ZERO;
   const dottedTranslateX = shouldShiftDotted ? ADJACENT_NOTE_TRANSLATE_X: ZERO;
 
   return [
-    showStaccato && { component:'Staccato', transform:`translate(0,${mapStaccatoPosition[pianoKey]})`, conditions:{}},
     showDotted && { component:'Dotted', transform:`translate(${dottedTranslateX},${mapDottedPosition[pianoKey]})`, conditions:{}},
-    showNoteFlat && { component:'NoteFlat', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
-    showNoteSharp && { component:'NoteSharp', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
-    showNoteNatural && { component:'NoteNatural', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
-    showAccent && { component:'Accent', transform:'translate(0,0)', conditions:{}},
-    showTenuto && { component:'Tenuto', transform:'translate(0,0)', conditions:{}},
-    showFermata && { component:'Fermata', transform:'translate(0,0)', conditions:{}},
-    showTrill && { component:'Trill', transform:'translate(0,0)', conditions:{}}
+    ...getNoteAccidentals({
+      showNoteFlat,
+      showNoteSharp,
+      showNoteNatural,
+      shouldShiftAccidental,
+      pianoKey
+    }),
+    ...getTopSymbols({
+      showStaccato,
+      showAccent,
+      showTenuto,
+      showFermata,
+      showTrill,
+      pianoKey
+    })
   ].filter(Boolean);
 };
 
