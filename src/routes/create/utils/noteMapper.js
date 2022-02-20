@@ -70,17 +70,19 @@ const getNoteModifier = ({
   showFermata,
   showTrill,
   pianoKey,
-  shouldStagger
+  shouldShiftAccidental,
+  shouldShiftDotted
 }) => {
   const translateY = mapNotePosition[pianoKey];
-  const translateX = shouldStagger ? -ADJACENT_NOTE_TRANSLATE_X: ZERO;
+  const accidentalTranslateX = shouldShiftAccidental ? -ADJACENT_NOTE_TRANSLATE_X: ZERO;
+  const dottedTranslateX = shouldShiftDotted ? ADJACENT_NOTE_TRANSLATE_X: ZERO;
 
   return [
     showStaccato && { component:'Staccato', transform:`translate(0,${mapStaccatoPosition[pianoKey]})`, conditions:{}},
-    showDotted && { component:'Dotted', transform:`translate(0,${mapDottedPosition[pianoKey]})`, conditions:{}},
-    showNoteFlat && { component:'NoteFlat', transform:`translate(${translateX},${translateY})`, conditions:{}},
-    showNoteSharp && { component:'NoteSharp', transform:`translate(${translateX},${translateY})`, conditions:{}},
-    showNoteNatural && { component:'NoteNatural', transform:`translate(${translateX},${translateY})`, conditions:{}},
+    showDotted && { component:'Dotted', transform:`translate(${dottedTranslateX},${mapDottedPosition[pianoKey]})`, conditions:{}},
+    showNoteFlat && { component:'NoteFlat', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
+    showNoteSharp && { component:'NoteSharp', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
+    showNoteNatural && { component:'NoteNatural', transform:`translate(${accidentalTranslateX},${translateY})`, conditions:{}},
     showAccent && { component:'Accent', transform:'translate(0,0)', conditions:{}},
     showTenuto && { component:'Tenuto', transform:'translate(0,0)', conditions:{}},
     showFermata && { component:'Fermata', transform:'translate(0,0)', conditions:{}},
@@ -157,7 +159,8 @@ const getChordNote = ({
   isStemmedNoteFlipped,
   noteType,
   conditions,
-  shouldStagger
+  shouldShiftAccidental,
+  shouldShiftDotted
 }) => {
   if(!pianoKey) {
     return [];
@@ -165,7 +168,7 @@ const getChordNote = ({
 
   return [
     getNoteType({ pianoKey, isAdjacentNote, isStemmedNoteFlipped, ...noteType}),
-    ...getNoteModifier({...conditions, pianoKey, shouldStagger})
+    ...getNoteModifier({...conditions, pianoKey, shouldShiftAccidental, shouldShiftDotted })
   ];
 };
 
@@ -211,7 +214,7 @@ const getChordSubcomponent = (item) => {
     noteType,
     size: item.chord.length + ONE
   });
-
+  const shouldShiftDotted = adjacentNotes.some(isAdjacent => isAdjacent) && item.isStemmedNoteFlipped;
 
   const rootNote = getChordNote({
     pianoKey: item.pianoKey,
@@ -221,39 +224,56 @@ const getChordSubcomponent = (item) => {
     conditions: {
       ...item,
       showStaccato: item.isStemmedNoteFlipped ? false : item.showStaccato
-    }
+    },
+    shouldShiftDotted
   });
   const secondNote = getChordNote({
     pianoKey: secondPianoKey,
     isAdjacentNote: adjacentNotes[ONE],
     isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[ONE],
-    conditions: chordNote2,
-    shouldStagger: shiftedAccidentals[ZERO]
+    conditions: {
+      ...chordNote2,
+      showDotted: item.showDotted
+    },
+    shouldShiftAccidental: shiftedAccidentals[ZERO],
+    shouldShiftDotted
   });
   const thirdNote = getChordNote({
     pianoKey: thirdPianoKey,
     isAdjacentNote: adjacentNotes[TWO],
     isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[TWO],
-    conditions: chordNote3,
-    shouldStagger: shiftedAccidentals[ONE]
+    conditions: {
+      ...chordNote3,
+      showDotted: item.showDotted
+    },
+    shouldShiftAccidental: shiftedAccidentals[ONE],
+    shouldShiftDotted
   });
   const fourthNote = getChordNote({
     pianoKey: fourthPianoKey,
     isAdjacentNote: adjacentNotes[THREE],
     isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[THREE],
-    conditions: chordNote4,
-    shouldStagger: shiftedAccidentals[TWO]
+    conditions: {
+      ...chordNote4,
+      showDotted: item.showDotted
+    },
+    shouldShiftAccidental: shiftedAccidentals[TWO],
+    shouldShiftDotted
   });
   const fifthNote = getChordNote({
     pianoKey: fifthPianoKey,
     isAdjacentNote: adjacentNotes[FOUR],
     isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[FOUR],
-    conditions: chordNote5,
-    shouldStagger: shiftedAccidentals[THREE]
+    conditions: {
+      ...chordNote5,
+      showDotted: item.showDotted
+    },
+    shouldShiftAccidental: shiftedAccidentals[THREE],
+    shouldShiftDotted
   });
   const lastNoteModifier = getLastNoteModifiers({ ...item, pianoKey: lastKey });
 
