@@ -209,28 +209,21 @@ const getChordNote = ({
   noteType,
   conditions,
   shouldShiftAccidental,
-  shouldShiftDotted
+  shouldShiftDotted,
+  lastKey
 }) => {
   if(!pianoKey) {
     return [];
   }
+
+  const noteModifiers = lastKey && isStemmedNoteFlipped
+    ? getNoteModifier({ ...conditions, pianoKey: lastKey, showStaccato: isStemmedNoteFlipped && conditions.showStaccato, shouldShiftAccidental, shouldShiftDotted })
+    : getNoteModifier({...conditions, pianoKey, shouldShiftAccidental, shouldShiftDotted });
 
   return [
     getNoteType({ pianoKey, isAdjacentNote, isStemmedNoteFlipped, ...noteType}),
-    ...getNoteModifier({...conditions, pianoKey, shouldShiftAccidental, shouldShiftDotted })
+    ...noteModifiers
   ];
-};
-
-const getLastNoteModifiers = ({
-  pianoKey,
-  isStemmedNoteFlipped,
-  showStaccato
-}) => {
-  if(!pianoKey) {
-    return [];
-  }
-
-  return [...getNoteModifier({ pianoKey, showStaccato: isStemmedNoteFlipped && showStaccato })];
 };
 
 const getChordSubcomponent = (item) => {
@@ -267,13 +260,11 @@ const getChordSubcomponent = (item) => {
 
   const rootNote = getChordNote({
     pianoKey: item.pianoKey,
+    lastKey,
     isAdjacentNote: adjacentNotes[ZERO],
     isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[ZERO],
-    conditions: {
-      ...item,
-      showStaccato: item.isStemmedNoteFlipped ? false : item.showStaccato
-    },
+    conditions: item,
     shouldShiftDotted
   });
   const secondNote = getChordNote({
@@ -324,9 +315,8 @@ const getChordSubcomponent = (item) => {
     shouldShiftAccidental: shiftedAccidentals[THREE],
     shouldShiftDotted
   });
-  const lastNoteModifier = getLastNoteModifiers({ ...item, pianoKey: lastKey });
 
-  return [...rootNote,...secondNote,...thirdNote,...fourthNote,...fifthNote, ...lastNoteModifier];
+  return [...rootNote,...secondNote,...thirdNote,...fourthNote,...fifthNote];
 };
 
 const getNoteSubcomponents = (item) => {
