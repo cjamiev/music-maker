@@ -169,6 +169,18 @@ const getChordNote = ({
   ];
 };
 
+const getLastNoteModifiers = ({
+  pianoKey,
+  isStemmedNoteFlipped,
+  showStaccato
+}) => {
+  if(!pianoKey) {
+    return [];
+  }
+
+  return [...getNoteModifier({ pianoKey, showStaccato: isStemmedNoteFlipped && showStaccato })];
+};
+
 const getChordSubcomponent = (item) => {
   const [chordNote2, chordNote3, chordNote4, chordNote5] = item.chord;
   const { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote } = item;
@@ -182,6 +194,7 @@ const getChordSubcomponent = (item) => {
   const fourthPianoKey = getPianoKey(fourthIndex);
   const fifthIndex = rootIndex + chordNote5.value;
   const fifthPianoKey = getPianoKey(fifthIndex);
+  const lastKey = fifthPianoKey || fourthPianoKey || thirdPianoKey || secondPianoKey;
 
   const shiftedAccidentals = getShiftedAccidentals(item);
   const adjacentNotes = getAdjacentNotes({
@@ -205,7 +218,10 @@ const getChordSubcomponent = (item) => {
     isAdjacentNote: adjacentNotes[ZERO],
     isStemmedNoteFlipped: item.isStemmedNoteFlipped,
     noteType: chordNoteTypes[ZERO],
-    conditions: item
+    conditions: {
+      ...item,
+      showStaccato: item.isStemmedNoteFlipped ? false : item.showStaccato
+    }
   });
   const secondNote = getChordNote({
     pianoKey: secondPianoKey,
@@ -239,8 +255,9 @@ const getChordSubcomponent = (item) => {
     conditions: chordNote5,
     shouldStagger: shiftedAccidentals[THREE]
   });
+  const lastNoteModifier = getLastNoteModifiers({ ...item, pianoKey: lastKey });
 
-  return [...rootNote,...secondNote,...thirdNote,...fourthNote,...fifthNote];
+  return [...rootNote,...secondNote,...thirdNote,...fourthNote,...fifthNote, ...lastNoteModifier];
 };
 
 const getNoteSubcomponents = (item) => {
@@ -254,6 +271,7 @@ const getNoteSubcomponents = (item) => {
     ? { showNoteSharp: true }
     : { };
   const uniqueChord = getUniqueChord(item.chord);
+  const filteredChord = uniqueChord.filter(note => note.value);
   const updatedItem = {
     ...item,
     pianoKey: rootPianoKey,
@@ -261,7 +279,7 @@ const getNoteSubcomponents = (item) => {
     ...sharpConditional,
     chord: uniqueChord
   };
-  const noteSubcomponent = uniqueChord.length > ZERO
+  const noteSubcomponent = filteredChord.length > ZERO
     ? getChordSubcomponent(updatedItem)
     : [getNoteType(updatedItem), ...getNoteModifier(updatedItem)];
 
