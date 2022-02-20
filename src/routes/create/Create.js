@@ -273,7 +273,7 @@ const Create = () => {
 
   const handlePositionChange = (updatedEditorPosition, updatedData) => {
     setEditorPositon(updatedEditorPosition);
-    setNoteConfig({ ...noteConfig, chord: [], isChordMode: false });
+    setNoteConfig({ ...noteConfig, chord: [{},{},{},{}], isChordMode: false });
     updatedData && setData(updatedData);
   };
 
