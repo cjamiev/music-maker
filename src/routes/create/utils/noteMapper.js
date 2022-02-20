@@ -1,6 +1,7 @@
 import { mapNotePosition, mapStaffLines } from 'constants/stafflines';
 import { pianoKeyList, pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import { getNoteModifier } from './modifiersMapper';
+import { getShiftedAccidentals, getAdjacentNotes, getChordNoteTypes } from './chordMapper';
 
 const ZERO = 0;
 const ONE = 1;
@@ -50,69 +51,6 @@ const getNoteType = ({
   const conditions = { showNoteStem: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
 
   return { component: isStemmedNoteFlipped ? 'StemmedNoteFlipped' : 'StemmedNote', transform:`translate(${translateX},${translateY})`, conditions};
-};
-
-// eslint-disable-next-line complexity
-const getShiftedAccidentals = (item) => {
-  const isSecondNoteShifted = item.showNoteFlat || item.showNoteNatural || item.showNoteSharp;
-  const isThirdNoteShifted = !isSecondNoteShifted && (item.chord[ZERO].showNoteFlat || item.chord[ZERO].showNoteNatural || item.chord[ZERO].showNoteSharp);
-  const isFourthNoteShifted = !isThirdNoteShifted && (item.chord[ONE].showNoteFlat || item.chord[ONE].showNoteNatural || item.chord[ONE].showNoteSharp);
-  const isFifthNoteShifted = !isFourthNoteShifted && (item.chord[TWO].showNoteFlat || item.chord[TWO].showNoteNatural || item.chord[TWO].showNoteSharp);
-
-  return [isSecondNoteShifted,isThirdNoteShifted,isFourthNoteShifted,isFifthNoteShifted];
-};
-
-const getAdjacentNotes = ({
-  isStemmedNoteFlipped,
-  pianoKey,
-  secondPianoKey,
-  thirdPianoKey,
-  fourthPianoKey,
-  fifthPianoKey
-}) => {
-  const rootIndex = pianoKeyListWithoutAccidentals.findIndex(letter => pianoKey.includes(letter));
-  const secondIndex = pianoKeyListWithoutAccidentals.findIndex(letter => secondPianoKey.includes(letter));
-  const thirdIndex = pianoKeyListWithoutAccidentals.findIndex(letter => thirdPianoKey.includes(letter));
-  const fourthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => fourthPianoKey.includes(letter));
-  const fifthIndex = pianoKeyListWithoutAccidentals.findIndex(letter => fifthPianoKey.includes(letter));
-
-  const isSecondNoteAdjacent = (secondIndex - rootIndex) === ONE;
-  const isThirdNoteAdjacent = isSecondNoteAdjacent ? false : (thirdIndex - secondIndex) === ONE;
-  const isFourthNoteAdjacent = isThirdNoteAdjacent ? false : (fourthIndex - thirdIndex) === ONE;
-  const isFifthNoteAdjacent = isFourthNoteAdjacent ? false : (fifthIndex - fourthIndex) === ONE;
-
-  return (!isStemmedNoteFlipped)
-    ? [false, isSecondNoteAdjacent, isThirdNoteAdjacent, isFourthNoteAdjacent, isFifthNoteAdjacent]
-    : [isSecondNoteAdjacent, isThirdNoteAdjacent, isFourthNoteAdjacent, isFifthNoteAdjacent, false];
-};
-
-const getChordNoteTypes = ({ adjacentNotes, isStemmedNoteFlipped, noteType, size }) => {
-  const noFlagsNoteType = {
-    ...noteType,
-    showEighthNote: false,
-    showSixteenthNote:false
-  };
-
-  if(isStemmedNoteFlipped) {
-    const rootNoteType = adjacentNotes[ZERO] ? noFlagsNoteType : noteType;
-    const secondNoteType = adjacentNotes[ZERO] ? noteType : noFlagsNoteType;
-
-    return [rootNoteType,secondNoteType,noFlagsNoteType,noFlagsNoteType,noFlagsNoteType];
-  } else {
-    const lastNoteType = adjacentNotes[size - ONE] ? noFlagsNoteType : noteType;
-    const secondLastNoteType = adjacentNotes[size - ONE] ? noteType : noFlagsNoteType;
-
-    return Array.apply(null, Array(size)).map((x, i) => {
-      if(i === size - ONE) {
-        return lastNoteType;
-      }
-      else if(i === size - TWO) {
-        return secondLastNoteType;
-      }
-
-      return noFlagsNoteType;
-    });
-  }
 };
 
 const getChordNote = ({
@@ -169,7 +107,7 @@ const getChordSubcomponent = (item) => {
     noteType,
     size: item.chord.length + ONE
   });
-  const shouldShiftDotted = adjacentNotes.some(isAdjacent => isAdjacent) && item.isStemmedNoteFlipped;
+  const shouldShiftDotted = adjacentNotes.some(isAdjacent => isAdjacent) && !item.isStemmedNoteFlipped;
 
   const rootNote = getChordNote({
     pianoKey: item.pianoKey,

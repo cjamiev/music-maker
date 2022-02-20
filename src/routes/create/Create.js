@@ -5,7 +5,7 @@ import MusicForm from 'components/musicform';
 import Configuration from './Configuration';
 import ColumnPositionController from './ColumnPositionController';
 import LinePositionController from './LinePositionController';
-import { getSheetMusic } from './utils';
+import { getSheetMusic } from './utils/sheetMusicMapper';
 
 const attributes = {
   width: 1000,

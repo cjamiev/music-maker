@@ -6,7 +6,7 @@ import {
 import { pianoKeyList } from 'constants/pianokeys';
 
 const ZERO = 0;
-const ACCIDENTAL_SHIFT_MODIFIER = 7;
+const ADJACENT_SYMBOL_SHIFT_MODIFIER = 7;
 const HEIGHT_STACK_MODIFIER = -10;
 const HEIGHT_STACK_STACCATO_ADJUSTMENT = 5;
 const STAFF_TOPPOINT = 33;
@@ -88,7 +88,7 @@ const getNoteAccidentals = ({
   shouldShiftAccidental,
   pianoKey
 }) => {
-  const shiftX = shouldShiftAccidental ? ACCIDENTAL_SHIFT_MODIFIER: ZERO;
+  const shiftX = shouldShiftAccidental ? -ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
   const shiftY = mapNotePosition[pianoKey];
 
   if(showNoteFlat) {
@@ -103,7 +103,7 @@ const getNoteAccidentals = ({
 };
 
 const getDotted = ({ showDotted, shouldShiftDotted, pianoKey }) => {
-  const shiftX = shouldShiftDotted ? -ADJACENT_NOTE_TRANSLATE_X: ZERO;
+  const shiftX = shouldShiftDotted ? ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
   const shiftY = mapDottedPosition[pianoKey];
 
   return showDotted && { component:'Dotted', transform:`translate(${shiftX},${shiftY})`, conditions:{}};
