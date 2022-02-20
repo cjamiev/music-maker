@@ -15,6 +15,7 @@ import {
 } from './noteMapper';
 
 const ZERO = 0;
+const SINGLE_ROW_MODIFIER = 0;
 const ONE = 1;
 
 const getTransformProperty = (lineIndex, columnIndex, isBassClef) => {
@@ -43,7 +44,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     return {
       ...item,
       conditions: { ...item.conditions, showDotted: item.showDotted },
-      transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, false),
+      transform: getTransformProperty(SINGLE_ROW_MODIFIER, item.columnIndex + columnIndexModifier, false),
       subcomponents:getNoteSubcomponents(item)
     };
   });
@@ -51,7 +52,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: getTransformProperty(ZERO, item.columnIndex + columnIndexModifier, true),
+      transform: getTransformProperty(SINGLE_ROW_MODIFIER, item.columnIndex + columnIndexModifier, true),
       subcomponents:getNoteSubcomponents(item)
     };
   });
@@ -59,7 +60,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${SINGLE_ROW_MODIFIER*item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
       subcomponents: getMeasureSubcomponents(item)
     };
   });
@@ -67,7 +68,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${SINGLE_ROW_MODIFIER*item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
       subcomponents: []
     };
   });
@@ -75,7 +76,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${SINGLE_ROW_MODIFIER*item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
       subcomponents: []
     };
   });
@@ -83,7 +84,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${SINGLE_ROW_MODIFIER*item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
       subcomponents: []
     };
   });
@@ -91,7 +92,7 @@ const getSheetMusic = (configuration, line, editorPosition) => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
     return {
       ...item,
-      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
+      transform: `translate(${(item.columnIndex + columnIndexModifier)*STAFF_LINE_WIDTH},${SINGLE_ROW_MODIFIER*item.lineIndex*(HEIGHT_BETWEEN_ROWS)})`,
       subcomponents: []
     };
   });

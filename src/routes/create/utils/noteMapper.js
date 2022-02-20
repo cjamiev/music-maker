@@ -18,9 +18,7 @@ const STAFF_MIDPOINT = 26;
 const STAFF_TOPPOINT = 33;
 
 const getPianoKey = (index = -ONE) => {
-  const pianoKey = pianoKeyList[index];
-
-  return !pianoKey ? '' : pianoKey.replace('#','');
+  return pianoKeyListWithoutAccidentals[index - ONE] || '';
 };
 
 const getUniqueChord = (chord) => {
@@ -230,7 +228,7 @@ const getChordSubcomponent = (item) => {
   const [chordNote2, chordNote3, chordNote4, chordNote5] = item.chord;
   const { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote } = item;
   const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
-  const rootIndex = pianoKeyList.findIndex(key => key === item.pianoKey);
+  const rootIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === item.pianoKey);
   const secondIndex = rootIndex + chordNote2.value;
   const secondPianoKey = getPianoKey(secondIndex);
   const thirdIndex = rootIndex + chordNote3.value;

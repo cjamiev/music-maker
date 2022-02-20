@@ -40,8 +40,9 @@ Each object will properties
 ```
 
 ## ToDo
-- Chord Constructor 
-  - rolled modifier
+- finger numbers
+- chord notation
+- rolled modifier
 - Beam Constructor
 - Triplet Constructor
 - Grace Note Constructor

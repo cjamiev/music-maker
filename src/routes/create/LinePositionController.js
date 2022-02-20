@@ -25,13 +25,17 @@ const LinePositionController = ({ editorPosition, data, onChange }) => {
             lineIndex: nextLineIndex,
             columnIndex: ZERO,
             component: 'Note',
-            pianoKey: 'C4'
+            pianoKey: 'C4',
+            chord: [{},{},{},{}]
           };
           const nextLine = {
+            ottavaAlta: [],
             treble: [newNote],
-            center: [],
+            measure: [],
+            dynamics: [],
             bass: [newNote],
-            bottom: []
+            ottavaBassa: [],
+            pedal: []
           };
           const updateData = data.concat([nextLine]);
 
@@ -80,6 +84,14 @@ const LinePositionController = ({ editorPosition, data, onChange }) => {
           const updatedData = data.filter((item, index) => index !== lineIndex)
             .map((entry,entryIndex) => {
               const updatedEntry = {
+                ottavaAlta: entry.ottavaAlta.map(item => {
+                  const noteId = String(item.pageIndex) + String(entryIndex) + String(item.columnIndex);
+                  return {
+                    ...item,
+                    id: noteId,
+                    lineIndex: entryIndex
+                  };
+                }),
                 treble: entry.treble.map(item => {
                   const noteId = String(item.pageIndex) + String(entryIndex) + String(item.columnIndex);
                   return {
@@ -88,7 +100,7 @@ const LinePositionController = ({ editorPosition, data, onChange }) => {
                     lineIndex: entryIndex
                   };
                 }),
-                center: entry.center.map(item => {
+                dynamics: entry.dynamics.map(item => {
                   const noteId = String(item.pageIndex) + String(entryIndex) + String(item.columnIndex);
                   return {
                     ...item,
@@ -104,7 +116,23 @@ const LinePositionController = ({ editorPosition, data, onChange }) => {
                     lineIndex: entryIndex
                   };
                 }),
-                bottom: entry.bottom.map(item => {
+                pedal: entry.pedal.map(item => {
+                  const noteId = String(item.pageIndex) + String(entryIndex) + String(item.columnIndex);
+                  return {
+                    ...item,
+                    id: noteId,
+                    lineIndex: entryIndex
+                  };
+                }),
+                measure: entry.measure.map(item => {
+                  const noteId = String(item.pageIndex) + String(entryIndex) + String(item.columnIndex);
+                  return {
+                    ...item,
+                    id: noteId,
+                    lineIndex: entryIndex
+                  };
+                }),
+                ottavaBassa: entry.ottavaBassa.map(item => {
                   const noteId = String(item.pageIndex) + String(entryIndex) + String(item.columnIndex);
                   return {
                     ...item,
