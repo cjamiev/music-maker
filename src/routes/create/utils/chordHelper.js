@@ -6,31 +6,31 @@ const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 
-const getUniqueChord = (chord) => {
-  const secondValue = chord[ZERO].value;
-  const thirdValue = chord[ONE].value;
-  const fourthValue = chord[TWO].value;
-  const fifthValue = chord[THREE].value;
+const getUniqueNotes = (notes) => {
+  const secondValue = notes[ZERO].value;
+  const thirdValue = notes[ONE].value;
+  const fourthValue = notes[TWO].value;
+  const fifthValue = notes[THREE].value;
 
-  const unqiueChord = [
-    chord[ZERO],
-    thirdValue === secondValue ? {} : chord[ONE],
-    fourthValue === secondValue || fourthValue === thirdValue ? {} : chord[TWO],
-    fifthValue === secondValue || fifthValue === thirdValue || fifthValue === fourthValue ? {} : chord[THREE]
+  const unqiueNotes = [
+    notes[ZERO],
+    thirdValue === secondValue ? {} : notes[ONE],
+    fourthValue === secondValue || fourthValue === thirdValue ? {} : notes[TWO],
+    fifthValue === secondValue || fifthValue === thirdValue || fifthValue === fourthValue ? {} : notes[THREE]
   ];
 
-  return unqiueChord;
+  return unqiueNotes;
 };
 
 const getHasAccidental = ({ showNoteFlat, showNoteNatural, showNoteSharp }) => {
   return showNoteFlat || showNoteNatural || showNoteSharp;
 };
 
-const getShiftedAccidentals = (item) => {
-  const isSecondNoteShifted = getHasAccidental(item);
-  const isThirdNoteShifted = !isSecondNoteShifted && (getHasAccidental(item.chord[ZERO]));
-  const isFourthNoteShifted = !isThirdNoteShifted && (getHasAccidental(item.chord[ONE]));
-  const isFifthNoteShifted = !isFourthNoteShifted && (getHasAccidental(item.chord[TWO]));
+const getShiftedAccidentals = (chordPianoKeys) => {
+  const isSecondNoteShifted = getHasAccidental(chordPianoKeys[ZERO]);
+  const isThirdNoteShifted = !isSecondNoteShifted && (getHasAccidental(chordPianoKeys[ONE]));
+  const isFourthNoteShifted = !isThirdNoteShifted && (getHasAccidental(chordPianoKeys[TWO]));
+  const isFifthNoteShifted = !isFourthNoteShifted && (getHasAccidental(chordPianoKeys[THREE]));
 
   return [false, isSecondNoteShifted,isThirdNoteShifted,isFourthNoteShifted,isFifthNoteShifted];
 };
@@ -85,7 +85,7 @@ const getChordNoteTypes = ({ adjacentNotes, isStemmedNoteFlipped, noteType, size
 };
 
 export {
-  getUniqueChord,
+  getUniqueNotes,
   getShiftedAccidentals,
   getAdjacentNotes,
   getChordNoteTypes

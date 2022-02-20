@@ -2,7 +2,7 @@ import { pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import { getNoteType } from './noteTypeMapper';
 import { getNoteModifier } from './modifiersMapper';
 import {
-  getUniqueChord,
+  getUniqueNotes,
   getShiftedAccidentals,
   getAdjacentNotes,
   getChordNoteTypes
@@ -23,7 +23,7 @@ const getLastKey = (chord) => {
   const filteredChord = chord.filter(item => item.pianoKey);
   const lastItemIndex = filteredChord.length - ONE;
 
-  return filteredChord[lastItemIndex].pianoKey;
+  return lastItemIndex >= ZERO ? filteredChord[lastItemIndex].pianoKey : '';
 };
 
 const getChordNote = ({
@@ -53,19 +53,19 @@ const getChordNote = ({
 
 const getChordSubcomponent = (item) => {
   const rootIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === item.pianoKey);
-  const uniqueChord = getUniqueChord(item.chord).map(chordKey => {
+  const uniqueAddedNotes = getUniqueNotes(item.addedNotes).map(addedNoteItem => {
     return {
-      ...chordKey,
-      pianoKey: getPianoKey(rootIndex + chordKey.value)
+      ...addedNoteItem,
+      pianoKey: getPianoKey(rootIndex + addedNoteItem.value)
     };
   });
   const { isStemmedNoteFlipped, showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote } = item;
   const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
-  const lastKey = getLastKey(uniqueChord);
+  const lastKey = getLastKey(uniqueAddedNotes);
 
-  const chordData = [item].concat(uniqueChord);
+  const chordData = [item].concat(uniqueAddedNotes);
   const chordPianoKeys = chordData.map(d => d.pianoKey);
-  const shiftedAccidentals = getShiftedAccidentals(item);
+  const shiftedAccidentals = getShiftedAccidentals(chordPianoKeys);
   const adjacentNotes = getAdjacentNotes({
     isStemmedNoteFlipped,
     chordPianoKeys
@@ -74,7 +74,7 @@ const getChordSubcomponent = (item) => {
     adjacentNotes,
     isStemmedNoteFlipped,
     noteType,
-    size: item.chord.length + ONE
+    size: item.addedNotes.length + ONE
   });
   const shouldShiftDotted = adjacentNotes.some(isAdjacent => isAdjacent) && !item.isStemmedNoteFlipped;
 

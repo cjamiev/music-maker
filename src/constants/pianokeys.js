@@ -43,17 +43,17 @@ export const intervalList = [
 ];
 
 export const chordList = [
-  {label: 'Minor', chord: [{ value: third, showNoteFlat: true },{ value: fifth }]},
-  {label: 'Major', chord: [{ value: third }, { value: fifth }]},
-  {label: 'Sus2', chord: [{ value: second }, { value: fifth }]},
-  {label: 'Sus4', chord: [{ value: fourth }, { value: fifth }]},
-  {label: 'Augmented', chord: [{ value: third }, { value: fifth, showNoteSharp: true }]},
-  {label: 'Diminished', chord: [{ value: third, showNoteFlat: true }, { value: fifth, showNoteFlat: true }]},
-  {label: 'm6', chord: [{ value: third }, { value: sixth }]},
-  {label: 'M6', chord: [{ value: third }, { value: sixth }]},
-  {label: 'Dominant 7th', chord: [{ value: third }, { value: fifth }, { value: seventh, showNoteFlat: true }]},
-  {label: 'Major 7th', chord: [{ value: third }, { value: fifth }, { value: seventh }]},
-  {label: 'Minor Major 7th', chord: [{ value: third, showNoteFlat: true }, { value: fifth }, { value: seventh }]},
-  {label: 'Minor 7th', chord: [{ value: third, showNoteFlat: true }, { value: fifth }, { value: seventh, showNoteFlat: true }]},
-  {label: 'Diminished 7th', chord: [{ value: third, showNoteFlat: true }, { value: fifth, showNoteFlat: true }, { value: seventh, conditions: { showNoteFlat: true } }]}
+  {label: 'Minor', addedNotes: [{ value: third, showNoteFlat: true },{ value: fifth }]},
+  {label: 'Major', addedNotes: [{ value: third }, { value: fifth }]},
+  {label: 'Sus2', addedNotes: [{ value: second }, { value: fifth }]},
+  {label: 'Sus4', addedNotes: [{ value: fourth }, { value: fifth }]},
+  {label: 'Augmented', addedNotes: [{ value: third }, { value: fifth, showNoteSharp: true }]},
+  {label: 'Diminished', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth, showNoteFlat: true }]},
+  {label: 'm6', addedNotes: [{ value: third }, { value: sixth }]},
+  {label: 'M6', addedNotes: [{ value: third }, { value: sixth }]},
+  {label: 'Dominant 7th', addedNotes: [{ value: third }, { value: fifth }, { value: seventh, showNoteFlat: true }]},
+  {label: 'Major 7th', addedNotes: [{ value: third }, { value: fifth }, { value: seventh }]},
+  {label: 'Minor Major 7th', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth }, { value: seventh }]},
+  {label: 'Minor 7th', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth }, { value: seventh, showNoteFlat: true }]},
+  {label: 'Diminished 7th', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth, showNoteFlat: true }, { value: seventh, conditions: { showNoteFlat: true } }]}
 ];

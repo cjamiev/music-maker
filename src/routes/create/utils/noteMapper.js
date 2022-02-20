@@ -23,8 +23,8 @@ const getNoteSubcomponents = (item) => {
     isStemmedNoteFlipped,
     ...sharpConditional
   };
-  const filteredChord = item.chord.filter(note => note.value);
-  const noteSubcomponent = filteredChord.length > ZERO
+  const filteredAddedNotes = item.addedNotes.filter(note => note.value);
+  const noteSubcomponent = filteredAddedNotes.length > ZERO
     ? getChordSubcomponent(updatedItem)
     : [getNoteType(updatedItem), ...getNoteModifier(updatedItem)];
 
