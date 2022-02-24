@@ -120,10 +120,10 @@ const ChordBuilder = ({pianoKey, isBassSelection, selectNoteType}) => {
 
             setChordQuality(values);
             setSelectedAddedNotes(updatedAddedNotes);
-            setAddedNoteFive({});
-            setAddedNoteFour(updatedNoteFour);
-            setAddedNoteThree(updatedNoteThree);
             setAddedNoteTwo(updatedNoteTwo);
+            setAddedNoteThree(updatedNoteThree);
+            setAddedNoteFour(updatedNoteFour);
+            setAddedNoteFive([]);
             selectNoteType({ addedNotes: updatedAddedNotes});
           }}
         />

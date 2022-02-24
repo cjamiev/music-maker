@@ -49,11 +49,11 @@ export const chordList = [
   {label: 'Sus4', addedNotes: [{ value: fourth }, { value: fifth }]},
   {label: 'Augmented', addedNotes: [{ value: third }, { value: fifth, showNoteSharp: true }]},
   {label: 'Diminished', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth, showNoteFlat: true }]},
-  {label: 'm6', addedNotes: [{ value: third }, { value: sixth }]},
+  {label: 'm6', addedNotes: [{ value: third }, { value: sixth, showNoteFlat: true }]},
   {label: 'M6', addedNotes: [{ value: third }, { value: sixth }]},
   {label: 'Dominant 7th', addedNotes: [{ value: third }, { value: fifth }, { value: seventh, showNoteFlat: true }]},
   {label: 'Major 7th', addedNotes: [{ value: third }, { value: fifth }, { value: seventh }]},
   {label: 'Minor Major 7th', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth }, { value: seventh }]},
   {label: 'Minor 7th', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth }, { value: seventh, showNoteFlat: true }]},
-  {label: 'Diminished 7th', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth, showNoteFlat: true }, { value: seventh, conditions: { showNoteFlat: true } }]}
+  {label: 'Diminished 7th', addedNotes: [{ value: third, showNoteFlat: true }, { value: fifth, showNoteFlat: true }, { value: sixth }]}
 ];
