@@ -81,14 +81,16 @@ const getTopSymbols = ({
   ];
 };
 
-const getNoteAccidentals = ({
+const getAccidentals = ({
   showNoteFlat,
   showNoteSharp,
   showNoteNatural,
   shouldShiftAccidental,
+  shouldShiftAccidentalsMore,
   pianoKey
 }) => {
-  const shiftX = shouldShiftAccidental ? -ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
+  const initialShiftX = shouldShiftAccidental ? -ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
+  const shiftX = shouldShiftAccidentalsMore ? initialShiftX - ADJACENT_SYMBOL_SHIFT_MODIFIER: initialShiftX;
   const shiftY = mapNotePosition[pianoKey];
 
   if(showNoteFlat) {
@@ -109,7 +111,7 @@ const getDotted = ({ showDotted, shouldShiftDotted, pianoKey }) => {
   return showDotted && { component:'Dotted', transform:`translate(${shiftX},${shiftY})`, conditions:{}};
 };
 
-const getNoteModifier = ({
+const getAllModifiers = ({
   showDotted,
   showNoteFlat,
   showNoteSharp,
@@ -133,7 +135,7 @@ const getNoteModifier = ({
       showTrill,
       pianoKey
     }),
-    getNoteAccidentals({
+    getAccidentals({
       showNoteFlat,
       showNoteSharp,
       showNoteNatural,
@@ -145,5 +147,8 @@ const getNoteModifier = ({
 };
 
 export {
-  getNoteModifier
+  getAllModifiers,
+  getAccidentals,
+  getTopSymbols,
+  getDotted
 };

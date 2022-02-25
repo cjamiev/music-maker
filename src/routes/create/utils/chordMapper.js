@@ -1,6 +1,10 @@
 import { pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import { getNoteType } from './noteTypeMapper';
-import { getNoteModifier } from './modifiersMapper';
+import {
+  getAccidentals,
+  getTopSymbols,
+  getDotted
+} from './modifiersMapper';
 import {
   getUniqueNotes,
   getShiftedAccidentals,
@@ -15,15 +19,14 @@ const THREE = 3;
 const FOUR = 4;
 const ADJACENT_NOTE_TRANSLATE_X = 7;
 
-const getPianoKey = (index = -ONE) => {
-  return pianoKeyListWithoutAccidentals[index - ONE] || '';
-};
+const getPianoKey = (index = -ONE) => pianoKeyListWithoutAccidentals[index - ONE] || '';
 
-const getLastKey = (chord) => {
+const getLastKeySymbols = (chord, noteTopSymbols) => {
   const filteredChord = chord.filter(item => item.pianoKey);
   const lastItemIndex = filteredChord.length - ONE;
+  const pianoKey = lastItemIndex >= ZERO ? filteredChord[lastItemIndex].pianoKey : '';
 
-  return lastItemIndex >= ZERO ? filteredChord[lastItemIndex].pianoKey : '';
+  return getTopSymbols({ ...noteTopSymbols, pianoKey });
 };
 
 const getChordNote = ({
@@ -33,21 +36,22 @@ const getChordNote = ({
   noteType,
   conditions,
   shouldShiftAccidental,
-  shouldShiftDotted,
-  lastKey
+  shouldShiftAccidentalsMore,
+  shouldShiftDotted
 }) => {
   if(!pianoKey) {
     return [];
   }
 
-  const noteData = lastKey && isStemmedNoteFlipped
-    ? {...conditions, pianoKey: lastKey, shouldShiftAccidental, shouldShiftDotted,
-      showStaccato: isStemmedNoteFlipped && conditions.showStaccato }
-    : {...conditions, pianoKey, shouldShiftAccidental, shouldShiftDotted };
-
   return [
-    getNoteType({ pianoKey, isAdjacentNote, isStemmedNoteFlipped, ...noteType}),
-    ...getNoteModifier(noteData)
+    getNoteType({ pianoKey, isAdjacentNote, isStemmedNoteFlipped, ...noteType }),
+    getAccidentals({
+      ...conditions,
+      shouldShiftAccidental,
+      shouldShiftAccidentalsMore,
+      pianoKey
+    }),
+    getDotted({ showDotted: conditions.showDotted, shouldShiftDotted, pianoKey })
   ];
 };
 
@@ -59,13 +63,19 @@ const getChordSubcomponent = (item) => {
       pianoKey: getPianoKey(rootIndex + addedNoteItem.value)
     };
   });
-  const { isStemmedNoteFlipped, showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote } = item;
+  const {
+    isStemmedNoteFlipped,
+    showStaccato, showAccent, showTenuto, showFermata, showTrill,
+    showDotted,
+    showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote
+  } = item;
   const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
-  const lastKey = getLastKey(uniqueAddedNotes);
+  const noteTopSymbols = { showStaccato, showAccent, showTenuto, showFermata, showTrill };
+  const lastKeySymbols = getLastKeySymbols(uniqueAddedNotes, noteTopSymbols);
 
   const chordData = [item].concat(uniqueAddedNotes);
   const chordPianoKeys = chordData.map(d => d.pianoKey);
-  const shiftedAccidentals = getShiftedAccidentals(chordPianoKeys);
+  const shiftedAccidentals = getShiftedAccidentals(chordData);
   const adjacentNotes = getAdjacentNotes({
     isStemmedNoteFlipped,
     chordPianoKeys
@@ -77,23 +87,25 @@ const getChordSubcomponent = (item) => {
     size: item.addedNotes.length + ONE
   });
   const shouldShiftDotted = adjacentNotes.some(isAdjacent => isAdjacent) && !item.isStemmedNoteFlipped;
+  const shouldShiftAccidentalsMore = adjacentNotes.some(isAdjacent => isAdjacent) && item.isStemmedNoteFlipped;
 
   const chordNotes = chordPianoKeys.map((chordPiano,index) => {
     return getChordNote({
       isStemmedNoteFlipped,
       shouldShiftDotted,
+      shouldShiftAccidentalsMore,
       pianoKey: chordPiano,
       isAdjacentNote: adjacentNotes[index],
       noteType: chordNoteTypes[index],
       shouldShiftAccidental: shiftedAccidentals[index],
       conditions: {
         ...chordData[index],
-        showDotted: item.showDotted
+        showDotted
       }
     });
   }).reduce((entry,acc) => { return acc.concat(entry); },[]);
 
-  return chordNotes;
+  return chordNotes.concat(lastKeySymbols).filter(Boolean);
 };
 
 export {

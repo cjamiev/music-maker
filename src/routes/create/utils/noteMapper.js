@@ -1,7 +1,7 @@
 import { mapStaffLines } from 'constants/stafflines';
 import { pianoKeyList } from 'constants/pianokeys';
 import { getNoteType } from './noteTypeMapper';
-import { getNoteModifier } from './modifiersMapper';
+import { getAllModifiers } from './modifiersMapper';
 import { getChordSubcomponent } from './chordMapper';
 
 const ZERO = 0;
@@ -26,7 +26,7 @@ const getNoteSubcomponents = (item) => {
   const filteredAddedNotes = item.addedNotes.filter(note => note.value);
   const noteSubcomponent = filteredAddedNotes.length > ZERO
     ? getChordSubcomponent(updatedItem)
-    : [getNoteType(updatedItem), ...getNoteModifier(updatedItem)];
+    : [getNoteType(updatedItem), ...getAllModifiers(updatedItem)];
 
   return [
     { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[rootPianoKey]},

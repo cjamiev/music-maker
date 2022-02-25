@@ -26,7 +26,7 @@ const LinePositionController = ({ editorPosition, data, onChange }) => {
             columnIndex: ZERO,
             component: 'Note',
             pianoKey: 'C4',
-            chord: [{},{},{},{}]
+            addedNotes: [{},{},{},{}]
           };
           const nextLine = {
             ottavaAlta: [],
