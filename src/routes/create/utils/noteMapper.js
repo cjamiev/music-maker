@@ -31,11 +31,15 @@ const getNoteSubcomponents = (data) => {
   const chordSize = data.addedNotes.filter(note => note.value).length;
   const isNoteFlipped = getIsNoteFlipped(rootPianoKey, chordSize);
   const noteData = { ...data, pianoKey: rootPianoKey, isNoteFlipped, ...sharpConditional, chordSize };
-  const staffComponent = { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[rootPianoKey]};
 
   return (chordSize === ZERO)
-    ? [staffComponent, getNoteType(noteData), ...getAllModifiers(noteData)]
-    : [staffComponent, ...getChordSubcomponent(noteData)];
+    ?
+    [
+      { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[rootPianoKey]},
+      getNoteType(noteData),
+      ...getAllModifiers(noteData)
+    ]
+    : getChordSubcomponent(noteData);
 };
 
 export {

@@ -8,14 +8,14 @@ const FOUR = 4;
 
 const getPianoKey = (index = -ONE) => pianoKeyListWithoutAccidentals[index - ONE] || '';
 
-const getOrganizedChordData = (item) => {
+const getOrganizedChordData = (data) => {
   const {
     pianoKey,
     addedNotes,
     showStaccato, showAccent, showTenuto, showFermata, showTrill,
     showNoteFlat, showNoteSharp, showNoteNatural,
     showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote
-  } = item;
+  } = data;
 
   const rootIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === pianoKey);
   const uniqueAddedNotes = getUniqueNotes(addedNotes).map(addedNoteItem => {
@@ -24,11 +24,16 @@ const getOrganizedChordData = (item) => {
       pianoKey: getPianoKey(rootIndex + addedNoteItem.value)
     };
   });
+
+  const filteredChord = uniqueAddedNotes.filter(item => item.pianoKey);
+  const lastItemIndex = filteredChord.length - ONE;
+  const lastPianoKey = lastItemIndex >= ZERO ? filteredChord[lastItemIndex].pianoKey : '';
+
   const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
   const noteTopSymbols = { showStaccato, showAccent, showTenuto, showFermata, showTrill };
   const chordData = [{ pianoKey, showNoteFlat, showNoteSharp, showNoteNatural}].concat(uniqueAddedNotes);
 
-  return { chordData, noteType, noteTopSymbols };
+  return { chordData, noteType, noteTopSymbols, lastPianoKey };
 };
 
 const getUniqueNotes = (notes) => {

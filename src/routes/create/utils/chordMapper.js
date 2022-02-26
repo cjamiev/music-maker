@@ -1,5 +1,5 @@
 import { pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
-import { mapNotePosition, mapNoteLedgerPosition } from 'constants/stafflines';
+import { mapNotePosition, mapNoteLedgerPosition, mapStaffLines } from 'constants/stafflines';
 import { getNoteType } from './noteTypeMapper';
 import {
   getAccidentals,
@@ -36,29 +36,17 @@ const getDottedSymbols = ({chordPianoKeys, adjacentNotes, showDotted, isNoteFlip
   });
 };
 
-const getLastKeySymbols = (chord, noteTopSymbols, isNoteFlipped) => {
-  const filteredChord = chord.filter(value => value);
-  const lastItemIndex = filteredChord.length - ONE;
-  const pianoKey = lastItemIndex >= ZERO ? filteredChord[lastItemIndex] : '';
-
-  return getTopSymbols({ ...noteTopSymbols, showStaccato: isNoteFlipped ? noteTopSymbols.showStaccato : false, pianoKey });
+const getLastKeySymbols = (lastPianoKey, noteTopSymbols, isNoteFlipped) => {
+  return getTopSymbols({ ...noteTopSymbols, showStaccato: isNoteFlipped ? noteTopSymbols.showStaccato : false, pianoKey: lastPianoKey });
 };
 
-const getChordLedger = ({ pianoKey, isAdjacentNote, isNoteFlipped }) => {
-  const shiftX = isAdjacentNote ? (Number(isNoteFlipped)*-ONE)*(ADJACENT_NOTE_TRANSLATE_X) : ZERO;
-  const shiftY = mapNoteLedgerPosition[pianoKey];
+const getChordLedgers = ({ chordPianoKeys, adjacentNotes }) => {
+  return chordPianoKeys.map((pianoKey, index) => {
+    const shiftX = -ADJACENT_NOTE_TRANSLATE_X;
+    const shiftY = mapNoteLedgerPosition[pianoKey];
 
-  if(!shiftY) {
-    return [];
-  }
-  else if(shiftX) {
-    return [
-      { component:'ChordLedger', transform:`translate(${shiftX},${shiftY})`, conditions: {}},
-      { component:'ChordLedger', transform:`translate(0.01,${shiftY})`, conditions: {}}
-    ];
-  }
-
-  return [{ component:'ChordLedger', transform:`translate(0,${shiftY})`, conditions: {}}];
+    return adjacentNotes[index] && shiftY && { component:'ChordLedger', transform:`translate(${shiftX},${shiftY})`, conditions: {}};
+  });
 };
 
 const getChordNote = ({
@@ -75,7 +63,6 @@ const getChordNote = ({
   }
 
   return [
-    ...getChordLedger({ pianoKey, isAdjacentNote, isNoteFlipped}),
     getNoteType({ pianoKey, isAdjacentNote, isNoteFlipped, ...noteType }),
     getAccidentals({
       ...conditions,
@@ -87,8 +74,8 @@ const getChordNote = ({
 };
 
 const getChordSubcomponent = (item) => {
-  const { isNoteFlipped, showDotted, chordSize } = item;
-  const { chordData, noteType, noteTopSymbols } = getOrganizedChordData(item);
+  const { pianoKey, isNoteFlipped, showDotted, chordSize } = item;
+  const { chordData, noteType, noteTopSymbols, lastPianoKey } = getOrganizedChordData(item);
   const chordPianoKeys = chordData.map(d => d.pianoKey);
 
   const shiftedAccidentals = getShiftedAccidentals(chordData);
@@ -104,9 +91,10 @@ const getChordSubcomponent = (item) => {
   });
   const shouldShiftAccidentalsMore = adjacentNotes.some(isAdjacent => isAdjacent) && isNoteFlipped;
 
-  const rootStaccato = getRootStaccato(item.pianoKey, noteTopSymbols.showStaccato, isNoteFlipped);
+  const rootStaccato = getRootStaccato(pianoKey, noteTopSymbols.showStaccato, isNoteFlipped);
   const dottedSymbols = getDottedSymbols({chordPianoKeys, adjacentNotes, showDotted, isNoteFlipped});
-  const lastKeySymbols = getLastKeySymbols(chordPianoKeys, noteTopSymbols, isNoteFlipped);
+  const lastKeySymbols = getLastKeySymbols(lastPianoKey, noteTopSymbols, isNoteFlipped);
+  const chordLedgers = getChordLedgers({chordPianoKeys, adjacentNotes});
   const chordNotes = chordPianoKeys.map((chordPiano,index) => {
     return getChordNote({
       isNoteFlipped,
@@ -118,8 +106,9 @@ const getChordSubcomponent = (item) => {
       conditions: chordData[index]
     });
   }).reduce((entry,acc) => { return acc.concat(entry); },[]);
+  const staffComponent = { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[isNoteFlipped ? lastPianoKey : pianoKey]};
 
-  return [...rootStaccato, ...dottedSymbols, ...lastKeySymbols, ...chordNotes].filter(Boolean);
+  return [...rootStaccato, ...dottedSymbols, ...lastKeySymbols, ...chordLedgers, staffComponent, ...chordNotes].filter(Boolean);
 };
 
 export {
