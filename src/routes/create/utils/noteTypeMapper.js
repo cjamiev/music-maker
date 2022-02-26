@@ -12,20 +12,20 @@ const getNoteType = ({
   showQuarterNote,
   showEighthNote,
   showSixteenthNote,
-  isStemmedNoteFlipped,
+  isNoteFlipped,
   isAdjacentNote,
   pianoKey
 }) => {
   const shiftY = mapNotePosition[pianoKey];
 
   if (showWholeNote) {
-    const shiftX = isAdjacentNote ? (-ONE+TWO*Number(!isStemmedNoteFlipped)) * ADJACENT_WHOLE_NOTE_SHIFT_MODIFIER: ZERO;
+    const shiftX = isAdjacentNote ? (-ONE+TWO*Number(!isNoteFlipped)) * ADJACENT_WHOLE_NOTE_SHIFT_MODIFIER: ZERO;
     return { component: 'WholeNote', transform:`translate(${shiftX},${shiftY})`, conditions: {}};
   }
 
-  const shiftX = isAdjacentNote ? (-ONE+TWO*Number(!isStemmedNoteFlipped)) * ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
+  const shiftX = isAdjacentNote ? (-ONE+TWO*Number(!isNoteFlipped)) * ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
   const conditions = { showNoteStem: !isAdjacentNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
-  const component = isStemmedNoteFlipped ? 'StemmedNoteFlipped' : 'StemmedNote';
+  const component = isNoteFlipped ? 'StemmedNoteFlipped' : 'StemmedNote';
 
   return { component, transform:`translate(${shiftX},${shiftY})`, conditions};
 };

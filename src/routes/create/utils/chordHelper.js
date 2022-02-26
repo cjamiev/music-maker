@@ -36,7 +36,7 @@ const getShiftedAccidentals = (chordPianoKeys) => {
 };
 
 const getAdjacentNotes = ({
-  isStemmedNoteFlipped,
+  isNoteFlipped,
   chordPianoKeys
 }) => {
   const rootIndex = pianoKeyListWithoutAccidentals.findIndex(letter => chordPianoKeys[ZERO].includes(letter));
@@ -50,19 +50,19 @@ const getAdjacentNotes = ({
   const isFourthNoteAdjacent = isThirdNoteAdjacent ? false : (fourthIndex - thirdIndex) === ONE;
   const isFifthNoteAdjacent = isFourthNoteAdjacent ? false : (fifthIndex - fourthIndex) === ONE;
 
-  return (!isStemmedNoteFlipped)
+  return (!isNoteFlipped)
     ? [false, isSecondNoteAdjacent, isThirdNoteAdjacent, isFourthNoteAdjacent, isFifthNoteAdjacent]
     : [isSecondNoteAdjacent, isThirdNoteAdjacent, isFourthNoteAdjacent, isFifthNoteAdjacent, false];
 };
 
-const getChordNoteTypes = ({ adjacentNotes, isStemmedNoteFlipped, noteType, size }) => {
+const getChordNoteTypes = ({ adjacentNotes, isNoteFlipped, noteType, size }) => {
   const noFlagsNoteType = {
     ...noteType,
     showEighthNote: false,
     showSixteenthNote:false
   };
 
-  if(isStemmedNoteFlipped) {
+  if(isNoteFlipped) {
     const rootNoteType = adjacentNotes[ZERO] ? noFlagsNoteType : noteType;
     const secondNoteType = adjacentNotes[ZERO] ? noteType : noFlagsNoteType;
 

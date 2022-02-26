@@ -106,17 +106,17 @@ const getAccidentals = ({
   return undefined;
 };
 
-const getDottedShiftY = ({ shouldShiftDottedY, isStemmedNoteFlipped, pianoKey }) => {
+const getDottedShiftY = ({ shouldShiftDottedY, isNoteFlipped, pianoKey }) => {
   if(!shouldShiftDottedY) {
     return mapDottedPosition[pianoKey];
   }
 
-  return (isStemmedNoteFlipped) ? mapAdjacentFlippedDottedPosition[pianoKey] : mapAdjacentDottedPosition[pianoKey];
+  return (isNoteFlipped) ? mapAdjacentFlippedDottedPosition[pianoKey] : mapAdjacentDottedPosition[pianoKey];
 };
 
-const getDotted = ({ showDotted, shouldShiftDottedX, shouldShiftDottedY, isStemmedNoteFlipped, pianoKey }) => {
+const getDotted = ({ showDotted, shouldShiftDottedX, shouldShiftDottedY, isNoteFlipped, pianoKey }) => {
   const shiftX = shouldShiftDottedX ? ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
-  const shiftY = getDottedShiftY({ shouldShiftDottedY, isStemmedNoteFlipped, pianoKey });
+  const shiftY = getDottedShiftY({ shouldShiftDottedY, isNoteFlipped, pianoKey });
 
   return showDotted && { component:'Dotted', transform:`translate(${shiftX},${shiftY})`, conditions:{}};
 };

@@ -10,7 +10,7 @@ const STAFF_MIDPOINT = 26;
 const STAFF_CHORD_LENGTH_TWO_MIDPOINT = 24;
 const STAFF_CHORD_LENGTH_THREE_MIDPOINT = 22;
 
-const getIsStemmedNoteFlipped = (rootPianoKey, chordSize) => {
+const getIsNoteFlipped = (rootPianoKey, chordSize) => {
   const rootIndex = pianoKeyList.findIndex(key => key === rootPianoKey);
 
   if(chordSize === ZERO) {
@@ -21,32 +21,21 @@ const getIsStemmedNoteFlipped = (rootPianoKey, chordSize) => {
   return rootIndex > STAFF_CHORD_LENGTH_THREE_MIDPOINT;
 };
 
-const getNoteSubcomponents = (item) => {
-  if(item.component !== 'Note') {
+const getNoteSubcomponents = (data) => {
+  if(data.component !== 'Note') {
     return [];
   }
 
-  const rootPianoKey = item.pianoKey.replace('#','');
-  const chordSize = item.addedNotes.filter(note => note.value).length;
-  const isStemmedNoteFlipped = getIsStemmedNoteFlipped(rootPianoKey, chordSize);
-  const sharpConditional = item.pianoKey.includes('#')
-    ? { showNoteSharp: true }
-    : { };
-  const updatedItem = {
-    ...item,
-    pianoKey: rootPianoKey,
-    isStemmedNoteFlipped,
-    ...sharpConditional,
-    chordSize
-  };
-  const noteSubcomponent = chordSize > ZERO
-    ? getChordSubcomponent(updatedItem)
-    : [getNoteType(updatedItem), ...getAllModifiers(updatedItem)];
+  const rootPianoKey = data.pianoKey.replace('#','');
+  const sharpConditional = data.pianoKey.includes('#') ? { showNoteSharp: true } : { };
+  const chordSize = data.addedNotes.filter(note => note.value).length;
+  const isNoteFlipped = getIsNoteFlipped(rootPianoKey, chordSize);
+  const noteData = { ...data, pianoKey: rootPianoKey, isNoteFlipped, ...sharpConditional, chordSize };
+  const staffComponent = { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[rootPianoKey]};
 
-  return [
-    { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[rootPianoKey]},
-    ...noteSubcomponent
-  ];
+  return (chordSize === ZERO)
+    ? [staffComponent, getNoteType(noteData), ...getAllModifiers(noteData)]
+    : [staffComponent, ...getChordSubcomponent(noteData)];
 };
 
 export {
