@@ -48,7 +48,17 @@ const getChordLedger = ({ pianoKey, isAdjacentNote, isStemmedNoteFlipped }) => {
   const shiftX = isAdjacentNote ? (Number(isStemmedNoteFlipped)*-ONE)*(ADJACENT_NOTE_TRANSLATE_X) : ZERO;
   const shiftY = mapNoteLedgerPosition[pianoKey];
 
-  return shiftY && { component:'ChordLedger', transform:`translate(${shiftX},${shiftY})`, conditions: {}};
+  if(!shiftY) {
+    return [];
+  }
+  else if(shiftX) {
+    return [
+      { component:'ChordLedger', transform:`translate(${shiftX},${shiftY})`, conditions: {}},
+      { component:'ChordLedger', transform:`translate(0.01,${shiftY})`, conditions: {}}
+    ];
+  }
+
+  return [{ component:'ChordLedger', transform:`translate(0,${shiftY})`, conditions: {}}];
 };
 
 const getChordNote = ({
@@ -65,7 +75,7 @@ const getChordNote = ({
   }
 
   return [
-    getChordLedger({ pianoKey, isAdjacentNote, isStemmedNoteFlipped}),
+    ...getChordLedger({ pianoKey, isAdjacentNote, isStemmedNoteFlipped}),
     getNoteType({ pianoKey, isAdjacentNote, isStemmedNoteFlipped, ...noteType }),
     getAccidentals({
       ...conditions,
