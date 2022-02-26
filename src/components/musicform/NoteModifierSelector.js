@@ -4,6 +4,7 @@ import { ICON_SIZES, MUSIC_ICON_TYPES } from 'constants/icon';
 import { noteModifierTypes } from 'constants/musicnotation';
 
 const ZERO = 0;
+
 const NoteModifierSelector = ({ noteConfig, selectNoteModifier }) => {
   const renderNoteModifier = noteModifierTypes.map(({ key, value }) => {
     const selectedKey = Object.keys(value)[ZERO];

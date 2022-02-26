@@ -21,12 +21,16 @@ const ADJACENT_NOTE_TRANSLATE_X = 7;
 
 const getPianoKey = (index = -ONE) => pianoKeyListWithoutAccidentals[index - ONE] || '';
 
-const getLastKeySymbols = (chord, noteTopSymbols) => {
+const getRootStaccato = (root, showStaccato, isStemmedNoteFlipped) => {
+  return getTopSymbols({ showStaccato: isStemmedNoteFlipped ? false: showStaccato, pianoKey: root });
+};
+
+const getLastKeySymbols = (chord, noteTopSymbols, isStemmedNoteFlipped) => {
   const filteredChord = chord.filter(item => item.pianoKey);
   const lastItemIndex = filteredChord.length - ONE;
   const pianoKey = lastItemIndex >= ZERO ? filteredChord[lastItemIndex].pianoKey : '';
 
-  return getTopSymbols({ ...noteTopSymbols, pianoKey });
+  return getTopSymbols({ ...noteTopSymbols, showStaccato: isStemmedNoteFlipped ? noteTopSymbols.showStaccato : false, pianoKey });
 };
 
 const getChordNote = ({
@@ -71,7 +75,8 @@ const getChordSubcomponent = (item) => {
   } = item;
   const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
   const noteTopSymbols = { showStaccato, showAccent, showTenuto, showFermata, showTrill };
-  const lastKeySymbols = getLastKeySymbols(uniqueAddedNotes, noteTopSymbols);
+  const rootStaccato = getRootStaccato(item.pianoKey, showStaccato, isStemmedNoteFlipped);
+  const lastKeySymbols = getLastKeySymbols(uniqueAddedNotes, noteTopSymbols, isStemmedNoteFlipped);
 
   const chordData = [item].concat(uniqueAddedNotes);
   const chordPianoKeys = chordData.map(d => d.pianoKey);
@@ -105,7 +110,7 @@ const getChordSubcomponent = (item) => {
     });
   }).reduce((entry,acc) => { return acc.concat(entry); },[]);
 
-  return chordNotes.concat(lastKeySymbols).filter(Boolean);
+  return rootStaccato.concat(chordNotes.concat(lastKeySymbols)).filter(Boolean);
 };
 
 export {
