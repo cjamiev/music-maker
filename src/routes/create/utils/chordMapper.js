@@ -108,7 +108,7 @@ const getChordSubcomponent = (item) => {
   }).reduce((entry,acc) => { return acc.concat(entry); },[]);
   const staffComponent = { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[isNoteFlipped ? lastPianoKey : pianoKey]};
 
-  return [...rootStaccato, ...dottedSymbols, ...lastKeySymbols, ...chordLedgers, staffComponent, ...chordNotes].filter(Boolean);
+  return [...rootStaccato, ...dottedSymbols, ...lastKeySymbols, ...chordNotes, ...chordLedgers, staffComponent].filter(Boolean);
 };
 
 export {

@@ -35,9 +35,9 @@ const getNoteSubcomponents = (data) => {
   return (chordSize === ZERO)
     ?
     [
-      { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[rootPianoKey]},
       getNoteType(noteData),
-      ...getAllModifiers(noteData)
+      ...getAllModifiers(noteData),
+      { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[rootPianoKey]}
     ]
     : getChordSubcomponent(noteData);
 };
