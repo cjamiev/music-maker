@@ -6,6 +6,31 @@ const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 
+const getPianoKey = (index = -ONE) => pianoKeyListWithoutAccidentals[index - ONE] || '';
+
+const getOrganizedChordData = (item) => {
+  const {
+    pianoKey,
+    addedNotes,
+    showStaccato, showAccent, showTenuto, showFermata, showTrill,
+    showNoteFlat, showNoteSharp, showNoteNatural,
+    showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote
+  } = item;
+
+  const rootIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === pianoKey);
+  const uniqueAddedNotes = getUniqueNotes(addedNotes).map(addedNoteItem => {
+    return {
+      ...addedNoteItem,
+      pianoKey: getPianoKey(rootIndex + addedNoteItem.value)
+    };
+  });
+  const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
+  const noteTopSymbols = { showStaccato, showAccent, showTenuto, showFermata, showTrill };
+  const chordData = [{ pianoKey, showNoteFlat, showNoteSharp, showNoteNatural}].concat(uniqueAddedNotes);
+
+  return { chordData, noteType, noteTopSymbols };
+};
+
 const getUniqueNotes = (notes) => {
   const secondValue = notes[ZERO].value;
   const thirdValue = notes[ONE].value;
@@ -85,6 +110,8 @@ const getChordNoteTypes = ({ adjacentNotes, isNoteFlipped, noteType, size }) => 
 };
 
 export {
+  getPianoKey,
+  getOrganizedChordData,
   getUniqueNotes,
   getShiftedAccidentals,
   getAdjacentNotes,

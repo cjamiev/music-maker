@@ -7,6 +7,8 @@ import {
   getDotted
 } from './modifiersMapper';
 import {
+  getPianoKey,
+  getOrganizedChordData,
   getUniqueNotes,
   getShiftedAccidentals,
   getAdjacentNotes,
@@ -19,8 +21,6 @@ const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 const ADJACENT_NOTE_TRANSLATE_X = 7;
-
-const getPianoKey = (index = -ONE) => pianoKeyListWithoutAccidentals[index - ONE] || '';
 
 const getRootStaccato = (root, showStaccato, isNoteFlipped) => {
   return getTopSymbols({ showStaccato: isNoteFlipped ? false: showStaccato, pianoKey: root });
@@ -37,9 +37,9 @@ const getDottedSymbols = ({chordPianoKeys, adjacentNotes, showDotted, isNoteFlip
 };
 
 const getLastKeySymbols = (chord, noteTopSymbols, isNoteFlipped) => {
-  const filteredChord = chord.filter(item => item.pianoKey);
+  const filteredChord = chord.filter(value => value);
   const lastItemIndex = filteredChord.length - ONE;
-  const pianoKey = lastItemIndex >= ZERO ? filteredChord[lastItemIndex].pianoKey : '';
+  const pianoKey = lastItemIndex >= ZERO ? filteredChord[lastItemIndex] : '';
 
   return getTopSymbols({ ...noteTopSymbols, showStaccato: isNoteFlipped ? noteTopSymbols.showStaccato : false, pianoKey });
 };
@@ -87,24 +87,10 @@ const getChordNote = ({
 };
 
 const getChordSubcomponent = (item) => {
-  const rootIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === item.pianoKey);
-  const uniqueAddedNotes = getUniqueNotes(item.addedNotes).map(addedNoteItem => {
-    return {
-      ...addedNoteItem,
-      pianoKey: getPianoKey(rootIndex + addedNoteItem.value)
-    };
-  });
-  const {
-    isNoteFlipped,
-    showStaccato, showAccent, showTenuto, showFermata, showTrill,
-    showDotted,
-    showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote
-  } = item;
-  const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
-  const noteTopSymbols = { showStaccato, showAccent, showTenuto, showFermata, showTrill };
-
-  const chordData = [item].concat(uniqueAddedNotes);
+  const { isNoteFlipped, showDotted, chordSize } = item;
+  const { chordData, noteType, noteTopSymbols } = getOrganizedChordData(item);
   const chordPianoKeys = chordData.map(d => d.pianoKey);
+
   const shiftedAccidentals = getShiftedAccidentals(chordData);
   const adjacentNotes = getAdjacentNotes({
     isNoteFlipped,
@@ -114,13 +100,13 @@ const getChordSubcomponent = (item) => {
     adjacentNotes,
     isNoteFlipped,
     noteType,
-    size: item.chordSize + ONE
+    size: chordSize + ONE
   });
-  const shouldShiftAccidentalsMore = adjacentNotes.some(isAdjacent => isAdjacent) && item.isNoteFlipped;
+  const shouldShiftAccidentalsMore = adjacentNotes.some(isAdjacent => isAdjacent) && isNoteFlipped;
 
-  const rootStaccato = getRootStaccato(item.pianoKey, showStaccato, isNoteFlipped);
+  const rootStaccato = getRootStaccato(item.pianoKey, noteTopSymbols.showStaccato, isNoteFlipped);
   const dottedSymbols = getDottedSymbols({chordPianoKeys, adjacentNotes, showDotted, isNoteFlipped});
-  const lastKeySymbols = getLastKeySymbols(uniqueAddedNotes, noteTopSymbols, isNoteFlipped);
+  const lastKeySymbols = getLastKeySymbols(chordPianoKeys, noteTopSymbols, isNoteFlipped);
   const chordNotes = chordPianoKeys.map((chordPiano,index) => {
     return getChordNote({
       isNoteFlipped,
