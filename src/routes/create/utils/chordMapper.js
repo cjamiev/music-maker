@@ -33,6 +33,16 @@ const getLastKeySymbols = (chord, noteTopSymbols, isStemmedNoteFlipped) => {
   return getTopSymbols({ ...noteTopSymbols, showStaccato: isStemmedNoteFlipped ? noteTopSymbols.showStaccato : false, pianoKey });
 };
 
+const getDottedSymbols = ({chordPianoKeys, adjacentNotes, showDotted, isStemmedNoteFlipped}) => {
+  const shouldShiftDottedX = adjacentNotes.some(isAdjacent => isAdjacent) && !isStemmedNoteFlipped;
+
+  return chordPianoKeys.filter(Boolean).map((pianoKey, index) => {
+    const shouldShiftDottedY = adjacentNotes[index];
+
+    return getDotted({ showDotted, shouldShiftDottedX, shouldShiftDottedY, isStemmedNoteFlipped, pianoKey });
+  });
+};
+
 const getChordNote = ({
   pianoKey,
   isAdjacentNote,
@@ -40,8 +50,7 @@ const getChordNote = ({
   noteType,
   conditions,
   shouldShiftAccidental,
-  shouldShiftAccidentalsMore,
-  shouldShiftDotted
+  shouldShiftAccidentalsMore
 }) => {
   if(!pianoKey) {
     return [];
@@ -54,8 +63,7 @@ const getChordNote = ({
       shouldShiftAccidental,
       shouldShiftAccidentalsMore,
       pianoKey
-    }),
-    getDotted({ showDotted: conditions.showDotted, shouldShiftDotted, pianoKey })
+    })
   ];
 };
 
@@ -76,7 +84,6 @@ const getChordSubcomponent = (item) => {
   const noteType = { showWholeNote, showHalfNote, showQuarterNote, showEighthNote, showSixteenthNote };
   const noteTopSymbols = { showStaccato, showAccent, showTenuto, showFermata, showTrill };
   const rootStaccato = getRootStaccato(item.pianoKey, showStaccato, isStemmedNoteFlipped);
-  const lastKeySymbols = getLastKeySymbols(uniqueAddedNotes, noteTopSymbols, isStemmedNoteFlipped);
 
   const chordData = [item].concat(uniqueAddedNotes);
   const chordPianoKeys = chordData.map(d => d.pianoKey);
@@ -91,26 +98,23 @@ const getChordSubcomponent = (item) => {
     noteType,
     size: item.addedNotes.length + ONE
   });
-  const shouldShiftDotted = adjacentNotes.some(isAdjacent => isAdjacent) && !item.isStemmedNoteFlipped;
   const shouldShiftAccidentalsMore = adjacentNotes.some(isAdjacent => isAdjacent) && item.isStemmedNoteFlipped;
 
+  const lastKeySymbols = getLastKeySymbols(uniqueAddedNotes, noteTopSymbols, isStemmedNoteFlipped);
+  const dottedSymbols = getDottedSymbols({chordPianoKeys, adjacentNotes, showDotted, isStemmedNoteFlipped});
   const chordNotes = chordPianoKeys.map((chordPiano,index) => {
     return getChordNote({
       isStemmedNoteFlipped,
-      shouldShiftDotted,
       shouldShiftAccidentalsMore,
       pianoKey: chordPiano,
       isAdjacentNote: adjacentNotes[index],
       noteType: chordNoteTypes[index],
       shouldShiftAccidental: shiftedAccidentals[index],
-      conditions: {
-        ...chordData[index],
-        showDotted
-      }
+      conditions: chordData[index]
     });
   }).reduce((entry,acc) => { return acc.concat(entry); },[]);
 
-  return rootStaccato.concat(chordNotes.concat(lastKeySymbols)).filter(Boolean);
+  return rootStaccato.concat(dottedSymbols.concat(chordNotes.concat(lastKeySymbols))).filter(Boolean);
 };
 
 export {

@@ -1,5 +1,7 @@
 import {
   mapStaccatoPosition,
+  mapAdjacentDottedPosition,
+  mapAdjacentFlippedDottedPosition,
   mapDottedPosition,
   mapNotePosition
 } from 'constants/stafflines';
@@ -104,9 +106,17 @@ const getAccidentals = ({
   return undefined;
 };
 
-const getDotted = ({ showDotted, shouldShiftDotted, pianoKey }) => {
-  const shiftX = shouldShiftDotted ? ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
-  const shiftY = mapDottedPosition[pianoKey];
+const getDottedShiftY = ({ shouldShiftDottedY, isStemmedNoteFlipped, pianoKey }) => {
+  if(!shouldShiftDottedY) {
+    return mapDottedPosition[pianoKey];
+  }
+
+  return (isStemmedNoteFlipped) ? mapAdjacentFlippedDottedPosition[pianoKey] : mapAdjacentDottedPosition[pianoKey];
+};
+
+const getDotted = ({ showDotted, shouldShiftDottedX, shouldShiftDottedY, isStemmedNoteFlipped, pianoKey }) => {
+  const shiftX = shouldShiftDottedX ? ADJACENT_SYMBOL_SHIFT_MODIFIER: ZERO;
+  const shiftY = getDottedShiftY({ shouldShiftDottedY, isStemmedNoteFlipped, pianoKey });
 
   return showDotted && { component:'Dotted', transform:`translate(${shiftX},${shiftY})`, conditions:{}};
 };
