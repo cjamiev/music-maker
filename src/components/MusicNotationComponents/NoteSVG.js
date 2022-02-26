@@ -1,5 +1,4 @@
 import React from 'react';
-import { StaffSVG } from './StaffSVG';
 
 export const TripletSVG = ({ transform }) => {
   return (
