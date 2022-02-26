@@ -1,5 +1,4 @@
-import { pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
-import { mapNotePosition, mapNoteLedgerPosition, mapStaffLines } from 'constants/stafflines';
+import { mapNoteLedgerPosition, mapStaffLines } from 'constants/stafflines';
 import { getNoteType } from './noteTypeMapper';
 import {
   getAccidentals,
@@ -17,9 +16,6 @@ import {
 
 const ZERO = 0;
 const ONE = 1;
-const TWO = 2;
-const THREE = 3;
-const FOUR = 4;
 const ADJACENT_NOTE_TRANSLATE_X = 7;
 
 const getRootStaccato = (root, showStaccato, isNoteFlipped) => {
@@ -37,7 +33,11 @@ const getDottedSymbols = ({chordPianoKeys, adjacentNotes, showDotted, isNoteFlip
 };
 
 const getLastKeySymbols = (lastPianoKey, noteTopSymbols, isNoteFlipped) => {
-  return getTopSymbols({ ...noteTopSymbols, showStaccato: isNoteFlipped ? noteTopSymbols.showStaccato : false, pianoKey: lastPianoKey });
+  return getTopSymbols({
+    ...noteTopSymbols,
+    showStaccato: isNoteFlipped ? noteTopSymbols.showStaccato : false,
+    pianoKey: lastPianoKey
+  });
 };
 
 const getChordLedgers = ({ chordPianoKeys, adjacentNotes }) => {
@@ -45,7 +45,11 @@ const getChordLedgers = ({ chordPianoKeys, adjacentNotes }) => {
     const shiftX = -ADJACENT_NOTE_TRANSLATE_X;
     const shiftY = mapNoteLedgerPosition[pianoKey];
 
-    return adjacentNotes[index] && shiftY && { component:'ChordLedger', transform:`translate(${shiftX},${shiftY})`, conditions: {}};
+    return adjacentNotes[index] && shiftY && {
+      component:'ChordLedger',
+      transform:`translate(${shiftX},${shiftY})`,
+      conditions: {}
+    };
   });
 };
 
@@ -106,9 +110,20 @@ const getChordSubcomponent = (item) => {
       conditions: chordData[index]
     });
   }).reduce((entry,acc) => { return acc.concat(entry); },[]);
-  const staffComponent = { component:'Staff', transform:'translate(0,0)', conditions: mapStaffLines[isNoteFlipped ? lastPianoKey : pianoKey]};
+  const staffComponent = {
+    component:'Staff',
+    transform:'translate(0,0)',
+    conditions: mapStaffLines[isNoteFlipped ? lastPianoKey : pianoKey]
+  };
 
-  return [...rootStaccato, ...dottedSymbols, ...lastKeySymbols, ...chordNotes, ...chordLedgers, staffComponent].filter(Boolean);
+  return [
+    ...rootStaccato,
+    ...dottedSymbols,
+    ...lastKeySymbols,
+    ...chordNotes,
+    ...chordLedgers,
+    staffComponent
+  ].filter(Boolean);
 };
 
 export {
