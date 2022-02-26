@@ -36,7 +36,8 @@ const getNoteSubcomponents = (item) => {
     ...item,
     pianoKey: rootPianoKey,
     isStemmedNoteFlipped,
-    ...sharpConditional
+    ...sharpConditional,
+    chordSize
   };
   const noteSubcomponent = chordSize > ZERO
     ? getChordSubcomponent(updatedItem)

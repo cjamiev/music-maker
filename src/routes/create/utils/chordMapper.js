@@ -114,7 +114,7 @@ const getChordSubcomponent = (item) => {
     adjacentNotes,
     isStemmedNoteFlipped,
     noteType,
-    size: item.addedNotes.length + ONE
+    size: item.chordSize + ONE
   });
   const shouldShiftAccidentalsMore = adjacentNotes.some(isAdjacent => isAdjacent) && item.isStemmedNoteFlipped;
 
