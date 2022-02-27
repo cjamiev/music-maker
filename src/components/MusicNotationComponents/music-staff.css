@@ -3,24 +3,13 @@
   stroke: #000000;
 }
 
+.svg--marked-text {
+  font-size: 4px;
+}
+
 .svg--marked-color {
   fill: #ff0000;
   stroke: #ff0000;
-}
-
-.svg--marked-color2 {
-  fill: #ff00ff;
-  stroke: #ff00ff;
-}
-
-.svg--marked-color3 {
-  fill: #00ffff;
-  stroke: #00ffff;
-}
-
-.svg--marked-color4 {
-  fill: #ffff00;
-  stroke: #ffff00;
 }
 
 .svg--selected-color {

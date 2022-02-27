@@ -17,6 +17,7 @@ const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
 const THREE = 3;
+const FOUR = 4;
 
 const getAngle = (beamNoteIndicies, highestNoteIndex) => {
   if(beamNoteIndicies[ZERO] === beamNoteIndicies[beamNoteIndicies.length - ONE]) {
@@ -39,7 +40,6 @@ const getParsedBeamData = (beamNotes) => {
 
 const getModifier = (index, angle, widthGap) => {
   if(index === ZERO) {
-    // eslint-disable-next-line no-magic-numbers
     return NOTE_BEAM_HEIGHT - TWO;
   }
   else if(angle > ZERO && widthGap - index > ZERO) {
@@ -49,45 +49,36 @@ const getModifier = (index, angle, widthGap) => {
   }
 };
 
-const getCoordinates = ({
-  firstPianoKey,
-  widthGap,
-  heightGap,
-  angle
-}) => {
-  const baseX = NOTE_STEM_BASE_X;
-  const baseY = NOTE_STEM_BASE_Y + mapNotePosition[firstPianoKey];
-
-  const originCoord = {
-    x: baseX,
-    y: baseY - NOTE_BEAM_HEIGHT
-  };
-  const inBetweenCoords = Array.from({ length: widthGap })
-    .map((_, index) => {
-      const modifier = getModifier(index, angle, widthGap);
-
-      return `
-        L${baseX + STAFF_LINE_WIDTH/TWO * index} ${baseY + modifier }
-        L${baseX + STAFF_LINE_WIDTH/TWO * index} ${baseY + modifier + NOTE_STEM_HEIGHT}
-        L${baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH} ${baseY + modifier + NOTE_STEM_HEIGHT}
-        L${baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH} ${baseY + modifier}
-      `;
-    }).join(' ');
-
-  const angleModifier = -angle*(widthGap - ONE) * DISTANCE_BETWEEN_STAFF_LINES;
-  const finalCoord = {
-    x: baseX + STAFF_LINE_WIDTH + NOTE_STEM_WIDTH,
-    y: baseY + angleModifier - NOTE_BEAM_HEIGHT
-  };
-
-  return { beamDefinition: `
-        M${originCoord.x} ${originCoord.y}
-        ${inBetweenCoords}
-        L${finalCoord.x} ${finalCoord.y}
-        Z`, angleModifier };
+const getPositionText = (data) => {
+  return data.map((location,index) => {
+    return(
+      <text
+        key={location.x + location.y + index}
+        className="svg--marked-color svg--marked-text"
+        x={location.x} y={location.y}
+      >
+        <tspan className="svg--marked-color4 svg--marked-text"
+          x={location.x} y={location.y} >
+          {index + ONE}
+        </tspan>
+      </text>
+    );
+  });
 };
 
-const getTestCoordinates = ({
+const getPositionEllipse = (data) => {
+  return data.map((location,index) => {
+    return (
+      <ellipse
+        key={location.x + location.y + index}
+        className="svg-primary-color"
+        cx={location.x} cy={location.y} rx="0.5" ry="0.5"
+      />
+    );
+  });
+};
+
+const getBeamPath = ({
   firstPianoKey,
   widthGap,
   heightGap,
@@ -97,85 +88,61 @@ const getTestCoordinates = ({
   const baseY = NOTE_STEM_BASE_Y + mapNotePosition[firstPianoKey];
 
   const angleModifier = -angle*(widthGap - ONE) * DISTANCE_BETWEEN_STAFF_LINES;
-
   const originCoord = {
     x: baseX,
     y: baseY - NOTE_BEAM_HEIGHT
   };
-  const inBetweenCoords = Array.from({ length: widthGap })
-    .map((_, index) => {
-      const modifier = getModifier(index, angle, widthGap);
-
-      return (
-        <g key={index + modifier}>
-          <ellipse
-            className="svg-primary-color svg--marked-color"
-            cx={baseX + STAFF_LINE_WIDTH/TWO * index}
-            cy={baseY + modifier}
-            rx="0.5"
-            ry="0.5"
-          />
-          <ellipse
-            className="svg-primary-color svg--marked-color2"
-            cx={baseX + STAFF_LINE_WIDTH/TWO * index}
-            cy={baseY + modifier + NOTE_STEM_HEIGHT}
-            rx="0.5"
-            ry="0.5"
-          />
-          <ellipse
-            className="svg-primary-color svg--marked-color3"
-            cx={baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH}
-            cy={baseY + modifier + NOTE_STEM_HEIGHT}
-            rx="0.5"
-            ry="0.5"
-          />
-          <ellipse
-            className="svg-primary-color svg--marked-color4"
-            cx={baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH}
-            cy={baseY + modifier}
-            rx="0.5"
-            ry="0.5"
-          />
-        </g>
-      );
-    });
   const finalCoord = {
     x: baseX + STAFF_LINE_WIDTH + NOTE_STEM_WIDTH,
     y: baseY + angleModifier - NOTE_BEAM_HEIGHT
   };
+  const inBetweenCoords = Array.from({ length: widthGap })
+    .map((_, index) => {
+      const modifier = getModifier(index, angle, widthGap);
+      const firstX = baseX + (STAFF_LINE_WIDTH/TWO) * index;
+      const firstY = baseY + modifier;
+      const secondX = firstX;
+      const secondY = firstY + NOTE_STEM_HEIGHT;
+      const thirdX = firstX + NOTE_STEM_WIDTH;
+      const thirdY = secondY;
+      const fourthX = thirdX;
+      const fourthY = firstY;
 
-  return (<>
-    <ellipse
-      className="svg-primary-color"
-      cx={originCoord.x}
-      cy={originCoord.y}
-      rx="0.5"
-      ry="0.5"
-    />
-    {inBetweenCoords}
-    <ellipse
-      className="svg-primary-color"
-      cx={finalCoord.x}
-      cy={finalCoord.y}
-      rx="0.5"
-      ry="0.5"
-    />
-  </>);
+      return [
+        { x: firstX, y: firstY },
+        { x: secondX, y: secondY },
+        { x: thirdX, y: thirdY },
+        { x: fourthX, y: fourthY }
+      ];
+    }).reduce((entry,acc) => { return entry.concat(acc); },[]);
+  const pathCoordinates = [originCoord, ...inBetweenCoords, finalCoord];
+  const pathDefinition = `
+    M${originCoord.x} ${originCoord.y}
+    ${inBetweenCoords.map(item => `L${item.x} ${item.y}`).join(' ')} L${finalCoord.x} 
+    ${finalCoord.y}
+    Z
+  `;
+
+  return (
+    <>
+      <path className="svg-primary-color svg__20 svg--marked-color" d={pathDefinition} />
+      {getPositionEllipse(pathCoordinates)}
+    </>
+  );
 };
 
 const GenerateBeam = ({ beamNotes }) => {
   const { widthGap, heightGap, angle } = getParsedBeamData(beamNotes);
-  const { beamDefinition, angleModifier } = getCoordinates({
+  const beamPath = getBeamPath({
     firstPianoKey:beamNotes[ZERO],
     widthGap,
     heightGap,
     angle
   });
-  console.log(beamDefinition);
 
   return (
     <>
-      <path className="svg-primary-color svg__20 svg--marked-color" d={beamDefinition} />
+      {beamPath}
     </>
   );
 };
