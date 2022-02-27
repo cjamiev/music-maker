@@ -10,74 +10,26 @@ import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/pa
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 
 const data = [
-  { component: 'NoteBeam', transform:`translate(${-3*STAFF_LINE_WIDTH + 17.3},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS) - 4})`, conditions:{},
-    content: { heightMultiplier: -1, widthMultiplier: 2, angle: -1 },
-    subcomponents:[] },
-  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
     subcomponents:[
-      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
-      { component:'StemmedNote', transform:`translate(-11,${mapNotePosition['F4']})`, conditions:{ showNoteStem: true }}
+      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['C4']},
+      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['C4']})`, conditions:{ showNoteStem: true }}
     ]},
-  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
     subcomponents:[
-      { component:'StemmedNote', transform:`translate(4,${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }}
+      { component:'StemmedNote', transform:`translate(${STAFF_LINE_WIDTH/2},${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }}
     ]},
-  // { component: 'NoteBeam', transform:`translate(${-2*STAFF_LINE_WIDTH + 17.3},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS) - 4})`, conditions:{},
-  //   content: { heightMultiplier: -1.5, widthMultiplier: 2, angle: -1 },
-  //   subcomponents:[] },
-  // { component:'Note', transform:`translate(${-1*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-  //   subcomponents:[
-  //     { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
-  //     { component:'StemmedNote', transform:`translate(-11,${mapNotePosition['G4']})`, conditions:{ showNoteStem: true }}
-  //   ]},
-  // { component:'Note', transform:`translate(${-1*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-  //   subcomponents:[
-  //     { component:'StemmedNote', transform:`translate(4,${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }}
-  //   ]},
-  // { component: 'NoteBeam', transform:`translate(${-1*STAFF_LINE_WIDTH + 17.3},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS) - 4})`, conditions:{},
-  //   content: { heightMultiplier: -2, widthMultiplier: 2, angle: -1 },
-  //   subcomponents:[] },
-  // { component:'Note', transform:`translate(${0*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-  //   subcomponents:[
-  //     { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
-  //     { component:'StemmedNote', transform:`translate(-11,${mapNotePosition['A5']})`, conditions:{ showNoteStem: true }}
-  //   ]},
-  // { component:'Note', transform:`translate(${0*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-  //   subcomponents:[
-  //     { component:'StemmedNote', transform:`translate(4,${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }}
-  //   ]},
-  // { component: 'NoteBeam', transform:`translate(${0*STAFF_LINE_WIDTH + 17.3},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS) - 9.5})`, conditions:{},
-  //   content: { heightMultiplier: -1, widthMultiplier: 2, angle: 1 },
-  //   subcomponents:[] },
-  // { component:'Note', transform:`translate(${1*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-  //   subcomponents:[
-  //     { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
-  //     { component:'StemmedNote', transform:`translate(-11,${mapNotePosition['A5']})`, conditions:{ showNoteStem: true }}
-  //   ]},
-  // { component:'Note', transform:`translate(${1*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-  //   subcomponents:[
-  //     { component:'StemmedNote', transform:`translate(4,${mapNotePosition['B5']})`, conditions:{ showNoteStem: true }}
-  //   ]},
-  { component: 'NoteBeam', transform:`translate(${1*STAFF_LINE_WIDTH + 17.3},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS) - 9.5})`, conditions:{},
-    content: { heightMultiplier: -1, widthMultiplier: 3, angle: 1 },
-    subcomponents:[] },
-  { component:'Note', transform:`translate(${2*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
     subcomponents:[
-      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['A5']},
-      { component:'StemmedNote', transform:`translate(-11,${mapNotePosition['A5']})`, conditions:{ showNoteStem: true }}
+      { component:'StemmedNote', transform:`translate(${STAFF_LINE_WIDTH},${mapNotePosition['G4']})`, conditions:{ showNoteStem: true }}
     ]},
-  { component:'Note', transform:`translate(${2*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'StemmedNote', transform:`translate(4,${mapNotePosition['B5']})`, conditions:{ showNoteStem: true }}
-    ]},
-  { component:'Note', transform:`translate(${2*STAFF_LINE_WIDTH},${0*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'StemmedNote', transform:`translate(19,${mapNotePosition['B5']})`, conditions:{ showNoteStem: true }}
-    ]}
+  { component: 'NoteBeam', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    content: { beamNotes: ['C4', 'E4', 'G4'] },
+    subcomponents:[] }
 ];
 
 const ONE = 1;
-const DEFAULT_ZOOM_INDEX = 11;
+const DEFAULT_ZOOM_INDEX = 14;
 const getSvgAttributes = (currentZoom) => {
   const zoomModifier = ZOOM_LEVELS[currentZoom];
 

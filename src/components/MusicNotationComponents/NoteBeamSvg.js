@@ -1,27 +1,52 @@
 import React from 'react';
+import { pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import {
   STAFF_LINE_WIDTH,
-  // STAFF_LINE_HEIGHT,
-  // STAFF_LINE_BASE_Y,
   DISTANCE_BETWEEN_STAFF_LINES,
   NOTE_STEM_BASE_X,
   NOTE_STEM_BASE_Y,
-  // NOTE_STEM_FLIPPED_BASE_X,
-  // NOTE_STEM_FLIPPED_BASE_Y,
   NOTE_STEM_WIDTH,
   NOTE_STEM_HEIGHT,
   NOTE_BEAM_HEIGHT
 } from 'constants/svgattributes';
+import {
+  mapNotePosition
+} from 'constants/stafflines';
 
 const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
 const THREE = 3;
 
-const GenerateBeam = ({ widthMultiplier, heightMultipler, angle }) => {
+const getAngle = (beamNoteIndicies, highestNoteIndex) => {
+  if(beamNoteIndicies[ZERO] === beamNoteIndicies[beamNoteIndicies.length - ONE]) {
+    return ZERO;
+  }
+
+  return beamNoteIndicies[ZERO] < highestNoteIndex ? ONE : -ONE;
+};
+
+const getParsedBeamData = (beamNotes) => {
+  const beamNoteIndicies = beamNotes.map(pianoKey => pianoKeyListWithoutAccidentals.findIndex(key => key === pianoKey));
+  const highestNoteIndex = Math.max(...beamNoteIndicies);
+  const lowestNoteIndex = Math.min(...beamNoteIndicies);
+  const heightGap = highestNoteIndex - lowestNoteIndex;
+  const widthGap = beamNotes.length;
+  const angle = getAngle(beamNoteIndicies, highestNoteIndex);
+
+  return { heightGap, widthGap, angle };
+};
+
+const getCoordinates = ({
+  firstPianoKey,
+  widthGap,
+  heightGap,
+  angle
+}) => {
   const baseX = NOTE_STEM_BASE_X;
-  const baseY = NOTE_STEM_BASE_Y + NOTE_STEM_HEIGHT + heightMultipler * DISTANCE_BETWEEN_STAFF_LINES;
-  const angleModifier = -angle*(widthMultiplier - ONE) * DISTANCE_BETWEEN_STAFF_LINES;
+  const baseY = NOTE_STEM_BASE_Y + mapNotePosition[firstPianoKey];
+
+  const angleModifier = -angle*(widthGap - ONE) * DISTANCE_BETWEEN_STAFF_LINES;
 
   const originCoord = {
     x: baseX,
@@ -29,96 +54,90 @@ const GenerateBeam = ({ widthMultiplier, heightMultipler, angle }) => {
   };
   const secondCoord = {
     x: baseX,
-    y: baseY
+    y: baseY + NOTE_STEM_HEIGHT
   };
   const thirdCoord = {
-    x: baseX + (widthMultiplier - ONE)*TWO*NOTE_STEM_WIDTH + STAFF_LINE_WIDTH * (widthMultiplier - ONE)/TWO,
+    x: baseX + NOTE_STEM_WIDTH,
+    y: baseY + NOTE_STEM_HEIGHT
+  };
+  const fourthCoord = {
+    x: baseX + NOTE_STEM_WIDTH,
+    y: baseY
+  };
+  const fifthCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO,
+    y: baseY + angleModifier/TWO
+  };
+  const sixthCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO,
+    y: baseY + angleModifier/TWO + NOTE_STEM_HEIGHT
+  };
+  const seventhCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO + NOTE_STEM_WIDTH,
+    y: baseY + angleModifier/TWO + NOTE_STEM_HEIGHT
+  };
+  const eighthCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO + NOTE_STEM_WIDTH,
+    y: baseY + angleModifier/TWO
+  };
+  const ninthCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO*TWO,
+    y: baseY + angleModifier
+  };
+  const tenthCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO*TWO,
+    y: baseY + angleModifier + NOTE_STEM_HEIGHT
+  };
+  const eleventhCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO*TWO + NOTE_STEM_WIDTH,
+    y: baseY + angleModifier + NOTE_STEM_HEIGHT
+  };
+  const twelvthCoord = {
+    x: baseX + STAFF_LINE_WIDTH/TWO*TWO + NOTE_STEM_WIDTH,
     y: baseY + angleModifier
   };
   const finalCoord = {
-    x: baseX + (widthMultiplier - ONE)*TWO*NOTE_STEM_WIDTH + STAFF_LINE_WIDTH * (widthMultiplier - ONE)/TWO,
+    x: baseX + STAFF_LINE_WIDTH + NOTE_STEM_WIDTH,
     y: baseY + angleModifier - NOTE_BEAM_HEIGHT
   };
 
-  const stemConnector = Array.apply(null, Array(widthMultiplier)).map((x, i) => {
-    const shiftX = i ? (widthMultiplier * TWO * NOTE_STEM_WIDTH + STAFF_LINE_WIDTH * (widthMultiplier - ONE)/TWO)/(widthMultiplier*i): ZERO;
+  return { beamDefinition: `
+        M${originCoord.x} ${originCoord.y}
+        L${secondCoord.x} ${secondCoord.y}
+        L${thirdCoord.x} ${thirdCoord.y}
+        L${fourthCoord.x} ${fourthCoord.y}
+        L${fifthCoord.x} ${fifthCoord.y}
+        L${sixthCoord.x} ${sixthCoord.y}
+        L${seventhCoord.x} ${seventhCoord.y}
+        L${eighthCoord.x} ${eighthCoord.y}
+        L${ninthCoord.x} ${ninthCoord.y}
+        L${tenthCoord.x} ${tenthCoord.y}
+        L${eleventhCoord.x} ${eleventhCoord.y}
+        L${twelvthCoord.x} ${twelvthCoord.y}
+        L${finalCoord.x} ${finalCoord.y}
+        Z`, angleModifier };
+};
 
-    return <rect
-      key={i*STAFF_LINE_WIDTH}
-      className="svg__20 svg--marked-color"
-      width={NOTE_STEM_WIDTH}
-      height={NOTE_STEM_HEIGHT}
-      x={originCoord.x - NOTE_STEM_WIDTH + shiftX}
-      y={originCoord.y + i*(angleModifier)}
-    />;
+const GenerateBeam = ({ beamNotes }) => {
+  const { widthGap, heightGap, angle } = getParsedBeamData(beamNotes);
+  const { beamDefinition, angleModifier } = getCoordinates({
+    firstPianoKey:beamNotes[ZERO],
+    widthGap,
+    heightGap,
+    angle
   });
 
   return (
     <>
-      <path className="svg-primary-color" d={`
-        M${originCoord.x} ${originCoord.y}
-        L${secondCoord.x} ${secondCoord.y}
-        L${thirdCoord.x} ${thirdCoord.y}
-        L${finalCoord.x} ${finalCoord.y}
-        Z`
-      } />
-      {stemConnector}
-      {/* <rect
-        className="svg__20"
-        width={NOTE_STEM_WIDTH}
-        height={NOTE_STEM_HEIGHT}
-        x={originCoord.x - NOTE_STEM_WIDTH}
-        y={originCoord.y}
-      />
-      <rect
-        className="svg__20"
-        width={NOTE_STEM_WIDTH}
-        height={NOTE_STEM_HEIGHT}
-        x={finalCoord.x}
-        y={finalCoord.y}
-      /> */}
-      {/* <ellipse
-        className="svg-primary-color svg--marked-color"
-        cx={originCoord.x}
-        cy={originCoord.y}
-        rx="0.5"
-        ry="0.5"
-      />
-      <ellipse
-        className="svg-primary-color svg--marked-color2"
-        cx={secondCoord.x}
-        cy={secondCoord.y}
-        rx="0.5"
-        ry="0.5"
-      />
-      <ellipse
-        className="svg-primary-color svg--marked-color3"
-        cx={thirdCoord.x}
-        cy={thirdCoord.y}
-        rx="0.5"
-        ry="0.5"
-      />
-      <ellipse
-        className="svg-primary-color svg--marked-color4"
-        cx={finalCoord.x}
-        cy={finalCoord.y}
-        rx="0.5"
-        ry="0.5"
-      /> */}
+      <path className="svg-primary-color svg__20 svg--marked-color" d={beamDefinition} />
     </>
   );
 };
 
-const NoteBeamSvg = ({ transform, content = {} }) => {
-  const { widthMultiplier, heightMultiplier, angle } = content;
-
+const NoteBeamSvg = ({ transform, content = { } }) => {
   return (
     <g transform={transform}>
-      <GenerateBeam
-        widthMultiplier={widthMultiplier}
-        heightMultipler={heightMultiplier}
-        angle={angle}
-      />
+      <GenerateBeam beamNotes={content.beamNotes} />
     </g>
   );
 };
