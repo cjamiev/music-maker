@@ -102,11 +102,11 @@ const getChordNoteTypes = ({ adjacentNotes, isNoteFlipped, noteType, size }) => 
   const lastNoteType = adjacentNotes[size - ONE] ? noFlagsNoteType : noteType;
   const secondLastNoteType = adjacentNotes[size - ONE] ? noteType : noFlagsNoteType;
 
-  return Array.apply(null, Array(size)).map((x, i) => {
-    if(i === size - ONE) {
+  return Array.from({ length: size }).map((_, index) => {
+    if(index === size - ONE) {
       return lastNoteType;
     }
-    else if(i === size - TWO) {
+    else if(index === size - TWO) {
       return secondLastNoteType;
     }
 

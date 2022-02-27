@@ -37,7 +37,57 @@ const getParsedBeamData = (beamNotes) => {
   return { heightGap, widthGap, angle };
 };
 
+const getModifier = (index, angle, widthGap) => {
+  if(index === ZERO) {
+    // eslint-disable-next-line no-magic-numbers
+    return NOTE_BEAM_HEIGHT - TWO;
+  }
+  else if(angle > ZERO && widthGap - index > ZERO) {
+    return -angle*(widthGap - ONE) * DISTANCE_BETWEEN_STAFF_LINES/(widthGap - index);
+  } else {
+    return ZERO;
+  }
+};
+
 const getCoordinates = ({
+  firstPianoKey,
+  widthGap,
+  heightGap,
+  angle
+}) => {
+  const baseX = NOTE_STEM_BASE_X;
+  const baseY = NOTE_STEM_BASE_Y + mapNotePosition[firstPianoKey];
+
+  const originCoord = {
+    x: baseX,
+    y: baseY - NOTE_BEAM_HEIGHT
+  };
+  const inBetweenCoords = Array.from({ length: widthGap })
+    .map((_, index) => {
+      const modifier = getModifier(index, angle, widthGap);
+
+      return `
+        L${baseX + STAFF_LINE_WIDTH/TWO * index} ${baseY + modifier }
+        L${baseX + STAFF_LINE_WIDTH/TWO * index} ${baseY + modifier + NOTE_STEM_HEIGHT}
+        L${baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH} ${baseY + modifier + NOTE_STEM_HEIGHT}
+        L${baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH} ${baseY + modifier}
+      `;
+    }).join(' ');
+
+  const angleModifier = -angle*(widthGap - ONE) * DISTANCE_BETWEEN_STAFF_LINES;
+  const finalCoord = {
+    x: baseX + STAFF_LINE_WIDTH + NOTE_STEM_WIDTH,
+    y: baseY + angleModifier - NOTE_BEAM_HEIGHT
+  };
+
+  return { beamDefinition: `
+        M${originCoord.x} ${originCoord.y}
+        ${inBetweenCoords}
+        L${finalCoord.x} ${finalCoord.y}
+        Z`, angleModifier };
+};
+
+const getTestCoordinates = ({
   firstPianoKey,
   widthGap,
   heightGap,
@@ -52,70 +102,65 @@ const getCoordinates = ({
     x: baseX,
     y: baseY - NOTE_BEAM_HEIGHT
   };
-  const secondCoord = {
-    x: baseX,
-    y: baseY + NOTE_STEM_HEIGHT
-  };
-  const thirdCoord = {
-    x: baseX + NOTE_STEM_WIDTH,
-    y: baseY + NOTE_STEM_HEIGHT
-  };
-  const fourthCoord = {
-    x: baseX + NOTE_STEM_WIDTH,
-    y: baseY
-  };
-  const fifthCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO,
-    y: baseY + angleModifier/TWO
-  };
-  const sixthCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO,
-    y: baseY + angleModifier/TWO + NOTE_STEM_HEIGHT
-  };
-  const seventhCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO + NOTE_STEM_WIDTH,
-    y: baseY + angleModifier/TWO + NOTE_STEM_HEIGHT
-  };
-  const eighthCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO + NOTE_STEM_WIDTH,
-    y: baseY + angleModifier/TWO
-  };
-  const ninthCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO*TWO,
-    y: baseY + angleModifier
-  };
-  const tenthCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO*TWO,
-    y: baseY + angleModifier + NOTE_STEM_HEIGHT
-  };
-  const eleventhCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO*TWO + NOTE_STEM_WIDTH,
-    y: baseY + angleModifier + NOTE_STEM_HEIGHT
-  };
-  const twelvthCoord = {
-    x: baseX + STAFF_LINE_WIDTH/TWO*TWO + NOTE_STEM_WIDTH,
-    y: baseY + angleModifier
-  };
+  const inBetweenCoords = Array.from({ length: widthGap })
+    .map((_, index) => {
+      const modifier = getModifier(index, angle, widthGap);
+
+      return (
+        <g key={index + modifier}>
+          <ellipse
+            className="svg-primary-color svg--marked-color"
+            cx={baseX + STAFF_LINE_WIDTH/TWO * index}
+            cy={baseY + modifier}
+            rx="0.5"
+            ry="0.5"
+          />
+          <ellipse
+            className="svg-primary-color svg--marked-color2"
+            cx={baseX + STAFF_LINE_WIDTH/TWO * index}
+            cy={baseY + modifier + NOTE_STEM_HEIGHT}
+            rx="0.5"
+            ry="0.5"
+          />
+          <ellipse
+            className="svg-primary-color svg--marked-color3"
+            cx={baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH}
+            cy={baseY + modifier + NOTE_STEM_HEIGHT}
+            rx="0.5"
+            ry="0.5"
+          />
+          <ellipse
+            className="svg-primary-color svg--marked-color4"
+            cx={baseX + STAFF_LINE_WIDTH/TWO * index + NOTE_STEM_WIDTH}
+            cy={baseY + modifier}
+            rx="0.5"
+            ry="0.5"
+          />
+        </g>
+      );
+    });
   const finalCoord = {
     x: baseX + STAFF_LINE_WIDTH + NOTE_STEM_WIDTH,
     y: baseY + angleModifier - NOTE_BEAM_HEIGHT
   };
 
-  return { beamDefinition: `
-        M${originCoord.x} ${originCoord.y}
-        L${secondCoord.x} ${secondCoord.y}
-        L${thirdCoord.x} ${thirdCoord.y}
-        L${fourthCoord.x} ${fourthCoord.y}
-        L${fifthCoord.x} ${fifthCoord.y}
-        L${sixthCoord.x} ${sixthCoord.y}
-        L${seventhCoord.x} ${seventhCoord.y}
-        L${eighthCoord.x} ${eighthCoord.y}
-        L${ninthCoord.x} ${ninthCoord.y}
-        L${tenthCoord.x} ${tenthCoord.y}
-        L${eleventhCoord.x} ${eleventhCoord.y}
-        L${twelvthCoord.x} ${twelvthCoord.y}
-        L${finalCoord.x} ${finalCoord.y}
-        Z`, angleModifier };
+  return (<>
+    <ellipse
+      className="svg-primary-color"
+      cx={originCoord.x}
+      cy={originCoord.y}
+      rx="0.5"
+      ry="0.5"
+    />
+    {inBetweenCoords}
+    <ellipse
+      className="svg-primary-color"
+      cx={finalCoord.x}
+      cy={finalCoord.y}
+      rx="0.5"
+      ry="0.5"
+    />
+  </>);
 };
 
 const GenerateBeam = ({ beamNotes }) => {
@@ -126,6 +171,7 @@ const GenerateBeam = ({ beamNotes }) => {
     heightGap,
     angle
   });
+  console.log(beamDefinition);
 
   return (
     <>
