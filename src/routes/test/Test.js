@@ -9,6 +9,7 @@ import {
   NoteIcons,
   RestIcons
 } from './IconTest';
+import { BeamTest } from './BeamTest';
 
 const Test = () => {
   return (
@@ -20,6 +21,7 @@ const Test = () => {
       <ModifierIcons />
       <NoteIcons />
       <RestIcons />
+      <BeamTest />
     </Page>
   );
 };

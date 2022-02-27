@@ -8,6 +8,21 @@
   stroke: #ff0000;
 }
 
+.svg--marked-color2 {
+  fill: #ff00ff;
+  stroke: #ff00ff;
+}
+
+.svg--marked-color3 {
+  fill: #00ffff;
+  stroke: #00ffff;
+}
+
+.svg--marked-color4 {
+  fill: #ffff00;
+  stroke: #ffff00;
+}
+
 .svg--selected-color {
   fill: #0084AD;
   stroke: #0084AD;
