@@ -19,32 +19,44 @@ const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 
+const getAngleHeightGap = ({ direction = ONE, size }) => {
+  return direction * size * DISTANCE_BETWEEN_STAFF_LINES;
+};
+
 const getAngleHeightModifier = ({ beamNoteIndicies, highestNoteIndex, widthGap }) => {
+  const angle = beamNoteIndicies[ZERO] < highestNoteIndex ? -ONE : ONE;
+
   if(beamNoteIndicies[ZERO] === beamNoteIndicies[beamNoteIndicies.length - ONE]) {
     return ZERO;
   }
 
-  const angle = beamNoteIndicies[ZERO] < highestNoteIndex ? -ONE : ONE;
 
-  return angle * widthGap * DISTANCE_BETWEEN_STAFF_LINES;
+  return getAngleHeightGap({ direction: angle, size: widthGap });
 };
 
 const getBaseY = ({ beamNotes, angleHeightModifier, heightGap, highestNotePosition, widthGap }) => {
-  const firstPianoKey = beamNotes[ZERO];
-  const heightGapModifier = NOTE_STEM_BASE_Y + mapNotePosition[firstPianoKey] - heightGap * DISTANCE_BETWEEN_STAFF_LINES/TWO;
+  const firstPianoKey = beamNotes[ZERO].pianoKey;
+  const firstNotePosition = NOTE_STEM_BASE_Y + mapNotePosition[firstPianoKey];
+  const heightGapModifier = heightGap * DISTANCE_BETWEEN_STAFF_LINES/TWO;
+  const adjustedAngleHeightModifier = (angleHeightModifier)*(highestNotePosition)/(widthGap);
 
-  return angleHeightModifier === ZERO
-    ? heightGapModifier
-    : heightGapModifier - (angleHeightModifier)*(highestNotePosition)/(widthGap);
+  if (highestNotePosition === ZERO){
+    return firstNotePosition;
+  } else if(angleHeightModifier === ZERO) {
+    return firstNotePosition - heightGapModifier;
+  }
+
+  const baseY = firstNotePosition - heightGapModifier - adjustedAngleHeightModifier;
+
+  return baseY > firstNotePosition ? firstNotePosition : baseY;
 };
 
 const getBeamAttributes = (beamNotes) => {
-  const beamNoteIndicies = beamNotes.map(pianoKey => pianoKeyListWithoutAccidentals.findIndex(key => key === pianoKey));
+  const beamNoteIndicies = beamNotes.map(noteData => pianoKeyListWithoutAccidentals.findIndex(key => key === noteData.pianoKey));
   const highestNoteIndex = Math.max(...beamNoteIndicies);
-  const lowestNoteIndex = Math.min(...beamNoteIndicies);
 
   const highestNotePosition = beamNoteIndicies.findIndex(i => i === highestNoteIndex);
-  const heightGap = highestNoteIndex - lowestNoteIndex;
+  const heightGap = highestNoteIndex - beamNoteIndicies[ZERO];
 
   const widthGap = beamNotes.length - ONE;
   const angleHeightModifier = getAngleHeightModifier({ beamNoteIndicies, highestNoteIndex, widthGap });
@@ -82,7 +94,6 @@ const BeamPath = ({ baseX, baseY, widthGap, angleHeightModifier }) => {
 
   return (<path className="svg-primary-color svg__20 svg--marked-color" d={pathDefinition} />);
 };
-
 
 const NoteBeamSvg = ({ transform, content = { } }) => {
   const { baseX, baseY, widthGap, angleHeightModifier } = getBeamAttributes(content.beamNotes);

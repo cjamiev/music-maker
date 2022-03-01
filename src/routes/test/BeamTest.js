@@ -9,27 +9,11 @@ import {
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 
-const data = [
-  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['C4']},
-      { component:'StemmedNote', transform:`translate(0,${mapNotePosition['C4']})`, conditions:{ showNoteStem: true }}
-    ]},
-  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'StemmedNote', transform:`translate(${STAFF_LINE_WIDTH/2},${mapNotePosition['E4']})`, conditions:{ showNoteStem: true }}
-    ]},
-  { component:'Note', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    subcomponents:[
-      { component:'StemmedNote', transform:`translate(${STAFF_LINE_WIDTH},${mapNotePosition['G4']})`, conditions:{ showNoteStem: true }}
-    ]},
-  { component: 'NoteBeam', transform:`translate(${-2*STAFF_LINE_WIDTH},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    content: { beamNotes: ['C4', 'E4', 'G4'] },
-    subcomponents:[] }
-];
-
+const ZERO = 0;
 const ONE = 1;
+const TWO = 2;
 const DEFAULT_ZOOM_INDEX = 14;
+
 const getSvgAttributes = (currentZoom) => {
   const zoomModifier = ZOOM_LEVELS[currentZoom];
 
@@ -40,6 +24,36 @@ const getSvgAttributes = (currentZoom) => {
   };
 };
 
+const getNotes = (beamNotes) => {
+  return beamNotes.map((noteData,index) => {
+    const shiftX = index === ZERO ? ZERO : STAFF_LINE_WIDTH/TWO*index;
+
+    return { component:'Note',
+      transform:`translate(${shiftX - 50},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+      subcomponents:[
+        { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[noteData.pianoKey]},
+        { component:'StemmedNote', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
+      ]};
+  });
+};
+
+const beamNotes = [
+  { pianoKey: 'F5' },
+  { pianoKey: 'C4' },
+  { pianoKey: 'G4' },
+  { pianoKey: 'F4' },
+  { pianoKey: 'C5' }
+];
+
 export const BeamTest = () => {
-  return <DisplaySheetMusic sheetMusic={data} {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}/>;
+  return (
+    <DisplaySheetMusic
+      sheetMusic={[
+        ...getNotes(beamNotes),
+        { component: 'NoteBeam', transform:`translate(-50,${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+          content: { beamNotes },
+          subcomponents:[] }
+      ]}
+      {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
+    />);
 };
