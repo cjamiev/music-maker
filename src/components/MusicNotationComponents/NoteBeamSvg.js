@@ -19,68 +19,45 @@ const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 
-const getAngleHeightGap = ({ direction = ONE, size }) => {
-  return direction * size * DISTANCE_BETWEEN_STAFF_LINES;
-};
-
-const getAngleHeightModifier = ({ beamNoteIndicies, highestNoteIndex, widthGap }) => {
-  const angle = beamNoteIndicies[ZERO] < highestNoteIndex ? -ONE : ONE;
+const getAngleHeightModifier = (beamNotes) => {
+  const beamNoteIndicies = beamNotes.map(noteData => pianoKeyListWithoutAccidentals.findIndex(key => key === noteData.pianoKey));
 
   if(beamNoteIndicies[ZERO] === beamNoteIndicies[beamNoteIndicies.length - ONE]) {
     return ZERO;
   }
 
-
-  return getAngleHeightGap({ direction: angle, size: widthGap });
-};
-
-const getBaseY = ({ beamNotes, angleHeightModifier, heightGap, highestNotePosition, widthGap }) => {
-  const firstPianoKey = beamNotes[ZERO].pianoKey;
-  const firstNotePosition = NOTE_STEM_BASE_Y + mapNotePosition[firstPianoKey];
-  const heightGapModifier = heightGap * DISTANCE_BETWEEN_STAFF_LINES/TWO;
-  const adjustedAngleHeightModifier = (angleHeightModifier)*(highestNotePosition)/(widthGap);
-
-  if (highestNotePosition === ZERO){
-    return firstNotePosition;
-  } else if(angleHeightModifier === ZERO) {
-    return firstNotePosition - heightGapModifier;
-  }
-
-  const baseY = firstNotePosition - heightGapModifier - adjustedAngleHeightModifier;
-
-  return baseY > firstNotePosition ? firstNotePosition : baseY;
-};
-
-const getBeamAttributes = (beamNotes) => {
-  const beamNoteIndicies = beamNotes.map(noteData => pianoKeyListWithoutAccidentals.findIndex(key => key === noteData.pianoKey));
   const highestNoteIndex = Math.max(...beamNoteIndicies);
+  const angle = beamNoteIndicies[ZERO] < highestNoteIndex ? -ONE : ONE;
 
-  const highestNotePosition = beamNoteIndicies.findIndex(i => i === highestNoteIndex);
-  const heightGap = highestNoteIndex - beamNoteIndicies[ZERO];
-
-  const widthGap = beamNotes.length - ONE;
-  const angleHeightModifier = getAngleHeightModifier({ beamNoteIndicies, highestNoteIndex, widthGap });
-  const baseX = NOTE_STEM_BASE_X;
-  const baseY = getBaseY({ beamNotes, angleHeightModifier, heightGap, highestNotePosition, widthGap });
-
-  return { baseX, baseY, widthGap, angleHeightModifier };
+  return angle * (beamNotes.length - ONE) * DISTANCE_BETWEEN_STAFF_LINES;
 };
 
-const BeamPath = ({ baseX, baseY, widthGap, angleHeightModifier }) => {
+const getBaseY = (beamNotes) => {
+  const firstNotePosition = NOTE_STEM_BASE_Y + mapNotePosition[beamNotes[ZERO].pianoKey];
+  const beamNoteHeights = beamNotes.map(noteData => NOTE_STEM_BASE_Y + mapNotePosition[noteData.pianoKey] - firstNotePosition);
+  const isFirstNoteHighest = beamNoteHeights.some(h => h < ZERO);
+  const beamGaps = beamNoteHeights.map((h, i) => (isFirstNoteHighest
+    ? h + i * DISTANCE_BETWEEN_STAFF_LINES
+    : h - i * DISTANCE_BETWEEN_STAFF_LINES));
+
+  return firstNotePosition + Math.min(...beamGaps);
+};
+
+const BeamPath = ({ widthGap, baseY, angleHeightModifier }) => {
   const originCoord = {
-    x: baseX,
+    x: NOTE_STEM_BASE_X,
     y: baseY - NOTE_BEAM_HEIGHT
   };
   const secondCoord = {
-    x: baseX,
+    x: NOTE_STEM_BASE_X,
     y: baseY
   };
   const thirdCoord = {
-    x: baseX + NOTE_STEM_WIDTH + STAFF_LINE_WIDTH * widthGap/TWO,
+    x: NOTE_STEM_BASE_X + NOTE_STEM_WIDTH + STAFF_LINE_WIDTH * widthGap/TWO,
     y: baseY + angleHeightModifier
   };
   const finalCoord = {
-    x: baseX + STAFF_LINE_WIDTH * widthGap/TWO + NOTE_STEM_WIDTH,
+    x: NOTE_STEM_BASE_X + STAFF_LINE_WIDTH * widthGap/TWO + NOTE_STEM_WIDTH,
     y: baseY + angleHeightModifier - NOTE_BEAM_HEIGHT
   };
 
@@ -96,14 +73,15 @@ const BeamPath = ({ baseX, baseY, widthGap, angleHeightModifier }) => {
 };
 
 const NoteBeamSvg = ({ transform, content = { } }) => {
-  const { baseX, baseY, widthGap, angleHeightModifier } = getBeamAttributes(content.beamNotes);
+  const widthGap = content.beamNotes.length - ONE;
+  const baseY = getBaseY(content.beamNotes);
+  const angleHeightModifier = getAngleHeightModifier(content.beamNotes);
 
   return (
     <g transform={transform}>
       <BeamPath
-        baseX={baseX}
-        baseY={baseY}
         widthGap={widthGap}
+        baseY={baseY}
         angleHeightModifier={angleHeightModifier}
       />
     </g>

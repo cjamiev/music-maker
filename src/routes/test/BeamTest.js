@@ -38,11 +38,11 @@ const getNotes = (beamNotes) => {
 };
 
 const beamNotes = [
-  { pianoKey: 'F5' },
   { pianoKey: 'C4' },
-  { pianoKey: 'G4' },
-  { pianoKey: 'F4' },
-  { pianoKey: 'C5' }
+  { pianoKey: 'E4' },
+  { pianoKey: 'C4' },
+  { pianoKey: 'E4' },
+  { pianoKey: 'F4' }
 ];
 
 export const BeamTest = () => {
