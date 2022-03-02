@@ -98,12 +98,18 @@ const RestIcons = () => {
   }).filter(Boolean);
 };
 
-export {
-  DynamicsIcons,
-  OttavaIcons,
-  PedalIcons,
-  MeasureBarIcons,
-  ModifierIcons,
-  NoteIcons,
-  RestIcons
+const IconTest = () => {
+  return (
+    <>
+      <DynamicsIcons />
+      <OttavaIcons />
+      <PedalIcons />
+      <MeasureBarIcons />
+      <ModifierIcons />
+      <NoteIcons />
+      <RestIcons />
+    </>
+  );
 };
+
+export default IconTest;

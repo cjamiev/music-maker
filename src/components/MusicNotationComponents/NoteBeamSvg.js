@@ -36,6 +36,12 @@ const getBaseY = (beamNotes) => {
   const firstNotePosition = NOTE_STEM_BASE_Y + mapNotePosition[beamNotes[ZERO].pianoKey];
   const beamNoteHeights = beamNotes.map(noteData => NOTE_STEM_BASE_Y + mapNotePosition[noteData.pianoKey] - firstNotePosition);
   const isFirstNoteHighest = beamNoteHeights.some(h => h < ZERO);
+  const isNotAllZero = beamNoteHeights.some(h => h !== ZERO);
+
+  if(!isNotAllZero) {
+    return firstNotePosition;
+  }
+
   const beamGaps = beamNoteHeights.map((h, i) => (isFirstNoteHighest
     ? h + i * DISTANCE_BETWEEN_STAFF_LINES
     : h - i * DISTANCE_BETWEEN_STAFF_LINES));

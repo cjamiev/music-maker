@@ -24,12 +24,12 @@ const getSvgAttributes = (currentZoom) => {
   };
 };
 
-const getNotes = (beamNotes) => {
+const getNotes = (beamNotes, pos) => {
   return beamNotes.map((noteData,index) => {
     const shiftX = index === ZERO ? ZERO : STAFF_LINE_WIDTH/TWO*index;
 
     return { component:'Note',
-      transform:`translate(${shiftX - 50},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+      transform:`translate(${shiftX - 70 + 70*pos},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
       subcomponents:[
         { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[noteData.pianoKey]},
         { component:'StemmedNote', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
@@ -37,23 +37,46 @@ const getNotes = (beamNotes) => {
   });
 };
 
-const beamNotes = [
+const getBeam = (beamNotes, pos) => {
+  return { component: 'NoteBeam', transform:`translate(${-70 + 70*pos},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+    content: { beamNotes },
+    subcomponents:[] };
+};
+
+const upDirection = [
   { pianoKey: 'C4' },
   { pianoKey: 'E4' },
   { pianoKey: 'C4' },
   { pianoKey: 'E4' },
   { pianoKey: 'F4' }
 ];
+const flatDirection = [
+  { pianoKey: 'C4' },
+  { pianoKey: 'C4' },
+  { pianoKey: 'C4' },
+  { pianoKey: 'C4' },
+  { pianoKey: 'C4' }
+];
+const downDirection = [
+  { pianoKey: 'F4' },
+  { pianoKey: 'E4' },
+  { pianoKey: 'C4' },
+  { pianoKey: 'E4' },
+  { pianoKey: 'C4' }
+];
 
 export const BeamTest = () => {
+  const [beamNotes, setBeamNotes] = useState(upDirection);
+
   return (
-    <DisplaySheetMusic
-      sheetMusic={[
-        ...getNotes(beamNotes),
-        { component: 'NoteBeam', transform:`translate(-50,${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-          content: { beamNotes },
-          subcomponents:[] }
-      ]}
-      {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
-    />);
+    <>
+      <button onClick={() => {setBeamNotes(upDirection);}}>Ascending</button>
+      <button onClick={() => {setBeamNotes(flatDirection);}}>Flat</button>
+      <button onClick={() => {setBeamNotes(downDirection);}}>Descending</button>
+      <DisplaySheetMusic
+        sheetMusic={[...getNotes(beamNotes,ZERO), getBeam(beamNotes,ZERO)]}
+        {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
+      />
+    </>
+  );
 };
