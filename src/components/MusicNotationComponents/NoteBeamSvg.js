@@ -1,11 +1,12 @@
 import React from 'react';
-import { pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
+import { pianoKeyList, pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import {
   STAFF_LINE_WIDTH,
   DISTANCE_BETWEEN_STAFF_LINES,
   NOTE_STEM_BASE_X,
   NOTE_STEM_BASE_Y,
   NOTE_STEM_WIDTH,
+  NOTE_FLAG_WIDTH,
   NOTE_STEM_HEIGHT,
   NOTE_BEAM_HEIGHT
 } from 'constants/svgattributes';
@@ -18,6 +19,13 @@ const ONE = 1;
 const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
+const STAFF_MIDPOINT = 26;
+
+const getAreNotesFlipped = (beamNotes) => {
+  return beamNotes.map(noteData => {
+    return pianoKeyList.findIndex(key => key === noteData.pianoKey) > STAFF_MIDPOINT;
+  });
+};
 
 const getAngleHeightModifier = (beamNotes) => {
   const beamNoteIndicies = beamNotes.map(noteData => pianoKeyListWithoutAccidentals.findIndex(key => key === noteData.pianoKey));
@@ -49,22 +57,27 @@ const getBaseY = (beamNotes) => {
   return firstNotePosition + Math.min(...beamGaps);
 };
 
-const BeamPath = ({ widthGap, baseY, angleHeightModifier }) => {
+const BeamPath = ({ flippedNotes, widthGap, baseY, angleHeightModifier }) => {
+  const shiftXForFirstFlipped = flippedNotes[ZERO] ? NOTE_FLAG_WIDTH - TWO * NOTE_STEM_WIDTH: ZERO;
+  const shiftXForLastFlipped = flippedNotes[widthGap] ? NOTE_FLAG_WIDTH - TWO * NOTE_STEM_WIDTH : ZERO;
+  // eslint-disable-next-line no-magic-numbers
+  const shiftYForFlipped = flippedNotes[ZERO] ? 50 : ZERO;
+
   const originCoord = {
-    x: NOTE_STEM_BASE_X,
-    y: baseY - NOTE_BEAM_HEIGHT
+    x: NOTE_STEM_BASE_X - shiftXForFirstFlipped,
+    y: baseY - NOTE_BEAM_HEIGHT + shiftYForFlipped
   };
   const secondCoord = {
-    x: NOTE_STEM_BASE_X,
-    y: baseY
+    x: NOTE_STEM_BASE_X - shiftXForFirstFlipped,
+    y: baseY + shiftYForFlipped
   };
   const thirdCoord = {
-    x: NOTE_STEM_BASE_X + NOTE_STEM_WIDTH + STAFF_LINE_WIDTH * widthGap/TWO,
-    y: baseY + angleHeightModifier
+    x: NOTE_STEM_BASE_X + NOTE_STEM_WIDTH + STAFF_LINE_WIDTH * widthGap/TWO - shiftXForLastFlipped,
+    y: baseY + angleHeightModifier + shiftYForFlipped
   };
   const finalCoord = {
-    x: NOTE_STEM_BASE_X + STAFF_LINE_WIDTH * widthGap/TWO + NOTE_STEM_WIDTH,
-    y: baseY + angleHeightModifier - NOTE_BEAM_HEIGHT
+    x: NOTE_STEM_BASE_X + STAFF_LINE_WIDTH * widthGap/TWO + NOTE_STEM_WIDTH - shiftXForLastFlipped,
+    y: baseY + angleHeightModifier - NOTE_BEAM_HEIGHT + shiftYForFlipped
   };
 
   const pathDefinition = `
@@ -80,12 +93,14 @@ const BeamPath = ({ widthGap, baseY, angleHeightModifier }) => {
 
 const NoteBeamSvg = ({ transform, content = { } }) => {
   const widthGap = content.beamNotes.length - ONE;
+  const flippedNotes = getAreNotesFlipped(content.beamNotes);
   const baseY = getBaseY(content.beamNotes);
   const angleHeightModifier = getAngleHeightModifier(content.beamNotes);
 
   return (
     <g transform={transform}>
       <BeamPath
+        flippedNotes={flippedNotes}
         widthGap={widthGap}
         baseY={baseY}
         angleHeightModifier={angleHeightModifier}
