@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import React from 'react';
 import { pianoKeyList, pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import {
@@ -5,6 +6,8 @@ import {
   DISTANCE_BETWEEN_STAFF_LINES,
   NOTE_STEM_BASE_X,
   NOTE_STEM_BASE_Y,
+  NOTE_STEM_FLIPPED_BASE_X,
+  NOTE_STEM_FLIPPED_BASE_Y,
   NOTE_STEM_WIDTH,
   NOTE_FLAG_WIDTH,
   NOTE_STEM_HEIGHT,
@@ -91,15 +94,22 @@ const BeamPath = ({ flippedNotes, widthGap, baseY, angleHeightModifier }) => {
   return (<path className="svg-primary-color svg__20 svg--marked-color" d={pathDefinition} />);
 };
 
-const BeamStemConnector = ({ beamNotes, baseY, angleHeightModifier }) => {
-  const firstNotePosition = NOTE_STEM_BASE_Y + mapNotePosition[beamNotes[ZERO].pianoKey];
+const BeamStemConnector = ({ flippedNotes, beamNotes, baseY, angleHeightModifier }) => {
+  const firstNotePosition = flippedNotes[ZERO]
+    ? NOTE_STEM_FLIPPED_BASE_Y + mapNotePosition[beamNotes[ZERO].pianoKey] + NOTE_STEM_HEIGHT
+    : NOTE_STEM_BASE_Y + mapNotePosition[beamNotes[ZERO].pianoKey];
   const direction = angleHeightModifier > ZERO ? ONE : -ONE;
   return beamNotes.map((noteData,index) => {
     const heightModifier = angleHeightModifier < ZERO ? index : (beamNotes.length - index - ONE);
-    const shiftX = NOTE_STEM_BASE_X + index * STAFF_LINE_WIDTH/TWO;
-    const height = heightModifier * DISTANCE_BETWEEN_STAFF_LINES + NOTE_STEM_BASE_Y + mapNotePosition[noteData.pianoKey] - firstNotePosition;
-    const shiftY = baseY + direction * index * DISTANCE_BETWEEN_STAFF_LINES;
-
+    const shiftX = flippedNotes[ZERO]
+      ? -NOTE_STEM_WIDTH + NOTE_STEM_FLIPPED_BASE_X + index * STAFF_LINE_WIDTH/TWO
+      : NOTE_STEM_BASE_X + index * STAFF_LINE_WIDTH/TWO;
+    const height = flippedNotes[ZERO]
+      ? (baseY - NOTE_BEAM_HEIGHT + 50) - (firstNotePosition + mapNotePosition[noteData.pianoKey] + NOTE_BEAM_HEIGHT + heightModifier * DISTANCE_BETWEEN_STAFF_LINES)
+      : heightModifier * DISTANCE_BETWEEN_STAFF_LINES + NOTE_STEM_BASE_Y + mapNotePosition[noteData.pianoKey] - firstNotePosition;
+    const shiftY = flippedNotes[ZERO]
+      ? NOTE_STEM_HEIGHT + NOTE_STEM_FLIPPED_BASE_Y + mapNotePosition[noteData.pianoKey]
+      : baseY + direction * index * DISTANCE_BETWEEN_STAFF_LINES;
     return <rect
       key={shiftX}
       data-testid="beam-note-stem"
@@ -129,6 +139,7 @@ const NoteBeamSvg = ({ transform, content = { } }) => {
         angleHeightModifier={angleHeightModifier}
       />
       <BeamStemConnector
+        flippedNotes={flippedNotes}
         beamNotes={beamNotes}
         baseY={baseY}
         angleHeightModifier={angleHeightModifier}
