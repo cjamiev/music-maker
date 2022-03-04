@@ -99,17 +99,31 @@ const BeamStemConnector = ({ flippedNotes, beamNotes, baseY, angleHeightModifier
     ? NOTE_STEM_FLIPPED_BASE_Y + mapNotePosition[beamNotes[ZERO].pianoKey] + NOTE_STEM_HEIGHT
     : NOTE_STEM_BASE_Y + mapNotePosition[beamNotes[ZERO].pianoKey];
   const direction = angleHeightModifier > ZERO ? ONE : -ONE;
+
+  // eslint-disable-next-line max-params
+  const getConnectorHeights = (index, pianoKey, heightModifier, shiftY) => {
+    if(flippedNotes[ZERO] && angleHeightModifier < ZERO) {
+      return (baseY - NOTE_BEAM_HEIGHT + 50) - (firstNotePosition + mapNotePosition[pianoKey] + NOTE_BEAM_HEIGHT + heightModifier * DISTANCE_BETWEEN_STAFF_LINES);
+    } else if(flippedNotes[ZERO] && angleHeightModifier === ZERO) {
+      return (baseY - NOTE_BEAM_HEIGHT + 50) - (shiftY);
+    } else if(flippedNotes[ZERO]) {
+      return (baseY - NOTE_BEAM_HEIGHT + 50 + index * DISTANCE_BETWEEN_STAFF_LINES) - (shiftY);
+    } else if(angleHeightModifier === ZERO) {
+      return NOTE_STEM_BASE_Y + mapNotePosition[pianoKey] - firstNotePosition;
+    }
+    return heightModifier * DISTANCE_BETWEEN_STAFF_LINES + NOTE_STEM_BASE_Y + mapNotePosition[pianoKey] - firstNotePosition;
+  };
+
   return beamNotes.map((noteData,index) => {
     const heightModifier = angleHeightModifier < ZERO ? index : (beamNotes.length - index - ONE);
     const shiftX = flippedNotes[ZERO]
       ? NOTE_STEM_FLIPPED_BASE_X + index * STAFF_LINE_WIDTH/TWO
       : NOTE_STEM_BASE_X + index * STAFF_LINE_WIDTH/TWO;
-    const height = flippedNotes[ZERO]
-      ? (baseY - NOTE_BEAM_HEIGHT + 50) - (firstNotePosition + mapNotePosition[noteData.pianoKey] + NOTE_BEAM_HEIGHT + heightModifier * DISTANCE_BETWEEN_STAFF_LINES)
-      : heightModifier * DISTANCE_BETWEEN_STAFF_LINES + NOTE_STEM_BASE_Y + mapNotePosition[noteData.pianoKey] - firstNotePosition;
     const shiftY = flippedNotes[ZERO]
       ? NOTE_STEM_HEIGHT + NOTE_STEM_FLIPPED_BASE_Y + mapNotePosition[noteData.pianoKey]
       : baseY + direction * index * DISTANCE_BETWEEN_STAFF_LINES;
+    const height = getConnectorHeights(index, noteData.pianoKey, heightModifier, shiftY);
+
     return <rect
       key={shiftX}
       data-testid="beam-note-stem"
