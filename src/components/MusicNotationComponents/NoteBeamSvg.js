@@ -102,7 +102,7 @@ const BeamStemConnector = ({ flippedNotes, beamNotes, baseY, angleHeightModifier
   return beamNotes.map((noteData,index) => {
     const heightModifier = angleHeightModifier < ZERO ? index : (beamNotes.length - index - ONE);
     const shiftX = flippedNotes[ZERO]
-      ? -NOTE_STEM_WIDTH + NOTE_STEM_FLIPPED_BASE_X + index * STAFF_LINE_WIDTH/TWO
+      ? NOTE_STEM_FLIPPED_BASE_X + index * STAFF_LINE_WIDTH/TWO
       : NOTE_STEM_BASE_X + index * STAFF_LINE_WIDTH/TWO;
     const height = flippedNotes[ZERO]
       ? (baseY - NOTE_BEAM_HEIGHT + 50) - (firstNotePosition + mapNotePosition[noteData.pianoKey] + NOTE_BEAM_HEIGHT + heightModifier * DISTANCE_BETWEEN_STAFF_LINES)
