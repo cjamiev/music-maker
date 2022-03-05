@@ -108,10 +108,13 @@ const BeamStemConnector = ({ flippedNotes, beamNotes, baseY, angleHeightModifier
       return (baseY - NOTE_BEAM_HEIGHT + 50) - (shiftY);
     } else if(flippedNotes[ZERO]) {
       return (baseY - NOTE_BEAM_HEIGHT + 50 + index * DISTANCE_BETWEEN_STAFF_LINES) - (shiftY);
+    } else if(angleHeightModifier < ZERO) {
+      return heightModifier * DISTANCE_BETWEEN_STAFF_LINES + NOTE_STEM_BASE_Y + mapNotePosition[pianoKey] - firstNotePosition;
     } else if(angleHeightModifier === ZERO) {
       return NOTE_STEM_BASE_Y + mapNotePosition[pianoKey] - firstNotePosition;
     }
-    return heightModifier * DISTANCE_BETWEEN_STAFF_LINES + NOTE_STEM_BASE_Y + mapNotePosition[pianoKey] - firstNotePosition;
+
+    return Math.round((NOTE_STEM_BASE_Y + mapNotePosition[pianoKey]) - (baseY + index * DISTANCE_BETWEEN_STAFF_LINES));
   };
 
   return beamNotes.map((noteData,index) => {
