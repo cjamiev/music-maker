@@ -7,8 +7,9 @@ import {
   HEIGHT_BETWEEN_ROWS
 } from 'constants/svgattributes';
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
-import { pianoKeyList } from 'constants/pianokeys';
+import { pianoKeyList, pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
+import './beam-notes.css';
 
 const ZERO = 0;
 const ONE = 1;
@@ -93,18 +94,94 @@ const downDirection2 = [
 export const BeamTest = () => {
   const [beamNotes, setBeamNotes] = useState(upDirection);
 
+  const incrementNote = (beamIndex) => {
+    const currentPianoKeyIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === beamNotes[beamIndex].pianoKey);
+    if(currentPianoKeyIndex < pianoKeyListWithoutAccidentals.length) {
+      const updatedNote = pianoKeyListWithoutAccidentals[currentPianoKeyIndex + ONE];
+
+      const updatedBeamNotes = beamNotes.map((note, i) => {
+        if(i === beamIndex) {
+          return {
+            ...note,
+            pianoKey: updatedNote
+          };
+        }
+
+        return note;
+      });
+
+      setBeamNotes(updatedBeamNotes);
+    }
+  };
+
+  const decrementNote = (beamIndex) => {
+    const currentPianoKeyIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === beamNotes[beamIndex].pianoKey);
+    if(currentPianoKeyIndex > ZERO) {
+      const updatedNote = pianoKeyListWithoutAccidentals[currentPianoKeyIndex - ONE];
+
+      const updatedBeamNotes = beamNotes.map((note, i) => {
+        if(i === beamIndex) {
+          return {
+            ...note,
+            pianoKey: updatedNote
+          };
+        }
+
+        return note;
+      });
+
+      setBeamNotes(updatedBeamNotes);
+    }
+  };
+
+  const addNote = (beamIndex) => {
+    const updatedBeamNotes = beamNotes.concat([{
+      pianoKey: 'C4'
+    }]);
+
+    setBeamNotes(updatedBeamNotes);
+  };
+
+  const deleteNote = (beamIndex) => {
+    const updatedBeamNotes = beamNotes.map((note, i) => {
+      if(i === beamIndex) {
+        return null;
+      }
+
+      return note;
+    }).filter(Boolean);
+
+    setBeamNotes(updatedBeamNotes);
+  };
+
   return (
     <>
-      <button onClick={() => {setBeamNotes(upDirection);}}>Ascending</button>
-      <button onClick={() => {setBeamNotes(flatDirection);}}>Flat</button>
-      <button onClick={() => {setBeamNotes(downDirection);}}>Descending</button>
-      <button onClick={() => {setBeamNotes(upDirection2);}}>Ascending Flipped</button>
-      <button onClick={() => {setBeamNotes(flatDirection2);}}>Flat Flipped</button>
-      <button onClick={() => {setBeamNotes(downDirection2);}}>Descending Flipped</button>
-      <DisplaySheetMusic
-        sheetMusic={[...getNotes(beamNotes,ZERO), getBeam(beamNotes,ZERO)]}
-        {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
-      />
+      <div className="beam-notes__test-btns">
+        <button onClick={() => {setBeamNotes(upDirection);}}>Ascending</button>
+        <button onClick={() => {setBeamNotes(flatDirection);}}>Flat</button>
+        <button onClick={() => {setBeamNotes(downDirection);}}>Descending</button>
+        <button onClick={() => {setBeamNotes(upDirection2);}}>Ascending Flipped</button>
+        <button onClick={() => {setBeamNotes(flatDirection2);}}>Flat Flipped</button>
+        <button onClick={() => {setBeamNotes(downDirection2);}}>Descending Flipped</button>
+      </div>
+      <div className="beam-notes__container">
+        <div className="beam-notes__btn-container">
+          <button onClick={() => {addNote();}}>Add</button>
+          {beamNotes.map((_,index) => {
+            return (
+              <div key={`beam-note-btn-group-${index}`} className="beam-notes__btn-group">
+                <button onClick={() => {incrementNote(index);}}>Increment {index}</button>
+                <button onClick={() => {decrementNote(index);}}>Decrement {index}</button>
+                {index > ONE && <button onClick={() => {deleteNote(index);}}>Delete {index}</button>}
+              </div>
+            );
+          })}
+        </div>
+        <DisplaySheetMusic
+          sheetMusic={[...getNotes(beamNotes,ZERO), getBeam(beamNotes,ZERO)]}
+          {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
+        />
+      </div>
     </>
   );
 };
