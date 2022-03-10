@@ -1,5 +1,5 @@
 import CurveSvg from './CurveSvg';
-import NoteBeamSvg from './NoteBeam';
+import NoteBeamSvg from './NoteBeamSvg';
 import {
   ClefSVG,
   MeasureStartSVG,

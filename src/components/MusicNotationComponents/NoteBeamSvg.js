@@ -7,7 +7,6 @@ import {
   NOTE_STEM_FLIPPED_BASE_X,
   NOTE_BEAM_HEIGHT
 } from 'constants/svgattributes';
-import getBeamData from './helper';
 
 const ZERO = 0;
 const ONE = 1;
@@ -67,8 +66,7 @@ const BeamStemConnector = ({ isBeamOnTop, beamCoordinates, beamNoteHeights }) =>
 };
 
 const NoteBeamSvg = ({ transform, content = { } }) => {
-  const { beamNotes } = content;
-  const { beamCoordinates, beamNoteHeights, isBeamOnTop } = getBeamData(beamNotes);
+  const { beamCoordinates, beamNoteHeights, isBeamOnTop } = content;
 
   return (
     <g transform={transform}>

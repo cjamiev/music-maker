@@ -10,6 +10,7 @@ import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/pa
 import { pianoKeyList, pianoKeyListWithoutAccidentals } from 'constants/pianokeys';
 import DisplaySheetMusic from 'components/DisplaySheetMusic';
 import './beam-notes.css';
+import getBeamData from './beamHelper';
 
 const ZERO = 0;
 const ONE = 1;
@@ -26,25 +27,24 @@ const getSvgAttributes = (currentZoom) => {
   };
 };
 
-const getNotes = (beamNotes, pos) => {
+const getNotes = (beamNotes, isBeamOnTop, pos) => {
   return beamNotes.map((noteData,index) => {
     const pianoKeyIndex = pianoKeyList.findIndex(key => key === noteData.pianoKey);
-    const isNoteFlipped = pianoKeyIndex > 26;
     const shiftX = index === ZERO ? ZERO : STAFF_LINE_WIDTH/TWO*index;
 
     return { component:'Note',
       transform:`translate(${shiftX - 70 + 70*pos},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
       subcomponents:[
         { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[noteData.pianoKey]},
-        isNoteFlipped ? { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
-          : { component:'StemmedNote', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
+        isBeamOnTop ? { component:'StemmedNote', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
+          : { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
       ]};
   });
 };
 
-const getBeam = (beamNotes, pos) => {
+const getBeam = (beamData, pos) => {
   return { component: 'NoteBeam', transform:`translate(${-70 + 70*pos},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
-    content: { beamNotes },
+    content: beamData,
     subcomponents:[] };
 };
 
@@ -154,6 +154,8 @@ export const BeamTest = () => {
     setBeamNotes(updatedBeamNotes);
   };
 
+  const { beamCoordinates, beamNoteHeights, isBeamOnTop } = getBeamData(beamNotes);
+
   return (
     <>
       <div className="beam-notes__test-btns">
@@ -178,7 +180,7 @@ export const BeamTest = () => {
           })}
         </div>
         <DisplaySheetMusic
-          sheetMusic={[...getNotes(beamNotes,ZERO), getBeam(beamNotes,ZERO)]}
+          sheetMusic={[...getNotes(beamNotes, isBeamOnTop, ZERO), getBeam({ beamCoordinates, beamNoteHeights, isBeamOnTop },ZERO)]}
           {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
         />
       </div>
