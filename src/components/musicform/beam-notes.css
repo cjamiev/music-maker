@@ -1,0 +1,26 @@
+.beam-note-builder {
+  position: relative;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 20px;
+  height: 1000px;
+  width: 1000px;
+}
+
+.beam-note__btn-groups {
+  position: absolute;
+  display: flex;
+  top: 60%;
+  left: 10%;
+}
+
+.beam-note__btn-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.beam-note__sheet-music {
+  position: absolute;
+  top: -5%;
+  left: -135%;
+}

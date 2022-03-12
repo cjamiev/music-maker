@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import React, { useMemo, useEffect, useState } from 'react';
 import { mapNotePosition, mapStaffLines } from 'constants/stafflines';
 import {
@@ -15,7 +14,13 @@ import getBeamData from './beamHelper';
 const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
-const DEFAULT_ZOOM_INDEX = 14;
+const MAX_BEAM_LENGTH = 8;
+const DEFAULT_ZOOM_INDEX = 12;
+const SHIFT_STAFF_X = 70;
+const DEFAULT_BEAM_NOTES = [
+  { pianoKey: 'C4' },
+  { pianoKey: 'C4' }
+];
 
 const getSvgAttributes = (currentZoom) => {
   const zoomModifier = ZOOM_LEVELS[currentZoom];
@@ -33,7 +38,7 @@ const getNotes = (beamNotes, isBeamOnTop, pos) => {
     const shiftX = index === ZERO ? ZERO : STAFF_LINE_WIDTH/TWO*index;
 
     return { component:'Note',
-      transform:`translate(${shiftX - 70 + 70*pos},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+      transform:`translate(${shiftX - SHIFT_STAFF_X + SHIFT_STAFF_X*pos},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
       subcomponents:[
         { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[noteData.pianoKey]},
         isBeamOnTop ? { component:'StemmedNote', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
@@ -43,56 +48,13 @@ const getNotes = (beamNotes, isBeamOnTop, pos) => {
 };
 
 const getBeam = (beamData, pos) => {
-  return { component: 'NoteBeam', transform:`translate(${-70 + 70*pos},${(-1/2)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
+  return { component: 'NoteBeam', transform:`translate(${-SHIFT_STAFF_X + SHIFT_STAFF_X*pos},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
     content: beamData,
     subcomponents:[] };
 };
 
-const upDirection = [
-  { pianoKey: 'C4' },
-  { pianoKey: 'E4' },
-  { pianoKey: 'C4' },
-  { pianoKey: 'E4' },
-  { pianoKey: 'F4' }
-];
-const flatDirection = [
-  { pianoKey: 'C4' },
-  { pianoKey: 'C4' },
-  { pianoKey: 'C4' },
-  { pianoKey: 'C4' },
-  { pianoKey: 'C4' }
-];
-const downDirection = [
-  { pianoKey: 'F4' },
-  { pianoKey: 'E4' },
-  { pianoKey: 'C4' },
-  { pianoKey: 'E4' },
-  { pianoKey: 'C4' }
-];
-const upDirection2 = [
-  { pianoKey: 'C5' },
-  { pianoKey: 'E5' },
-  { pianoKey: 'C5' },
-  { pianoKey: 'E5' },
-  { pianoKey: 'F5' }
-];
-const flatDirection2 = [
-  { pianoKey: 'C5' },
-  { pianoKey: 'C5' },
-  { pianoKey: 'C5' },
-  { pianoKey: 'C5' },
-  { pianoKey: 'C5' }
-];
-const downDirection2 = [
-  { pianoKey: 'F5' },
-  { pianoKey: 'E5' },
-  { pianoKey: 'C5' },
-  { pianoKey: 'E5' },
-  { pianoKey: 'C5' }
-];
-
-export const BeamTest = () => {
-  const [beamNotes, setBeamNotes] = useState(upDirection);
+const BeamBuilder = () => {
+  const [beamNotes, setBeamNotes] = useState(DEFAULT_BEAM_NOTES);
 
   const incrementNote = (beamIndex) => {
     const currentPianoKeyIndex = pianoKeyListWithoutAccidentals.findIndex(key => key === beamNotes[beamIndex].pianoKey);
@@ -134,12 +96,14 @@ export const BeamTest = () => {
     }
   };
 
-  const addNote = (beamIndex) => {
-    const updatedBeamNotes = beamNotes.concat([{
-      pianoKey: 'C4'
-    }]);
+  const addNote = () => {
+    if(beamNotes.length < MAX_BEAM_LENGTH) {
+      const updatedBeamNotes = beamNotes.concat([{
+        pianoKey: 'C4'
+      }]);
 
-    setBeamNotes(updatedBeamNotes);
+      setBeamNotes(updatedBeamNotes);
+    }
   };
 
   const deleteNote = (beamIndex) => {
@@ -158,20 +122,18 @@ export const BeamTest = () => {
 
   return (
     <>
-      <div className="beam-notes__test-btns">
-        <button onClick={() => {setBeamNotes(upDirection);}}>Ascending</button>
-        <button onClick={() => {setBeamNotes(flatDirection);}}>Flat</button>
-        <button onClick={() => {setBeamNotes(downDirection);}}>Descending</button>
-        <button onClick={() => {setBeamNotes(upDirection2);}}>Ascending Flipped</button>
-        <button onClick={() => {setBeamNotes(flatDirection2);}}>Flat Flipped</button>
-        <button onClick={() => {setBeamNotes(downDirection2);}}>Descending Flipped</button>
-      </div>
-      <div className="beam-notes__container">
-        <div className="beam-notes__btn-container">
+      <div className="beam-note-builder">
+        <div className="beam-note__sheet-music">
+          <DisplaySheetMusic
+            sheetMusic={[...getNotes(beamNotes, isBeamOnTop, ZERO), getBeam({ beamCoordinates, beamNoteHeights, isBeamOnTop },ZERO)]}
+            {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
+          />
+        </div>
+        <div className="beam-note__btn-groups">
           <button onClick={() => {addNote();}}>Add</button>
           {beamNotes.map((_,index) => {
             return (
-              <div key={`beam-note-btn-group-${index}`} className="beam-notes__btn-group">
+              <div key={`beam-note-btn-column-${index}`} className="beam-note__btn-column">
                 <button onClick={() => {incrementNote(index);}}>Increment {index}</button>
                 <button onClick={() => {decrementNote(index);}}>Decrement {index}</button>
                 {index > ONE && <button onClick={() => {deleteNote(index);}}>Delete {index}</button>}
@@ -179,11 +141,9 @@ export const BeamTest = () => {
             );
           })}
         </div>
-        <DisplaySheetMusic
-          sheetMusic={[...getNotes(beamNotes, isBeamOnTop, ZERO), getBeam({ beamCoordinates, beamNoteHeights, isBeamOnTop },ZERO)]}
-          {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
-        />
       </div>
     </>
   );
 };
+
+export default BeamBuilder;

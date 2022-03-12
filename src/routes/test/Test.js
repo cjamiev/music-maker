@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import Page from 'components/layout';
 import IconTest from './IconTest';
-import { BeamTest } from './BeamTest';
+import BeamBuilder from 'components/musicform/BeamBuilder';
 
 const testId = 'beam';
 
@@ -9,7 +9,7 @@ const getTestComponent = () => {
   if(testId === 'icon') {
     return (<IconTest />);
   } else if (testId === 'beam') {
-    return (<BeamTest />);
+    return (<BeamBuilder />);
   } else {
     return (<p>Not Found</p>);
   }
