@@ -15,7 +15,7 @@ const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
 const MAX_BEAM_LENGTH = 8;
-const DEFAULT_ZOOM_INDEX = 12;
+const DEFAULT_ZOOM_INDEX = 9;
 const SHIFT_STAFF_X = 70;
 const DEFAULT_BEAM_NOTES = [
   { pianoKey: 'C4' },
@@ -123,20 +123,20 @@ const BeamBuilder = () => {
   return (
     <>
       <div className="beam-note-builder">
-        <div className="beam-note__sheet-music">
+        <div className={isBeamOnTop ? 'beam-note__sheet-music' : 'beam-note__sheet-music--bottom-beam'}>
           <DisplaySheetMusic
             sheetMusic={[...getNotes(beamNotes, isBeamOnTop, ZERO), getBeam({ beamCoordinates, beamNoteHeights, isBeamOnTop },ZERO)]}
             {...getSvgAttributes(DEFAULT_ZOOM_INDEX)}
           />
         </div>
         <div className="beam-note__btn-groups">
-          <button onClick={() => {addNote();}}>Add</button>
+          <button className="beam-note__btn" onClick={() => {addNote();}}>Add</button>
           {beamNotes.map((_,index) => {
             return (
               <div key={`beam-note-btn-column-${index}`} className="beam-note__btn-column">
-                <button onClick={() => {incrementNote(index);}}>Increment {index}</button>
-                <button onClick={() => {decrementNote(index);}}>Decrement {index}</button>
-                {index > ONE && <button onClick={() => {deleteNote(index);}}>Delete {index}</button>}
+                <button className="beam-note__btn" onClick={() => {incrementNote(index);}}>Raise Note {index+ONE}</button>
+                <button className="beam-note__btn" onClick={() => {decrementNote(index);}}>Lower Note {index+ONE}</button>
+                {index > ONE && <button className="beam-note__btn" onClick={() => {deleteNote(index);}}>Delete {index}</button>}
               </div>
             );
           })}
