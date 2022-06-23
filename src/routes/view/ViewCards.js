@@ -30,7 +30,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
           />
         }
         onClick={() => {
-          onShowImage('dearly-beloved.jpg');
+          onShowImage(['dearly-beloved.jpg']);
         }}
       />
       <Card
@@ -44,7 +44,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
           />
         }
         onClick={() => {
-          onShowImage('ff7-prelude.jpg');
+          onShowImage(['ff7-prelude.jpg']);
         }}
       />
       <Card
@@ -58,7 +58,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
           />
         }
         onClick={() => {
-          onShowImage('mario-theme.jpg');
+          onShowImage(['mario-theme.jpg', 'mario-theme2.jpg', 'mario-theme3.jpg']);
         }}
       />
       <Card

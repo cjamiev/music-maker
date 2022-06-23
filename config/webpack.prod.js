@@ -31,26 +31,26 @@ module.exports = env => {
             'style-loader',
             'css-loader'
           ]
+        },
+        {
+          test: /\.html$/,
+          use: [
+            'html-loader'
+          ]
+        },
+        {
+          test: /\.(svg|png|jpg|gif|ico)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
         }
-        // {
-        //   test: /\.html$/,
-        //   use: [
-        //     'html-loader'
-        //   ]
-        // },
-        // {
-        //   test: /\.(svg|png|jpg|gif|ico)$/,
-        //   use: {
-        //     loader: 'file-loader',
-        //     options: {
-        //       name: '[name].[ext]'
-        //     }
-        //   }
-        // }
       ]
     },
     plugins: [
-      // new HtmlWebpackPlugin({ template: path.resolve('./src/index.html') }),
+      new HtmlWebpackPlugin({ template: path.resolve('./src/index.html') }),
       new webpack.DefinePlugin({ 'process.env': JSON.stringify(env) }),
       new ESLintPlugin(),
       new BundleAnalyzerPlugin({

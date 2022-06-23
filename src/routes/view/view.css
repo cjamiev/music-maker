@@ -32,8 +32,13 @@
   width: 241.92px;
 }
 
-.view__sheet_music_image {
+.view__sheet_music_page {
+  display: flex;
+  gap: 10px;
   margin-left: 250px;
+}
+
+.view__sheet_music_image {
   height: 800px;
   width: 600px;
 }

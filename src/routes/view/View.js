@@ -9,6 +9,8 @@ import Button from 'components/button';
 import 'assets/img/dearly-beloved.jpg';
 import 'assets/img/ff7-prelude.jpg';
 import 'assets/img/mario-theme.jpg';
+import 'assets/img/mario-theme2.jpg';
+import 'assets/img/mario-theme3.jpg';
 
 const ZERO = 0;
 const ONE = 1;
@@ -27,14 +29,14 @@ const getSvgAttributes = (currentZoom) => {
 
 const View = () => {
   const [musicSelection, setMusicSelection] = useState([]);
-  const [musicImage, setMusicImage] = useState('');
+  const [musicImages, setMusicImages] = useState([]);
   const [pageNumber, setPageNumber] = useState(ZERO);
   const [currentZoom, setCurrentZoom] = useLocalStorage(LS_ZOOM, DEFAULT_ZOOM_INDEX, false);
   const musicNotationSvgAttributes = getSvgAttributes(Number(currentZoom));
 
   const handleResetMusicSelection = () => {
     setMusicSelection([]);
-    setMusicImage('');
+    setMusicImages([]);
     setPageNumber([]);
   };
 
@@ -59,19 +61,24 @@ const View = () => {
     }
   };
 
-  const handleShowImage = (src) => {
-    setMusicImage(src);
+  const handleShowImage = (imgs) => {
+    setMusicImages(imgs);
   };
 
   const renderView = () => {
     if(musicSelection.length > ZERO) {
       return <DisplaySheetMusic sheetMusic={musicSelection[pageNumber]} {...musicNotationSvgAttributes}/>;
-    } else if (musicImage) {
+    } else if (musicImages.length > ZERO) {
       return (<div>
-        <img
-          className="view__sheet_music_image"
-          src={musicImage}
-        />
+        <div className="view__sheet_music_page">
+          {musicImages.map(img => {
+            return (<img
+              key={img}
+              className="view__sheet_music_image"
+              src={img}
+            />);
+          })}
+        </div>
         <div className="viewHeader">
           <Button
             label="Back to Selection"

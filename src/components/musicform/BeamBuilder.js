@@ -32,18 +32,32 @@ const getSvgAttributes = (currentZoom) => {
   };
 };
 
+const getShowStaff = (index, size, pianoKey) => {
+  if (index % TWO === ZERO && size % TWO !== ZERO) {
+    return true;
+  } else if (index % TWO !== ZERO && size % TWO !== ZERO) {
+    return false;
+  } else if (index % TWO === ZERO || index === size - ONE) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const getNotes = (beamNotes, isBeamOnTop, pos) => {
+  const size = beamNotes.length;
   return beamNotes.map((noteData,index) => {
     const pianoKeyIndex = pianoKeyList.findIndex(key => key === noteData.pianoKey);
     const shiftX = index === ZERO ? ZERO : STAFF_LINE_WIDTH/TWO*index;
+    const showStaff = getShowStaff(index, size, noteData.pianoKey);
 
     return { component:'Note',
       transform:`translate(${shiftX - SHIFT_STAFF_X + SHIFT_STAFF_X*pos},${(-ONE/TWO)*(MEASURE_BOTH_STAFFS_HEIGHT+HEIGHT_BETWEEN_ROWS)})`, conditions:{},
       subcomponents:[
-        { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[noteData.pianoKey]},
+        showStaff && { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines[noteData.pianoKey]},
         isBeamOnTop ? { component:'StemmedNote', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
           : { component:'StemmedNoteFlipped', transform:`translate(0,${mapNotePosition[noteData.pianoKey]})`, conditions:{}}
-      ]};
+      ].filter(Boolean)};
   });
 };
 
