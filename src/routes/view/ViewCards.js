@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from 'components/Card';
+import { Card } from 'components/Card';
 import {
   musicNotationData,
   allWholeNoteData,
@@ -10,7 +10,6 @@ import {
 import {
   hollowKnightRestingGroundsData
 } from 'mock/resting-grounds-sheet-music';
-import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 import 'assets/img/seer.jpg';
 import 'assets/img/mario.jpg';
 import 'assets/img/meteor.jpg';
@@ -21,7 +20,8 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
     <div className="flex--horizontal">
       <Card
         className="clickable"
-        title="Dearly Beloved"
+        songTitle="Dearly Beloved"
+        albumTitle="Kingdom Hearts"
         body={
           <img
             className="view__image"
@@ -35,7 +35,8 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
       />
       <Card
         className="clickable"
-        title="FF7 Prelude"
+        songTitle="Prelude"
+        albumTitle="Final Fantasy 7"
         body={
           <img
             className="view__image"
@@ -49,7 +50,8 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
       />
       <Card
         className="clickable"
-        title="Mario Theme"
+        songTitle="Main Theme"
+        albumTitle="Super Mario"
         body={
           <img
             className="view__image"
@@ -62,7 +64,8 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
         }}
       />
       <Card
-        title="Resting Grounds"
+        songTitle="Resting Grounds"
+        albumTitle="Hollow Knight"
         body={
           <img
             className="clickable view__image"
@@ -72,20 +75,10 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
               onChangeSelection(hollowKnightRestingGroundsData);
             }} />
         }
-        footer={
-          <>
-            <div>
-              <label>Song:</label> <a className="" href="https://www.youtube.com/watch?v=5rwagL7Yrxo" target="_blank">Resting Grounds</a>
-            </div>
-            <div>
-              <label>Synthesia:</label> <a className="" href="https://www.youtube.com/watch?v=qZ2yWvholHw" target="_blank">Tutorial</a>
-            </div>
-          </>
-        }
       />
       <Card
         className="clickable"
-        title="Test"
+        songTitle="Test"
         onClick={() => {
           onChangeSelection([musicNotationData, allWholeNoteData,allQuarterNoteData, allQuarterChordData, allModifierData]);
         }}
