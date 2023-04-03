@@ -1,0 +1,42 @@
+.songcard {
+  display: block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.songcard-body {
+  height: 400px;
+	width: 300px;
+  background-color: white;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0px 0px 10px 1px var(--primary-color);
+  transition: transform 250ms ease-out 0s;
+  z-index: 1;
+}
+
+.songcard-body:hover {
+	transform: scaleX(1.05) scaleY(1.05) ;
+	box-shadow: 1px 1px 15px 3px var(--primary-matching-color2);
+}
+
+.songcard-title {
+  height: 50px;
+  width: 300px;
+  padding: 5px 0px;
+  border-radius: 0px 0px 5px 5px;
+  background-color: var(--primary-color);
+  box-shadow: 0px 5px 10px 1px var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+}
+
+.songcard-song-title {
+  font-size: 24px;
+}
+
+.songcard-album-title {
+  font-size: 18px;
+  text-align: center;
+}

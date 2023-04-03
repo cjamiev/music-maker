@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'components/Card';
+import { SongCard } from 'components/SongCard';
 import {
   musicNotationData,
   allWholeNoteData,
@@ -18,7 +18,7 @@ import 'assets/img/sora.jpg';
 const ViewCards = ({ onChangeSelection, onShowImage }) => {
   return (
     <div className="flex--horizontal">
-      <Card
+      <SongCard
         className="clickable"
         songTitle="Dearly Beloved"
         albumTitle="Kingdom Hearts"
@@ -33,7 +33,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
           onShowImage(['dearly-beloved.jpg']);
         }}
       />
-      <Card
+      <SongCard
         className="clickable"
         songTitle="Prelude"
         albumTitle="Final Fantasy 7"
@@ -48,7 +48,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
           onShowImage(['ff7-prelude.jpg']);
         }}
       />
-      <Card
+      <SongCard
         className="clickable"
         songTitle="Main Theme"
         albumTitle="Super Mario"
@@ -63,7 +63,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
           onShowImage(['mario-theme.jpg', 'mario-theme2.jpg', 'mario-theme3.jpg']);
         }}
       />
-      <Card
+      <SongCard
         songTitle="Resting Grounds"
         albumTitle="Hollow Knight"
         body={
@@ -76,7 +76,7 @@ const ViewCards = ({ onChangeSelection, onShowImage }) => {
             }} />
         }
       />
-      <Card
+      <SongCard
         className="clickable"
         songTitle="Test"
         onClick={() => {
