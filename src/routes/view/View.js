@@ -6,11 +6,6 @@ import ViewFooter from './ViewFooter';
 import useLocalStorage from 'hooks/useLocalStorage';
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
 import Button from 'components/button';
-import 'assets/img/dearly-beloved.jpg';
-import 'assets/img/ff7-prelude.jpg';
-import 'assets/img/mario-theme.jpg';
-import 'assets/img/mario-theme2.jpg';
-import 'assets/img/mario-theme3.jpg';
 
 const ZERO = 0;
 const ONE = 1;

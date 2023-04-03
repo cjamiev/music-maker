@@ -10,10 +10,6 @@ import {
 import {
   hollowKnightRestingGroundsData
 } from 'data/resting-grounds-sheet-music';
-import 'assets/img/seer.jpg';
-import 'assets/img/mario.jpg';
-import 'assets/img/meteor.jpg';
-import 'assets/img/sora.jpg';
 import { songs } from 'data/songs';
 
 const ViewCards = ({ onChangeSelection, onShowImage }) => {

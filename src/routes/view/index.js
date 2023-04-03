@@ -1,2 +1,11 @@
 export { default } from './View';
 import './view.css';
+import 'assets/img/dearly-beloved.jpg';
+import 'assets/img/ff7-prelude.jpg';
+import 'assets/img/mario-theme.jpg';
+import 'assets/img/mario-theme2.jpg';
+import 'assets/img/mario-theme3.jpg';
+import 'assets/img/seer.jpg';
+import 'assets/img/mario.jpg';
+import 'assets/img/meteor.jpg';
+import 'assets/img/sora.jpg';
