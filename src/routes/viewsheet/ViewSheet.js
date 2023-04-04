@@ -33,7 +33,6 @@ const parseUrlInfo = (songid, page) => {
 const ViewSheet = () => {
   const { songid, page } = useParams();
   const { selectedSong, selectedPage } = parseUrlInfo(songid, page);
-  console.log(songid, page);
   const [pageNumber, setPageNumber] = useState(selectedPage);
   const [currentZoom, setCurrentZoom] = useLocalStorage(LS_ZOOM, DEFAULT_ZOOM_INDEX, false);
   const musicNotationSvgAttributes = getSvgAttributes(Number(currentZoom));
