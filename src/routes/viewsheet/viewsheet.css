@@ -1,0 +1,22 @@
+.viewsheet {
+  margin-top: 20px;
+  margin-left: 20px;
+  position: relative;
+}
+
+.viewsheet-footer {
+  margin-left: 20px;
+  width: 100%;
+}
+
+.viewsheet-footer__pagination {
+  margin-left: 25%;
+}
+
+.viewsheet-footer__zoom {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  margin-top: 40px;
+  margin-right: 20px;
+}

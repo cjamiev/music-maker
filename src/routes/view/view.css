@@ -4,41 +4,7 @@
   position: relative;
 }
 
-.viewHeader {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-
-.viewFooter {
-  margin-left: 20px;
-  width: 100%;
-}
-
-.viewFooter__pagination {
-  margin-left: 25%;
-}
-
-.viewFooter__zoom {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  margin-top: 40px;
-  margin-right: 20px;
-}
-
 .view__image {
   height: 400px;
   width: 300px;
-}
-
-.view__sheet_music_page {
-  display: flex;
-  gap: 10px;
-  margin-left: 250px;
-}
-
-.view__sheet_music_image {
-  height: 800px;
-  width: 600px;
 }
