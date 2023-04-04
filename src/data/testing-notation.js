@@ -579,3 +579,5 @@ export const allModifierData = [
       { component:'Staff', transform:'translate(0,0)', conditions:mapStaffLines['B3']}
     ]}
 ];
+
+export const testSheetMusic = [musicNotationData, allWholeNoteData, allQuarterNoteData, allQuarterChordData, allModifierData];

@@ -5,7 +5,7 @@ import Page from 'components/layout';
 import ViewFooter from './ViewFooter';
 import useLocalStorage from 'hooks/useLocalStorage';
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
-import { songs } from 'data/songs';
+import { songsWithSheetMusic } from 'data/songs';
 
 const ZERO = 0;
 const ONE = 1;
@@ -23,7 +23,7 @@ const getSvgAttributes = (currentZoom) => {
 };
 
 const parseUrlInfo = (songid, page) => {
-  const selectedSong = songs.find(song => song.id === songid) ?? songs[ZERO];
+  const selectedSong = songsWithSheetMusic.find(song => song.id === songid) ?? songsWithSheetMusic[ZERO];
   const pageNumber = Number(page) ? Number(page) - ONE : ZERO;
   const selectedPage = selectedSong.sheets.length > pageNumber ? pageNumber : ZERO;
 
@@ -33,6 +33,7 @@ const parseUrlInfo = (songid, page) => {
 const ViewSheet = () => {
   const { songid, page } = useParams();
   const { selectedSong, selectedPage } = parseUrlInfo(songid, page);
+  console.log(songid, page);
   const [pageNumber, setPageNumber] = useState(selectedPage);
   const [currentZoom, setCurrentZoom] = useLocalStorage(LS_ZOOM, DEFAULT_ZOOM_INDEX, false);
   const musicNotationSvgAttributes = getSvgAttributes(Number(currentZoom));

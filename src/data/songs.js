@@ -1,3 +1,6 @@
+import { hollowKnightRestingGroundsData } from './resting-grounds-sheet-music';
+import { testSheetMusic } from './testing-notation';
+
 const restingGrounds = {
   id: 'resting-grounds-hollow-knight',
   songTitle:'Resting Grounds',
@@ -51,5 +54,6 @@ const test = {
 };
 
 const songs = [restingGrounds, marioTheme, dearlyBeloved, ff7Prelude, test];
+const songsWithSheetMusic = [{ id: 'resting-grounds-hollow-knight', sheets: hollowKnightRestingGroundsData}, { id: 'test', sheets: testSheetMusic }];
 
-export { songs };
+export { songs, songsWithSheetMusic };

@@ -9,7 +9,7 @@
   width: 300px;
 }
 
-.view__url-buttons-header {
+.view__sidepanel-header {
   width: 80%;
   font-size: 36px;
   margin: 5px auto;
@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-.view__url-buttons {
+.view__sidepanel-btn-group {
   width: 80%;
   margin: 5px auto;
   display: flex;
@@ -25,14 +25,15 @@
   row-gap: 2px;
 }
 
-.view__url-btn {
+.view__sidepanel-btn {
   text-decoration: none;
   font-size: 24px;
   text-align: center;
   color: white;
   background: var(--primary-color);
+  cursor: pointer;
 }
 
-.view__url-btn:hover {
+.view__sidepanel-btn:hover {
   color: var(--secondary-color);
 }

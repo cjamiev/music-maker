@@ -1,7 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Page from 'components/layout';
 import { SongCard } from 'components/SongCard';
-import { songs } from 'data/songs';
+import { songs, songsWithSheetMusic } from 'data/songs';
+
+const SheetMusicLink = ({ id }) => {
+  const navigate = useNavigate();
+
+  if(!songsWithSheetMusic.find(song => song.id === id)) {
+    return null;
+  }
+
+  return (<div>
+    <div className='view__sidepanel-header'>Sheet Music</div>
+    <div className="view__sidepanel-btn-group">
+      <div className="view__sidepanel-btn" onClick={() => { navigate(`/viewsheet/${id}/0`);}}>Personal Sheet Music</div>
+    </div>
+  </div>);
+};
 
 const YoutubeLinks = ({ links }) => {
   if(!links.length) {
@@ -9,9 +25,9 @@ const YoutubeLinks = ({ links }) => {
   }
 
   return (<div>
-    <div className='view__url-buttons-header'>Youtube Videos</div>
-    <div className="view__url-buttons">
-      {links.map(link => <a key={link.url} className="view__url-btn" href={link.url} target="_blank">{link.name}</a>)}
+    <div className='view__sidepanel-header'>Youtube Videos</div>
+    <div className="view__sidepanel-btn-group">
+      {links.map(link => <a key={link.url} className="view__sidepanel-btn" href={link.url} target="_blank">{link.name}</a>)}
     </div>;
   </div>);
 };
@@ -24,7 +40,7 @@ const View = () => {
   };
 
   return (
-    <Page sidePanelContent={selectedSong ? <div><YoutubeLinks links={selectedSong.youtubelinks} /></div> : null} >
+    <Page sidePanelContent={selectedSong ? <div><SheetMusicLink id={selectedSong.id} /><YoutubeLinks links={selectedSong.youtubelinks} /></div> : null} >
       <div className="view flex--horizontal">
         {songs.map(song => <SongCard
           key={song.songTitle + song.albumTitle}
