@@ -4,7 +4,6 @@ import { mapStaccatoPosition, mapDottedPosition, mapNotePosition, mapStaffLines 
 import { STAFF_LINE_WIDTH, BASS_GAP } from 'constants/svgattributes';
 
 export const musicNotationData = [
-  { component:'NoteBeam', transform: 'translate(0,0)', content: { widthMultiplier: 1, heightMultiplier: 2, angle: 1 } },
   { component:'Curve', transform:'translate(0,0)', id: 1 },
   { component:'Clef', transform:'translate(0,0)', conditions:{},
     subcomponents:[{ component:'MeasureStart', transform:'translate(0,0)', conditions:{showClefBrace:true}},
