@@ -1,40 +1,55 @@
-import {hollowKnightRestingGroundsData } from './resting-grounds-sheet-music';
-
-const dearlyBeloved = {
-  id: '0',
-  songTitle: 'Dearly Beloved',
-  albumTitle: 'Kingdom Hearts',
-  cardImg: 'sora.jpg',
-  sheetMusicImg: ['dearly-beloved.jpg']
-};
-const ff7Prelude = {
-  id: '1',
-  songTitle: 'Prelude',
-  albumTitle: 'Final Fantasy 7',
-  cardImg: 'meteor.jpg',
-  sheetMusicImg: ['ff7-prelude.jpg']
-};
-const marioTheme = {
-  id: '2',
-  songTitle: 'Main Theme',
-  albumTitle: 'Super Mario',
-  cardImg: 'mario.jpg',
-  sheetMusicImg: ['mario-theme.jpg', 'mario-theme2.jpg', 'mario-theme3.jpg']
-};
 const restingGrounds = {
-  id: '3',
+  id: 'resting-grounds-hollow-knight',
   songTitle:'Resting Grounds',
   albumTitle:'Hollow Knight',
   cardImg:'seer.jpg',
-  sheetMusicImg: [],
-  sheets: hollowKnightRestingGroundsData
+  youtubelinks: [{
+    name: 'Original',
+    url: 'https://www.youtubelinks.com/watch?v=CgrBJDU2yvQ'
+  },{
+    name: 'Synthesia',
+    url: 'https://www.youtubelinks.com/watch?v=qZ2yWvholHw'
+  },{
+    name: 'Hard Version',
+    url: 'https://www.youtubelinks.com/watch?v=CKsz-GlZF3w'
+  }],
+  sheetMusicImgs: []
+};
+const marioTheme = {
+  id: 'mario-main-theme',
+  songTitle: 'Main Theme',
+  albumTitle: 'Super Mario',
+  cardImg: 'mario.jpg',
+  youtubelinks: [
+    { name: 'Super Easy', url: 'https://www.youtube.com/watch?v=7i3oM-u93xM'},
+    { name: 'Easy', url: 'https://www.youtube.com/watch?v=jgvaL5b02uU'},
+    { name: 'Hard', url: 'https://www.youtube.com/watch?v=XDmczii5-R0'}
+  ],
+  sheetMusicImgs: ['mario-theme.jpg', 'mario-theme2.jpg', 'mario-theme3.jpg']
+};
+const dearlyBeloved = {
+  id: 'dearly-beloved-kingdom-hearts',
+  songTitle: 'Dearly Beloved',
+  albumTitle: 'Kingdom Hearts',
+  cardImg: 'sora.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: ['dearly-beloved.jpg']
+};
+const ff7Prelude = {
+  id: 'final-fantasy-7-prelude',
+  songTitle: 'Prelude',
+  albumTitle: 'Final Fantasy 7',
+  cardImg: 'meteor.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: ['ff7-prelude.jpg']
 };
 const test = {
-  id: '4',
+  id: 'test',
   songTitle: 'Test',
-  sheetMusicImg: []
+  youtubelinks: [],
+  sheetMusicImgs: []
 };
 
-const songs = [dearlyBeloved, ff7Prelude, marioTheme, restingGrounds, test];
+const songs = [restingGrounds, marioTheme, dearlyBeloved, ff7Prelude, test];
 
 export { songs };

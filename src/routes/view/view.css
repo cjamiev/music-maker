@@ -8,3 +8,31 @@
   height: 400px;
   width: 300px;
 }
+
+.view__url-buttons-header {
+  width: 80%;
+  font-size: 36px;
+  margin: 5px auto;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.view__url-buttons {
+  width: 80%;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+.view__url-btn {
+  text-decoration: none;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  background: var(--primary-color);
+}
+
+.view__url-btn:hover {
+  color: var(--secondary-color);
+}
