@@ -5,7 +5,7 @@ const restingGrounds = {
   id: 'resting-grounds-hollow-knight',
   songTitle:'Resting Grounds',
   albumTitle:'Hollow Knight',
-  cardImg:'seer.jpg',
+  cardImg:'seer.png',
   youtubelinks: [{
     name: 'Original',
     url: 'https://www.youtubelinks.com/watch?v=CgrBJDU2yvQ'
@@ -22,7 +22,7 @@ const marioTheme = {
   id: 'mario-main-theme',
   songTitle: 'Main Theme',
   albumTitle: 'Super Mario',
-  cardImg: 'mario.jpg',
+  cardImg: 'mario.png',
   youtubelinks: [
     { name: 'Super Easy', url: 'https://www.youtube.com/watch?v=7i3oM-u93xM'},
     { name: 'Easy', url: 'https://www.youtube.com/watch?v=jgvaL5b02uU'},
@@ -34,7 +34,7 @@ const dearlyBeloved = {
   id: 'dearly-beloved-kingdom-hearts',
   songTitle: 'Dearly Beloved',
   albumTitle: 'Kingdom Hearts',
-  cardImg: 'sora.jpg',
+  cardImg: 'sora.png',
   youtubelinks: [],
   sheetMusicImgs: ['dearly-beloved.jpg']
 };
