@@ -1,0 +1,48 @@
+.page {
+  height: 100%;
+  display: flex;
+  min-height: 830px;
+  animation: fadeIn 500ms ease 0s 1 normal forwards;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.page__main {
+  padding-left: 10px;
+  width: 100%;
+}
+
+.page__header {
+  position: relative;
+  height: 100px;
+  white-space: nowrap;
+}
+
+.page__header-title {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.page__footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+.sidepanel {
+  width: 600px;
+  border-right: 1px solid rgb(228, 228, 228);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

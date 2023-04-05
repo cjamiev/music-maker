@@ -1,22 +1,20 @@
 import React from 'react';
-import { Navigate, Link, Route, Routes } from 'react-router-dom';
-import View from './view';
-import ViewSheet from './viewsheet';
-import Test from './test';
-import Create from './create';
-import ErrorPage from './errorpage';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { CreateMusic } from 'components/Pages/CreateMusic';
+import { TestPage } from 'components/Pages/TestPage';
+import { ViewSongs } from 'components/Pages/ViewSongs';
+import { ViewSheetMusic } from 'components/Pages/ViewSheetMusic';
+import { ErrorPage } from 'components/Pages/ErrorPage';
 
-const AppRoutes = React.memo(() => {
+export const AppRoutes = React.memo(() => {
   return (
     <Routes>
       <Route exact path="/" element={<Navigate to="/view" />} />
-      <Route path="/view" element={<View />} />
-      <Route path="/viewsheet/:songid/:page" element={<ViewSheet />} />
-      <Route path="/test" element={<Test />} />
-      <Route path="/create" element={<Create />} />
+      <Route path="/view" element={<ViewSongs />} />
+      <Route path="/viewsheet/:songid/:page" element={<ViewSheetMusic />} />
+      <Route path="/test" element={<TestPage />} />
+      <Route path="/create" element={<CreateMusic />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 });
-
-export default AppRoutes;

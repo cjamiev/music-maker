@@ -1,0 +1,39 @@
+.viewsongs {
+  margin-top: 20px;
+  margin-left: 20px;
+  position: relative;
+}
+
+.viewsongs__image {
+  height: 200px;
+  width: 150px;
+}
+
+.viewsongs__sidepanel-header {
+  width: 80%;
+  font-size: 36px;
+  margin: 5px auto;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.viewsongs__sidepanel-btn-group {
+  width: 80%;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+.viewsongs__sidepanel-btn {
+  text-decoration: none;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  background: var(--primary-color);
+  cursor: pointer;
+}
+
+.viewsongs__sidepanel-btn:hover {
+  color: var(--secondary-color);
+}

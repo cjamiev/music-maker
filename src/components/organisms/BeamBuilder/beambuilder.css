@@ -1,0 +1,41 @@
+.beambuilder {
+  position: relative;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 20px;
+  height: 700px;
+  width: 570px;
+}
+
+.beambuilder__btn-groups {
+  position: absolute;
+  display: flex;
+  top: 45%;
+  left: 1%;
+}
+
+.beambuilder__btn-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.beambuilder__sheet-music {
+  position: absolute;
+  top: -4%;
+  left: -145%;
+}
+
+.beambuilder__sheet-music--bottom-beam {
+  position: absolute;
+  top: -20%;
+  left: -145%;
+}
+
+.beambuilder__btn {
+  background-color: #022;
+  color: #fff;
+  width: 50px;
+  height: 60px;
+  margin-bottom: 3px;
+  margin-right: 13px;
+}
