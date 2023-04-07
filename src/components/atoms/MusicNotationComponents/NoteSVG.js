@@ -217,7 +217,7 @@ export const StemmedNoteFlippedSVG = ({ transform, conditions = {} }) => {
   );
 };
 
-export const NoteSVG = ({ className = '', transform, subcomponents = [] }) => {
+export const NoteSVG = ({ className = '', transform, subcomponents = [], handleClick }) => {
   const renderData = subcomponents.map(item => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.subcomponents) + JSON.stringify(item.conditions);
@@ -226,7 +226,7 @@ export const NoteSVG = ({ className = '', transform, subcomponents = [] }) => {
   });
 
   return (
-    <g className={className} data-testid="component-note" aria-label="note" transform={transform} >
+    <g onClick={handleClick} className={`${className} svg--clickable`} data-testid="component-note" aria-label="note" transform={transform} >
       {renderData}
     </g>
   );

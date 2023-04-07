@@ -68,7 +68,7 @@ Each object will properties
   - Cycle through any existing svg component
   - Be able to drag or use controller to place it anywhere in the sheet music
 - Evenly Spacing Note
-- Select Column on Click
+- Make Column Selection Easier
 - Move, Duplicate a row
 - Transpose scales
 - Save/Load from localStorage

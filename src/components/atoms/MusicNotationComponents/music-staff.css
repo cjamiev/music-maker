@@ -1,3 +1,7 @@
+.svg--clickable {
+  cursor: pointer;
+}
+
 .svg--primary-color {
   fill: #000000;
   stroke: #000000;

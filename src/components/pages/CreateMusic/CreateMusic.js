@@ -22,6 +22,7 @@ import {
 } from './helper';
 
 const ZERO = 0;
+const ONE = 1;
 
 export const CreateMusic = () => {
   const [editorPosition, setEditorPositon] = useState({
@@ -115,6 +116,18 @@ export const CreateMusic = () => {
     downloadFile(fileName, contentToSave);
   };
 
+  const handleClick = (svgItem) => {
+    // Hack to figure out if we clicked on bass section
+    const isBass = svgItem.transform.split(',')[ONE][ZERO] !== '0';
+
+    setEditorPositon({
+      pageIndex: svgItem.pageIndex,
+      lineIndex: svgItem.lineIndex,
+      columnIndex: svgItem.columnIndex,
+      isBassSelection: isBass
+    });
+  };
+
   return (
     <Page >
       <div className='createmusic__container'>
@@ -122,6 +135,7 @@ export const CreateMusic = () => {
           <DisplaySheetMusic
             isOneLineMode={true}
             sheetMusic={getSheetMusic(configuration, data[editorPosition.lineIndex], editorPosition)}
+            handleClick={handleClick}
             {...attributes}
           />
         </div>

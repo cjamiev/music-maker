@@ -134,14 +134,15 @@ const svgMap = {
   'Selection': SelectionSVG
 };
 
-const entryMapper = (entry) => {
+const entryMapper = (entry,handleClick) => {
   return {
+    handleClick,
     ...entry,
-    subcomponents: entry.subcomponents ? entry.subcomponents.map(item => entryMapper(item)): [],
+    subcomponents: entry.subcomponents ? entry.subcomponents.map(item => entryMapper(item, handleClick)): [],
     component: svgMap[entry.component]
   };
 };
 
-export const svgDataMapper = (data) => {
-  return data.map(entry => entryMapper(entry));
+export const svgDataMapper = (data,handleClick) => {
+  return data.map(entry => entryMapper(entry,handleClick));
 };
