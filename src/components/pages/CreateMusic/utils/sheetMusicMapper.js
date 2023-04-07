@@ -37,7 +37,7 @@ const getMeasureSubcomponents = ({
 };
 
 const getSheetMusic = (configuration, line, editorPosition) => {
-  const { ottavaAlta, treble, measure, dynamics, bass, ottavaBassa, pedal } = line;
+  const { ottavaAlta = [], treble, measure = [], dynamics = [], bass, ottavaBassa = [], pedal = [] } = line;
 
   const mappedTrebleData = treble.map(item => {
     const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;

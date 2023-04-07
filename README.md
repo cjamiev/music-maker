@@ -46,8 +46,6 @@ Each object will properties
 
 ## ToDo
 
-- Create horizontal cards
-- Click on them open side panel
 - Side Panel will have images
 - Click on Image to enlarge
 - Pages to swap images
@@ -73,4 +71,4 @@ Each object will properties
 - Select Column on Click
 - Move, Duplicate a row
 - Transpose scales
-- Save/Load from localStorage and json file
+- Save/Load from localStorage

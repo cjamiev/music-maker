@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Page }from 'components/core/Page';
+import { Button } from 'components/atoms/Button';
 import { DisplaySheetMusic } from 'components/molecules/DisplaySheetMusic';
 import { MusicForm } from 'components/molecules/MusicForm';
 import { Configuration } from './Configuration';
 import { ColumnPositionController } from './ColumnPositionController';
 import { LinePositionController } from './LinePositionController';
 import { getSheetMusic } from './utils/sheetMusicMapper';
+import { getCompressedData } from './utils/compressData';
+import { downloadFile } from './utils/download';
 
 const attributes = {
   width: 1000,
@@ -295,6 +298,20 @@ export const CreateMusic = () => {
     }
   };
 
+  const handleFileUploaded = (e) => {
+    const file = e.target.files[ZERO];
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[ZERO]);
+    fileReader.onloadend = () => {
+      const contents = JSON.parse(fileReader.result);
+
+      console.log(contents);
+
+      setConfiguration(contents.configuration);
+      setData(contents.data);
+    };
+  };
+
   return (
     <Page >
       <div className='createmusic__container'>
@@ -309,6 +326,19 @@ export const CreateMusic = () => {
           <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
           <LinePositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
           <Configuration configuration={configuration} onConfigurationChange={handleConfigurationChange} />
+          <Button
+            key="save"
+            onClick={() => {
+              const compressedData = getCompressedData(data);
+              const fileToSave = JSON.stringify({
+                configuration,
+                data: compressedData
+              });
+              downloadFile('test.json', fileToSave);
+            }}
+            label="Save"
+          />
+          <input type="file" id="filetoupload" name="upload" onChange={handleFileUploaded} />
         </div>
         <div className='createmusic__form'>
           <MusicForm
