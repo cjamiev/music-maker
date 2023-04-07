@@ -129,12 +129,15 @@ export const CreateMusic = () => {
           <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
           <LinePositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
           <Configuration configuration={configuration} onConfigurationChange={handleConfigurationChange} />
-          <Button
-            key="save"
-            onClick={handleOnSaveSheetMusic}
-            label="Save"
-          />
-          <input type="file" id="filetoupload" name="upload" onChange={handleFileUploaded} />
+          <div className="createmusic__file-section">
+            <Button
+              key="save"
+              className='createmusic__save-btn'
+              onClick={handleOnSaveSheetMusic}
+              label="Save"
+            />
+            <input className="createmusic__file-upload" type="file" onChange={handleFileUploaded} />
+          </div>
         </div>
         <div className='createmusic__form'>
           <MusicForm

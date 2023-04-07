@@ -45,3 +45,15 @@
   position: absolute;
   z-index: 2;
 }
+
+.createmusic__file-section {
+  display: flex;
+  place-items: center;
+}
+
+.createmusic__save-btn {
+  width: 80px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: white;
+}
