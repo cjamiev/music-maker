@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Button } from 'components/atoms/Button';
 import RestSelector from './RestSelector';
 import MeasureBarSelector from './MeasureBarSelector';
 import PedalSelector from './PedalSelector';
@@ -13,6 +14,7 @@ export const MusicForm = ({
   noteConfig,
   selectSymbol,
   selectNoteType,
+  handleAddHiglight,
   isBassSelection
 }) => {
   return (
@@ -29,6 +31,11 @@ export const MusicForm = ({
       </div>
       <div className="music-form__middle">
         <div className="music-form__side-btns">
+          <Button
+            className="music-form__highlight-btn"
+            label="Add Highlight"
+            onClick={handleAddHiglight}
+          />
           <ChordBuilder pianoKey={noteConfig.pianoKey} isBassSelection={isBassSelection} selectNoteType={selectNoteType}/>
         </div>
         <div className="music-form__piano">

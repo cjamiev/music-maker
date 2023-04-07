@@ -75,6 +75,12 @@ export const CreateMusic = () => {
     handleDataChange(updatedNote);
   };
 
+  const handleAddHiglight = () => {
+    const updatedClassName = noteConfig.className ? '':'svg--selected-color';
+    const updatedNoteConfig = {...noteConfig, className: updatedClassName};
+    setNoteConfig(updatedNoteConfig);
+  };
+
   const handleDataChange = (updatedSymbol) => {
     if(updatedSymbol.component === 'Pedal') {
       setData(getUpdatedPedal({ editorPosition, currentLine, data, update: updatedSymbol }));
@@ -158,6 +164,7 @@ export const CreateMusic = () => {
             noteConfig={noteConfig}
             selectSymbol={handleDataChange}
             selectNoteType={handleNoteTypeChange}
+            handleAddHiglight={handleAddHiglight}
             isBassSelection={editorPosition.isBassSelection}
           />
         </div>
