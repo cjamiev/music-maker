@@ -102,6 +102,10 @@
   cursor: pointer;
 }
 
+.btn--icon__disabled {
+  cursor: not-allowed;
+}
+
 .btn--icon:hover {
   transform: scaleX(1.05) scaleY(1.05);
   border:none;

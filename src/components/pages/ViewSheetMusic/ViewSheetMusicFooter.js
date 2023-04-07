@@ -24,12 +24,12 @@ export const ViewSheetMusicFooter = ({ numberOfPages, onChangePage, onZoomIn, on
           <IconButton
             type={ICON_TYPES.PLUS}
             size={ICON_SIZES.EXTRA_SMALL}
-            onClick={onZoomIn}
+            handleClick={onZoomIn}
           />
           <IconButton
             type={ICON_TYPES.MINUS}
             size={ICON_SIZES.EXTRA_SMALL}
-            onClick={onZoomOut}
+            handleClick={onZoomOut}
           />
         </div>
       </div>

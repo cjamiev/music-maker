@@ -17,7 +17,7 @@ export const ColumnPositionController = ({ editorPosition, data, onChange }) => 
         classColor='primary'
         onClick={() => {
           const nextColumnIndex = lastColumnIndex + ONE;
-          const noteId = String(pageIndex) + String(lineIndex) + String(nextColumnIndex);
+          const noteId = `${pageIndex},${lineIndex},${nextColumnIndex}`;
           const newNote = {
             id: noteId,
             pageIndex,
@@ -89,7 +89,7 @@ export const ColumnPositionController = ({ editorPosition, data, onChange }) => 
           const updatedSection = currentSection
             .filter((item) => !(item.columnIndex === columnIndex))
             .map((item,index) => {
-              const noteId = String(item.pageIndex) + String(item.lineIndex) + String(index);
+              const noteId = `${item.pageIndex},${item.lineIndex},${index}`;
               return {
                 ...item,
                 id: noteId,

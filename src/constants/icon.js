@@ -1,5 +1,8 @@
 export const ICON_TYPES = {
+  ARROW: 'arrow',
   CLOSE: 'close',
+  COPY: 'copy',
+  DELETE: 'delete',
   EDIT: 'edit',
   MINUS: 'minus',
   PLUS: 'plus',

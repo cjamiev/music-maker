@@ -25,7 +25,7 @@ export const DEFAULT_NOTE = {
   addedNotes: [{},{},{},{}]
 };
 export const STARTING_NOTE = {
-  id: '001',
+  id: '0,0,0',
   pageIndex: ZERO,
   lineIndex: ZERO,
   columnIndex: ZERO,

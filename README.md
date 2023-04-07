@@ -46,7 +46,7 @@ Each object will properties
 
 ## ToDo
 
-- Move, Duplicate a row
+- Save/Load from localStorage
 - chord notation
 - finger numbers
 - Triplet Constructor
@@ -70,4 +70,3 @@ Each object will properties
   - Be able to drag or use controller to place it anywhere in the sheet music
 - Evenly Spacing Note
 - Transpose scales
-- Save/Load from localStorage

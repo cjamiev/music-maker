@@ -15,9 +15,20 @@
   stroke:var(--primary-bg-color);
 }
 
+.icon--disabled {
+  fill:#c2d1d1;
+  stroke:#c2d1d1;
+  cursor: not-allowed;
+}
+
 .icon--black {
   fill:#000000;
   stroke:#000000;
+}
+
+.icon--white {
+  fill:#ffffff;
+  stroke:#ffffff;
 }
 
 .icon--hollow {
