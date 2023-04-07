@@ -46,15 +46,16 @@ Each object will properties
 
 ## ToDo
 
+- Move, Duplicate a row
+- chord notation
+- finger numbers
+- Triplet Constructor
+- Beam Constructor
 - Side Panel will have images
 - Click on Image to enlarge
 - Pages to swap images
 - Update Navigation (Bar on the bottom)
-- finger numbers
-- chord notation
 - rolled modifier
-- Beam Constructor
-- Triplet Constructor
 - Grace Note Constructor
 - Slur/Tie Constructor
 - Clef Ottava option
@@ -68,7 +69,5 @@ Each object will properties
   - Cycle through any existing svg component
   - Be able to drag or use controller to place it anywhere in the sheet music
 - Evenly Spacing Note
-- Make Column Selection Easier
-- Move, Duplicate a row
 - Transpose scales
 - Save/Load from localStorage

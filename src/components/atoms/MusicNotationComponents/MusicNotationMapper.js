@@ -1,7 +1,8 @@
 import React from 'react';
 import { svgDataMapper } from './svgMapperData';
+import { noop } from 'utils/noop';
 
-export const MusicNotationMapper = ({ data, parentRef, handleClick } ) => {
+export const MusicNotationMapper = ({ data, parentRef, handleClick = noop } ) => {
   const renderData = svgDataMapper(data, handleClick).map(item => {
     const SvgComponent = item.component;
     const key = SvgComponent.name + item.transform + JSON.stringify(item.conditions) + JSON.stringify(item.subcomponents);

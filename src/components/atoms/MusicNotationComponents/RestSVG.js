@@ -44,11 +44,12 @@ export const DottedRestSVG = () => {
   );
 };
 
-export const RestSVG = ({ transform, conditions = {}, subcomponents = [] }) => {
+export const RestSVG = ({ transform, conditions = {}, subcomponents = [], handleClick }) => {
   const { showWholeRest, showHalfRest, showQuarterRest, showEighthRest, showSixteenthRest, showDotted } = conditions;
 
   return (
-    <g data-testid="component-rest" aria-label="rest" transform={transform} >
+    <g onClick={handleClick} data-testid="component-rest" aria-label="rest" transform={transform} >
+      <rect data-testid="column-clickable-area" className="svg--clickable svg--invisible-area" aria-label="clickable area" width="27.192894" height="70" x="65.119415" y="76.970314" />
       <g data-testid="staff-rest" aria-label="staff rest" >
         <rect data-testid="rect3608-7-0-3-7-1" className="svg__0" width="27.192894" height="0.073101997" x="65.119415" y="102.15877" />
         <rect data-testid="rect3610-9-9-5-2-5" className="svg__0" width="27.192894" height="0.07310199" x="65.119415" y="107.18586" />
