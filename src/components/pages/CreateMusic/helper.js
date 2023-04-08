@@ -6,6 +6,13 @@ export const attributes = {
   viewBox: '0 0 529.2 317.5'
 };
 
+export const DEFAULT_EDITOR = {
+  pageIndex: ZERO,
+  lineIndex: ZERO,
+  columnIndex: ZERO,
+  isBassSelection: false
+};
+
 export const DEFAULT_NOTE = {
   showWholeNote: false,
   showHalfNote: false,
@@ -24,7 +31,7 @@ export const DEFAULT_NOTE = {
   pianoKey: 'C4',
   addedNotes: [{},{},{},{}]
 };
-export const STARTING_NOTE = {
+const STARTING_NOTE = {
   id: '0,0,0',
   pageIndex: ZERO,
   lineIndex: ZERO,
@@ -33,6 +40,16 @@ export const STARTING_NOTE = {
   pianoKey: 'C4',
   addedNotes: [{},{},{},{}]
 };
+
+export const DEFAULT_DATA = [{
+  ottavaAlta: [],
+  treble: [STARTING_NOTE],
+  measure: [],
+  dynamics: [],
+  bass: [STARTING_NOTE],
+  ottavaBassa: [],
+  pedal: []
+}];
 
 export const getUpdatedSymbols = ({ editorPosition, currentLine, data, update }) => {
   const currentSection = editorPosition.isBassSelection ? currentLine.bass : currentLine.treble;

@@ -33,7 +33,7 @@ export const MusicForm = ({
         <div className="music-form__side-btns">
           <Button
             className="music-form__highlight-btn"
-            label="Add Highlight"
+            label={noteConfig.className ? 'Remove Highlight': 'Add Highlight'}
             onClick={handleAddHiglight}
           />
           <ChordBuilder pianoKey={noteConfig.pianoKey} isBassSelection={isBassSelection} selectNoteType={selectNoteType}/>

@@ -11,8 +11,9 @@ import { ColumnPositionController } from './ColumnPositionController';
 import { LinePositionController } from './LinePositionController';
 import {
   attributes,
+  DEFAULT_EDITOR,
   DEFAULT_NOTE,
-  STARTING_NOTE,
+  DEFAULT_DATA,
   getUpdatedSymbols,
   getUpdatedMeasure,
   getUpdatedDynamics,
@@ -25,12 +26,7 @@ const ZERO = 0;
 const ONE = 1;
 
 export const CreateMusic = () => {
-  const [editorPosition, setEditorPositon] = useState({
-    pageIndex: ZERO,
-    lineIndex: ZERO,
-    columnIndex: ZERO,
-    isBassSelection: false
-  });
+  const [editorPosition, setEditorPositon] = useState(DEFAULT_EDITOR);
   const [noteConfig, setNoteConfig] = useState(DEFAULT_NOTE);
   const [configuration, setConfiguration] = useState({
     title: '',
@@ -45,15 +41,7 @@ export const CreateMusic = () => {
       cutTime: false
     }
   });
-  const [data, setData] = useState([{
-    ottavaAlta: [],
-    treble: [STARTING_NOTE],
-    measure: [],
-    dynamics: [],
-    bass: [STARTING_NOTE],
-    ottavaBassa: [],
-    pedal: []
-  }]);
+  const [data, setData] = useState(DEFAULT_DATA);
 
   const currentLine = data[editorPosition.lineIndex];
 
@@ -101,6 +89,9 @@ export const CreateMusic = () => {
     if(!file) {
       return;
     }
+
+    setEditorPositon(DEFAULT_EDITOR);
+    setNoteConfig(DEFAULT_NOTE);
 
     const fileReader = new FileReader();
     fileReader.readAsText(file);
