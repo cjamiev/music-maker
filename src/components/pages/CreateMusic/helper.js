@@ -1,4 +1,5 @@
 const ZERO = 0;
+const ONE = 1;
 
 export const attributes = {
   width: 1000,
@@ -252,9 +253,98 @@ export const toLowerCaseNoSpace = (text) => {
     .join('');
 };
 
-export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
+export const cloneLineToNextLine = (lineToCopy) => {
+  const ottavaAlta = lineToCopy.ottavaAlta || [];
+  const dynamics = lineToCopy.dynamics || [];
+  const pedal = lineToCopy.pedal || [];
+  const measure = lineToCopy.measure || [];
+  const ottavaBassa = lineToCopy.ottavaBassa || [];
+  const pageIndex = lineToCopy.treble[ZERO].pageIndex;
+  const lineIndex = lineToCopy.treble[ZERO].lineIndex + ONE;
+
   return {
-    ottavaAlta: lineToCopy.ottavaAlta.map((item, itemIndex) => {
+    ottavaAlta: ottavaAlta.map((item) => {
+      const id = `${pageIndex},${lineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: item.columnIndex,
+        id
+      };
+    }),
+    treble: lineToCopy.treble.map((item) => {
+      const id = `${pageIndex},${lineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: item.columnIndex,
+        id
+      };
+    }),
+    dynamics: dynamics.map((item) => {
+      const id = `${pageIndex},${lineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: item.columnIndex,
+        id
+      };
+    }),
+    bass: lineToCopy.bass.map((item) => {
+      const id = `${pageIndex},${lineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: item.columnIndex,
+        id
+      };
+    }),
+    pedal: pedal.map((item) => {
+      const id = `${pageIndex},${lineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: item.columnIndex,
+        id
+      };
+    }),
+    measure: measure.map((item) => {
+      const id = `${pageIndex},${lineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: item.columnIndex,
+        id
+      };
+    }),
+    ottavaBassa: ottavaBassa.map((item) => {
+      const id = `${pageIndex},${lineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: item.columnIndex,
+        id
+      };
+    })
+  };
+};
+
+export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
+  const ottavaAlta = lineToCopy.ottavaAlta || [];
+  const dynamics = lineToCopy.dynamics || [];
+  const pedal = lineToCopy.pedal || [];
+  const measure = lineToCopy.measure || [];
+  const ottavaBassa = lineToCopy.ottavaBassa || [];
+
+  return {
+    ottavaAlta: ottavaAlta.map((item, itemIndex) => {
       const id = `${pageIndex},${lineIndex},${itemIndex}`;
       return {
         ...item,
@@ -274,7 +364,7 @@ export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
         id
       };
     }),
-    dynamics: lineToCopy.dynamics.map((item, itemIndex) => {
+    dynamics: dynamics.map((item, itemIndex) => {
       const id = `${pageIndex},${lineIndex},${itemIndex}`;
       return {
         ...item,
@@ -294,7 +384,7 @@ export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
         id
       };
     }),
-    pedal: lineToCopy.pedal.map((item, itemIndex) => {
+    pedal: pedal.map((item, itemIndex) => {
       const id = `${pageIndex},${lineIndex},${itemIndex}`;
       return {
         ...item,
@@ -304,7 +394,7 @@ export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
         id
       };
     }),
-    measure: lineToCopy.measure.map((item, itemIndex) => {
+    measure: measure.map((item, itemIndex) => {
       const id = `${pageIndex},${lineIndex},${itemIndex}`;
       return {
         ...item,
@@ -314,7 +404,7 @@ export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
         id
       };
     }),
-    ottavaBassa: lineToCopy.ottavaBassa.map((item, itemIndex) => {
+    ottavaBassa: ottavaBassa.map((item, itemIndex) => {
       const id = `${pageIndex},${lineIndex},${itemIndex}`;
       return {
         ...item,

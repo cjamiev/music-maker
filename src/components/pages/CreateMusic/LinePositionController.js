@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from 'components/atoms/Button';
-import { swapDataPositions } from './helper';
+import { cloneLineToNextLine, swapDataPositions } from './helper';
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 
 const ZERO = 0;
@@ -111,7 +111,7 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
               };
             });
             const dupeLine = {
-              ...currentLine,
+              ...cloneLineToNextLine(currentLine),
               treble: dupeTreble,
               bass: dupeBass
             };
@@ -119,7 +119,7 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
 
             onChange({
               ...editorPosition,
-              lineIndex: lineIndex + ONE,
+              lineIndex: nextLineIndex,
               columnIndex: ZERO,
               isBassSelection: false
             },updateData);
@@ -192,68 +192,69 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
           size={ICON_SIZES.EXTRA_SMALL}
           isDisabled={isLastLineIndex && isFirstLineIndex}
           handleClick={() => {
-            const updatedData = data.filter((item, index) => index !== lineIndex)
-              .map((entry,entryIndex) => {
-                const updatedEntry = {
-                  ottavaAlta: entry.ottavaAlta.map(item => {
-                    const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                    return {
-                      ...item,
-                      id,
-                      lineIndex: entryIndex
-                    };
-                  }),
-                  treble: entry.treble.map(item => {
-                    const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                    return {
-                      ...item,
-                      id,
-                      lineIndex: entryIndex
-                    };
-                  }),
-                  dynamics: entry.dynamics.map(item => {
-                    const id =`${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                    return {
-                      ...item,
-                      id,
-                      lineIndex: entryIndex
-                    };
-                  }),
-                  bass: entry.bass.map(item => {
-                    const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                    return {
-                      ...item,
-                      id,
-                      lineIndex: entryIndex
-                    };
-                  }),
-                  pedal: entry.pedal.map(item => {
-                    const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                    return {
-                      ...item,
-                      id,
-                      lineIndex: entryIndex
-                    };
-                  }),
-                  measure: entry.measure.map(item => {
-                    const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                    return {
-                      ...item,
-                      id,
-                      lineIndex: entryIndex
-                    };
-                  }),
-                  ottavaBassa: entry.ottavaBassa.map(item => {
-                    const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                    return {
-                      ...item,
-                      id,
-                      lineIndex: entryIndex
-                    };
-                  })
-                };
-                return updatedEntry;
-              });
+            const filteredData = data.filter((item, index) => index !== lineIndex);
+            const updatedData = isLastLineIndex ? filteredData : filteredData.map((entry,entryIndex) => {
+              const updatedEntry = {
+                ottavaAlta: entry.ottavaAlta.map(item => {
+                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
+                  return {
+                    ...item,
+                    id,
+                    lineIndex: entryIndex
+                  };
+                }),
+                treble: entry.treble.map(item => {
+                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
+                  return {
+                    ...item,
+                    id,
+                    lineIndex: entryIndex
+                  };
+                }),
+                dynamics: entry.dynamics.map(item => {
+                  const id =`${item.pageIndex},${entryIndex},${item.columnIndex}`;
+                  return {
+                    ...item,
+                    id,
+                    lineIndex: entryIndex
+                  };
+                }),
+                bass: entry.bass.map(item => {
+                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
+                  return {
+                    ...item,
+                    id,
+                    lineIndex: entryIndex
+                  };
+                }),
+                pedal: entry.pedal.map(item => {
+                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
+                  return {
+                    ...item,
+                    id,
+                    lineIndex: entryIndex
+                  };
+                }),
+                measure: entry.measure.map(item => {
+                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
+                  return {
+                    ...item,
+                    id,
+                    lineIndex: entryIndex
+                  };
+                }),
+                ottavaBassa: entry.ottavaBassa.map(item => {
+                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
+                  return {
+                    ...item,
+                    id,
+                    lineIndex: entryIndex
+                  };
+                })
+              };
+              return updatedEntry;
+            });
+
             const updatedEditorLineIndex = isLastLineIndex ? lineIndex - ONE: lineIndex;
             const updatedEditorPosition = {
               ...editorPosition,
