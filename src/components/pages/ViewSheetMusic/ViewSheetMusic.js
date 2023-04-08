@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { DisplaySheetMusic } from 'components/molecules/DisplaySheetMusic';
 import { Page }from 'components/core/Page';
 import { ViewSheetMusicFooter } from './ViewSheetMusicFooter';
-import useLocalStorage from 'hooks/useLocalStorage';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
 import { songsWithSheetMusic } from 'data/songs';
 

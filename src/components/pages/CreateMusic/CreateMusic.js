@@ -3,6 +3,7 @@ import { Page }from 'components/core/Page';
 import { Button } from 'components/atoms/Button';
 import { DisplaySheetMusic } from 'components/molecules/DisplaySheetMusic';
 import { MusicForm } from 'components/molecules/MusicForm';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 import { getSheetMusic } from 'utils/sheetMusicMapper';
 import { getCompressedSheetMusicData } from 'utils/compressSheetMusicData';
 import { downloadFile } from 'utils/download';
@@ -24,6 +25,7 @@ import {
 
 const ZERO = 0;
 const ONE = 1;
+const LS_SHEET_DATA = 'sheetData';
 
 export const CreateMusic = () => {
   const [editorPosition, setEditorPositon] = useState(DEFAULT_EDITOR);
@@ -103,7 +105,7 @@ export const CreateMusic = () => {
     };
   };
 
-  const handleOnSaveSheetMusic = () => {
+  const handleOnDownload = () => {
     const compressedData = getCompressedSheetMusicData(data);
     const contentToSave = JSON.stringify({
       configuration,
@@ -111,6 +113,24 @@ export const CreateMusic = () => {
     });
     const fileName = `${toLowerCaseNoSpace(configuration.title)}-${toLowerCaseNoSpace(configuration.subtitle)}.json`;
     downloadFile(fileName, contentToSave);
+  };
+
+  const handleOnGetCache = (e) => {
+    const item = localStorage.getItem(LS_SHEET_DATA);
+    const contents = JSON.parse(item);
+
+    setConfiguration(contents.configuration);
+    setData(contents.data);
+  };
+
+
+  const handleOnStoreCache = () => {
+    const compressedData = getCompressedSheetMusicData(data);
+    const contentToSave = JSON.stringify({
+      configuration,
+      data: compressedData
+    });
+    localStorage.setItem(LS_SHEET_DATA, contentToSave);
   };
 
   const handleClick = (svgItem) => {
@@ -140,12 +160,26 @@ export const CreateMusic = () => {
           <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
           <LinePositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
           <Configuration configuration={configuration} onConfigurationChange={handleConfigurationChange} />
+          <div className="createmusic__cache-section">
+            <Button
+              key="cache"
+              className='createmusic__save-btn'
+              onClick={handleOnStoreCache}
+              label="Cache"
+            />
+            <Button
+              key="load-cache"
+              className='createmusic__save-btn'
+              onClick={handleOnGetCache}
+              label="Load Cache"
+            />
+          </div>
           <div className="createmusic__file-section">
             <Button
               key="save"
               className='createmusic__save-btn'
-              onClick={handleOnSaveSheetMusic}
-              label="Save"
+              onClick={handleOnDownload}
+              label="Download"
             />
             <input className="createmusic__file-upload" type="file" onChange={handleFileUploaded} />
           </div>
