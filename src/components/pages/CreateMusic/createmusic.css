@@ -46,6 +46,11 @@
   z-index: 2;
 }
 
+.createmusic__cache-section {
+  display: flex;
+  place-items: center;
+}
+
 .createmusic__file-section {
   display: flex;
   place-items: center;
@@ -78,13 +83,13 @@
   top: -10px;
 }
 
-.createmusic__row-modifier--up {
+.createmusic__row-modifier--left {
   position: absolute;
   top: 10px;
   left: -5px;
 }
 
-.createmusic__row-modifier--down {
+.createmusic__row-modifier--right {
   position: absolute;
   top: 45px;
   left: -2px;
@@ -101,3 +106,23 @@
   top: 35px;
 }
 
+.createmusic__row-modifier--move {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 40px;
+  top: -10px;
+  left: -25px;
+}
+
+.createmusic__row-modifier--up {
+  position: absolute;
+  top: 10px;
+  left: -5px;
+}
+
+.createmusic__row-modifier--down {
+  position: absolute;
+  top: 45px;
+  left: -2px;
+}

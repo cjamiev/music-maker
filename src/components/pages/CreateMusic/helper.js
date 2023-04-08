@@ -251,3 +251,78 @@ export const toLowerCaseNoSpace = (text) => {
     })
     .join('');
 };
+
+export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
+  return {
+    ottavaAlta: lineToCopy.ottavaAlta.map((item, itemIndex) => {
+      const id = `${pageIndex},${lineIndex},${itemIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: itemIndex,
+        id
+      };
+    }),
+    treble: lineToCopy.treble.map((item, itemIndex) => {
+      const id = `${pageIndex},${lineIndex},${itemIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: itemIndex,
+        id
+      };
+    }),
+    dynamics: lineToCopy.dynamics.map((item, itemIndex) => {
+      const id = `${pageIndex},${lineIndex},${itemIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: itemIndex,
+        id
+      };
+    }),
+    bass: lineToCopy.bass.map((item, itemIndex) => {
+      const id = `${pageIndex},${lineIndex},${itemIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: itemIndex,
+        id
+      };
+    }),
+    pedal: lineToCopy.pedal.map((item, itemIndex) => {
+      const id = `${pageIndex},${lineIndex},${itemIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: itemIndex,
+        id
+      };
+    }),
+    measure: lineToCopy.measure.map((item, itemIndex) => {
+      const id = `${pageIndex},${lineIndex},${itemIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: itemIndex,
+        id
+      };
+    }),
+    ottavaBassa: lineToCopy.ottavaBassa.map((item, itemIndex) => {
+      const id = `${pageIndex},${lineIndex},${itemIndex}`;
+      return {
+        ...item,
+        pageIndex,
+        lineIndex,
+        columnIndex: itemIndex,
+        id
+      };
+    })
+  };
+};

@@ -46,27 +46,28 @@ Each object will properties
 
 ## ToDo
 
-- Save/Load from localStorage
 - chord notation
 - finger numbers
-- Triplet Constructor
-- Beam Constructor
-- Side Panel will have images
-- Click on Image to enlarge
-- Pages to swap images
-- Update Navigation (Bar on the bottom)
-- rolled modifier
-- Grace Note Constructor
-- Slur/Tie Constructor
-- Clef Ottava option
-- Repeat Selector
 - Custom Text Component
   - Normal Font -> font-family: Arial, sans-serif;
   - Small gap Font -> font-family: Tahoma, sans-serif;
   - Large gap Font -> font-family: 'Courier New', monospace;
   - Cursive Font -> font-family: 'Brush Script MT', cursive;
+- Easy Way to Switch Between Create/Edit/View
+- Add sounds to the site
+- Interval Training Section
+- Beam Constructor
+- Triplet Constructor
+- Side Panel will have images
+- Click on Image to enlarge
+- Pages to swap images
+- rolled modifier
+- Grace Note Constructor
+- Slur/Tie Constructor
+- Clef Ottava option
+- Transpose scales
+- Repeat Selector
+- Evenly Spacing Note
 - Custom SVG placer
   - Cycle through any existing svg component
   - Be able to drag or use controller to place it anywhere in the sheet music
-- Evenly Spacing Note
-- Transpose scales
