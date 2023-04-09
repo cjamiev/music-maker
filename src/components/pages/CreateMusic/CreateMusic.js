@@ -98,9 +98,29 @@ export const CreateMusic = () => {
     fileReader.readAsText(file);
     fileReader.onloadend = () => {
       const contents = JSON.parse(fileReader.result);
+      const cachedFirstNote= contents.data[ZERO].treble[ZERO];
 
       setConfiguration(contents.configuration);
       setData(contents.data);
+      setEditorPositon(DEFAULT_EDITOR);
+      setNoteConfig({
+        pianoKey: cachedFirstNote.pianoKey,
+        addedNotes: cachedFirstNote.addedNotes,
+        showWholeNote: cachedFirstNote.showWholeNote,
+        showHalfNote: cachedFirstNote.showHalfNote,
+        showQuarterNote: cachedFirstNote.showQuarterNote,
+        showEighthNote: cachedFirstNote.showEighthNote,
+        showSixteenthNote: cachedFirstNote.showSixteenthNote,
+        showNoteFlat: cachedFirstNote.showNoteFlat,
+        showNoteSharp: cachedFirstNote.showNoteSharp,
+        showNoteNatural: cachedFirstNote.showNoteNatural,
+        showStaccato: cachedFirstNote.showStaccato,
+        showDotted: cachedFirstNote.showDotted,
+        showAccent: cachedFirstNote.showAccent,
+        showTenuto: cachedFirstNote.showTenuto,
+        showFermata: cachedFirstNote.showFermata,
+        showTrill: cachedFirstNote.showTrill
+      });
     };
   };
 
@@ -117,9 +137,29 @@ export const CreateMusic = () => {
   const handleOnGetCache = (e) => {
     const item = localStorage.getItem(LS_SHEET_DATA);
     const contents = JSON.parse(item);
+    const cachedFirstNote= contents.data[ZERO].treble[ZERO];
 
     setConfiguration(contents.configuration);
     setData(contents.data);
+    setEditorPositon(DEFAULT_EDITOR);
+    setNoteConfig({
+      pianoKey: cachedFirstNote.pianoKey,
+      addedNotes: cachedFirstNote.addedNotes,
+      showWholeNote: cachedFirstNote.showWholeNote,
+      showHalfNote: cachedFirstNote.showHalfNote,
+      showQuarterNote: cachedFirstNote.showQuarterNote,
+      showEighthNote: cachedFirstNote.showEighthNote,
+      showSixteenthNote: cachedFirstNote.showSixteenthNote,
+      showNoteFlat: cachedFirstNote.showNoteFlat,
+      showNoteSharp: cachedFirstNote.showNoteSharp,
+      showNoteNatural: cachedFirstNote.showNoteNatural,
+      showStaccato: cachedFirstNote.showStaccato,
+      showDotted: cachedFirstNote.showDotted,
+      showAccent: cachedFirstNote.showAccent,
+      showTenuto: cachedFirstNote.showTenuto,
+      showFermata: cachedFirstNote.showFermata,
+      showTrill: cachedFirstNote.showTrill
+    });
   };
 
 
