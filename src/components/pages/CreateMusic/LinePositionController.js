@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from 'components/atoms/Button';
-import { cloneLineToNextLine, swapDataPositions } from './helper';
+import { cloneLineToNextLine, reorderLineIndex, swapDataPositions } from './helper';
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 
 const ZERO = 0;
@@ -76,14 +76,23 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
               ottavaBassa: [],
               pedal: []
             };
-            const updateData = data.concat([nextLine]);
+
+            const dataWithNewLine = data.slice(ZERO, nextLineIndex).concat([nextLine]).concat(data.slice(nextLineIndex));
+            const updatedData = dataWithNewLine
+              .map((entry, entryIndex) => {
+                if(entryIndex < nextLineIndex) {
+                  return entry;
+                } else {
+                  return reorderLineIndex(entry, entryIndex);
+                }
+              });
 
             onChange({
               ...editorPosition,
               lineIndex: lineIndex + ONE,
               columnIndex: ZERO,
               isBassSelection: false
-            },updateData);
+            },updatedData);
           }}
         />
         <IconButton
@@ -115,14 +124,23 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
               treble: dupeTreble,
               bass: dupeBass
             };
-            const updateData = data.concat([dupeLine]);
+
+            const dataWithClonedLine = data.slice(ZERO, nextLineIndex).concat([dupeLine]).concat(data.slice(nextLineIndex));
+            const updatedData = dataWithClonedLine
+              .map((entry, entryIndex) => {
+                if(entryIndex < nextLineIndex) {
+                  return entry;
+                } else {
+                  return reorderLineIndex(entry, entryIndex);
+                }
+              });
 
             onChange({
               ...editorPosition,
               lineIndex: nextLineIndex,
               columnIndex: ZERO,
               isBassSelection: false
-            },updateData);
+            }, updatedData);
           }}
         />
       </div>

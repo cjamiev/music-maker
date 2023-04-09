@@ -336,6 +336,74 @@ export const cloneLineToNextLine = (lineToCopy) => {
   };
 };
 
+export const reorderLineIndex = (lineToReindex, newLineIndex) => {
+  const ottavaAlta = lineToReindex.ottavaAlta || [];
+  const dynamics = lineToReindex.dynamics || [];
+  const pedal = lineToReindex.pedal || [];
+  const measure = lineToReindex.measure || [];
+  const ottavaBassa = lineToReindex.ottavaBassa || [];
+
+  return {
+    ottavaAlta: ottavaAlta.map(item => {
+      const id = `${item.pageIndex},${newLineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        id,
+        lineIndex: newLineIndex
+      };
+    }),
+    treble: lineToReindex.treble.map(item => {
+      const id = `${item.pageIndex},${newLineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        id,
+        lineIndex: newLineIndex
+      };
+    }),
+    dynamics: dynamics.map(item => {
+      const id =`${item.pageIndex},${newLineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        id,
+        lineIndex: newLineIndex
+      };
+    }),
+    bass: lineToReindex.bass.map(item => {
+      const id = `${item.pageIndex},${newLineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        id,
+        lineIndex: newLineIndex
+      };
+    }),
+    pedal: pedal.map(item => {
+      const id = `${item.pageIndex},${newLineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        id,
+        lineIndex: newLineIndex
+      };
+    }),
+    measure: measure.map(item => {
+      const id = `${item.pageIndex},${newLineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        id,
+        lineIndex: newLineIndex
+      };
+    }),
+    ottavaBassa: ottavaBassa.map(item => {
+      const id = `${item.pageIndex},${newLineIndex},${item.columnIndex}`;
+      return {
+        ...item,
+        id,
+        lineIndex: newLineIndex
+      };
+    })
+  };
+};
+
+
 export const swapDataPositions = ({lineToCopy, pageIndex, lineIndex }) => {
   const ottavaAlta = lineToCopy.ottavaAlta || [];
   const dynamics = lineToCopy.dynamics || [];
