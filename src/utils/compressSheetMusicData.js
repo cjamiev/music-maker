@@ -36,7 +36,8 @@ const getCompressedNoteData = (noteData) => {
 
 const getCompressedNoteRow = (noteRow) => {
   return noteRow.map(noteData => {
-    const addedNotes = noteData.addedNotes.filter(added => added.label);
+    const addedNotes = noteData.addedNotes ? noteData.addedNotes.filter(added => added.label): [];
+
     return {
       columnIndex: noteData.columnIndex,
       component: noteData.component,

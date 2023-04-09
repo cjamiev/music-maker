@@ -220,7 +220,8 @@ export const CreateMusic = () => {
       pageIndex: svgItem.pageIndex,
       lineIndex: svgItem.lineIndex,
       columnIndex: svgItem.columnIndex,
-      isBassSelection: Boolean(svgItem.bassIndex)
+      isBassSelection: Boolean(svgItem.bassIndex),
+      isInsertMode: editorPosition.isInsertMode
     });
   };
 

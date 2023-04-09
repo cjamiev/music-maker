@@ -98,7 +98,7 @@ export const ColumnPositionController = ({ editorPosition, data, onAddModeChange
       </div>
       <div className="createmusic__col-modifier--modes">
         <Button
-          label={isBassSelection ? 'Treble Mode' : 'Bass Mode'}
+          label={isBassSelection ? 'Bass Mode' : 'Treble Mode'}
           className='createmusic__btn'
           classColor='primary'
           onClick={() => {
