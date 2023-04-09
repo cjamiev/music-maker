@@ -72,12 +72,6 @@ export const CreateMusic = () => {
       lineIndex,
       columnIndex: nextColumnIndex,
       bassIndex: isBassSelection ? ONE: ZERO,
-      addedNotes: [
-        {},
-        {},
-        {},
-        {}
-      ],
       ...addNote
     };
     const updatedEditorPosition = {

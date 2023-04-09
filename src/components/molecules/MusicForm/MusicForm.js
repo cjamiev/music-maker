@@ -25,10 +25,14 @@ export const MusicForm = ({
         <NoteTypeSelector noteConfig={noteConfig} selectNoteType={selectNoteType} />
         <NoteModifierSelector noteConfig={noteConfig} selectNoteModifier={selectNoteType} />
         <RestSelector selectRestSymbol={(selectedRestSymbol) => {
-          selectSymbol({
-            component: 'Rest',
-            conditions: selectedRestSymbol
-          });
+          if(isInsertMode) {
+            selectSymbol({
+              component: 'Rest',
+              conditions: selectedRestSymbol
+            });
+          } else {
+            onAddModeChange({ component: 'Rest', conditions: selectedRestSymbol });
+          }
         }} />
       </div>
       <div className="music-form__middle">
@@ -46,7 +50,7 @@ export const MusicForm = ({
               if(isInsertMode) {
                 selectNoteType({ component: 'Note', ...note });
               } else {
-                onAddModeChange({ component: 'Note', ...note });
+                onAddModeChange({ component: 'Note', ...note, addedNotes: [{}, {}, {}, {}] });
               }
             }}
             isBassSelection={isBassSelection}
