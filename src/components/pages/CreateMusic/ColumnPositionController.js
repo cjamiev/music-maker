@@ -23,6 +23,7 @@ export const ColumnPositionController = ({ editorPosition, data, onChange }) => 
             pageIndex,
             lineIndex,
             columnIndex: nextColumnIndex,
+            bassIndex: isBassSelection ? ONE: ZERO,
             component: 'Note',
             pianoKey: 'C4',
             noteType,

@@ -23,7 +23,6 @@ import {
 } from './helper';
 
 const ZERO = 0;
-const ONE = 1;
 const LS_SHEET_DATA = 'sheetData';
 
 export const CreateMusic = () => {
@@ -173,14 +172,11 @@ export const CreateMusic = () => {
   };
 
   const handleClick = (svgItem) => {
-    // Hack to figure out if we clicked on bass section
-    const isBass = svgItem.transform.split(',')[ONE][ZERO] !== '0';
-
     setEditorPositon({
       pageIndex: svgItem.pageIndex,
       lineIndex: svgItem.lineIndex,
       columnIndex: svgItem.columnIndex,
-      isBassSelection: isBass
+      isBassSelection: Boolean(svgItem.bassIndex)
     });
   };
 

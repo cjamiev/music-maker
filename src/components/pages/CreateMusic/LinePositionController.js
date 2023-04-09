@@ -58,21 +58,32 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
           handleClick={() => {
             const nextLineIndex = lineIndex + ONE;
             const noteId = `${pageIndex},${nextLineIndex},${ZERO}`;
-            const newNote = {
+            const newTrebleNote = {
               id: noteId,
               pageIndex,
               lineIndex: nextLineIndex,
               columnIndex: ZERO,
+              bassIndex: ZERO,
+              component: 'Note',
+              pianoKey: 'C4',
+              addedNotes: [{},{},{},{}]
+            };
+            const newBassNote = {
+              id: noteId,
+              pageIndex,
+              lineIndex: nextLineIndex,
+              columnIndex: ZERO,
+              bassIndex: ONE,
               component: 'Note',
               pianoKey: 'C4',
               addedNotes: [{},{},{},{}]
             };
             const nextLine = {
               ottavaAlta: [],
-              treble: [newNote],
+              treble: [newTrebleNote],
               measure: [],
               dynamics: [],
-              bass: [newNote],
+              bass: [newBassNote],
               ottavaBassa: [],
               pedal: []
             };
@@ -155,13 +166,13 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
             const prevLine = data[lineIndex - ONE];
             const swappedPrevPageIndex = prevLine.treble[ZERO].pageIndex;
             const swappedPrevLineIndex = prevLine.treble[ZERO].lineIndex;
-            const swappedCurPageIndex = currentLine.treble[ZERO].pageIndex;
-            const swappedCurLineIndex = currentLine.treble[ZERO].lineIndex;
+            const swappedCurrentPageIndex = currentLine.treble[ZERO].pageIndex;
+            const swappedCurrentLineIndex = currentLine.treble[ZERO].lineIndex;
             const updatedData = data.map((entry,entryIndex) => {
               if(entryIndex === lineIndex - ONE) {
                 return swapLinePositions({lineToCopy: currentLine, pageIndex: swappedPrevPageIndex, lineIndex: swappedPrevLineIndex });
               } else if (entryIndex === lineIndex) {
-                return swapLinePositions({lineToCopy: prevLine, pageIndex: swappedCurPageIndex, lineIndex: swappedCurLineIndex });
+                return swapLinePositions({lineToCopy: prevLine, pageIndex: swappedCurrentPageIndex, lineIndex: swappedCurrentLineIndex });
               } else {
                 return entry;
               }
@@ -184,11 +195,11 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
             const nextLine = data[lineIndex + ONE];
             const swappedNextPageIndex = nextLine.treble[ZERO].pageIndex;
             const swappedNextLineIndex = nextLine.treble[ZERO].lineIndex;
-            const swappedCurPageIndex = currentLine.treble[ZERO].pageIndex;
-            const swappedCurLineIndex = currentLine.treble[ZERO].lineIndex;
+            const swappedCurrentPageIndex = currentLine.treble[ZERO].pageIndex;
+            const swappedCurrentLineIndex = currentLine.treble[ZERO].lineIndex;
             const updatedData = data.map((entry,entryIndex) => {
               if(entryIndex === lineIndex) {
-                return swapLinePositions({lineToCopy: nextLine, pageIndex: swappedCurPageIndex, lineIndex: swappedCurLineIndex });
+                return swapLinePositions({lineToCopy: nextLine, pageIndex: swappedCurrentPageIndex, lineIndex: swappedCurrentLineIndex });
               } else if (entryIndex === lineIndex + ONE) {
                 return swapLinePositions({lineToCopy: currentLine, pageIndex: swappedNextPageIndex, lineIndex: swappedNextLineIndex });
               } else {

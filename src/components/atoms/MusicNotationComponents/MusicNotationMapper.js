@@ -15,7 +15,7 @@ export const MusicNotationMapper = ({ data, parentRef, handleClick = noop } ) =>
             pageIndex: item.pageIndex,
             lineIndex: item.lineIndex,
             columnIndex: item.columnIndex,
-            transform: item.transform
+            bassIndex: item.bassIndex
           });
         }}
         reference={parentRef}

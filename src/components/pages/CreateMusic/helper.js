@@ -37,6 +37,7 @@ const STARTING_NOTE = {
   pageIndex: ZERO,
   lineIndex: ZERO,
   columnIndex: ZERO,
+  bassIndex: ZERO,
   component: 'Note',
   pianoKey: 'C4',
   addedNotes: [{},{},{},{}]
@@ -47,7 +48,7 @@ export const DEFAULT_DATA = [{
   treble: [STARTING_NOTE],
   measure: [],
   dynamics: [],
-  bass: [STARTING_NOTE],
+  bass: [{...STARTING_NOTE, bassIndex: ONE}],
   ottavaBassa: [],
   pedal: []
 }];
@@ -395,7 +396,6 @@ export const reorderLineIndex = (lineToReindex, newLineIndex) => {
     })
   };
 };
-
 
 export const swapLinePositions = ({lineToCopy, pageIndex, lineIndex }) => {
   const ottavaAlta = lineToCopy.ottavaAlta || [];
