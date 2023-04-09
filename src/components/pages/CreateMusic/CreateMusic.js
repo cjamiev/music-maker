@@ -23,6 +23,7 @@ import {
 } from './helper';
 
 const ZERO = 0;
+const ONE = 1;
 const FOUR = 4;
 const LS_SHEET_DATA = 'sheetData';
 
@@ -56,6 +57,54 @@ export const CreateMusic = () => {
   const handlePositionChange = (updatedEditorPosition, updatedData) => {
     setEditorPositon(updatedEditorPosition);
     setNoteConfig({ ...noteConfig, addedNotes: [{},{},{},{}] });
+    updatedData && setData(updatedData);
+  };
+
+  const handleAddModeNote = (addNote) => {
+    const { pageIndex, lineIndex, isBassSelection } = editorPosition;
+    const lastColumnIndex = isBassSelection ? currentLine.bass.length - ONE : currentLine.treble.length - ONE;
+
+    const nextColumnIndex = lastColumnIndex + ONE;
+    const noteId = `${pageIndex},${lineIndex},${nextColumnIndex}`;
+    const newNote = {
+      id: noteId,
+      pageIndex,
+      lineIndex,
+      columnIndex: nextColumnIndex,
+      bassIndex: isBassSelection ? ONE: ZERO,
+      addedNotes: [
+        {},
+        {},
+        {},
+        {}
+      ],
+      ...addNote
+    };
+    const updatedEditorPosition = {
+      ...editorPosition,
+      columnIndex: nextColumnIndex
+    };
+    const updatedSection = isBassSelection
+      ? currentLine.bass.concat([newNote])
+      : currentLine.treble.concat([newNote]);
+    const updatedLine = isBassSelection
+      ? {
+        ...currentLine,
+        bass: updatedSection
+      }
+      : {
+        ...currentLine,
+        treble: updatedSection
+      };
+
+    const updatedData = data.map((item, index) => {
+      if(index === lineIndex) {
+        return updatedLine;
+      }
+      return item;
+    });
+
+    setEditorPositon(updatedEditorPosition);
     updatedData && setData(updatedData);
   };
 
@@ -193,9 +242,21 @@ export const CreateMusic = () => {
           />
         </div>
         <div className='createmusic__config'>
-          <ColumnPositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
-          <LinePositionController editorPosition={editorPosition} data={data} onChange={handlePositionChange} />
-          <Configuration configuration={configuration} onConfigurationChange={handleConfigurationChange} />
+          <ColumnPositionController
+            editorPosition={editorPosition}
+            data={data}
+            onAddModeChange={handleAddModeNote}
+            onChange={handlePositionChange}
+          />
+          <LinePositionController
+            editorPosition={editorPosition}
+            data={data}
+            onChange={handlePositionChange}
+          />
+          <Configuration
+            configuration={configuration}
+            onConfigurationChange={handleConfigurationChange}
+          />
           <div className="createmusic__cache-section">
             <Button
               key="cache"
@@ -223,6 +284,8 @@ export const CreateMusic = () => {
         <div className='createmusic__form'>
           <MusicForm
             noteConfig={noteConfig}
+            isInsertMode={editorPosition.isInsertMode}
+            onAddModeChange={handleAddModeNote}
             selectSymbol={handleDataChange}
             selectNoteType={handleNoteTypeChange}
             handleAddHiglight={handleAddHiglight}

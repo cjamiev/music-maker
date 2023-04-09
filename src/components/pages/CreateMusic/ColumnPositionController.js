@@ -4,9 +4,14 @@ import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 
 const ZERO = 0;
 const ONE = 1;
+const ADD_DEFAULT_NOTE = {
+  component: 'Note',
+  pianoKey: 'C4',
+  addedNotes: [{},{},{},{}]
+};
 
-export const ColumnPositionController = ({ editorPosition, data, onChange }) => {
-  const { pageIndex, lineIndex, columnIndex, noteType, isBassSelection } = editorPosition;
+export const ColumnPositionController = ({ editorPosition, data, onAddModeChange, onChange }) => {
+  const { lineIndex, columnIndex, isBassSelection, isInsertMode } = editorPosition;
   const currentLine = data[lineIndex];
   const lastColumnIndex = isBassSelection ? currentLine.bass.length - ONE : currentLine.treble.length - ONE;
 
@@ -17,44 +22,7 @@ export const ColumnPositionController = ({ editorPosition, data, onChange }) => 
         type={ICON_TYPES.PLUS}
         size={ICON_SIZES.EXTRA_SMALL}
         handleClick={() => {
-          const nextColumnIndex = lastColumnIndex + ONE;
-          const noteId = `${pageIndex},${lineIndex},${nextColumnIndex}`;
-          const newNote = {
-            id: noteId,
-            pageIndex,
-            lineIndex,
-            columnIndex: nextColumnIndex,
-            bassIndex: isBassSelection ? ONE: ZERO,
-            component: 'Note',
-            pianoKey: 'C4',
-            noteType,
-            addedNotes: [{},{},{},{}]
-          };
-          const updatedEditorPosition = {
-            ...editorPosition,
-            columnIndex: nextColumnIndex
-          };
-          const updatedSection = isBassSelection
-            ? currentLine.bass.concat([newNote])
-            : currentLine.treble.concat([newNote]);
-          const updatedLine = isBassSelection
-            ? {
-              ...currentLine,
-              bass: updatedSection
-            }
-            : {
-              ...currentLine,
-              treble: updatedSection
-            };
-
-          const updatedData = data.map((item, index) => {
-            if(index === lineIndex) {
-              return updatedLine;
-            }
-            return item;
-          });
-
-          onChange(updatedEditorPosition, updatedData);
+          onAddModeChange(ADD_DEFAULT_NOTE);
         }}
       />
       <div className="createmusic__col-modifier--change">
@@ -138,6 +106,17 @@ export const ColumnPositionController = ({ editorPosition, data, onChange }) => 
               ...editorPosition,
               columnIndex: ZERO,
               isBassSelection: !isBassSelection
+            });
+          }}
+        />
+        <Button
+          label={isInsertMode ? 'Insert Mode' : 'Add Mode'}
+          className='createmusic__btn'
+          classColor='primary'
+          onClick={() => {
+            onChange({
+              ...editorPosition,
+              isInsertMode: !isInsertMode
             });
           }}
         />

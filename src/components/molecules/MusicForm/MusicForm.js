@@ -12,6 +12,8 @@ import Piano from './Piano';
 
 export const MusicForm = ({
   noteConfig,
+  isInsertMode,
+  onAddModeChange,
   selectSymbol,
   selectNoteType,
   handleAddHiglight,
@@ -41,7 +43,11 @@ export const MusicForm = ({
         <div className="music-form__piano">
           <Piano
             selectedNote={(note) => {
-              selectNoteType({ component: 'Note', ...note });
+              if(isInsertMode) {
+                selectNoteType({ component: 'Note', ...note });
+              } else {
+                onAddModeChange({ component: 'Note', ...note });
+              }
             }}
             isBassSelection={isBassSelection}
           />

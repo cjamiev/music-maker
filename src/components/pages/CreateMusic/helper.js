@@ -11,7 +11,8 @@ export const DEFAULT_EDITOR = {
   pageIndex: ZERO,
   lineIndex: ZERO,
   columnIndex: ZERO,
-  isBassSelection: false
+  isBassSelection: false,
+  isInsertMode: true
 };
 
 export const DEFAULT_NOTE = {
