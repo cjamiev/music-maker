@@ -25,13 +25,50 @@
   margin: 10px;
 }
 
-.createmusic__btn-group {
+.createmusic__col-modifier {
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: nowrap;
+  position: relative;
+  height: 100px;
+  min-width: 380px;
+  margin-right: 10px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.createmusic__col-modifier--add {
+  position: relative;
+  top: 15px;
+}
+
+.createmusic__col-modifier--change {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 40px;
+  top: 5px;
+  left: -15px;
+}
+
+.createmusic__col-modifier--left {
+  position: absolute;
+  top: 10px;
+  left: -5px;
+}
+
+.createmusic__col-modifier--right {
+  position: absolute;
+  top: 45px;
+  left: -2px;
+}
+
+.createmusic__col-modifier--delete {
+  position: relative;
+  top: 15px;
+  left: -10px;
 }
 
 .createmusic__btn {
-  width: 80px;
+  width: 95px;
 }
 
 .createmusic__chord-builder {
@@ -67,6 +104,9 @@
   height: 100px;
   display: flex;
   position: relative;
+  margin-top: 10px;
+  margin-right: 10px;
+  border-bottom: 1px solid rgb(228, 228, 228);
 }
 
 .createmusic__row-modifier--number {
@@ -81,6 +121,7 @@
   position: relative;
   width: 40px;
   top: -10px;
+  left: 10px;
 }
 
 .createmusic__row-modifier--left {
@@ -99,6 +140,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  left: 10px;
 }
 
 .createmusic__row-modifier--new-copy {
@@ -112,7 +154,7 @@
   position: relative;
   width: 40px;
   top: -10px;
-  left: -25px;
+  left: -15px;
 }
 
 .createmusic__row-modifier--up {
