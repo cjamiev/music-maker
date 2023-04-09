@@ -189,6 +189,7 @@ export const measureBarTypes = [
 ];
 
 export const restTypes = [
+  { key: 'blank', label: 'Blank', value: { showBlank: true }},
   { key: 'whole-rest', label: 'Whole Rest', value: { showWholeRest: true } },
   { key: 'half-rest', label: 'Half Rest', value: { showHalfRest: true } },
   { key: 'quarter-rest', label: 'Quarter Rest', value: { showQuarterRest: true } },

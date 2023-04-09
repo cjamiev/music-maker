@@ -1,3 +1,7 @@
+.musicicon__empty {
+  fill-opacity: 0;
+}
+
 .musicicon__ottava-continue {
   stroke:#000000;
   fill: none;

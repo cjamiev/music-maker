@@ -1,6 +1,7 @@
 import React from 'react';
 
 export const RestIcon = ({
+  showBlank,
   showWholeRest,
   showHalfRest,
   showQuarterRest,
@@ -9,6 +10,18 @@ export const RestIcon = ({
 }) => {
   return (
     <g>
+      {showBlank && <g
+        data-testid="blank"
+        transform="translate(60.112709,-23.393517)"
+      >
+        <rect
+          className="musicicon__empty"
+          width="26.072723"
+          height="6.1296353"
+          x="-46.690739"
+          y="46.787033"
+        />
+      </g>}
       {showWholeRest && <g
         data-testid="whole-rest"
         transform="translate(60.112709,-23.393517)"

@@ -62,6 +62,7 @@ const iconMap = {
   [MUSIC_ICON_TYPES.PEDAL_QUICK_RELEASE]: ComponentWrapper(PedalIcon, { showPedalQuickRelease: true }),
   [MUSIC_ICON_TYPES.PEDAL_REMOVE]: ComponentWrapper(PedalIcon, { value: 'DEL' }),
   [MUSIC_ICON_TYPES.PEDAL_END]: ComponentWrapper(PedalIcon, { showPedalEnd: true }),
+  [MUSIC_ICON_TYPES.BLANK]: ComponentWrapper(RestIcon, { showBlank: true }),
   [MUSIC_ICON_TYPES.WHOLE_REST]: ComponentWrapper(RestIcon, { showWholeRest: true }),
   [MUSIC_ICON_TYPES.HALF_REST]: ComponentWrapper(RestIcon, { showHalfRest: true }),
   [MUSIC_ICON_TYPES.QUARTER_REST]: ComponentWrapper(RestIcon, { showQuarterRest: true }),

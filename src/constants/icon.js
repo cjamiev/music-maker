@@ -10,6 +10,7 @@ export const ICON_TYPES = {
 };
 
 export const MUSIC_ICON_TYPES = {
+  BLANK: 'blank',
   WHOLE_NOTE: 'whole-note',
   HALF_NOTE: 'half-note',
   QUARTER_NOTE: 'quarter-note',
