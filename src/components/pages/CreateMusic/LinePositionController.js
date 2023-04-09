@@ -16,7 +16,7 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
   return (
     <div className='createmusic__row-modifier'>
       <div className='createmusic__row-modifier--number'>
-          Row: {lineIndex + ONE}
+          #{lineIndex + ONE}
       </div>
       <div className="createmusic__row-modifier--change">
         <IconButton

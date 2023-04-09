@@ -23,6 +23,7 @@ import {
 } from './helper';
 
 const ZERO = 0;
+const FOUR = 4;
 const LS_SHEET_DATA = 'sheetData';
 
 export const CreateMusic = () => {
@@ -35,8 +36,8 @@ export const CreateMusic = () => {
     author: '',
     keySignature: '',
     timeSignature: {
-      numerator: 4,
-      denominator: 4,
+      numerator: FOUR,
+      denominator: FOUR,
       commonTime: true,
       cutTime: false
     }
