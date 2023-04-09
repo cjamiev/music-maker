@@ -211,66 +211,12 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
           isDisabled={isLastLineIndex && isFirstLineIndex}
           handleClick={() => {
             const filteredData = data.filter((item, index) => index !== lineIndex);
-            const updatedData = isLastLineIndex ? filteredData : filteredData.map((entry,entryIndex) => {
-              const updatedEntry = {
-                ottavaAlta: entry.ottavaAlta.map(item => {
-                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                  return {
-                    ...item,
-                    id,
-                    lineIndex: entryIndex
-                  };
-                }),
-                treble: entry.treble.map(item => {
-                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                  return {
-                    ...item,
-                    id,
-                    lineIndex: entryIndex
-                  };
-                }),
-                dynamics: entry.dynamics.map(item => {
-                  const id =`${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                  return {
-                    ...item,
-                    id,
-                    lineIndex: entryIndex
-                  };
-                }),
-                bass: entry.bass.map(item => {
-                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                  return {
-                    ...item,
-                    id,
-                    lineIndex: entryIndex
-                  };
-                }),
-                pedal: entry.pedal.map(item => {
-                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                  return {
-                    ...item,
-                    id,
-                    lineIndex: entryIndex
-                  };
-                }),
-                measure: entry.measure.map(item => {
-                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                  return {
-                    ...item,
-                    id,
-                    lineIndex: entryIndex
-                  };
-                }),
-                ottavaBassa: entry.ottavaBassa.map(item => {
-                  const id = `${item.pageIndex},${entryIndex},${item.columnIndex}`;
-                  return {
-                    ...item,
-                    id,
-                    lineIndex: entryIndex
-                  };
-                })
-              };
-              return updatedEntry;
+            const updatedData = isLastLineIndex ? filteredData : filteredData.map((entry, entryIndex) => {
+              if(entryIndex < lineIndex) {
+                return entry;
+              } else {
+                return reorderLineIndex(entry, entryIndex);
+              }
             });
 
             const updatedEditorLineIndex = isLastLineIndex ? lineIndex - ONE: lineIndex;
