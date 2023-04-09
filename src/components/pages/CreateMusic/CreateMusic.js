@@ -216,12 +216,15 @@ export const CreateMusic = () => {
   };
 
   const handleClick = (svgItem) => {
+    const isBassSelection = Boolean(svgItem.bassIndex);
+    const hasClickedOnBass = isBassSelection !== editorPosition.isBassSelection;
+
     setEditorPositon({
       pageIndex: svgItem.pageIndex,
       lineIndex: svgItem.lineIndex,
       columnIndex: svgItem.columnIndex,
-      isBassSelection: Boolean(svgItem.bassIndex),
-      isInsertMode: editorPosition.isInsertMode
+      isBassSelection,
+      isInsertMode: hasClickedOnBass ? editorPosition.isInsertMode : true
     });
   };
 
