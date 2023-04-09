@@ -144,8 +144,6 @@ export const CreateMusic = () => {
     });
   };
 
-  console.log('data', data);
-
   return (
     <Page >
       <div className='createmusic__container'>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from 'components/atoms/Button';
-import { cloneLineToNextLine, reorderLineIndex, swapDataPositions } from './helper';
+import { cloneLineToNextLine, reorderLineIndex, swapLinePositions } from './helper';
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 
 const ZERO = 0;
@@ -159,9 +159,9 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
             const swappedCurLineIndex = currentLine.treble[ZERO].lineIndex;
             const updatedData = data.map((entry,entryIndex) => {
               if(entryIndex === lineIndex - ONE) {
-                return swapDataPositions({lineToCopy: currentLine, pageIndex: swappedPrevPageIndex, lineIndex: swappedPrevLineIndex });
+                return swapLinePositions({lineToCopy: currentLine, pageIndex: swappedPrevPageIndex, lineIndex: swappedPrevLineIndex });
               } else if (entryIndex === lineIndex) {
-                return swapDataPositions({lineToCopy: prevLine, pageIndex: swappedCurPageIndex, lineIndex: swappedCurLineIndex });
+                return swapLinePositions({lineToCopy: prevLine, pageIndex: swappedCurPageIndex, lineIndex: swappedCurLineIndex });
               } else {
                 return entry;
               }
@@ -188,9 +188,9 @@ export const LinePositionController = ({ editorPosition, data, onChange }) => {
             const swappedCurLineIndex = currentLine.treble[ZERO].lineIndex;
             const updatedData = data.map((entry,entryIndex) => {
               if(entryIndex === lineIndex) {
-                return swapDataPositions({lineToCopy: nextLine, pageIndex: swappedCurPageIndex, lineIndex: swappedCurLineIndex });
+                return swapLinePositions({lineToCopy: nextLine, pageIndex: swappedCurPageIndex, lineIndex: swappedCurLineIndex });
               } else if (entryIndex === lineIndex + ONE) {
-                return swapDataPositions({lineToCopy: currentLine, pageIndex: swappedNextPageIndex, lineIndex: swappedNextLineIndex });
+                return swapLinePositions({lineToCopy: currentLine, pageIndex: swappedNextPageIndex, lineIndex: swappedNextLineIndex });
               } else {
                 return entry;
               }
