@@ -57,6 +57,7 @@ Each object will properties
 - Add sounds to the site
 - Interval Training Section
 - Beam Constructor
+  - Evenly Spacing Note Based on Time Signature
 - Triplet Constructor
 - Side Panel will have images
 - Click on Image to enlarge
@@ -67,7 +68,6 @@ Each object will properties
 - Clef Ottava option
 - Transpose scales
 - Repeat Selector
-- Evenly Spacing Note
 - Custom SVG placer
   - Cycle through any existing svg component
   - Be able to drag or use controller to place it anywhere in the sheet music

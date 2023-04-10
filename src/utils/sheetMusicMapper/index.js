@@ -1,1 +1,1 @@
-export { getSheetMusic } from './sheetMusicMapper';
+export { getSingleSheeMusicRow } from './sheetMusicMapper';

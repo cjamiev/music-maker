@@ -36,7 +36,7 @@ const getMeasureSubcomponents = ({
   }
 };
 
-const getSheetMusic = (configuration, line, editorPosition) => {
+const getSingleSheeMusicRow = (configuration, line, editorPosition) => {
   const { ottavaAlta = [], treble, measure = [], dynamics = [], bass, ottavaBassa = [], pedal = [] } = line;
 
   const mappedTrebleData = treble.map(item => {
@@ -118,5 +118,5 @@ const getSheetMusic = (configuration, line, editorPosition) => {
 };
 
 export {
-  getSheetMusic
+  getSingleSheeMusicRow
 };

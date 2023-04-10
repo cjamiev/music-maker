@@ -3,7 +3,7 @@ import { Page }from 'components/core/Page';
 import { Button } from 'components/atoms/Button';
 import { DisplaySheetMusic } from 'components/molecules/DisplaySheetMusic';
 import { MusicForm } from 'components/molecules/MusicForm';
-import { getSheetMusic } from 'utils/sheetMusicMapper';
+import { getSingleSheeMusicRow } from 'utils/sheetMusicMapper';
 import { getCompressedSheetMusicData, getDecompressedSheetMusicData } from 'utils/compressSheetMusicData';
 import { downloadFile } from 'utils/download';
 import { Configuration } from './Configuration';
@@ -228,7 +228,7 @@ export const CreateMusic = () => {
         <div className='createmusic__displaymusic'>
           <DisplaySheetMusic
             isOneLineMode={true}
-            sheetMusic={getSheetMusic(configuration, data[editorPosition.lineIndex], editorPosition)}
+            sheetMusic={getSingleSheeMusicRow(configuration, data[editorPosition.lineIndex], editorPosition)}
             handleClick={handleClick}
             {...attributes}
           />
