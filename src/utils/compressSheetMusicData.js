@@ -1,3 +1,60 @@
+import { replaceLine } from './replaceLine';
+
+const compressMap = {
+  'Dynamics': 'Dnmc',
+  'Measure': 'Msr',
+  'Note': 'Nt',
+  'Pedal': 'Pd',
+  'Rest': 'Rst',
+  'bassIndex' : 'bI',
+  'pageIndex' : 'pI',
+  'lineIndex' : 'lI',
+  'columnIndex' : 'cI',
+  'pianoKey' : 'pK',
+  'component' : 'cP',
+  'conditions' : 'cond',
+  'addedNotes' : 'aN',
+  'showWholeNote' : 'sWN',
+  'showHalfNote' : 'sHN',
+  'showQuarterNote' : 'sQN',
+  'showEighthNote' : 'sEN',
+  'showSixteenthNote' : 'sSN',
+  'showNoteFlat' : 'sNF',
+  'showNoteSharp' : 'sNS',
+  'showNoteNatural' : 'sNN',
+  'showStaccato' : 'sStac',
+  'showDotted' : 'sDot',
+  'showAccent' : 'sAcc',
+  'showTenuto' : 'sTenu',
+  'showFermata' : 'sFerm',
+  'showTrill' : 'sTril',
+  'showBlank' : 'sBlank',
+  'showWholeRest' : 'sWR',
+  'showHalfRest' : 'sHR',
+  'showQuarterRest' : 'sQR',
+  'showEighthRest' : 'sER',
+  'showSixteenthRest' : 'sSR',
+  'showMeasureEnd': 'sME',
+  'showRepeatBarStart': 'sRBS',
+  'showRepeatBarEnd': 'sRBE',
+  'showPedalStart': 'sPS',
+  'showPedalContinue': 'sPC',
+  'showPedalQuickRelease': 'sPQR',
+  'showPedalEnd': 'sPE',
+  'showCrescendo': 'sCres',
+  'showDecrescendo': 'sDecr',
+  'showOttavaAltaStart': 'sOAS',
+  'showOttavaAltaContinue': 'sOAC',
+  'showOttavaAltaEnd': 'sOAE',
+  'showOttavaBassaStart': 'sOBS',
+  'showOttavaBassaContinue': 'sOBC',
+  'showOttavaBassaEnd': 'sOBE'
+};
+
+const decompressMap = Object.keys(compressMap).map(key => {
+  return { [compressMap[key]] : key };
+}).reduce((current, accumulation) => ({...current, ...accumulation}));
+
 const getCompressedNonNoteData = (rowEntryData) => {
   const compressedNonNoteRowEntryData = {};
 
@@ -51,8 +108,8 @@ const getCompressedNoteRow = (noteRow) => {
   });
 };
 
-export const getCompressedSheetMusicData = (sheetMusicData) => {
-  return sheetMusicData
+export const getCompressedSheetMusicData = (configuration, sheetMusicData) => {
+  const strippedData = sheetMusicData
     .map(rowEntry => {
       return {
         ...getCompressedNonNoteData(rowEntry),
@@ -60,4 +117,14 @@ export const getCompressedSheetMusicData = (sheetMusicData) => {
         bass: getCompressedNoteRow(rowEntry.bass)
       };
     });
+
+  const compressedData = replaceLine(JSON.stringify({configuration, data: strippedData}), compressMap);
+
+  return compressedData;
+};
+
+export const getDecompressedSheetMusicData = (compressedData) => {
+  const decompressedData = replaceLine(compressedData, decompressMap);
+
+  return decompressedData;
 };

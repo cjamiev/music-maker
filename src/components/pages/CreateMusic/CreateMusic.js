@@ -4,7 +4,7 @@ import { Button } from 'components/atoms/Button';
 import { DisplaySheetMusic } from 'components/molecules/DisplaySheetMusic';
 import { MusicForm } from 'components/molecules/MusicForm';
 import { getSheetMusic } from 'utils/sheetMusicMapper';
-import { getCompressedSheetMusicData } from 'utils/compressSheetMusicData';
+import { getCompressedSheetMusicData, getDecompressedSheetMusicData } from 'utils/compressSheetMusicData';
 import { downloadFile } from 'utils/download';
 import { Configuration } from './Configuration';
 import { ColumnPositionController } from './ColumnPositionController';
@@ -140,7 +140,8 @@ export const CreateMusic = () => {
     const fileReader = new FileReader();
     fileReader.readAsText(file);
     fileReader.onloadend = () => {
-      const contents = JSON.parse(fileReader.result);
+      const decompressedData = getDecompressedSheetMusicData(fileReader.result);
+      const contents = JSON.parse(decompressedData);
       const cachedFirstNote= contents.data[ZERO].treble[ZERO];
 
       setConfiguration(contents.configuration);
@@ -168,18 +169,15 @@ export const CreateMusic = () => {
   };
 
   const handleOnDownload = () => {
-    const compressedData = getCompressedSheetMusicData(data);
-    const contentToSave = JSON.stringify({
-      configuration,
-      data: compressedData
-    });
+    const compressedData = getCompressedSheetMusicData(configuration, data);
     const fileName = `${toLowerCaseNoSpace(configuration.title)}-${toLowerCaseNoSpace(configuration.subtitle)}.json`;
-    downloadFile(fileName, contentToSave);
+    downloadFile(fileName, compressedData);
   };
 
   const handleOnGetCache = (e) => {
     const item = localStorage.getItem(LS_SHEET_DATA);
-    const contents = JSON.parse(item);
+    const decompressedData = getDecompressedSheetMusicData(item);
+    const contents = JSON.parse(decompressedData);
     const cachedFirstNote= contents.data[ZERO].treble[ZERO];
 
     setConfiguration(contents.configuration);
@@ -207,12 +205,8 @@ export const CreateMusic = () => {
 
 
   const handleOnStoreCache = () => {
-    const compressedData = getCompressedSheetMusicData(data);
-    const contentToSave = JSON.stringify({
-      configuration,
-      data: compressedData
-    });
-    localStorage.setItem(LS_SHEET_DATA, contentToSave);
+    const compressedData = getCompressedSheetMusicData(configuration, data);
+    localStorage.setItem(LS_SHEET_DATA, compressedData);
   };
 
   const handleClick = (svgItem) => {
