@@ -117,6 +117,107 @@ const getSingleSheeMusicRow = (configuration, line, editorPosition) => {
   ].filter(Boolean);
 };
 
+const getSheetMusic = ({ configuration, line, lineIndex, pageIndex }) => {
+  const { ottavaAlta = [], treble, measure = [], dynamics = [], bass, ottavaBassa = [], pedal = [] } = line;
+
+  const mappedTrebleData = treble.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      pageIndex,
+      conditions: { ...item.conditions, showDotted: item.showDotted },
+      transform: getTransformProperty(lineIndex, item.columnIndex + columnIndexModifier, false),
+      subcomponents: getNoteSubcomponents(item)
+    };
+  });
+  const mappedBassData = bass.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      pageIndex,
+      transform: getTransformProperty(lineIndex, item.columnIndex + columnIndexModifier, true),
+      subcomponents: getNoteSubcomponents(item)
+    };
+  });
+  const mappedMeasureData = measure.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      pageIndex,
+      transform: getTransformProperty(lineIndex, item.columnIndex + columnIndexModifier, false),
+      subcomponents: getMeasureSubcomponents(item)
+    };
+  });
+  const mappedDynamicsData = dynamics.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      pageIndex,
+      transform: getTransformProperty(lineIndex, item.columnIndex + columnIndexModifier, false),
+      subcomponents: []
+    };
+  });
+  const mappedOttavaAltaData = ottavaAlta.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      pageIndex,
+      transform: getTransformProperty(lineIndex, item.columnIndex + columnIndexModifier, false),
+      subcomponents: []
+    };
+  });
+  const mappedOttavaBassaData = ottavaBassa.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      pageIndex,
+      transform: getTransformProperty(lineIndex, item.columnIndex + columnIndexModifier, false),
+      subcomponents: []
+    };
+  });
+  const mappedPedalData = pedal.map(item => {
+    const columnIndexModifier = item.lineIndex === ZERO ? ONE : ZERO;
+    return {
+      ...item,
+      pageIndex,
+      transform: getTransformProperty(lineIndex, item.columnIndex + columnIndexModifier, false),
+      subcomponents: []
+    };
+  });
+
+  const columnIndexModifier = ZERO === ZERO ? ONE : ZERO;
+  return [
+    { component: 'Selection',
+      transform:`translate(${(ZERO + columnIndexModifier)*STAFF_LINE_WIDTH},${Number(false)*BASS_GAP})`},
+    getClefData({ lineNumber: lineIndex }),
+    getKeySignatureData({ lineNumber: lineIndex, keySignature: configuration.keySignature, isBassClef: false}),
+    getKeySignatureData({ lineNumber: lineIndex, keySignature: configuration.keySignature, isBassClef: true}),
+    ...mappedOttavaAltaData,
+    ...mappedTrebleData,
+    ...mappedMeasureData,
+    ...mappedDynamicsData,
+    ...mappedBassData,
+    ...mappedOttavaBassaData,
+    ...mappedPedalData
+  ].filter(Boolean);
+};
+
+const getTitleForSheetMusic = (configuration, pageIndex) => {
+  return [
+    getTitleData(configuration, pageIndex)
+  ];
+};
+
+const getTimeSignatureForSheetMusic = (configuration) => {
+  return [
+    getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: false}),
+    getTimeSignatureData({ lineNumber: ZERO, timeSignature: configuration.timeSignature, isBassClef: true})
+  ];
+};
+
 export {
-  getSingleSheeMusicRow
+  getSingleSheeMusicRow,
+  getSheetMusic,
+  getTitleForSheetMusic,
+  getTimeSignatureForSheetMusic
 };

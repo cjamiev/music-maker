@@ -3,14 +3,42 @@ import { useParams } from 'react-router-dom';
 import { DisplaySheetMusic } from 'components/molecules/DisplaySheetMusic';
 import { Page }from 'components/core/Page';
 import { ViewSheetMusicFooter } from './ViewSheetMusicFooter';
+import { getSheetMusic, getTitleForSheetMusic, getTimeSignatureForSheetMusic } from 'utils/sheetMusicMapper';
+import { getDecompressedSheetMusicData } from 'utils/compressSheetMusicData';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 import { ZOOM_LEVELS, DEFAULT_MUSIC_NOTATION_SVG_ATTRIBUTES } from 'constants/page';
 import { songsWithSheetMusic } from 'data/songs';
 
 const ZERO = 0;
 const ONE = 1;
+const FOUR = 4;
 const DEFAULT_ZOOM_INDEX = 6;
 const LS_ZOOM = 'zoomLevel';
+
+const getParsedSongData = (rawData) => {
+  return JSON.parse(getDecompressedSheetMusicData(rawData));
+};
+
+const getPages = (configuration, songData, pageSize) => {
+  const sheets = [];
+
+  songData.forEach((line, lineIndex) => {
+    const currentPageIndex = Math.floor(lineIndex / pageSize);
+    const currentLineindex = lineIndex % pageSize;
+    const currentPage = sheets[currentPageIndex] ?? [];
+    const constructedSheetMusic = getSheetMusic({ configuration, line, lineIndex: currentLineindex, pageIndex: currentPageIndex });
+    const constructedTitleSection = currentLineindex === ZERO ? getTitleForSheetMusic(configuration, currentPageIndex) : [];
+    const updatedCurrentPage = currentPage.concat(constructedSheetMusic).concat(constructedTitleSection);
+
+    sheets[currentPageIndex] = updatedCurrentPage;
+  });
+
+  const pageOne = sheets[ZERO].concat(getTimeSignatureForSheetMusic(configuration));
+
+  sheets[ZERO] = pageOne;
+
+  return sheets;
+};
 
 const getSvgAttributes = (currentZoom) => {
   const zoomModifier = ZOOM_LEVELS[currentZoom];
@@ -23,9 +51,11 @@ const getSvgAttributes = (currentZoom) => {
 };
 
 const parseUrlInfo = (songid, page) => {
-  const selectedSong = songsWithSheetMusic.find(song => song.id === songid) ?? songsWithSheetMusic[ZERO];
+  const selectedSongEntry = songsWithSheetMusic.find(song => song.id === songid) ?? songsWithSheetMusic[ZERO];
   const pageNumber = Number(page) ? Number(page) - ONE : ZERO;
-  const selectedPage = selectedSong.sheets.length > pageNumber ? pageNumber : ZERO;
+  const songData = getParsedSongData(selectedSongEntry.songRawData);
+  const selectedSong = getPages(songData.configuration, songData.data, FOUR);
+  const selectedPage = selectedSong.length > pageNumber ? pageNumber : ZERO;
 
   return { selectedSong, selectedPage};
 };
@@ -57,14 +87,14 @@ export const ViewSheetMusic = () => {
     <Page
       footerComponent={
         <ViewSheetMusicFooter
-          numberOfPages={selectedSong.sheets.length}
+          numberOfPages={selectedSong.length}
           onChangePage={handleChangePageNumber}
           onZoomIn={handleZoomIn}
           onZoomOut={handleZoomOut}
         />}
     >
       <div className="viewsheetmusic">
-        <DisplaySheetMusic sheetMusic={selectedSong.sheets[pageNumber]} {...musicNotationSvgAttributes}/>
+        <DisplaySheetMusic sheetMusic={selectedSong[pageNumber]} {...musicNotationSvgAttributes}/>
       </div>
     </Page>
   );

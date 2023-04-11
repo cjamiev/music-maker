@@ -8,6 +8,7 @@ import {
 } from 'constants/svgattributes';
 
 const ZERO = 0;
+const ONE = 1;
 
 const defaultData = {
   transform:'translate(0,0)',
@@ -20,11 +21,11 @@ const getTitleData = ({
   subtitle,
   author,
   tempo
-}) => {
+}, pageIndex = ZERO) => {
   return {
     ...defaultData,
     component:'Title',
-    content: { title, subtitle, author, tempo }
+    content: { title, subtitle: pageIndex === ZERO ? subtitle : `Page ${pageIndex + ONE}`, author, tempo }
   };
 };
 

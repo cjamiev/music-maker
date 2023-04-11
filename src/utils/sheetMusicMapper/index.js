@@ -1,1 +1,6 @@
-export { getSingleSheeMusicRow } from './sheetMusicMapper';
+export {
+  getSingleSheeMusicRow,
+  getSheetMusic,
+  getTitleForSheetMusic,
+  getTimeSignatureForSheetMusic
+} from './sheetMusicMapper';
