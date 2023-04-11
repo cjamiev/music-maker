@@ -185,10 +185,7 @@ const getSheetMusic = ({ configuration, line, lineIndex, pageIndex }) => {
     };
   });
 
-  const columnIndexModifier = ZERO === ZERO ? ONE : ZERO;
   return [
-    { component: 'Selection',
-      transform:`translate(${(ZERO + columnIndexModifier)*STAFF_LINE_WIDTH},${Number(false)*BASS_GAP})`},
     getClefData({ lineNumber: lineIndex }),
     getKeySignatureData({ lineNumber: lineIndex, keySignature: configuration.keySignature, isBassClef: false}),
     getKeySignatureData({ lineNumber: lineIndex, keySignature: configuration.keySignature, isBassClef: true}),
