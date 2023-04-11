@@ -52,10 +52,10 @@ const getSvgAttributes = (currentZoom) => {
 
 const parseUrlInfo = (songid, page) => {
   const selectedSongEntry = songsWithSheetMusic.find(song => song.id === songid) ?? songsWithSheetMusic[ZERO];
-  const pageNumber = Number(page) ? Number(page) - ONE : ZERO;
+  const pageIndex = Number(page) ? Number(page) - ONE : ZERO;
   const songData = getParsedSongData(selectedSongEntry.songRawData);
   const selectedSong = getPages(songData.configuration, songData.data, FOUR);
-  const selectedPage = selectedSong.length > pageNumber ? pageNumber : ZERO;
+  const selectedPage = selectedSong.length > pageIndex ? pageIndex : ZERO;
 
   return { selectedSong, selectedPage};
 };
@@ -87,6 +87,7 @@ export const ViewSheetMusic = () => {
     <Page
       footerComponent={
         <ViewSheetMusicFooter
+          currentPage={pageNumber}
           numberOfPages={selectedSong.length}
           onChangePage={handleChangePageNumber}
           onZoomIn={handleZoomIn}

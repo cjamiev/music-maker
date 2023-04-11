@@ -4,7 +4,7 @@ import { Pagination } from 'components/molecules/Pagination';
 import { Button, IconButton } from 'components/atoms/Button';
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 
-export const ViewSheetMusicFooter = ({ numberOfPages, onChangePage, onZoomIn, onZoomOut }) => {
+export const ViewSheetMusicFooter = ({ currentPage, numberOfPages, onChangePage, onZoomIn, onZoomOut }) => {
   const navigate = useNavigate();
 
   return (
@@ -17,6 +17,7 @@ export const ViewSheetMusicFooter = ({ numberOfPages, onChangePage, onZoomIn, on
         />
         <Pagination
           className="viewsheetmusic-footer__pagination"
+          currentPage={currentPage}
           size={numberOfPages}
           onChange={onChangePage}
         />

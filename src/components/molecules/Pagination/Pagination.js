@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'components/atoms/Button';
 
 const ZERO = 0;
@@ -6,8 +6,14 @@ const ONE = 1;
 const TWO = 2;
 const THREE = 3;
 
-export const Pagination = ({ size, onChange, className = '' }) => {
+export const Pagination = ({ currentPage = ZERO, size, onChange, className = '' }) => {
   const [pageNumber, setPageNumber] = useState(ZERO);
+
+  useEffect(() => {
+    if(currentPage) {
+      setPageNumber(currentPage);
+    }
+  }, [currentPage]);
 
   const prevBtn = () => {
     const isEnabled = pageNumber > ZERO;
