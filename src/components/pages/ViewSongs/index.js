@@ -12,6 +12,5 @@ import 'assets/img/robin.jpg';
 import 'assets/img/seer.jpg';
 import 'assets/img/sonic.jpg';
 import 'assets/img/sora.jpg';
-import 'assets/img/spike-spiegel.jpg';
 import 'assets/img/titan-dina.jpg';
 import 'assets/img/vegeta.jpg';

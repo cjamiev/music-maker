@@ -32,7 +32,7 @@ export const ChordLedgerSVG = ({ transform }) => {
 
 export const StaffSVG = ({ transform, conditions = {} }) => {
   return (
-    <g data-testid="subcomponent-staff" transform={transform} aria-label="staff" >
+    <g data-testid="subcomponent-staff" className="svg--primary-color" transform={transform} aria-label="staff" >
       <rect data-testid="column-clickable-area" className="svg--clickable svg--invisible-area" aria-label="clickable area" width="27.192894" height="70" x="65.119415" y="76.970314" />
       <StaffTopLedger conditions={conditions} />
       <rect data-testid="staff-line-five" className="svg__0" aria-label="staff line five" width="27.192894" height="0.073101997" x="65.119415" y="102.15884" />

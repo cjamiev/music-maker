@@ -579,4 +579,10 @@ export const allModifierData = [
     ]}
 ];
 
-export const testSheetMusic = [musicNotationData, allWholeNoteData, allQuarterNoteData, allQuarterChordData, allModifierData];
+export const testSheetMusic = [
+  musicNotationData,
+  allWholeNoteData,
+  allQuarterNoteData,
+  allQuarterChordData,
+  allModifierData
+];

@@ -53,6 +53,10 @@ const getSvgAttributes = (currentZoom) => {
 const parseUrlInfo = (songid, page) => {
   const selectedSongEntry = songsWithSheetMusic.find(song => song.id === songid) ?? songsWithSheetMusic[ZERO];
   const pageIndex = Number(page) ? Number(page) - ONE : ZERO;
+  if(!selectedSongEntry.songRawData) {
+    const selectedPage = selectedSongEntry.sheets.length > pageIndex ? pageIndex : ZERO;
+    return { selectedSong: selectedSongEntry.sheets, selectedPage };
+  }
   const songData = getParsedSongData(selectedSongEntry.songRawData);
   const selectedSong = getPages(songData.configuration, songData.data, FOUR);
   const selectedPage = selectedSong.length > pageIndex ? pageIndex : ZERO;
