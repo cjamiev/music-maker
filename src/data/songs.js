@@ -1,4 +1,5 @@
 import { restingGroundsHollowKnight } from './resting-grounds-hollow-knight';
+import { morningOfRemembranceBleach } from './morning-of-remembrance-bleach';
 import { testSheetMusic } from './testing-notation';
 
 const restingGrounds = {
@@ -87,7 +88,7 @@ const hellsBells = {
   sheetMusicImgs: []
 };
 const morningOfRemembrance = {
-  id: 'bleach-morning-of-remembrance',
+  id: 'morning-of-remembrance-bleach',
   songTitle: 'Morning of Remembrance',
   albumTitle: 'Bleach',
   cardImg: 'ichigo.jpg',
@@ -152,6 +153,7 @@ const songs = [
 ];
 const songsWithSheetMusic = [
   { id: 'resting-grounds-hollow-knight', songRawData: restingGroundsHollowKnight },
+  { id: 'morning-of-remembrance-bleach', songRawData: morningOfRemembranceBleach },
   { id: 'test', sheets: testSheetMusic }
 ];
 

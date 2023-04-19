@@ -4,23 +4,27 @@ import { Pagination } from 'components/molecules/Pagination';
 import { Button, IconButton } from 'components/atoms/Button';
 import { ICON_TYPES, ICON_SIZES } from 'constants/icon';
 
+const ONE = 1;
+
 export const ViewSheetMusicFooter = ({ currentPage, numberOfPages, onChangePage, onZoomIn, onZoomOut }) => {
   const navigate = useNavigate();
 
+  const className = numberOfPages > ONE ? 'viewsheetmusic-footer' : 'viewsheetmusic-footer viewsheetmusic-footer--transparent';
+
   return (
     <>
-      <div className="viewsheetmusic-footer">
+      <div className={className}>
         <Button
           label="Back to View Page"
           classColor="primary"
           onClick={() => { navigate('/view');}}
         />
-        <Pagination
+        {numberOfPages > ONE && <Pagination
           className="viewsheetmusic-footer__pagination"
           currentPage={currentPage}
           size={numberOfPages}
           onChange={onChangePage}
-        />
+        />}
         <div className="viewsheetmusic-footer__zoom">
           <IconButton
             type={ICON_TYPES.PLUS}
