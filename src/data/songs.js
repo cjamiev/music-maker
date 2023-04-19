@@ -1,12 +1,11 @@
 import { restingGroundsHollowKnight } from './resting-grounds-hollow-knight';
-import { hollowKnightRestingGroundsData } from './resting-grounds-sheet-music';
 import { testSheetMusic } from './testing-notation';
 
 const restingGrounds = {
   id: 'resting-grounds-hollow-knight',
   songTitle:'Resting Grounds',
   albumTitle:'Hollow Knight',
-  cardImg:'seer.png',
+  cardImg:'seer.jpg',
   youtubelinks: [{
     name: 'Original',
     url: 'https://www.youtubelinks.com/watch?v=CgrBJDU2yvQ'
@@ -21,7 +20,7 @@ const restingGrounds = {
 };
 const marioTheme = {
   id: 'mario-main-theme',
-  songTitle: 'Main Theme',
+  songTitle: 'Mario Theme',
   albumTitle: 'Super Mario',
   cardImg: 'mario.png',
   youtubelinks: [
@@ -29,23 +28,103 @@ const marioTheme = {
     { name: 'Easy', url: 'https://www.youtube.com/watch?v=jgvaL5b02uU'},
     { name: 'Hard', url: 'https://www.youtube.com/watch?v=XDmczii5-R0'}
   ],
-  sheetMusicImgs: ['mario-theme.jpg', 'mario-theme2.jpg', 'mario-theme3.jpg']
+  sheetMusicImgs: []
 };
 const dearlyBeloved = {
   id: 'dearly-beloved-kingdom-hearts',
   songTitle: 'Dearly Beloved',
   albumTitle: 'Kingdom Hearts',
-  cardImg: 'sora.png',
+  cardImg: 'sora.jpg',
   youtubelinks: [],
-  sheetMusicImgs: ['dearly-beloved.jpg']
+  sheetMusicImgs: []
 };
 const ff7Prelude = {
   id: 'final-fantasy-7-prelude',
-  songTitle: 'Prelude',
+  songTitle: 'FF7 Prelude',
   albumTitle: 'Final Fantasy 7',
   cardImg: 'meteor.jpg',
   youtubelinks: [],
-  sheetMusicImgs: ['ff7-prelude.jpg']
+  sheetMusicImgs: []
+};
+const homeAwayFromHome = {
+  id: 'ff7-remake-home-away-from-home',
+  songTitle: 'Home Away From Home',
+  albumTitle: 'FF7 Remake',
+  cardImg: 'aerith.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const ginyuTransformation = {
+  id: 'dbz-ginyu-transformation',
+  songTitle: 'Ginyu Transformation',
+  albumTitle: 'DragonBall Z',
+  cardImg: 'ginyu.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const groovyDiscotech = {
+  id: 'dbz-groovy-discotech',
+  songTitle: 'Groovy Discotech',
+  albumTitle: 'DragonBall Z',
+  cardImg: 'gohan2.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const gohansAnger = {
+  id: 'dbz-gohans-anger',
+  songTitle: 'Gohan\'s Anger',
+  albumTitle: 'DragonBall Z',
+  cardImg: 'gohan.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const hellsBells = {
+  id: 'dbz-hells-bells',
+  songTitle: 'Hells Bells',
+  albumTitle: 'DragonBall Z',
+  cardImg: 'vegeta.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const morningOfRemembrance = {
+  id: 'bleach-morning-of-remembrance',
+  songTitle: 'Morning of Remembrance',
+  albumTitle: 'Bleach',
+  cardImg: 'ichigo.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const mortalKombat = {
+  id: 'techno-syndrome',
+  songTitle: 'Techno Syndrome',
+  albumTitle: 'The Immortals',
+  cardImg: 'mortal-kombat.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const robinTheme = {
+  id: 'robin-theme',
+  songTitle: 'Robin',
+  albumTitle: 'Iconoclasts',
+  cardImg: 'robin.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const sonicTheme = {
+  id: 'sonic-theme',
+  songTitle: 'Sonic Theme',
+  albumTitle: 'Sega',
+  cardImg: 'sonic.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
+};
+const attackOnDina = {
+  id: 'attack-on-dina',
+  songTitle: 'Attack on Dina',
+  albumTitle: 'Attack on Titan',
+  cardImg: 'titan-dina.jpg',
+  youtubelinks: [],
+  sheetMusicImgs: []
 };
 const test = {
   id: 'test',
@@ -54,7 +133,26 @@ const test = {
   sheetMusicImgs: []
 };
 
-const songs = [restingGrounds, marioTheme, dearlyBeloved, ff7Prelude, test];
-const songsWithSheetMusic = [{ id: 'resting-grounds-hollow-knight', sheets: hollowKnightRestingGroundsData, songRawData: restingGroundsHollowKnight }, { id: 'test', sheets: testSheetMusic }];
+const songs = [
+  restingGrounds,
+  marioTheme,
+  dearlyBeloved,
+  ff7Prelude,
+  homeAwayFromHome,
+  ginyuTransformation,
+  groovyDiscotech,
+  gohansAnger,
+  hellsBells,
+  mortalKombat,
+  robinTheme,
+  sonicTheme,
+  attackOnDina,
+  morningOfRemembrance,
+  test
+];
+const songsWithSheetMusic = [
+  { id: 'resting-grounds-hollow-knight', songRawData: restingGroundsHollowKnight },
+  { id: 'test', sheets: testSheetMusic }
+];
 
 export { songs, songsWithSheetMusic };
